@@ -1,12 +1,68 @@
 // http://ionicframework.com/docs/theming/
+@charset "UTF-8";
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import "~@ionic/angular/css/colors.css";
-
+@import "~@ionic/angular/css/core.css";
 @import "~@ionic/angular/css/padding.css";
 @import "~@ionic/angular/css/float-elements.css";
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import "theme/animate.scss";
 
+// @import "theme/main-theme.scss";
+@font-face {
+    font-family: 'a-jannat-lt';
+    src: url('/resources/fonts/a-jannat-lt.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+*,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+body,
+button,
+input,
+select,
+textarea {
+    font-family: 'a-jannat-lt';
+}
+
+.bold {
+    font-weight: bold !important;
+}
+
+.center {
+    text-align: center !important;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    cursor: default;
+}
+
+.native-input {
+    position: relative;
+    top: 6.5px;
+    left: -5px;
+    border: 0;
+    outline: 0;
+    padding: 5px;
+}

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Settings
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <!--  TABS UNUSED
+  <ion-tabs>
+    <ion-tab label="Music" icon="musical-note"></ion-tab>
+    <ion-tab label="Profile" icon="person"></ion-tab>
+    <ion-tab label="people" icon="people"></ion-tab>
+  </ion-tabs> -->
+
+  <ion-list>
+    <ion-item>
+      <ion-label>
+        <ion-button fill="clear" color="primary" expand="block" size="large" routerLink="/select-language" routerDirection="Forward">
+          <ion-icon name="globe" slot="start"></ion-icon>
+          <!-- TODO: TRANSLATE -->
+          <!-- {{ 'change-language' | translate:param }} -->
+          Change Language
+        </ion-button>
+      </ion-label>
+    </ion-item>
+
+    <ion-item *ngFor="let item of items">
+      <ion-label>
+        <ion-icon [name]="item.icon" slot="start"></ion-icon>
+        {{item.title}}
+        <div class="item-note" slot="end">
+          {{item.note}}
+        </div>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+
+
+
+  <!--
+    <div *ngIf="selectedItem" padding>
+      You navigated here from <b>{{selectedItem.title }}</b>
+    </div>
+  -->
+</ion-content>
