@@ -2,9 +2,9 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MenuController, ToastController } from '@ionic/angular';
 
 import { AuthService } from '../core/auth.service';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { AngularFireStorage } from 'angularfire2/storage';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 import { FirestoreService } from '../core/firestore.service';
 
@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
 import * as firebase from 'firebase/app';
+import { detectChangesInternal } from '../../../node_modules/@angular/core/src/render3/instructions';
 
 @Component({
   selector: 'app-register',
@@ -46,10 +47,14 @@ export class RegisterPage implements OnInit {
 
   private newUserDoc: AngularFirestoreDocument<User>;
 
+  private selectedSupplierCategories: string[];
+
   // used to access input and clear it
   // (if file selected for upload is too big or disallowed type)
   @ViewChild('uploadButton')
   private myUploadButton: ElementRef;
+
+
 
 
 
@@ -200,6 +205,8 @@ export class RegisterPage implements OnInit {
 
 
 
+
+
   protected onRegisterClick(): void {
 
     if (this.validateInputs()) {
@@ -279,7 +286,8 @@ export class RegisterPage implements OnInit {
           this.newUser.personName.length === 0 ||
           !this.newUser.mobileNumber ||
           this.newUser.mobileNumber.length === 0 ||
-          this.newUser.class ||
+          !this.newUser.class ||
+          this.newUser.class.length === 0 ||
           !this.uploadData) {
 
           this.showToast(`A Required Field is Empty!`);
@@ -292,21 +300,19 @@ export class RegisterPage implements OnInit {
 
       case 4: {
         if (!this.newUser.city ||
+          !this.newUser.email ||
           this.newUser.email.length === 0 ||
-          this.newUser.email.length === 0 ||
+          !this.newUser.password ||
           this.newUser.password.length === 0 ||
-          this.newUser.password.length === 0 ||
+          !this.newUser.companyName ||
           this.newUser.companyName.length === 0 ||
-          this.newUser.companyName.length === 0 ||
+          !this.newUser.phoneNumber ||
           this.newUser.phoneNumber.length === 0 ||
-          this.newUser.phoneNumber.length === 0 ||
+          !this.newUser.personName ||
           this.newUser.personName.length === 0 ||
-          this.newUser.personName.length === 0 ||
+          !this.newUser.mobileNumber ||
           this.newUser.mobileNumber.length === 0 ||
-          this.newUser.mobileNumber.length === 0 ||
-          this.newUser.class.length === 0 ||
-          this.newUser.class.length === 0 ||
-          // !this.newUser.category ||
+          this.selectedSupplierCategories.length === 0 ||
           !this.uploadData) {
 
           this.showToast(`A Required Field is Empty!`);
@@ -318,11 +324,13 @@ export class RegisterPage implements OnInit {
       }
       default: {
         this.showToast(`Select an Account Type!`);
-        return;
+        return false;
       }
     }
 
   }
+
+
 
 
 
@@ -424,6 +432,10 @@ export class RegisterPage implements OnInit {
 
 
 
+
+
+
+
   // Sets user data to firestore after succesful login
   private updateUserData(user: User) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(
@@ -440,6 +452,57 @@ export class RegisterPage implements OnInit {
 
     return userRef.set(data);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  protected onSelectCity(event): any {
+    console.log(event);
+    console.log(event.detail.value);
+    console.log('this.newUser.city:', this.newUser.city);
+    // this.selectedSupplierCategories = event.detail.value;
+    // console.log(this.selectedSupplierCategories);
+    // Upload this to each supplier document as
+    // _tags array and it'll be used for
+    // searching using algolia later.
+  }
+
+
+
+
+
+
+
+
+
+
+
+  protected onSelectSupplierCategory(event): any {
+    console.log(event);
+    // array that has all selected element's values:
+    // ex: ["c_blocks", "c_ceramics", "c_interlock"]
+    // Working
+    console.log(event.detail.value);
+    this.selectedSupplierCategories = event.detail.value;
+    console.log(this.selectedSupplierCategories);
+    // Upload this to each supplier document as
+    // _tags array and it'll be used for
+    // searching using algolia later.
+  }
+
+
 
 
 

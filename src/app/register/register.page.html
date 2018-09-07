@@ -196,8 +196,14 @@
             <ng-container *ngTemplateOutlet="supplier_fields"></ng-container>
 
           </ng-container>
-        </ng-container>
 
+
+
+
+
+
+        </ng-container>
+        <!-- END OF NGSWITCH -->
 
 
       </ion-col>
@@ -241,7 +247,7 @@
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
         <!---google button-->
-        <ion-button expand="block" mode="ios" text-uppercase href="/register">
+        <ion-button expand="block" mode="ios" text-uppercase (click)="onRegisterClick()">
           <ion-icon name="at" mode="md"></ion-icon>&nbsp;Register
         </ion-button>
 
@@ -324,12 +330,14 @@
     <ion-input required type="text" placeholder="Enter your mobile" [(ngModel)]="newUser.mobileNumber"></ion-input>
   </div>
 
-  <!-- Company Class -->
-  <div>
-    <ion-label position="stacked">Classification</ion-label>
 
-    <ion-input required type="password" placeholder="Which Classification?" [(ngModel)]="newUser.password"></ion-input>
+  <!-- Company Classification -->
+  <div *ngIf="newUser.type == 2 || newUser.type == 3">
+    <ion-label position="stacked">Company Classification</ion-label>
+
+    <ion-input required type="text" placeholder="Enter Company Classification" [(ngModel)]="newUser.class"></ion-input>
   </div>
+
 
   <!-- upload company license -->
   <div>
@@ -376,7 +384,8 @@
   <ion-item>
     <ion-label position="stacked">City</ion-label>
 
-    <ion-select placeholder="Please Select a City" ok-text="Select" interface="action-sheet" [(ngModel)]="newUser.city">
+    <ion-select placeholder="Please Select a City" ok-text="Select" interface="action-sheet" [(ngModel)]="newUser.city"
+      (ionChange)="onSelectCity()">
 
       <ion-select-option value="1">Abu Dhabi</ion-select-option>
       <ion-select-option value="2">Dubai</ion-select-option>
@@ -414,23 +423,23 @@
 
 
 
-<!-- See here: https://www.algolia.com/doc/guides/searching/filtering/ -->
 
-<!-- TODO: FOR LATER, FIX SUPPLIER REGISTRATION -->
-<!-- TAKE ALL SELECTED OPTIONS THEN ADD THEM TO AN ARRAY -->
-<!-- THIS ARRAY WILL AN ATTRIBUTE ON THE SUPPLIER'S DOCUMENT -->
-<!-- CALLED Type: and it'll look like this: type: ['Paint','Blocks','Ceramics'] -->
-<!-- algolia won't let you show how many you have on each   -->
-<!-- The other type of filtering in algolia is facets, but that only lets you belong to one! example: team: '76ers' -->
-<!-- algolia lets you see how many belong to each facet.   -->
+
+
+
+
+
+
+
+
 
 <ng-template #supplier_fields>
 
   <ion-item>
     <ion-label position="stacked">Type</ion-label>
 
-    <ion-select multiple="true" placeholder="Please Select a City" ok-text="Select" interface="action-sheet"
-      [(ngModel)]="newUser.city">
+    <ion-select multiple="true" placeholder="Please Select Your Specialities" ok-text="Select" interface="alert"
+      (ionChange)="onSelectSupplierCategory($event)">
 
       <ion-select-option value="c_paint">Paint</ion-select-option>
       <ion-select-option value="c_blocks">Blocks</ion-select-option>

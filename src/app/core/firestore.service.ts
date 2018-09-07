@@ -7,7 +7,7 @@ import {
   Action,
   DocumentSnapshotDoesNotExist,
   DocumentSnapshotExists,
-} from 'angularfire2/firestore';
+} from '@angular/fire/firestore';
 import { Observable, from } from 'rxjs';
 import { map, tap, take, switchMap, mergeMap, expand, takeWhile } from 'rxjs/operators';
 
