@@ -31,7 +31,8 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'user', loadChildren: './profile/user/user.module#UserPageModule' },
-  { path: 'company', loadChildren: './profile/company/company.module#CompanyPageModule' }
+  { path: 'company', loadChildren: './profile/company/company.module#CompanyPageModule' },
+  { path: 'forgot-password', loadChildren: './login/forgot-password/forgot-password.module#ForgotPasswordPageModule' }
 ];
 
 @NgModule({

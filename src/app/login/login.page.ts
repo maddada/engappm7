@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { AuthService } from '../core/auth.service';
+import { ShowToastService } from '../core/show-toast.service';
 
 @Component({
   selector: 'app-login',
@@ -34,39 +36,34 @@ export class LoginPage implements OnInit {
   private email: string;
   private password: string;
 
-  constructor(private menuCtrl: MenuController, private router: Router) { }
+  constructor(
+    private menuCtrl: MenuController,
+    private router: Router,
+    private auth: AuthService,
+    private toast: ShowToastService,
+  ) { }
 
   ngOnInit() {
-    // this.menuCtrl.swipeEnable(false);
+    if (this.auth.isLoggedIn()) {
+      this.toast.showToast('Already Logged In!');
+      this.router.navigateByUrl('/');
+    }
   }
 
-  // onEvent = (event: string): void => {
-  //   if (event === 'onLogin' && !this.validate()) {
-  //     return;
-  //   }
-  //   if (this.events[event]) {
-  //     this.events[event]({
-  //       'username': this.username,
-  //       'password': this.password
-  //     });
-  //   }
+
+
+  protected onLoginClick(): void {
+    if (this.validate()) {
+      this.auth.emailLogin(this.email, this.password)
+        .catch(error => this.handleError(error));
+    }
+    else {
+      this.toast.showToast('Please Check Inputs');
+    }
+  }
+
+  // onForgotPassClick(): void {
   // }
-
-  onClickLoginClick(): void {
-
-  }
-
-  onGoogleClick(): void {
-
-  }
-
-  onRegisterClick(): void {
-
-  }
-
-  onForgotPassClick(): void {
-
-  }
 
   // onBackClick(): void {
   //   this.router.navigateByUrl('/home');
@@ -86,4 +83,17 @@ export class LoginPage implements OnInit {
 
     return this.isPasswordValid && this.isEmailValid;
   }
+
+
+
+  // If error, console log and notify user
+  private handleError(error: Error) {
+    console.error(error);
+    this.toast.showToast(`${error}`);
+  }
+
+
+
+
 }
+

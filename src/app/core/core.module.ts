@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 //import { CommonModule } from '@angular/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
-import { NotifyService } from './notify.service';
 import { FirestoreService } from './firestore.service';
 
 
@@ -27,7 +26,7 @@ import { CommonModule } from '@angular/common';
     SafeHtmlPipe,
     FileSizePipe,
   ],
-  providers: [AuthService, AuthGuard, NotifyService, FirestoreService]
+  providers: [AuthService, AuthGuard, FirestoreService]
 })
 export class CoreModule { }
 

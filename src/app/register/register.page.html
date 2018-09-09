@@ -34,34 +34,10 @@
 
 <ion-content background-size>
   <ion-grid no-padding>
-    <!--
-    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-      <ion-row padding-top>
-        <ion-col text-center>
-          <h2>Please fill in all the details</h2>
-        </ion-col>
-      </ion-row>
 
-      <h1>Hero Form</h1>
-
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
-      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-        Name is required
-      </div>
-
-      <label for="alterEgo">Alter Ego</label>
-      <input type="text" class="form-control" id="alterEgo" [(ngModel)]="model.alterEgo" name="alterEgo">
-
-      <label for="power">Hero Power</label>
-      <select class="form-control" id="power" required [(ngModel)]="model.power" name="power" #power="ngModel">
-        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-      </select>
-
-    </form>
- -->
 
     <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+
       <ion-row size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;" padding-horizontal>
 
         <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
@@ -477,3 +453,35 @@
   </ion-item>
 
 </ng-template>
+
+
+
+
+
+
+<!--
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <ion-row padding-top>
+        <ion-col text-center>
+          <h2>Please fill in all the details</h2>
+        </ion-col>
+      </ion-row>
+
+      <h1>Hero Form</h1>
+
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        Name is required
+      </div>
+
+      <label for="alterEgo">Alter Ego</label>
+      <input type="text" class="form-control" id="alterEgo" [(ngModel)]="model.alterEgo" name="alterEgo">
+
+      <label for="power">Hero Power</label>
+      <select class="form-control" id="power" required [(ngModel)]="model.power" name="power" #power="ngModel">
+        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+      </select>
+
+    </form>
+ -->

@@ -9,14 +9,13 @@ import {
 } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 
-
-import { NotifyService } from './notify.service';
-
 import { Observable, of } from 'rxjs';
-import { switchMap, startWith, tap, filter } from 'rxjs/operators';
+import { switchMap, startWith, tap, filter, take, map } from 'rxjs/operators';
 
 import { User } from '../../model';
-
+import { ToastController } from '../../../node_modules/@ionic/angular';
+import { ToastOptions } from '@ionic/core';
+import { ShowToastService } from './show-toast.service';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +25,7 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
-    private notify: NotifyService
+    private toast: ShowToastService,
   ) {
     this.user = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -67,7 +66,7 @@ export class AuthService {
     return this.afAuth.auth
       .signInWithPopup(provider)
       .then(credential => {
-        this.notify.update('Welcome to Firestarter!!!', 'success');
+        this.toast.showToast('Welcome to Firestarter!!!', 'success');
         return this.updateUserData(credential.user);
       })
       .catch(error => this.handleError(error));
@@ -79,7 +78,7 @@ export class AuthService {
     return this.afAuth.auth
       .signInAnonymously()
       .then(credential => {
-        this.notify.update('Welcome to Firestarter!!!', 'success');
+        this.toast.showToast('Welcome to Firestarter!!!', 'success');
         return this.updateUserData(credential.user); // if using firestore
       })
       .catch(error => {
@@ -91,7 +90,7 @@ export class AuthService {
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this.notify.update('Welcome back!', 'success');
+        this.toast.showToast('Welcome back!', 'success');
         return this.updateUserData(credential.user);
       })
       .catch(error => this.handleError(error));
@@ -103,7 +102,7 @@ export class AuthService {
 
     return fbAuth
       .sendPasswordResetEmail(email)
-      .then(() => this.notify.update('Password update email sent', 'info'))
+      .then(() => this.toast.showToast('Password update email sent'))
       .catch(error => this.handleError(error));
   }
 
@@ -116,7 +115,7 @@ export class AuthService {
   // If error, console log and notify user
   private handleError(error: Error) {
     console.error(error);
-    this.notify.update(error.message, 'error');
+    this.toast.showToast(error.message, 'error');
   }
 
   // Sets user data to firestore after succesful login
@@ -135,4 +134,29 @@ export class AuthService {
     };
     return userRef.set(data);
   }
+
+
+  public isLoggedIn(): boolean {
+
+    let isLoggedIn: boolean;
+
+    this.user.pipe(
+      take(1),
+      map(user => !!user), // make into boolean value
+      tap(loggedIn => {
+        isLoggedIn = loggedIn;
+
+        if (!loggedIn) {
+          isLoggedIn = loggedIn;
+
+          console.log('access denied');
+          this.toast.showToast('You must be logged in!', 'error');
+          this.router.navigate(['/login']);
+        }
+      }));
+
+    return isLoggedIn;
+
+  }
+
 }

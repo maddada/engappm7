@@ -58,7 +58,7 @@ router outlet like this:
       this.splashScreen.hide();
     });
 
-    // TODO: ADD CHECK IF APP WAS LAUNCHED BEFORE (BY CHECKING STORAGE)
+    // ADD CHECK IF APP WAS LAUNCHED BEFORE (BY CHECKING STORAGE)
 
     //checks if item exists, if it doesn't (null) then calls function to set it!
     this.storage.get('appLaunchedPreviously').then(
@@ -71,7 +71,8 @@ router outlet like this:
       error => console.error(error)
     );
 
-    // TODO: fix show alert thing, and enable this one so
+    // TODO:  Back button android
+    // fix show alert thing, and enable this one so
     // this.platform.backButton.subscribe(() => {
     //   if (this.routerOutlet && this.routerOutlet.canGoBack()) {
     //     this.routerOutlet.pop();

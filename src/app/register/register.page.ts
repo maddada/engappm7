@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MenuController, ToastController } from '@ionic/angular';
-
 import { AuthService } from '../core/auth.service';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -14,6 +12,7 @@ import { User } from '../../model';
 
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
+import { ShowToastService } from '../core/show-toast.service';
 
 // import * as firebase from 'firebase/app';
 
@@ -37,17 +36,15 @@ export class Hero {
 })
 export class RegisterPage implements OnInit {
 
-  // TODO: Remove this when we're done
-
-
-
   constructor(
-    private toastController: ToastController,
     private router: Router,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
+    private auth: AuthService,
     private storage: AngularFireStorage,
-    private db: FirestoreService) {
+    private db: FirestoreService,
+    private toast: ShowToastService,
+  ) {
 
   }
 
@@ -97,6 +94,10 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     // this.menuCtrl.enable(false);
+    if (this.auth.isLoggedIn()) {
+      this.toast.showToast('Already Logged In!');
+      this.router.navigateByUrl('/');
+    }
   }
 
 
@@ -162,7 +163,7 @@ export class RegisterPage implements OnInit {
           this.newUser.email.length === 0 ||
           this.newUser.password.length === 0) {
 
-          this.showToast(`A Required Field is Empty!`);
+          this.toast.showToast(`A Required Field is Empty!`);
           return false;
 
         }
@@ -191,7 +192,7 @@ export class RegisterPage implements OnInit {
           this.newUser.class.length === 0 ||
           !this.uploadData) {
 
-          this.showToast(`A Required Field is Empty!`);
+          this.toast.showToast(`A Required Field is Empty!`);
           return false;
 
         }
@@ -215,7 +216,7 @@ export class RegisterPage implements OnInit {
           this.newUser.mobileNumber.length === 0 ||
           this.selectedSupplierCategories.length === 0 ||
           !this.uploadData) {
-          this.showToast(`A Required Field is Empty!`);
+          this.toast.showToast(`A Required Field is Empty!`);
           return false;
 
         }
@@ -223,7 +224,7 @@ export class RegisterPage implements OnInit {
         break;
       }
       default: {
-        this.showToast(`Select an Account Type!`);
+        this.toast.showToast(`Select an Account Type!`);
         return false;
       }
     }
@@ -296,7 +297,7 @@ export class RegisterPage implements OnInit {
     // If file is over 10 mbs
     if (this.selectedFile.size > 10485760) {
 
-      this.showToast(`File selected is too large! (Max is 10mb)`);
+      this.toast.showToast(`File selected is too large! (Max is 10mb)`);
       this.myUploadButton.nativeElement.value = ''; //clearing file input!
       return;
 
@@ -316,7 +317,7 @@ export class RegisterPage implements OnInit {
 
     } else { // if it's not one of the formats then don't upload it
 
-      this.showToast(`File format not Supported! (Only Images/PDF/Word)`);
+      this.toast.showToast(`File format not Supported! (Only Images/PDF/Word)`);
       this.myUploadButton.nativeElement.value = ''; //clearing file input!
       return;
     }
@@ -431,23 +432,6 @@ export class RegisterPage implements OnInit {
 
 
 
-  async showToast(message: string) {
-    const toast = await this.toastController.create({
-      message: message,
-      position: 'bottom',
-      duration: 5000,
-      translucent: false,
-
-      // showCloseButton: true,
-      // closeButtonText: 'Done'
-    });
-    toast.present();
-  }
-
-
-
-
-
 
 
 
@@ -468,7 +452,7 @@ export class RegisterPage implements OnInit {
 
     await this.db.setTS(this.newUserDoc, this.newUser);
 
-    this.showToast(`Registration Successful, Welcome!`);
+    this.toast.showToast(`Registration Successful, Welcome!`);
     console.log('AFTER USER REGISTERED RAN');
 
     await this.delay(1500);
@@ -543,7 +527,7 @@ export class RegisterPage implements OnInit {
   // If error, console log and notify user
   private handleError(error: Error) {
     console.error(error);
-    this.showToast(`${error}`);
+    this.toast.showToast(`${error}`);
   }
 
 
