@@ -7,7 +7,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
-import * as firebase from 'firebase/app';
+import * as firebase from 'firebase';
 
 
 import { NotifyService } from './notify.service';
@@ -17,12 +17,6 @@ import { switchMap, startWith, tap, filter } from 'rxjs/operators';
 
 import { User } from '../../model';
 
-// interface User {
-//   uid: string;
-//   email?: string | null;
-//   photoURL?: string;
-//   displayName?: string;
-// }
 
 @Injectable()
 export class AuthService {
@@ -137,7 +131,7 @@ export class AuthService {
       companyName: user.companyName || ' ',
       personName: user.personName || ' ',
       // TODO: upload a new no user pic image.
-      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ'
+      profilePicURL: user.profilePicURL || 'https://goo.gl/Fz9nrQ'
     };
     return userRef.set(data);
   }

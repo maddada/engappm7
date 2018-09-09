@@ -8,7 +8,6 @@
 */
 
 /* Cities:
-
 1- abu dhabi
 2- dubai
 3- sharjah
@@ -34,7 +33,7 @@ personName
 
 mobileNumber
 
-photoURL
+profilePicURL
 
 licenceURL
 
@@ -42,6 +41,15 @@ city
 type
 class
 */
+
+
+// All user to user comments will be in a single collection.
+// Then use where queries to display subsets that you need only!
+
+// Comments collection is:
+// comments/createdby_recievedby/<COMMENT_DOC_DETAILS_HERE>
+// query by commentOn to show comments on a page.
+// query by createdBy = currentUserId -> show comments on user profile.
 
 export interface User {
 
@@ -60,7 +68,7 @@ export interface User {
     mobileNumber?: string;
     // رقم موبايل الشخص الي سجل
 
-    photoURL?: string;
+    profilePicURL?: string;
     //this is only for logo or profile pic!
 
     licenceURL?: string;
@@ -78,65 +86,79 @@ export interface User {
 
 
 
+// All comments will be in a single collection.
+// Then use where clauses to show what you need only
+// Comments collection is:
+// comments/createdby_recievedby/<COMMENT_DOC_DETAILS_HERE>
+// query by commentOn to show comments on a page.
+// query by createdBy = currentUserId -> show comments on user profile.
+export interface ProfileComment {
+    createdAt?: any;
+    updatedAt?: any;
 
+    createdBy?: string; // uid of comment writer
+    // go here and get details for UI (ples)
+    commentOn?: string; // uid of comment reciever
 
+    commentStr?: string;
 
+    rating?: number; // only for commentType 1 (on a profile)
 
+    commentType?: number; // 1 = profile, 2 = tender, 3 = proposal.
 
-
-
-
-
-
-
-
-
-
-
-
-
-export interface Type {
-    consultant: boolean;
-    contractor: boolean;
-    person: boolean;
-    admin: boolean;
-}
-
-export interface Rating {
-    uid?: string;
-    rating?: number;
-}
-
-export class Upload {
-    $key: string;
-    file: File;
-    name: string;
-    url: string;
-    progress: number;
-    createdAt: Date = new Date();
-
-    constructor(file: File) {
-        this.file = file;
-    }
+    // tenderComment?: boolean; // if the comment is on a tender
+    // proposalComment?: boolean; // if the comment is on a proposal
+    // profileComment?: boolean; // if the comment is on a profile.
 }
 
 
+
+
+
+
+
+
+
+
+
+
+// Proposals Collection:
+// tenders/createdby_tenderid/<PROPOSAL_DOC_DETAILS_HERE>
 export interface Tender {
     createdAt?: any;
     updatedAt?: any;
 
     createdBy?: string; // uid
-    attachmentURL?: string;
+
+    // Get Company Email from CreatedBy
+
     nameOfCompany?: string;
     nameOfPerson?: string;
-    // formElementsArray?: FormElement[];
+
+    worthMin?: number;
+    worthMax?: number;
+
+    attachmentURL?: string; // pdf explaining the project
 }
 
+
+
+
+
+
+
+
+
+// Proposals Collection:
+// proposals/randomid/<PROPOSAL_DOC_DETAILS_HERE>
+// didn't do /createdby_tenderid/ because might allow
+// multiple proposals!!
 export interface Proposal {
     createdAt?: any;
     updatedAt?: any;
 
     createdBy?: string; // uid
+    tenderid?: string;
 
     nameOfCompany?: string;
     // name of company
@@ -148,7 +170,97 @@ export interface Proposal {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // 6aaaf:
+
+
+// Not doing this, can't be queried in firestore
+// export interface Type {
+//     individual: // 1
+//     consultant: boolean; //2
+//     contractor: boolean; //3
+//     supplier: boolean; //4
+//     admin: boolean; // 5
+// }
+
+
+
+// export class Upload {
+//     $key: string;
+//     file: File;
+//     name: string;
+//     url: string;
+//     progress: number;
+//     createdAt: Date = new Date();
+
+//     constructor(file: File) {
+//         this.file = file;
+//     }
+// }
 
 
     //copied some things from here for the User class: https://firebase.google.com/docs/reference/js/firebase.UserInfo

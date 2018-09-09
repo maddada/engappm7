@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { MenuController, ToastController } from '@ionic/angular';
 
 import { AuthService } from '../core/auth.service';
@@ -11,10 +13,22 @@ import { FirestoreService } from '../core/firestore.service';
 import { User } from '../../model';
 
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 
-import * as firebase from 'firebase/app';
-import { detectChangesInternal } from '../../../node_modules/@angular/core/src/render3/instructions';
+// import * as firebase from 'firebase/app';
+
+
+export class Hero {
+
+  constructor(
+    public id: number,
+    public name: string,
+    public power: string,
+    public alterEgo?: string
+  ) { }
+
+}
+
 
 @Component({
   selector: 'app-register',
@@ -23,12 +37,19 @@ import { detectChangesInternal } from '../../../node_modules/@angular/core/src/r
 })
 export class RegisterPage implements OnInit {
 
+  // TODO: Remove this when we're done
 
 
 
+  constructor(
+    private toastController: ToastController,
+    private router: Router,
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private storage: AngularFireStorage,
+    private db: FirestoreService) {
 
-
-
+  }
 
 
 
@@ -36,10 +57,8 @@ export class RegisterPage implements OnInit {
 
   public newUser: User = { type: -1 };
 
-  private newUserGUID: string;
-
-  private uploadPercent: Observable<number>;
-  private downloadURL: Observable<string>;
+  protected uploadPercent: Observable<number>;
+  protected downloadURL: Observable<string>;
 
   private uploadData: any;
 
@@ -47,7 +66,19 @@ export class RegisterPage implements OnInit {
 
   private newUserDoc: AngularFirestoreDocument<User>;
 
-  private selectedSupplierCategories: string[];
+  private selectedSupplierCategories: string[] = [];
+
+
+  // We're binding to a select to get these
+  // We're recieving them as string
+  // Later do this:
+  // this.newUser.city = Number(this.selectedCity);
+  // to convert from string to number
+  protected selectedCity: string;
+
+  protected selectedType: string;
+
+
 
   // used to access input and clear it
   // (if file selected for upload is too big or disallowed type)
@@ -55,30 +86,6 @@ export class RegisterPage implements OnInit {
   private myUploadButton: ElementRef;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  constructor(
-    private toastController: ToastController,
-    private afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
-    private storage: AngularFireStorage,
-    private menuCtrl: MenuController,
-    private auth: AuthService,
-    private db: FirestoreService) {
-
-  }
 
 
 
@@ -101,7 +108,179 @@ export class RegisterPage implements OnInit {
 
 
 
+
+
+
+
+
+  protected onSubmit(): void {
+
+    if (this.validateInputs()) {
+      this.emailSignUp();
+    }
+    else {
+      return;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // Validation Function (Before Registering)
+  // Will return true or false based on required fields
+  //
+  private validateInputs(): boolean {
+
+    switch (this.newUser.type) {
+
+      case 1: {
+        if (
+          isNaN(this.newUser.city) ||
+          this.newUser.personName.length === 0 ||
+          this.newUser.email.length === 0 ||
+          this.newUser.password.length === 0) {
+
+          this.showToast(`A Required Field is Empty!`);
+          return false;
+
+        }
+
+        return true;
+        break;
+      }
+
+      case 2:
+      case 3: {
+        if (
+          isNaN(this.newUser.city) ||
+          !this.newUser.email ||
+          this.newUser.email.length === 0 ||
+          !this.newUser.password ||
+          this.newUser.password.length === 0 ||
+          !this.newUser.companyName ||
+          this.newUser.companyName.length === 0 ||
+          !this.newUser.phoneNumber ||
+          this.newUser.phoneNumber.length === 0 ||
+          !this.newUser.personName ||
+          this.newUser.personName.length === 0 ||
+          !this.newUser.mobileNumber ||
+          this.newUser.mobileNumber.length === 0 ||
+          !this.newUser.class ||
+          this.newUser.class.length === 0 ||
+          !this.uploadData) {
+
+          this.showToast(`A Required Field is Empty!`);
+          return false;
+
+        }
+        return true;
+        break;
+      }
+
+      case 4: {
+        if (
+          isNaN(this.newUser.city) ||
+          !this.newUser.email ||
+          this.newUser.email.length === 0 ||
+          !this.newUser.password || this.newUser.password.length === 0 ||
+          !this.newUser.companyName ||
+          this.newUser.companyName.length === 0 ||
+          !this.newUser.phoneNumber ||
+          this.newUser.phoneNumber.length === 0 ||
+          !this.newUser.personName ||
+          this.newUser.personName.length === 0 ||
+          !this.newUser.mobileNumber ||
+          this.newUser.mobileNumber.length === 0 ||
+          this.selectedSupplierCategories.length === 0 ||
+          !this.uploadData) {
+          this.showToast(`A Required Field is Empty!`);
+          return false;
+
+        }
+        return true;
+        break;
+      }
+      default: {
+        this.showToast(`Select an Account Type!`);
+        return false;
+      }
+    }
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //// Email/Password Auth ////
+
+  private emailSignUp() {
+    return this.afAuth.auth
+      .createUserWithEmailAndPassword(this.newUser.email, this.newUser.password)
+      .then((credential) => {
+
+        this.newUser.uid = credential.user.uid;
+
+        this.newUserDoc = this.afs.doc(`users/${this.newUser.uid}`);
+
+        this.startUpload();
+
+        // User data gets uploaded after uploading file and
+        // getting uploadUrl
+
+        return;
+      })
+      .catch(error => this.handleError(error));
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
   // SAVES DATA OF FILE THAT WAS ADDED FOR LATER. (protected since I use it in html)
+  // This is used in the template, dw about no reference found
   protected setUpload(event) {
 
     this.selectedFile = event.target.files[0];
@@ -162,6 +341,14 @@ export class RegisterPage implements OnInit {
 
 
 
+
+
+
+
+
+
+
+
   // STARTS UPLOAD OF SAVED FILE.
   private startUpload() {
     function zerofill(i) {
@@ -180,224 +367,62 @@ export class RegisterPage implements OnInit {
     console.log(current_date);
 
     const file = this.uploadData.target.files[0];
-    const filePath = `users/newUserGUID/${current_date}_license_copy`; // name of file on
+    // name of file in cloud storage
+    const filePath = `users/${this.newUser.uid}/${current_date}_license_copy`;
     const fileRef = this.storage.ref(filePath);
 
+    // start upload task
     const task = this.storage.upload(filePath, file);
+
     // observe percentage changes
     this.uploadPercent = task.percentageChanges();
+
+
     // get notified when the download URL is available
     task.snapshotChanges().pipe(
-      finalize(() => this.downloadURL = fileRef.getDownloadURL())
-    )
-      .subscribe();
 
-  }
+      finalize(() => { // when upload task done do this:
+        // set downloadURL observable
+        this.downloadURL = fileRef.getDownloadURL();
 
+        // then get the URL from this observable [take(1)],
+        // and call afterUserRegistered() after you get it!
+        this.downloadURL.pipe(
+          take(1),
 
+          finalize(() => {
+            this.afterUserRegistered();
+          })
 
+        ).subscribe((val) => {
+          this.newUser.licenceURL = val;
 
-
-
-
-
-
-
-
-
-
-
-  protected onRegisterClick(): void {
-
-    if (this.validateInputs()) {
-      this.emailSignUp();
-      this.uploadData();
-      this.afterUserLogin();
-    }
-
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // Validation Function (Before Registering)
-  private validateInputs(): boolean {
-
-    //type coming from select input is string!!
-    console.log(typeof this.newUser.type);
-
-    // Convert value to number
-    let userType: number = +this.newUser.type;
-    console.log(typeof userType);
-
-    switch (userType) {
-
-      case 1: {
-        if (
-          !this.newUser.city ||
-          this.newUser.personName.length === 0 ||
-          this.newUser.email.length === 0 ||
-          this.newUser.password.length === 0) {
-
-          this.showToast(`A Required Field is Empty!`);
-          return false;
-
-        }
-
-        return true;
-        break;
-      }
-
-      case 2:
-      case 3: {
-        if (
-          !this.newUser.city ||
-          !this.newUser.email ||
-          this.newUser.email.length === 0 ||
-          !this.newUser.password ||
-          this.newUser.password.length === 0 ||
-          !this.newUser.companyName ||
-          this.newUser.companyName.length === 0 ||
-          !this.newUser.phoneNumber ||
-          this.newUser.phoneNumber.length === 0 ||
-          !this.newUser.personName ||
-          this.newUser.personName.length === 0 ||
-          !this.newUser.mobileNumber ||
-          this.newUser.mobileNumber.length === 0 ||
-          !this.newUser.class ||
-          this.newUser.class.length === 0 ||
-          !this.uploadData) {
-
-          this.showToast(`A Required Field is Empty!`);
-          return false;
-
-        }
-        return true;
-        break;
-      }
-
-      case 4: {
-        if (!this.newUser.city ||
-          !this.newUser.email ||
-          this.newUser.email.length === 0 ||
-          !this.newUser.password ||
-          this.newUser.password.length === 0 ||
-          !this.newUser.companyName ||
-          this.newUser.companyName.length === 0 ||
-          !this.newUser.phoneNumber ||
-          this.newUser.phoneNumber.length === 0 ||
-          !this.newUser.personName ||
-          this.newUser.personName.length === 0 ||
-          !this.newUser.mobileNumber ||
-          this.newUser.mobileNumber.length === 0 ||
-          this.selectedSupplierCategories.length === 0 ||
-          !this.uploadData) {
-
-          this.showToast(`A Required Field is Empty!`);
-          return false;
-
-        }
-        return true;
-        break;
-      }
-      default: {
-        this.showToast(`Select an Account Type!`);
-        return false;
-      }
-    }
-
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //// Email/Password Auth ////
-
-  private emailSignUp() {
-    return this.afAuth.auth
-      .createUserWithEmailAndPassword(this.newUser.email, this.newUser.password)
-      .then((credential) => {
-
-        //find out which type, each goes in different doc.
-        switch (this.newUser.type) {
-          case 1: {
-            this.newUserDoc = this.afs.doc(`individual/${credential.user.uid}`);
-            break;
-          }
-          case 2: {
-            this.newUserDoc = this.afs.doc(`consultant/${credential.user.uid}`);
-            break;
-          }
-          case 3: {
-            this.newUserDoc = this.afs.doc(`contractor/${credential.user.uid}`);
-            break;
-          }
-          case 4: {
-            this.newUserDoc = this.afs.doc(`supplier/${credential.user.uid}`);
-            break;
-          }
-          default: {
-            break;
-          }
-        }
-
-        let data: User = this.newUser;
-
-        //convert from string to number
-        data.city = +this.newUser.city;
-        data.type = +this.newUser.type;
-
-        data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-
-        // this will start uploading file selected before!
-        this.startUpload();
-
-        this.newUserDoc.set(data);
-
-        // this.notify.update('Welcome new user!', 'success');
-        this.showToast(`Registration Successful! Welcome!`);
-
-
-
-        return this.updateUserData(credential.user);
+          console.log(`this.newUser.licenceURL:`, this.newUser.licenceURL);
+        });
       })
-      .catch(error => this.handleError(error));
+
+    ).subscribe();
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -419,64 +444,36 @@ export class RegisterPage implements OnInit {
     toast.present();
   }
 
-  private afterUserLogin() {
 
-    //
-    this.updateUserData(this.newUser);
 
-    // go to homepage
 
+
+
+
+
+
+
+
+
+
+
+
+  private delay(ms: number): any {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 
 
+  private async afterUserRegistered() {
 
+    await this.db.setTS(this.newUserDoc, this.newUser);
 
+    this.showToast(`Registration Successful, Welcome!`);
+    console.log('AFTER USER REGISTERED RAN');
 
+    await this.delay(1500);
 
-
-
-  // Sets user data to firestore after succesful login
-  private updateUserData(user: User) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-      `users/${user.uid}`
-    );
-
-    const data: User = {
-      uid: user.uid,
-      email: user.email || null,
-      companyName: user.companyName || ' ',
-      // TODO: upload a new no user pic image.
-      photoURL: user.photoURL
-    };
-
-    return userRef.set(data);
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  protected onSelectCity(event): any {
-    console.log(event);
-    console.log(event.detail.value);
-    console.log('this.newUser.city:', this.newUser.city);
-    // this.selectedSupplierCategories = event.detail.value;
-    // console.log(this.selectedSupplierCategories);
-    // Upload this to each supplier document as
-    // _tags array and it'll be used for
-    // searching using algolia later.
+    this.router.navigateByUrl('/');
   }
 
 
@@ -489,59 +486,78 @@ export class RegisterPage implements OnInit {
 
 
 
-  protected onSelectSupplierCategory(event): any {
-    console.log(event);
-    // array that has all selected element's values:
-    // ex: ["c_blocks", "c_ceramics", "c_interlock"]
-    // Working
-    console.log(event.detail.value);
-    this.selectedSupplierCategories = event.detail.value;
-    console.log(this.selectedSupplierCategories);
-    // Upload this to each supplier document as
-    // _tags array and it'll be used for
-    // searching using algolia later.
+
+
+
+
+
+
+
+
+
+
+
+
+
+  protected onSelectType($event): any {
+    this.newUser.type = Number(this.selectedType);
   }
 
 
 
 
 
+
+  protected onSelectCity($event): any {
+    this.newUser.city = Number(this.selectedCity);
+  }
+
+
+
+
+
+
+
+
+  protected onSelectSupplierCategory($event): any {
+
+    if ($event.detail.value.length > 0) {
+      this.selectedSupplierCategories = $event.detail.value;
+    }
+
+  }
+
+
+  // console.log(event);
+  // array that has all selected element's values:
+  // ex: ["c_blocks", "c_ceramics", "c_interlock"]
+  // Working
+  // console.log(event.detail.value);
+  // console.log(this.selectedSupplierCategories);
+  // Upload this to each supplier document as
+  // _tags array and it'll be used for
+  // searching using algolia later.
 
 
 
   // If error, console log and notify user
   private handleError(error: Error) {
     console.error(error);
+    this.showToast(`${error}`);
   }
 
 
-  // TODO: WRITE CREATE USER FUNCTION:
-  // createNewUser(): void {
-
-  // Check if all required fields are filled (if not show message)
-  // this.validateInputs();
 
 
-  // Set all the variables and create the user in firebase
-  // if (this.newUser.type == null) { return; }
-
-  // Upload the file and get file url:
-  // this.startUpload();
-
-  // newComp.x5_header_image = this.uploadURL;
 
 
-  //   return;
-  // }
 
-  // newComp.formElementsArray = formElementsArray;
 
-  // this.db.upsert('_meta/info', { 'numberOfCompetitions': this.newNumberOfCompetitions });
-  // console.log('newNumberOfCompetitions:::', this.newNumberOfCompetitions);
 
-  // newComp.x0_id = this.newCompID; //comp${numberOfCompetitions};
 
-  // this.db.upsert(`competitions/${newComp.x0_id}`, newComp);
+
+
+
 
   // if (newComp.phase2Of !== null) {
   //   this.db.upsert(`competitions/${newComp.phase2Of}`, { 'phase1Of': newComp.x0_id });
@@ -559,5 +575,5 @@ export class RegisterPage implements OnInit {
 }
 
 
-
+// END OF CLASS HERE!!!!!!!!!!
 

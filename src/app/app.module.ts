@@ -26,9 +26,10 @@ import { AngularFireFunctionsModule } from '@angular/fire/functions';
 // import { FirestoreService } from './core/firestore.service';
 
 import { environment } from '../environments/environment';
+import { TenderListElementComponent } from './tender/tender-list-element/tender-list-element.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, TenderListElementComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

@@ -32,58 +32,39 @@
 
 
 
-
-
-
-
 <ion-content background-size>
   <ion-grid no-padding>
+    <!--
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <ion-row padding-top>
+        <ion-col text-center>
+          <h2>Please fill in all the details</h2>
+        </ion-col>
+      </ion-row>
 
+      <h1>Hero Form</h1>
 
-    <ion-row padding-top>
-      <ion-col text-center>
-        <h2>Please fill in all the details</h2>
-      </ion-col>
-    </ion-row>
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
+      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+        Name is required
+      </div>
 
+      <label for="alterEgo">Alter Ego</label>
+      <input type="text" class="form-control" id="alterEgo" [(ngModel)]="model.alterEgo" name="alterEgo">
 
-    <ion-row size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;" padding-horizontal>
+      <label for="power">Hero Power</label>
+      <select class="form-control" id="power" required [(ngModel)]="model.power" name="power" #power="ngModel">
+        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
+      </select>
 
-      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+    </form>
+ -->
 
+    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+      <ion-row size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;" padding-horizontal>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <ion-item>
-          <ion-label position="stacked">Account Type</ion-label>
-
-          <ion-select placeholder="Please Select One" ok-text="Select" cancle-text="Cancle" [(ngModel)]="newUser.type"
-            interface="action-sheet">
-
-            <ion-select-option value="1">Individual</ion-select-option>
-            <ion-select-option value="2">Consultant</ion-select-option>
-            <ion-select-option value="3">Contractor</ion-select-option>
-            <ion-select-option value="4">Supplier</ion-select-option>
-
-          </ion-select>
-        </ion-item>
-
-        <ng-container [ngSwitch]="newUser.type">
+        <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
 
 
@@ -99,132 +80,164 @@
 
 
 
-          <!-- Individual = 1-->
-          <ng-container *ngSwitchCase="1">
 
-            <ng-container *ngTemplateOutlet="city_picker"></ng-container>
 
-            <div padding-top>
-              <ion-label position="stacked" class="label">Name (First and Last)</ion-label>
 
-              <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.personName"></ion-input>
 
-            </div>
+          <ion-item>
+            <ion-label position="stacked">Account Type</ion-label>
 
-            <div padding-top>
-              <ion-label position="stacked" class="label">Email</ion-label>
+            <ion-select placeholder="Please Select One" ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedType"
+              id="selectAccountType" interface="action-sheet" (ionChange)="onSelectType(event)" name="selectAccountType">
 
-              <ion-input required type="text" placeholder="Enter your email" [(ngModel)]="newUser.email"></ion-input>
+              <ion-select-option value="1">Individual</ion-select-option>
+              <ion-select-option value="2">Consultant</ion-select-option>
+              <ion-select-option value="3">Contractor</ion-select-option>
+              <ion-select-option value="4">Supplier</ion-select-option>
 
-            </div>
+            </ion-select>
+          </ion-item>
 
-            <div>
-              <ion-label position="stacked">Password</ion-label>
 
-              <ion-input required type="password" placeholder="Enter your password" [(ngModel)]="newUser.password"></ion-input>
 
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <ng-container [ngSwitch]="selectedType">
+
+
+
+
+
+
+
+
+
+            <ng-container *ngSwitchCase="1">
+
+              <ng-container *ngTemplateOutlet="city_picker"></ng-container>
+
+              <div padding-top>
+                <ion-label position="stacked" class="label">Name (First and Last)</ion-label>
+
+                <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.personName" class="form-control"
+                  id="name" name="name" #name="ngModel"></ion-input>
+                <!-- <input type="text" placeholder="Enter your name" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
+              </div>
+
+              <div padding-top>
+                <ion-label position="stacked" class="label">Email</ion-label>
+
+                <ion-input required type="text" placeholder="Enter your email" [(ngModel)]="newUser.email" name="email"></ion-input>
+
+              </div>
+
+              <div>
+                <ion-label position="stacked">Password</ion-label>
+
+                <ion-input required type="password" placeholder="Enter your password" [(ngModel)]="newUser.password"
+                  name="password"></ion-input>
+
+              </div>
+
+            </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <ng-container *ngSwitchCase="2">
+
+              <ng-container *ngTemplateOutlet="city_picker">
+              </ng-container>
+
+              <ng-container *ngTemplateOutlet="company_registration_fields">
+              </ng-container>
+
+            </ng-container>
+
+
+
+
+
+
+
+
+
+
+            <ng-container *ngSwitchCase="3">
+
+              <ng-container *ngTemplateOutlet="city_picker">
+              </ng-container>
+
+              <ng-container *ngTemplateOutlet="company_registration_fields">
+              </ng-container>
+
+            </ng-container>
+
+
+
+
+
+
+
+
+
+            <ng-container *ngSwitchCase="4">
+
+              <ng-container *ngTemplateOutlet="city_picker"></ng-container>
+
+              <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
+
+              <ng-container *ngTemplateOutlet="supplier_fields"></ng-container>
+
+            </ng-container>
+
+
+
+
+
 
           </ng-container>
 
 
+        </ion-col>
+
+      </ion-row>
+    </form>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <!-- Consultant = 2 -->
-          <ng-container *ngSwitchCase="2">
-
-            <ng-container *ngTemplateOutlet="city_picker">
-            </ng-container>
-
-            <ng-container *ngTemplateOutlet="company_registration_fields">
-            </ng-container>
-
-          </ng-container>
-
-
-
-
-
-
-
-
-
-
-          <!-- Contractor = 3 -->
-          <ng-container *ngSwitchCase="3">
-
-            <ng-container *ngTemplateOutlet="city_picker">
-            </ng-container>
-
-            <ng-container *ngTemplateOutlet="company_registration_fields">
-            </ng-container>
-
-          </ng-container>
-
-
-
-
-
-
-
-
-
-          <!-- Supplier = 4 -->
-          <ng-container *ngSwitchCase="4">
-
-            <ng-container *ngTemplateOutlet="city_picker"></ng-container>
-
-            <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
-
-            <ng-container *ngTemplateOutlet="supplier_fields"></ng-container>
-
-          </ng-container>
-
-
-
-
-
-
-        </ng-container>
-        <!-- END OF NGSWITCH -->
-
-
-      </ion-col>
-
-    </ion-row>
 
 
   </ion-grid>
 
 </ion-content>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -246,30 +259,28 @@
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-        <!---google button-->
-        <ion-button expand="block" mode="ios" text-uppercase (click)="onRegisterClick()">
+        <ion-button expand="block" mode="ios" text-uppercase type="submit">
           <ion-icon name="at" mode="md"></ion-icon>&nbsp;Register
         </ion-button>
 
       </ion-col>
-      <!---End Share Section-->
     </ion-row>
   </ion-toolbar>
 </ion-footer>
 
 
+
+
+
+
+
+
+
+
+
+
+
 <!-- Templates: -->
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -288,7 +299,7 @@
   <div padding-top>
     <ion-label position="stacked" class="label">Email</ion-label>
 
-    <ion-input required type="text" placeholder="Enter your email" [(ngModel)]="newUser.email"></ion-input>
+    <ion-input required type="text" placeholder="Enter your email" [(ngModel)]="newUser.email" name="email"></ion-input>
 
     <!-- <ion-label error-field no-margin *ngIf="!isEmailValid">Error: {{errorType}}</ion-label> -->
   </div>
@@ -297,7 +308,7 @@
   <div>
     <ion-label position="stacked">Password</ion-label>
 
-    <ion-input required type="password" placeholder="Enter your password" [(ngModel)]="newUser.password"></ion-input>
+    <ion-input required type="password" placeholder="Enter your password" [(ngModel)]="newUser.password" name="password"></ion-input>
 
     <ion-label error-field no-margin *ngIf="!isPasswordValid">{{errorPassword}}</ion-label>
   </div>
@@ -306,28 +317,28 @@
   <div>
     <ion-label position="stacked">Company Name</ion-label>
 
-    <ion-input required type="text" placeholder="Enter company name" [(ngModel)]="newUser.companyName"></ion-input>
+    <ion-input required type="text" placeholder="Enter company name" [(ngModel)]="newUser.companyName" name="companyName"></ion-input>
   </div>
 
   <!-- Company Phone -->
   <div>
     <ion-label position="stacked">Company Phone Number</ion-label>
 
-    <ion-input required type="text" placeholder="Enter company number" [(ngModel)]="newUser.phoneNumber"></ion-input>
+    <ion-input required type="text" placeholder="Enter company number" [(ngModel)]="newUser.phoneNumber" name="phoneNumber"></ion-input>
   </div>
 
   <!-- Account Creator Name -->
   <div>
     <ion-label position="stacked">Account Creator Name<br>(First and Last)</ion-label>
 
-    <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.personName"></ion-input>
+    <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.personName" name="personName"></ion-input>
   </div>
 
   <!-- Person Phone -->
   <div>
     <ion-label position="stacked">Account Creator Mobile</ion-label>
 
-    <ion-input required type="text" placeholder="Enter your mobile" [(ngModel)]="newUser.mobileNumber"></ion-input>
+    <ion-input required type="text" placeholder="Enter your mobile" [(ngModel)]="newUser.mobileNumber" name="mobileNumber"></ion-input>
   </div>
 
 
@@ -335,7 +346,7 @@
   <div *ngIf="newUser.type == 2 || newUser.type == 3">
     <ion-label position="stacked">Company Classification</ion-label>
 
-    <ion-input required type="text" placeholder="Enter Company Classification" [(ngModel)]="newUser.class"></ion-input>
+    <ion-input required type="text" placeholder="Enter Company Classification" [(ngModel)]="newUser.class" name="class"></ion-input>
   </div>
 
 
@@ -346,12 +357,25 @@
 
 
     <!-- <div class="upload-wrapper"> -->
-    <input #uploadButton type="file" (change)="setUpload($event)" />
+    <input #uploadButton type="file" (change)="setUpload($event)" name="upload" />
 
-    <div>{{ uploadPercent | async }}</div>
+    <div id="upload-percent">{{ uploadPercent | async }}
+      <ng-container *ngIf="uploadPercent | async">
+        %
+      </ng-container>
+    </div>
+
     <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
     <ng-container *ngIf="downloadURL | async">
-      <img [src]="downloadURL | async">
+      <img id="upload-image" style="
+      display: block;
+      text-align: center ;
+      margin: 0 auto;
+      border: 0 3px 15px rgba(0, 0, 0, 0.2);
+      border-style: solid;
+      width: 80% !important;
+      height: auto;"
+        [src]="downloadURL | async">
     </ng-container>
     <!-- </div> -->
 
@@ -384,9 +408,8 @@
   <ion-item>
     <ion-label position="stacked">City</ion-label>
 
-    <ion-select placeholder="Please Select a City" ok-text="Select" interface="action-sheet" [(ngModel)]="newUser.city"
-      (ionChange)="onSelectCity()">
-
+    <ion-select placeholder="Please Select a City" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedCity"
+      (ionChange)="onSelectCity(event)" name="selectCity">
       <ion-select-option value="1">Abu Dhabi</ion-select-option>
       <ion-select-option value="2">Dubai</ion-select-option>
       <ion-select-option value="3">Sharjah</ion-select-option>
@@ -436,10 +459,10 @@
 <ng-template #supplier_fields>
 
   <ion-item>
-    <ion-label position="stacked">Type</ion-label>
+    <ion-label position="stacked">Speciality</ion-label>
 
-    <ion-select multiple="true" placeholder="Please Select Your Specialities" ok-text="Select" interface="alert"
-      (ionChange)="onSelectSupplierCategory($event)">
+    <ion-select placeholder="Please Select Your Specialities" multiple="true" ok-text="Select" interface="alert"
+      (ionChange)="onSelectSupplierCategory($event)" name="selectSupplierCategory">
 
       <ion-select-option value="c_paint">Paint</ion-select-option>
       <ion-select-option value="c_blocks">Blocks</ion-select-option>

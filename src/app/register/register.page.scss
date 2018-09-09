@@ -165,3 +165,14 @@ input[type=file] {
     width: 0 !important;
     height: 0 !important;
 }
+
+#upload-percent {
+    display: block;
+    padding: 20px;
+    text-align: center !important;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: theme-colors('textColors', 'primary');
+}
+
+#upload-image {}

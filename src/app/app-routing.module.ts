@@ -29,7 +29,9 @@ const routes: Routes = [
   },
   { path: 'select-language', loadChildren: './select-lang/select-lang.module#SelectLangPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' }
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+  { path: 'user', loadChildren: './profile/user/user.module#UserPageModule' },
+  { path: 'company', loadChildren: './profile/company/company.module#CompanyPageModule' }
 ];
 
 @NgModule({
