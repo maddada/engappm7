@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -8,12 +9,17 @@ import { MenuController } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
 
-  constructor(private menuCtrl: MenuController) {
+  protected isLoggedIn: string;
+
+  constructor(
+    private menuCtrl: MenuController,
+    private auth: AuthService,
+  ) {
 
   }
 
   ngOnInit() {
-    // this.menuCtrl.enable(true);
+
   }
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ToastOptions } from '../../../node_modules/@ionic/core';
-import { ToastController } from '../../../node_modules/@ionic/angular';
+import { ToastOptions } from '@ionic/core';
+import { ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,9 @@ export class ShowToastService {
 
     let toastOptions: ToastOptions;
 
-    if (parameter) {
+    if (parameter != null) {
       toastOptions = {
-        message: `${message}: ${parameter}`,
+        message: `${message} ${parameter}`,
         position: 'bottom',
         duration: duration,
         translucent: false,

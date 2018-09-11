@@ -2,7 +2,7 @@
   <ion-toolbar color="light">
 
     <ion-buttons slot="start">
-      <ion-button routerLink="/" routerDirection="root">
+      <ion-button routerLink="/" routerDirection="back">
         <ion-icon name="arrow-round-back"></ion-icon>
         Back
       </ion-button>
@@ -44,6 +44,8 @@
 
           <ion-input required type="password" placeholder="{{passwordPlaceholder}}" [(ngModel)]="password"></ion-input>
 
+
+          <p>{{isLoggedIn}}</p>
           <!-- <ion-label error-field no-margin *ngIf="!isPasswordValid">{{errorPassword}}</ion-label> -->
         </div>
 

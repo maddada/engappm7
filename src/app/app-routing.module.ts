@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './core/auth.guard';
+import { LoggedinGuard } from './core/loggedin.guard';
+
 
 
 const routes: Routes = [
@@ -28,11 +30,12 @@ const routes: Routes = [
     loadChildren: './settings/settings.module#SettingsPageModule'
   },
   { path: 'select-language', loadChildren: './select-lang/select-lang.module#SelectLangPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
-  { path: 'user', loadChildren: './profile/user/user.module#UserPageModule' },
-  { path: 'company', loadChildren: './profile/company/company.module#CompanyPageModule' },
-  { path: 'forgot-password', loadChildren: './login/forgot-password/forgot-password.module#ForgotPasswordPageModule' }
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule', canActivate: [LoggedinGuard] },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule', canActivate: [LoggedinGuard] },
+  { path: 'forgot-password', loadChildren: './login/forgot-password/forgot-password.module#ForgotPasswordPageModule' },
+
+  { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule', canActivate: [AuthGuard] },
+
 ];
 
 @NgModule({

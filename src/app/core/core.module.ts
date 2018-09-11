@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 //import { CommonModule } from '@angular/common';
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
@@ -26,7 +26,12 @@ import { CommonModule } from '@angular/common';
     SafeHtmlPipe,
     FileSizePipe,
   ],
-  providers: [AuthService, AuthGuard, FirestoreService]
 })
-export class CoreModule { }
-
+export class CoreModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: CoreModule,
+      providers: [AuthService, FirestoreService, AuthGuard]
+    };
+  }
+}

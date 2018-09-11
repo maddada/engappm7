@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Your Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+
+    <ng-container *ngIf="loggedIn; else notLoggedIn">
+      <!-- logged in here -->
+
+
+      <!-- TODO: do different pages for each type!!!  -->
+      <ng-container [ngSwitch]="LATER">
+
+        <ng-container *ngSwitchCase="1">
+          <ng-container *ngTemplateOutlet="individual">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="2">
+          <ng-container *ngTemplateOutlet="consultant">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngTemplateOutlet="contractor">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngTemplateOutlet="supplier">
+          </ng-container>
+        </ng-container>
+
+      </ng-container>
+
+    </ng-container>
+
+
+
+    <ng-template #notLoggedIn>
+      <!-- not logged in here -->
+      <ion-row justify-content-center style="margin-top: 30vh;">
+        <ion-col size-sm="2" size-lg="5" size-md="4" size-xl="4" text-center align-items-center>
+          <h1>Login to view your profile!</h1>
+          <ion-button expand="block" mode="ios" text-uppercase href="/login" routerDirection="forward">
+            <ion-icon name="at" mode="md"></ion-icon>&nbsp;Log In
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ng-template>
+
+
+
+    <ng-template #individual>
+    </ng-template>
+
+    <ng-template #consultant>
+    </ng-template>
+
+    <ng-template #contractor>
+    </ng-template>
+
+    <ng-template #supplier>
+    </ng-template>
+
+
+
+
+  </ion-grid>
+
+</ion-content>

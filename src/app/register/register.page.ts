@@ -13,21 +13,7 @@ import { User } from '../../model';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { ShowToastService } from '../core/show-toast.service';
-
-// import * as firebase from 'firebase/app';
-
-
-export class Hero {
-
-  constructor(
-    public id: number,
-    public name: string,
-    public power: string,
-    public alterEgo?: string
-  ) { }
-
-}
-
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -37,7 +23,7 @@ export class Hero {
 export class RegisterPage implements OnInit {
 
   constructor(
-    private router: Router,
+    private nav: NavController,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private auth: AuthService,
@@ -88,19 +74,8 @@ export class RegisterPage implements OnInit {
 
 
 
-
-
-
-
   ngOnInit() {
-    // this.menuCtrl.enable(false);
-    if (this.auth.isLoggedIn()) {
-      this.toast.showToast('Already Logged In!');
-      this.router.navigateByUrl('/');
-    }
   }
-
-
 
 
 
@@ -457,7 +432,7 @@ export class RegisterPage implements OnInit {
 
     await this.delay(1500);
 
-    this.router.navigateByUrl('/');
+    this.nav.navigateForward('/');
   }
 
 
@@ -532,32 +507,11 @@ export class RegisterPage implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-  // if (newComp.phase2Of !== null) {
-  //   this.db.upsert(`competitions/${newComp.phase2Of}`, { 'phase1Of': newComp.x0_id });
-  // }
-
-  // newComp.x8_link = `https://mubadrah.ae/c/${newComp.x0_id}`;
-
-  // console.log(JSON.stringify(newComp, null, 4));
-
-  // this.router.navigateByUrl('/competitions');
-
-  // }
-
-
 }
+// END OF FILE HERE
 
 
-// END OF CLASS HERE!!!!!!!!!!
+
+
+
 

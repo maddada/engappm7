@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { RegisterPage } from './register.page';
+import { ShowToastService } from '../core/show-toast.service';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
+  providers: [
+    ShowToastService,
+  ],
   declarations: [RegisterPage]
 })
-export class RegisterPageModule {}
+export class RegisterPageModule { }

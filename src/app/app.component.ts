@@ -1,10 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-
-import { Platform, IonRouterOutlet } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router } from '@angular/router';
+import { IonRouterOutlet, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+
+import { AuthService } from './core/auth.service';
 
 
 /* get a reference to the used IonRouterOutlet
@@ -38,16 +39,17 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private auth: AuthService,
   ) {
     this.initializeApp();
 
   }
 
   /* if this is inside a page that was loaded into the router outlet,
-like the start screen of your app, you can get a reference to the
-router outlet like this:
-@Optional() private routerOutlet: IonRouterOutlet, */
+  like the start screen of your app, you can get a reference to the
+  router outlet like this:
+  @Optional() private routerOutlet: IonRouterOutlet, */
 
 
 
@@ -56,22 +58,15 @@ router outlet like this:
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.checkFirstLaunch();
+      this.checkIfLoggedIn();
     });
 
-    // ADD CHECK IF APP WAS LAUNCHED BEFORE (BY CHECKING STORAGE)
 
-    //checks if item exists, if it doesn't (null) then calls function to set it!
-    this.storage.get('appLaunchedPreviously').then(
-      (val) => {
-        console.log('#app.component.ts: First Launch:', val);
-        if (val == null) {
-          this.setFirstLaunch();
-        }
-      },
-      error => console.error(error)
-    );
 
-    // TODO:  Back button android
+
+
+    // TODO: [Super 6af] Fix Back button android
     // fix show alert thing, and enable this one so
     // this.platform.backButton.subscribe(() => {
     //   if (this.routerOutlet && this.routerOutlet.canGoBack()) {
@@ -86,10 +81,34 @@ router outlet like this:
 
   }
 
-
-  private setFirstLaunch(): void {
-    this.storage.set('appLaunchedPreviously', 'true');
+  async checkIfLoggedIn() {
+    const user = await this.auth.isLoggedIn();
+    if (user) {
+      this.appPages.push({
+        title: 'Log Out',
+        url: '/logout',
+        icon: 'exit'
+      });
+    } else {
+      console.log('app.component.ts: not logged in');
+      // this.isLoggedIn = 'NOT LOGGED IN';
+    }
   }
 
+  // TODO: Make wizard show up if first launch!
+  checkFirstLaunch(): any {
+    // this.storage.clear(); // for testing
+
+    this.storage.get('first_time').then((val) => {
+      if (val !== null) {
+        console.log(`Not first launch.`);
+      } else {
+        console.log('First launch.');
+        this.storage.set('first_time', 'done');
+      }
+    });
+  }
 
 }
+
+

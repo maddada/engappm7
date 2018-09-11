@@ -23,13 +23,14 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
+import { AuthService } from './core/auth.service';
+
 // import { FirestoreService } from './core/firestore.service';
 
 import { environment } from '../environments/environment';
-import { TenderListElementComponent } from './tender/tender-list-element/tender-list-element.component';
 
 @NgModule({
-  declarations: [AppComponent, TenderListElementComponent],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -41,10 +42,10 @@ import { TenderListElementComponent } from './tender/tender-list-element/tender-
     }),
     AppRoutingModule,
     IonicStorageModule.forRoot(),
-    CoreModule,
+    CoreModule.forRoot(),
     // AngularFireModule.initializeApp(environment.firebase, 'firestarter'),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireFunctionsModule,
@@ -52,6 +53,7 @@ import { TenderListElementComponent } from './tender/tender-list-element/tender-
   providers: [
     StatusBar,
     SplashScreen,
+    AuthService,
     // FirestoreService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],

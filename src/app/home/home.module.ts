@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 
+import { TenderListElementComponent } from '../tender/tender-list-element/tender-list-element.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -16,8 +18,10 @@ import { HomePage } from './home.page';
         path: '',
         component: HomePage
       }
-    ])
+    ]),
+    // TenderListElementModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage, TenderListElementComponent],
+
 })
-export class HomePageModule {}
+export class HomePageModule { }

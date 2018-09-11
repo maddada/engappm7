@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MenuController, ToastController } from '@ionic/angular';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+
 import { AuthService } from '../core/auth.service';
 import { ShowToastService } from '../core/show-toast.service';
 
@@ -32,7 +33,7 @@ export class LoginPage implements OnInit {
   private logo: string = 'assets/images/logo/1.png';
   private errorUser: string = 'Field can\'t be empty';
   private errorPassword: string = 'Field can\'t be empty';
-
+  protected isLoggedIn: string;
   private email: string;
   private password: string;
 
@@ -44,30 +45,26 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.auth.isLoggedIn()) {
-      this.toast.showToast('Already Logged In!');
-      this.router.navigateByUrl('/');
-    }
+    this.checkIfLoggedIn();
   }
 
-
+  async checkIfLoggedIn() {
+    const user = await this.auth.isLoggedIn();
+    if (user) {
+      this.isLoggedIn = 'LOGGED IN';
+    } else {
+      this.isLoggedIn = 'NOT LOGGED IN';
+    }
+  }
 
   protected onLoginClick(): void {
     if (this.validate()) {
-      this.auth.emailLogin(this.email, this.password)
-        .catch(error => this.handleError(error));
-    }
-    else {
-      this.toast.showToast('Please Check Inputs');
+      this.auth.emailLogin(this.email, this.password).catch(
+        error =>
+          this.toast.showToast('Please Check Inputs')
+      );
     }
   }
-
-  // onForgotPassClick(): void {
-  // }
-
-  // onBackClick(): void {
-  //   this.router.navigateByUrl('/home');
-  // }
 
   validate(): boolean {
     this.isEmailValid = true;

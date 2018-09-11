@@ -2,7 +2,7 @@
   <ion-toolbar color="light">
 
     <ion-buttons slot="start">
-      <ion-button routerLink="/" routerDirection="root">
+      <ion-button routerLink="/" routerDirection="back">
         <ion-icon name="arrow-round-back"></ion-icon>
         Back
       </ion-button>
@@ -23,20 +23,11 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <ion-content background-size>
   <ion-grid no-padding>
 
 
-    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+    <form #heroForm="ngForm">
 
       <ion-row size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;" padding-horizontal>
 
@@ -235,7 +226,7 @@
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-        <ion-button expand="block" mode="ios" text-uppercase type="submit">
+        <ion-button expand="block" mode="ios" text-uppercase type="submit" (click)="onSubmit()">
           <ion-icon name="at" mode="md"></ion-icon>&nbsp;Register
         </ion-button>
 
