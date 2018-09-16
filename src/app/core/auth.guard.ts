@@ -2,67 +2,40 @@ import { Injectable } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router
+  RouterStateSnapshot
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
-
-import { AuthService } from './auth.service';
+import { AuthService } from '../core/auth.service';
+import { AlertController } from '@ionic/angular';
 import { ShowToastService } from './show-toast.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
-  private loggedIn: boolean;
-
   constructor(
     private auth: AuthService,
-    private router: Router,
-    private toast: ShowToastService,
+    private toast: ShowToastService
   ) { }
-  canActivate(
+
+  async canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    this.checkIfLoggedIn();
+  ): Promise<boolean> {
+    const uid = await this.auth.uid();
+    const isLoggedIn = !!uid;
 
-    if (this.loggedIn) {
-      console.log('Authguard: Access Allowed - Logged In');
-      return this.loggedIn;
+    if (!isLoggedIn) {
+      this.toast.showToast('Already logged in');
+
+      //   const alert = await this.alertController.create({
+      //     header: 'Blocked',
+      //     subHeader: 'Users only',
+      //     message: 'You have been blocked by the router guard...',
+      //     buttons: ['OK']
     }
-    else {
-      console.log('Authguard: Access Denied: Not logged in');
-      this.toast.showToast(`Sorry, you aren't logged in!`, '', 1000);
-      return this.loggedIn;
-    }
+
+    return isLoggedIn;
+    // await alert.present();
   }
 
-  async checkIfLoggedIn() {
-    const user = await this.auth.isLoggedIn();
-
-    if (user) {
-      this.loggedIn = true;
-    } else {
-      this.loggedIn = false;
-    }
-  }
 }
-
-    // return this.auth.user.pipe(
-    //   take(1),
-    //   map(user => !!user),
-    //   tap(loggedIn => {
-    //     if (loggedIn) {
-    //       console.log('Access Denied: Not logged in');
-    //       this.toast.showToast(`Not Logged In!`);
-    //       this.router.navigate(['/login']);
-    //     }
-    //   })
-    // );
-
-
-

@@ -8,22 +8,10 @@ import { AuthService } from '../core/auth.service';
 })
 export class ProfilePage implements OnInit {
 
-  loggedIn: boolean;
 
-  constructor(private auth: AuthService) { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
-    this.checkIfLoggedIn();
-  }
-
-  async checkIfLoggedIn() {
-    const user = await this.auth.isLoggedIn();
-    if (user) {
-      this.loggedIn = true;
-    } else {
-      this.loggedIn = false;
-      // this.isLoggedIn = 'NOT LOGGED IN';
-    }
   }
 
 }

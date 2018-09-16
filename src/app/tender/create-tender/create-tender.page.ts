@@ -2,18 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { Tender } from '../../../model';
 
 @Component({
-  selector: 'app-tender-list-element',
-  templateUrl: './tender-list-element.component.html',
-  styleUrls: ['./tender-list-element.component.scss']
+  selector: 'app-create-tender',
+  templateUrl: './create-tender.page.html',
+  styleUrls: ['./create-tender.page.scss'],
 })
-export class TenderListElementComponent implements OnInit {
+export class CreateTenderPage implements OnInit {
 
   testTender: Tender;
   testTenders: Tender[];
 
-
   constructor() {
     this.testTender = {
+      deadline: Date,
       createdBy: 'userid1',
       creatorEmail: 'test@test.com',
       nameOfCompany: 'Company Name',
@@ -30,8 +30,8 @@ export class TenderListElementComponent implements OnInit {
 
   }
 
-
   ngOnInit() {
+
   }
 
 }

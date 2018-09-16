@@ -1,5 +1,5 @@
-/*  #Style Login + logo 1
-================================================*/
+@import '../../theme/mixins.scss';
+
 * {
     font-family: 'a-jannat-lt';
 }
@@ -19,17 +19,27 @@ ion-input {
     }
 }
 
-// ion-grid {
-//     height: 100%;
-// }
-
 // Settings Logo
 img {
+
     max-width: 120px;
     max-height: 120px;
     margin-bottom: 24px;
     display: block;
     border-radius: 0px;
+
+    @include for-phone-only {
+        max-width: 90px;
+    }
+
+    @include for-tablet-portrait {
+        width: 10rem;
+    }
+
+    @include for-tablet-landscape {
+        width: 14rem;
+    }
+
 }
 
 div {

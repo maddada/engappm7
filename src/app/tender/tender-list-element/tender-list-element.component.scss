@@ -1,0 +1,33 @@
+@import '../../../theme/mixins.scss';
+@import '../../../theme/variables.scss';
+
+* {
+    --border-style: none !important;
+}
+
+ion-list {
+    border-radius: 15px;
+}
+
+ion-item {
+    font-size: 0.8em;
+
+    @include for-phone-only{
+        font-size: 0.8em;
+    }
+}
+
+.heading {
+    color: --ion-color-primary;
+
+    font-size: 1em;
+
+    @include for-phone-only {
+        font-size: 1.5em;
+    }
+
+    @include for-tablet-portrait {
+        font-size: 2em;
+    }
+
+}

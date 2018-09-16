@@ -44,8 +44,13 @@
 
           <ion-input required type="password" placeholder="{{passwordPlaceholder}}" [(ngModel)]="password"></ion-input>
 
+          <ng-container *ngIf="auth.isUserLoggedIn$ | async; else notloggedin">
+            LOGGED IN
+          </ng-container>
 
-          <p>{{isLoggedIn}}</p>
+          <ng-template #notloggedin>
+            NOT LOGGED IN
+          </ng-template>
           <!-- <ion-label error-field no-margin *ngIf="!isPasswordValid">{{errorPassword}}</ion-label> -->
         </div>
 

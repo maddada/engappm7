@@ -45,16 +45,6 @@ export class LoginPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.checkIfLoggedIn();
-  }
-
-  async checkIfLoggedIn() {
-    const user = await this.auth.isLoggedIn();
-    if (user) {
-      this.isLoggedIn = 'LOGGED IN';
-    } else {
-      this.isLoggedIn = 'NOT LOGGED IN';
-    }
   }
 
   protected onLoginClick(): void {

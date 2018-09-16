@@ -23,18 +23,15 @@
 
 
 
-<ion-content background-size>
+<ion-content>
   <ion-grid no-padding>
+    <div id="m7-container">
 
+      <form #heroForm="ngForm">
 
-    <form #heroForm="ngForm">
+        <ion-row size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;" padding-horizontal>
 
-      <ion-row size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;" padding-horizontal>
-
-        <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
-
-
-
+          <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
 
 
@@ -51,24 +48,22 @@
 
 
 
-          <ion-item>
-            <ion-label position="stacked">Account Type</ion-label>
-
-            <ion-select placeholder="Please Select One" ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedType"
-              id="selectAccountType" interface="action-sheet" (ionChange)="onSelectType(event)" name="selectAccountType">
-
-              <ion-select-option value="1">Individual</ion-select-option>
-              <ion-select-option value="2">Consultant</ion-select-option>
-              <ion-select-option value="3">Contractor</ion-select-option>
-              <ion-select-option value="4">Supplier</ion-select-option>
-
-            </ion-select>
-          </ion-item>
 
 
 
+            <ion-item>
+              <ion-label position="stacked">Account Type</ion-label>
 
+              <ion-select placeholder="Please Select One" ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedType"
+                id="selectAccountType" interface="action-sheet" (ionChange)="onSelectType(event)" name="selectAccountType">
 
+                <ion-select-option value="1">Individual</ion-select-option>
+                <ion-select-option value="2">Consultant</ion-select-option>
+                <ion-select-option value="3">Contractor</ion-select-option>
+                <ion-select-option value="4">Supplier</ion-select-option>
+
+              </ion-select>
+            </ion-item>
 
 
 
@@ -80,7 +75,12 @@
 
 
 
-          <ng-container [ngSwitch]="selectedType">
+
+
+
+
+
+            <ng-container [ngSwitch]="selectedType">
 
 
 
@@ -90,117 +90,105 @@
 
 
 
-            <ng-container *ngSwitchCase="1">
+              <ng-container *ngSwitchCase="1">
 
-              <ng-container *ngTemplateOutlet="city_picker"></ng-container>
+                <ng-container *ngTemplateOutlet="city_picker"></ng-container>
 
-              <div padding-top>
-                <ion-label position="stacked" class="label">Name (First and Last)</ion-label>
+                <ng-container *ngTemplateOutlet="individual_fields"></ng-container>
 
-                <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.personName" class="form-control"
-                  id="name" name="name" #name="ngModel"></ion-input>
-                <!-- <input type="text" placeholder="Enter your name" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
-              </div>
+                <ng-container *ngTemplateOutlet="agree_to_terms">
+                </ng-container>
 
-              <div padding-top>
-                <ion-label position="stacked" class="label">Email</ion-label>
+              </ng-container>
 
-                <ion-input required type="text" placeholder="Enter your email" [(ngModel)]="newUser.email" name="email"></ion-input>
 
-              </div>
 
-              <div>
-                <ion-label position="stacked">Password</ion-label>
 
-                <ion-input required type="password" placeholder="Enter your password" [(ngModel)]="newUser.password"
-                  name="password"></ion-input>
 
-              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <ng-container *ngSwitchCase="2">
+
+                <ng-container *ngTemplateOutlet="city_picker">
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="company_registration_fields">
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="agree_to_terms">
+                </ng-container>
+              </ng-container>
+
+
+
+
+
+
+
+
+
+
+              <ng-container *ngSwitchCase="3">
+
+                <ng-container *ngTemplateOutlet="city_picker">
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="company_registration_fields">
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="agree_to_terms">
+                </ng-container>
+              </ng-container>
+
+
+
+
+
+
+
+
+
+              <ng-container *ngSwitchCase="4">
+
+                <ng-container *ngTemplateOutlet="city_picker"></ng-container>
+
+                <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
+
+                <ng-container *ngTemplateOutlet="supplier_fields"></ng-container>
+
+                <ng-container *ngTemplateOutlet="agree_to_terms">
+                </ng-container>
+              </ng-container>
+
+
+
+
+
 
             </ng-container>
 
 
+          </ion-col>
+
+        </ion-row>
+      </form>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <ng-container *ngSwitchCase="2">
-
-              <ng-container *ngTemplateOutlet="city_picker">
-              </ng-container>
-
-              <ng-container *ngTemplateOutlet="company_registration_fields">
-              </ng-container>
-
-            </ng-container>
-
-
-
-
-
-
-
-
-
-
-            <ng-container *ngSwitchCase="3">
-
-              <ng-container *ngTemplateOutlet="city_picker">
-              </ng-container>
-
-              <ng-container *ngTemplateOutlet="company_registration_fields">
-              </ng-container>
-
-            </ng-container>
-
-
-
-
-
-
-
-
-
-            <ng-container *ngSwitchCase="4">
-
-              <ng-container *ngTemplateOutlet="city_picker"></ng-container>
-
-              <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
-
-              <ng-container *ngTemplateOutlet="supplier_fields"></ng-container>
-
-            </ng-container>
-
-
-
-
-
-
-          </ng-container>
-
-
-        </ion-col>
-
-      </ion-row>
-    </form>
-
-
-
+    </div>
 
   </ion-grid>
 
@@ -226,7 +214,7 @@
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-        <ion-button expand="block" mode="ios" text-uppercase type="submit" (click)="onSubmit()">
+        <ion-button expand="block" mode="ios" type="submit" (click)="onSubmit()">
           <ion-icon name="at" mode="md"></ion-icon>&nbsp;Register
         </ion-button>
 
@@ -364,12 +352,6 @@
 
 
 
-
-
-
-
-
-
 <ng-template #city_picker>
 
   <ion-item>
@@ -405,9 +387,31 @@
 
 
 
+<ng-template #individual_fields>
 
+  <div padding-top>
+    <ion-label position="stacked" class="label">Name (First and Last)</ion-label>
 
+    <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.personName" class="form-control"
+      id="name" name="name" #name="ngModel"></ion-input>
+    <!-- <input type="text" placeholder="Enter your name" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
+  </div>
 
+  <div padding-top>
+    <ion-label position="stacked" class="label">Email</ion-label>
+
+    <ion-input required type="text" placeholder="Enter your email" [(ngModel)]="newUser.email" name="email"></ion-input>
+
+  </div>
+
+  <div>
+    <ion-label position="stacked">Password</ion-label>
+
+    <ion-input required type="password" placeholder="Enter your password" [(ngModel)]="newUser.password" name="password"></ion-input>
+
+  </div>
+
+</ng-template>
 
 
 
@@ -450,29 +454,55 @@
 
 
 
-<!--
-    <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-      <ion-row padding-top>
-        <ion-col text-center>
-          <h2>Please fill in all the details</h2>
-        </ion-col>
-      </ion-row>
 
-      <h1>Hero Form</h1>
 
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel">
-      <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-        Name is required
-      </div>
 
-      <label for="alterEgo">Alter Ego</label>
-      <input type="text" class="form-control" id="alterEgo" [(ngModel)]="model.alterEgo" name="alterEgo">
 
-      <label for="power">Hero Power</label>
-      <select class="form-control" id="power" required [(ngModel)]="model.power" name="power" #power="ngModel">
-        <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-      </select>
 
-    </form>
- -->
+<ng-template #agree_to_terms>
+  <div>
+    <ion-button expand="block" mode="ios" (click)="toggleShowingTerms()" style="width:auto; padding-left: 10px; font-size: 0.9rem;">Show
+      Terms
+      & Conditions
+    </ion-button>
+  </div>
+
+  <ion-list style="background: transparent">
+    <ion-item>
+      I agree with the terms and conditions. &nbsp;&nbsp;
+      <ion-checkbox style="padding-left: 5px;" [(ngModel)]="termsCheckBoxValue" color="primary"></ion-checkbox>
+    </ion-item>
+    <ion-row justify-content-center>
+      <ion-col>
+
+
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <div *ngIf="showTerms">
+    <textarea style="padding-top:5px; padding-bottom:5px; padding-right:0; padding-left:0; width:100%; height: 20rem; font-size: 0.7rem">
+      SERVICES AGREEMENT
+
+      THIS SERVICES AGREEMENT (the “Agreement”) is made as of the Effective Date by and between Drifty Co. (d/b/a “Ionic”),
+       a Delaware corporation with its principal offices at 121 S. Pinckney St. Suite 300 Madison, WI 53703
+      (“Drifty”), and the party entering into this Agreement for the use of the Service (“Client”). By accessing,
+      copying, or otherwise using the Service (the date of which shall be known as the “Effective Date”),
+
+      Client acknowledges that it has read this Agreement, understands it, and agrees to be bound by its terms and conditions,
+       including Drifty’s Privacy Policy.
+
+      If Client does not agree to the terms and <conditio></conditio>ns of this Agreement, do not access or use the Service.
+      Drifty will not and does not license and make the Service available unless Client agrees to the terms of this Agreement.
+      In consideration of the mutual covenants and agreements set forth herein, and other good and valuable consideration,
+      receipt of which are hereby acknowledged, the parties agree as follows:
+
+      Scope of agreement. Drifty offers a service and tools that facilitate the development and design of
+      hybrid mobile apps using certain web technologies and certain ancillary applications, analytics, documentation,
+      and services to Client, all as more particularly described at ionicframework.com (the “Service”), and Drifty desires
+      to make such Service and its component parts available to Client on the terms and conditions described below.
+    </textarea>
+  </div>
+
+
+</ng-template>

@@ -92,7 +92,7 @@ export interface User {
 // comments/createdby_recievedby/<COMMENT_DOC_DETAILS_HERE>
 // query by commentOn to show comments on a page.
 // query by createdBy = currentUserId -> show comments on user profile.
-export interface ProfileComment {
+export interface Comment {
     createdAt?: any;
     updatedAt?: any;
 
@@ -126,19 +126,43 @@ export interface ProfileComment {
 // tenders/createdby_tenderid/<PROPOSAL_DOC_DETAILS_HERE>
 export interface Tender {
     createdAt?: any;
-    updatedAt?: any;
+    updatedAt?: any; // publish date
+
+    deadline?: any;
+
 
     createdBy?: string; // uid
 
+    creatorEmail?: string;
     // Get Company Email from CreatedBy
 
     nameOfCompany?: string;
     nameOfPerson?: string;
+    numberOfContactPerson?: string;
 
-    worthMin?: number;
-    worthMax?: number;
+    numberOfProposals?: number;
 
-    attachmentURL?: string; // pdf explaining the project
+    participationFee?: number;
+    // رسوم الإشتراك في المناقصة
+
+    bidBondPercent?: number;
+    // الكفالة المصرفية
+
+    sector?: number; // 1- goverment, 2- private
+
+    city?: number;
+
+    category?: string;
+
+    participants?: string[];
+
+    attachmentURLs?: string[];
+
+    // documents explaining the project!
+    // for each document show download button
+    // (attachment 1 , attachment 2, etc.)
+
+
 }
 
 
@@ -165,7 +189,21 @@ export interface Proposal {
     nameOfPerson?: string;
     // name of person that submitted this
 
-    attachmentURL?: string;
+
+
+    bidAmount?: number;
+
+    attachmentLicenceDoc?: string;
+    // copy this from the company's doc.
+
+    attachmentTechnicalDoc?: string;
+    // link to technical document
+    // مستند العرض الفني
+
+    attachmentCostDoc?: string;
+    // link to technical document
+    // مستند العرض المالي
+
     // formElementsArray?: FormElement[];
 }
 

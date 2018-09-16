@@ -3,10 +3,10 @@ $break-small: 768px;
 $break-large: 1200px;
 #container {
     @media only screen and (max-width: $break-small) {
-        background-image: url("/resources/backgrounds/newyork-city-blue-small.jpg");
+        // background-image: url("/resources/backgrounds/newyork-city-blue-small.jpg");
     }
     @media only screen and (min-width: $break-small) {
-        background-image: url("/resources/backgrounds/newyork-city-blue-large.jpg");
+        // background-image: url("/resources/backgrounds/newyork-city-blue-large.jpg");
     }
     background-repeat: no-repeat; // background-position: center center;
     background-size: auto 100%;
@@ -65,7 +65,7 @@ ion-button {
     width: 14rem;
     @media only screen and (min-width: $break-small) {
         font-size: 2rem;
-        width: 20rem;
+        width: 10rem;
     }
 }
 
@@ -73,11 +73,13 @@ h1 {
     text-align: center;
     font-size: 2rem;
     width: 90%;
+    color: --ion-color-dark;
+    padding-bottom: 200px;
+
     @media only screen and (min-width: $break-small) {
         font-size: 2rem;
         width: 20rem;
     }
-    color:white;
-    padding-bottom: 200px;
+
 }
 

@@ -1,23 +1,22 @@
 /*  #Style Login + logo 1
 ================================================*/
+
+
+
 * {
     font-family: 'a-jannat-lt';
+    --inner-border-width: 0;
 }
 
 .center {
     text-align: center !important;
 }
 
-ion-content {
-    background-image: "assets/images/background/39.jpg";
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}
 
 ion-label {
     text-align: center;
     font-size: 1.2rem !important;
+
 }
 
 ion-input {
@@ -25,6 +24,19 @@ ion-input {
 
     &::placeholder {
         text-align: center;
+    }
+}
+
+ion-list {
+    --inner-border-width: 0 !important;
+}
+
+ion-checkbox {
+    --border-style: none;
+    --inner-border-width: 0 !important;
+
+    .item-cover {
+        display: none;
     }
 }
 
@@ -174,5 +186,3 @@ input[type=file] {
     font-weight: bold;
     color: theme-colors('textColors', 'primary');
 }
-
-#upload-image {}

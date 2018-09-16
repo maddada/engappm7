@@ -1,14 +1,7 @@
-$break-small: 768px;
-$break-large: 1200px;
+@import '../../theme/mixins.scss';
+
 #container {
-    @media only screen and (max-width: $break-small) {
-        background-image: url("/resources/backgrounds/newyork-city-blue-small.jpg");
-    }
-    @media only screen and (min-width: $break-small) {
-        background-image: url("/resources/backgrounds/newyork-city-blue-large.jpg");
-    }
-    background-repeat: no-repeat; // background-position: center center;
-    background-size: auto 100%;
+
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -59,15 +52,22 @@ $break-large: 1200px;
 }
 
 ion-button {
-    text-align: center;
-    font-size: 2rem;
-    width: 14rem;
-    @media only screen and (min-width: $break-small) {
-        font-size: 4rem;
-        width: 20rem;
+
+    @include for-phone-only {
+        font-size: 1.2rem;
+        width: 30vw;
     }
+
+    @include for-tablet-portrait {
+        text-align: center;
+        font-size: 2rem;
+        width: 10rem;
+    }
+
+    @include for-tablet-landscape {
+        text-align: center;
+        font-size: 2rem;
+        width: 14rem;
+    }
+
 }
-
-#arabic-button {}
-
-#english-button {}

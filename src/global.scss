@@ -10,6 +10,7 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 @import "theme/animate.scss";
+@import "theme/mixins.scss";
 
 // @import "theme/main-theme.scss";
 @font-face {
@@ -19,25 +20,12 @@
     font-style: normal;
 }
 
-@mixin noselect {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
+ion-content {
+    background: url("assets/images/background/electro1.jpg") no-repeat top center fixed;
+    background-size: cover;
 }
 
-@mixin allow-select {
-    -webkit-touch-callout: text;
-    -webkit-user-select: text;
-    -khtml-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
-    cursor: default;
-}
+
 
 .m7toast {
     --ion-safe-area-bottom: 50px;
@@ -62,8 +50,8 @@ input,
 select,
 textarea {
     font-family: 'a-jannat-lt';
-    @include noselect;
-
+    @include no-select;
+    --ion-font-family: 'a-jannat-lt';
 }
 
 .bold {

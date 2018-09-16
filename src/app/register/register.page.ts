@@ -39,7 +39,6 @@ export class RegisterPage implements OnInit {
 
 
   public newUser: User = { type: -1 };
-
   protected uploadPercent: Observable<number>;
   protected downloadURL: Observable<string>;
 
@@ -69,6 +68,9 @@ export class RegisterPage implements OnInit {
   private myUploadButton: ElementRef;
 
 
+  showTerms: boolean;
+
+  termsCheckBoxValue: boolean;
 
 
 
@@ -128,6 +130,7 @@ export class RegisterPage implements OnInit {
   // Will return true or false based on required fields
   //
   private validateInputs(): boolean {
+
 
     switch (this.newUser.type) {
 
@@ -233,8 +236,11 @@ export class RegisterPage implements OnInit {
 
         this.newUserDoc = this.afs.doc(`users/${this.newUser.uid}`);
 
-        this.startUpload();
-
+        if (this.newUser.type !== 1) {
+          this.startUpload();
+        } else {
+          this.afterUserRegistered();
+        }
         // User data gets uploaded after uploading file and
         // getting uploadUrl
 
@@ -402,11 +408,25 @@ export class RegisterPage implements OnInit {
 
 
 
+  toggleShowingTerms() {
+    this.showTerms = !this.showTerms;
+  }
 
 
 
 
-
+  toggleTermsCheckBoxValue() {
+    // console.log(this.termsCheckBoxValue);
+    if (this.termsCheckBoxValue == null) {
+      this.termsCheckBoxValue = false;
+    }
+    else if (this.termsCheckBoxValue === true) {
+      this.termsCheckBoxValue = false;
+    } else {
+      this.termsCheckBoxValue = true;
+    }
+    console.log(this.termsCheckBoxValue);
+  }
 
 
 

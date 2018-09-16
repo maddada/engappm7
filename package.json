@@ -41,6 +41,8 @@
     "core-js": "^2.5.3",
     "css-animator": "^2.3.1",
     "firebase": "^5.4.2",
+    "moment": "^2.20.1",
+    "ngx-moment": "^3.1.0",
     "rxjs": "6.2.2",
     "zone.js": "^0.8.26"
   },

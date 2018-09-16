@@ -13,9 +13,8 @@
 
   <ion-grid>
 
-    <ng-container *ngIf="loggedIn; else notLoggedIn">
+    <ng-container *ngIf="auth.isUserLoggedIn$ | async; else notLoggedIn">
       <!-- logged in here -->
-
 
       <!-- TODO: do different pages for each type!!!  -->
       <ng-container [ngSwitch]="LATER">
@@ -45,21 +44,6 @@
     </ng-container>
 
 
-
-    <ng-template #notLoggedIn>
-      <!-- not logged in here -->
-      <ion-row justify-content-center style="margin-top: 30vh;">
-        <ion-col size-sm="2" size-lg="5" size-md="4" size-xl="4" text-center align-items-center>
-          <h1>Login to view your profile!</h1>
-          <ion-button expand="block" mode="ios" text-uppercase href="/login" routerDirection="forward">
-            <ion-icon name="at" mode="md"></ion-icon>&nbsp;Log In
-          </ion-button>
-        </ion-col>
-      </ion-row>
-    </ng-template>
-
-
-
     <ng-template #individual>
     </ng-template>
 
@@ -71,6 +55,34 @@
 
     <ng-template #supplier>
     </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <ng-template #notLoggedIn>
+      <!-- not logged in here -->
+      <ion-row justify-content-center>
+        <ion-col text-center align-items-center>
+          <h1>Login to view your profile!</h1>
+          <ion-button type="bar-button" mode="ios" text-uppercase href="/login" routerDirection="forward">
+            <ion-icon name="at" mode="md"></ion-icon>&nbsp;Log In
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ng-template>
+
 
 
 
