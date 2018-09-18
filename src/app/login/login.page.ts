@@ -30,7 +30,7 @@ export class LoginPage implements OnInit {
   private register: string = 'Register';
   private login: string = 'Login';
   private skip: string = 'Skip';
-  private logo: string = 'assets/images/logo/1.png';
+  private logo: string = 'assets/images/logo/logo.png';
   private errorUser: string = 'Field can\'t be empty';
   private errorPassword: string = 'Field can\'t be empty';
   protected isLoggedIn: string;

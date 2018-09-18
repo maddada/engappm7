@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Tender } from '../../../model';
 
 @Component({
@@ -8,26 +8,9 @@ import { Tender } from '../../../model';
 })
 export class TenderListElementComponent implements OnInit {
 
-  testTender: Tender;
-  testTenders: Tender[];
-
+  @Input() tender: Tender;
 
   constructor() {
-    this.testTender = {
-      createdBy: 'userid1',
-      creatorEmail: 'test@test.com',
-      nameOfCompany: 'Company Name',
-      nameOfPerson: 'string',
-      numberOfProposals: 0,
-      participationFee: 1000,
-      bidBondPercent: 5,
-      sector: 1,
-      city: 2,
-      attachmentURLs: ['link1', 'link2'],
-    };
-
-    this.testTenders = [this.testTender, this.testTender, this.testTender];
-
   }
 
 

@@ -1,14 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonRouterOutlet, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { AuthService } from './core/auth.service';
-import { BehaviorSubject } from 'rxjs';
+// import { BehaviorSubject } from 'rxjs';
 
-import * as firebase from 'firebase/app';
+// import * as firebase from 'firebase/app';
 
 /* get a reference to the used IonRouterOutlet
 assuming this code is placed in the component
@@ -44,12 +44,11 @@ export class AppComponent {
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
-        private router: Router,
+        // private router: Router,
         private storage: Storage,
         private auth: AuthService,
     ) {
         this.initializeApp();
-
     }
 
 
@@ -103,9 +102,7 @@ export class AppComponent {
 
 
 
-
-
-    // TODO: [Super 6af] Fix Back button android
+    // LATER: [Super 6af] Fix Back button android
     // fix show alert thing, and enable this one so
     // this.platform.backButton.subscribe(() => {
     //   if (this.routerOutlet && this.routerOutlet.canGoBack()) {

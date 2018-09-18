@@ -27,8 +27,6 @@ dependencies:
   core-js: 2.5.7
   css-animator: 2.3.1
   firebase: 5.5.0
-  moment: 2.22.2
-  ngx-moment: 3.1.0
   rxjs: 6.2.2
   zone.js: 0.8.26
 devDependencies:
@@ -5583,10 +5581,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-67Opd+evHGg65v2hK1Raa6bFhT0=
-  /moment/2.22.2:
-    dev: false
-    resolution:
-      integrity: sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
   /move-concurrently/1.0.1:
     dependencies:
       aproba: 1.2.0
@@ -5658,16 +5652,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-vdqTKI9GBIYcAEbFAcpKPErKINfPF5zIuz3/niBfq8WUZjpT2tytLlFVrBgWdOtqI4uaA/Rb6No0hux39XXDuw==
-  /ngx-moment/3.1.0:
-    dependencies:
-      tslib: 1.9.3
-    dev: false
-    peerDependencies:
-      '@angular/common': '>=2.0.0 <7.0.0'
-      '@angular/core': '>=2.0.0 <7.0.0'
-      moment: ^2.19.3
-    resolution:
-      integrity: sha512-liX6iTfOY0XyI3rUuWNgGpgxoeD+DFaAl7UJ/ejl9Ama5cXzw8L1Eft6UQLUo1d80kjNMc6AL+L19CPMvUQ/BA==
   /nice-try/1.0.5:
     dev: true
     resolution:
@@ -8690,10 +8674,10 @@ specifiers:
   '@angular-devkit/build-angular': ^0.7.5
   '@angular-devkit/core': ^0.7.5
   '@angular-devkit/schematics': ^0.7.5
-  '@angular/cli': ^6.1.5
+  '@angular/cli': ^6.2.2
   '@angular/common': ~6.1.6
-  '@angular/compiler': ^6.1.6
-  '@angular/compiler-cli': ^6.1.6
+  '@angular/compiler': ^6.1.7
+  '@angular/compiler-cli': ^6.1.7
   '@angular/core': ^6.1.6
   '@angular/fire': ^5.0.0
   '@angular/forms': ^6.1.6
@@ -8737,8 +8721,6 @@ specifiers:
   karma-coverage-istanbul-reporter: ^2.0.3
   karma-jasmine: ~1.1.1
   karma-jasmine-html-reporter: ^0.2.2
-  moment: ^2.20.1
-  ngx-moment: ^3.1.0
   protractor: ~5.4.0
   rxjs: 6.2.2
   ts-node: ~7.0.0

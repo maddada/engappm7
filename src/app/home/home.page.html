@@ -12,16 +12,17 @@
 
 <ion-content>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <!-- TODO: ADD INPUT/OUTPUT AND NGFOR TO THIS! -->
-        <app-tender-list-element>
-        </app-tender-list-element>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="flex-container">
 
+    <ng-container *ngFor="let tender of tenders | async">
+      <div class="tender-element-container">
+        <app-tender-list-element [tender]=>
+        </app-tender-list-element>
+      </div>
+
+    </ng-container>
+
+  </div>
 
   <!-- <ion-button style="display:block; text-align:center" href="/select-language" routerDirection="forward"> Go to
     language </ion-button>
@@ -31,5 +32,6 @@
   </ion-button> -->
 
 
-  <p>{{isLoggedIn}}</p>
+  <!-- <p *ngIf="isLoggedIn">Logged In</p>
+  <p *ngIf="!isLoggedIn">Not Logged In</p> -->
 </ion-content>

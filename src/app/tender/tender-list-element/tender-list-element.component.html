@@ -1,120 +1,47 @@
-<ion-row padding style="border-radius: 50px;">
-  <ion-col size-sm="12" size-md="12" size-xl="6">
+<ng-container>
+  <div class="grid-container">
 
 
-    <ion-list>
-      <ion-item>
-        <ion-note slot="start" class="heading">Project Name Here</ion-note>
-      </ion-item>
 
-      <ion-item>
-        <ion-icon slot="start" name="pin"></ion-icon>
-        <ion-label slot="start">City:</ion-label>
-        <ion-note slot="start">Sharjah</ion-note>
-      </ion-item>
+    <div class="image-col-grid">
+      <img src="/assets/icon/cement.svg">
+      <div class="category-row">
+        Construction
+      </div>
+    </div>
 
-      <ion-item>
-        <ion-label slot="start">Publish Date</ion-label>
-        <ion-note slot="start">2018-09-15</ion-note> <!-- User Date Pipe + createdAt here-->
-      </ion-item>
+    <div class="details-col-grid">
 
-      <ion-item>
-        <ion-button slot="end">
-          More Details
-        </ion-button>
-      </ion-item>
-    </ion-list>
+      <div class="row-1 tender-title-row">
+        Construction of School in Qusais
+      </div>
 
-    <ion-list>
-      <ion-item>
-        <ion-note slot="start" class="heading">Project Name Here</ion-note>
-      </ion-item>
+      <div class="row-2 company-name-row">
+        Emirates Consulting
+      </div>
+      <div class="row-3 details-row-container">
+        <div class="main-description-grid" [class.arabic]="lang === 'ar'">
 
-      <ion-item>
-        <ion-label slot="start">City</ion-label>
-        <ion-note slot="start">Sharjah</ion-note>
-      </ion-item>
+          <ion-icon name='pin' mode="md"></ion-icon>
+          <div class="detail-name-text">City</div>
+          <div class="detail-data">Abu Dhabi</div>
 
-      <ion-item>
-        <ion-label slot="start">Publish Date</ion-label>
-        <ion-note slot="start">2018-09-15</ion-note> <!-- User Date Pipe + createdAt here-->
-      </ion-item>
+          <ion-icon name="checkmark-circle-outline" mode="md"></ion-icon>
+          <div class="detail-name-text">Status</div>
+          <div class="detail-data">Recent</div>
 
-      <ion-item>
-        <ion-button slot="end">
-          More Details
-        </ion-button>
-      </ion-item>
-    </ion-list>
+          <ion-icon name='alarm' mode="md"></ion-icon>
+          <div class="detail-name-text">Published</div>
+          <div class="detail-data">15-09-2018</div>
 
-    <ion-list>
-      <ion-item>
-        <ion-note slot="start" class="heading">Project Name Here</ion-note>
-      </ion-item>
+          <div></div>
+          <div class="detail-name-text">Deadline</div>
+          <div class="detail-data">20-10-2018</div>
 
-      <ion-item>
-        <ion-label slot="start">City</ion-label>
-        <ion-note slot="start">Sharjah</ion-note>
-      </ion-item>
+        </div>
+      </div>
 
-      <ion-item>
-        <ion-label slot="start">Publish Date</ion-label>
-        <ion-note slot="start">2018-09-15</ion-note> <!-- User Date Pipe + createdAt here-->
-      </ion-item>
+    </div>
+  </div>
 
-      <ion-item>
-        <ion-button slot="end">
-          More Details
-        </ion-button>
-      </ion-item>
-    </ion-list>
-  </ion-col>
-
-
-  <ion-col size-sm="12" size-md="12" size-xl="6">
-    <ion-list>
-      <ion-item>
-        <ion-note slot="start" class="heading">Project Name Here</ion-note>
-      </ion-item>
-
-      <ion-item>
-        <ion-label slot="start">City</ion-label>
-        <ion-note slot="start">Sharjah</ion-note>
-      </ion-item>
-
-      <ion-item>
-        <ion-label slot="start">Publish Date</ion-label>
-        <ion-note slot="start">2018-09-15</ion-note> <!-- User Date Pipe + createdAt here-->
-      </ion-item>
-
-      <ion-item>
-        <ion-button slot="end">
-          More Details
-        </ion-button>
-      </ion-item>
-    </ion-list>
-
-    <ion-list>
-      <ion-item>
-        <ion-note slot="start" class="heading">Project Name Here</ion-note>
-      </ion-item>
-
-      <ion-item>
-        <ion-label slot="start">City</ion-label>
-        <ion-note slot="start">Sharjah</ion-note>
-      </ion-item>
-
-      <ion-item>
-        <ion-label slot="start">Publish Date</ion-label>
-        <ion-note slot="start">2018-09-15</ion-note> <!-- User Date Pipe + createdAt here-->
-      </ion-item>
-
-      <ion-item>
-        <ion-button slot="end">
-          More Details
-        </ion-button>
-      </ion-item>
-    </ion-list>
-
-  </ion-col>
-</ion-row>
+</ng-container>
