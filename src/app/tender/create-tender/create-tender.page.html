@@ -1,9 +1,205 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>create-tender</ion-title>
+  <ion-toolbar color="light">
+
+    <ion-buttons slot="start">
+      <ion-button routerLink="/" routerDirection="back">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Create Tender</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+
+
+
+
+
+
+
+
+<ion-content>
+  <ion-grid no-padding>
+
+    <ion-row size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" padding-horizontal>
+
+      <ion-col style="margin: 0 auto; max-width:500px">
+
+        <h2 class="center">
+          <strong>
+            Enter the details,<br>leave the rest to us!
+          </strong>
+        </h2>
+
+        <!-- NOTE: Tender Title -->
+        <ion-item>
+          <ion-label color="primary" position="floating">
+            Title*
+          </ion-label>
+          <ion-input [(ngModel)]="newTender.title" type="text">
+          </ion-input>
+        </ion-item>
+
+
+
+        <!-- NOTE: Tender Category -->
+        <ion-item padding-top>
+          <ion-label color="primary" position="floating" class="label">Tender Category*</ion-label>
+
+          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedType" interface="action-sheet">
+
+            <ion-select-option value="tender_construction">Construction</ion-select-option>
+            <ion-select-option value="tender_steel">Steel Works</ion-select-option>
+            <ion-select-option value="tender_maintenance">Maintenance</ion-select-option>
+            <ion-select-option value="tender_concrete">Concrete</ion-select-option>
+            <ion-select-option value="tender_prefab">Prefab Works</ion-select-option>
+            <ion-select-option value="tender_insulation">Insulation</ion-select-option>
+            <ion-select-option value="tender_fencing">Fencing/Walls</ion-select-option>
+            <ion-select-option value="tender_general">General Works</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+
+        <!-- NOTE: Tender Summary -->
+        <ion-item padding-top>
+          <ion-label color="primary" position="floating">
+            Tender Summary
+          </ion-label>
+
+          <ion-textarea rows="6" dir="auto" [(ngModel)]="newTender.tenderSummary" type="text">
+          </ion-textarea>
+        </ion-item>
+
+
+        <!-- NOTE: Deadline -->
+        <ion-item padding-top>
+          <ion-label color="primary" position="floating" class="label">Select Deadline*</ion-label>
+
+          <ion-datetime display-format="DD/MM/YYYY" max="{{datePickerMaxYear}}" style="--background: white;"></ion-datetime>
+
+        </ion-item>
+
+
+        <!-- NOTE: Participation Fee -->
+        <ion-item padding-top>
+
+          <ion-label color="primary" position="floating" class="label">Participation Fee*</ion-label>
+
+          <ion-input type="number" placeholder="" [(ngModel)]="newTender.participationFee"></ion-input>
+
+        </ion-item>
+
+        <p class="description-text center">Can be set to 0</p>
+
+        <!-- NOTE: Bid Bond Percentage -->
+        <ion-item padding-top>
+
+          <ion-label color="primary" position="floating" class="label">Bid Bond Percentage*</ion-label>
+
+
+          <ion-input type="number" placeholder="" [(ngModel)]="newTender.bidBondPercent"></ion-input>
+
+        </ion-item>
+
+        <p class="description-text center">Can be set to 0</p>
+
+        <br>
+
+        <!-- <h4>
+          Please upload any related documents here:
+        </h4> -->
+
+        <!-- NOTE: Select Number Of Attachments -->
+        <ion-item padding-bottom>
+
+          <ion-label style="color:rgb(3, 108, 150); font-size:1rem;" position="stacked" mode="md" text-wrap>
+            Select number of related attachments to upload:
+          </ion-label>
+
+          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedNumOfAttachments" interface="action-sheet"
+            (ionChange)="onSelectNumOfAttachments(event)">
+
+            <ion-select-option value="0">none</ion-select-option>
+            <ion-select-option value="1">1</ion-select-option>
+            <ion-select-option value="2">2</ion-select-option>
+            <ion-select-option value="3">3</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+
+
+        <!-- NOTE: ATTACHMENT 1 -->
+        <ion-item *ngIf="newTender.numOfAttachments >= 1" padding-bottom>
+
+          <ion-label color="primary" position="stacked">
+            Attachment #1
+          </ion-label>
+
+          <input #uploadButton3 type="file" (change)="setUpload($event, 0)" name="upload1">
+
+        </ion-item>
+
+        <!-- NOTE: ATTACHMENT 2 -->
+        <ion-item *ngIf="newTender.numOfAttachments >= 2" padding-bottom>
+
+          <ion-label color="primary" position="stacked">
+            Attachment #2
+          </ion-label>
+
+          <input #uploadButton3 type="file" (change)="setUpload($event, 1)" name="upload2">
+
+        </ion-item>
+
+        <!-- NOTE: ATTACHMENT 3 -->
+        <ion-item *ngIf="newTender.numOfAttachments >= 3" padding-bottom>
+
+          <ion-label color="primary" position="stacked">
+            Attachment #3
+          </ion-label>
+
+          <input #uploadButton3 type="file" (change)="setUpload($event, 2)" name="upload3">
+          <!-- <input #uploadButton type="file" (change)="setUpload($event)" name="upload" /> -->
+
+        </ion-item>
+
+        <!-- NOTE: Spacer  -->
+        <div padding>
+        </div>
+
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
 
 </ion-content>
+
+
+<!-- NOTE: Footer -->
+<ion-footer>
+
+  <ion-toolbar color="light">
+
+    <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
+      padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <!-- NOTE: Create Tender Button -->
+        <ion-button expand="block" mode="ios" type="submit" (click)="onSubmit()">
+          <ion-icon name="at"></ion-icon>&nbsp;Create Tender
+        </ion-button>
+
+        <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+          &nbsp;TEST
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

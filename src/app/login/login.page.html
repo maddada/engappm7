@@ -21,7 +21,7 @@
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-        <ion-row margin-top padding-top align-self-end>
+        <ion-row margin-top align-self-end>
 
           <ion-col text-center>
             <img box-shadow [src]="logo" style="margin: 0 auto;">
@@ -44,13 +44,7 @@
 
           <ion-input required type="password" placeholder="{{passwordPlaceholder}}" [(ngModel)]="password"></ion-input>
 
-          <ng-container *ngIf="auth.isUserLoggedIn$ | async; else notloggedin">
-            LOGGED IN
-          </ng-container>
 
-          <ng-template #notloggedin>
-            NOT LOGGED IN
-          </ng-template>
           <!-- <ion-label error-field no-margin *ngIf="!isPasswordValid">{{errorPassword}}</ion-label> -->
         </div>
 
@@ -59,11 +53,7 @@
     </ion-row>
 
 
-    <ion-row no-padding>
-      <ion-col text-center>
-        <ion-button text-capitalize fill="clear" href="/forgot-password">{{forgotPassword}}</ion-button>
-      </ion-col>
-    </ion-row>
+
 
   </ion-grid>
 
@@ -73,11 +63,13 @@
 
   <ion-toolbar color="light">
 
+
     <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
       padding-horizontal>
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
+        <ion-button text-capitalize expand="block" fill="clear" href="/forgot-password">{{forgotPassword}}</ion-button>
 
         <!---Login button-->
         <ion-button expand="block" mode="ios" text-uppercase (click)="onLoginClick()">

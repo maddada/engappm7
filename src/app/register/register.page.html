@@ -58,7 +58,7 @@
                 id="selectAccountType" interface="action-sheet" (ionChange)="onSelectType(event)" name="selectAccountType">
 
                 <ion-select-option value="1">Individual</ion-select-option>
-                <ion-select-option value="2">Consultant</ion-select-option>
+                <ion-select-option value="2">Organization / Consultant</ion-select-option>
                 <ion-select-option value="3">Contractor</ion-select-option>
                 <ion-select-option value="4">Supplier</ion-select-option>
 
@@ -129,8 +129,12 @@
                 <ng-container *ngTemplateOutlet="company_registration_fields">
                 </ng-container>
 
+                <ng-container *ngTemplateOutlet="organization_sector">
+                </ng-container>
+
                 <ng-container *ngTemplateOutlet="agree_to_terms">
                 </ng-container>
+
               </ng-container>
 
 
@@ -218,6 +222,10 @@
           <ion-icon name="at" mode="md"></ion-icon>&nbsp;Register
         </ion-button>
 
+        <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+          &nbsp;TEST
+        </ion-button>
+
       </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -298,7 +306,7 @@
 
 
   <!-- Company Classification -->
-  <div *ngIf="newUser.type == 2 || newUser.type == 3">
+  <div *ngIf="newUser.accountType == 2 || newUser.accountType == 3">
     <ion-label position="stacked">Company Classification</ion-label>
 
     <ion-input required type="text" placeholder="Enter Company Classification" [(ngModel)]="newUser.class" name="class"></ion-input>
@@ -359,12 +367,13 @@
 
     <ion-select placeholder="Please Select a City" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedCity"
       (ionChange)="onSelectCity(event)" name="selectCity">
-      <ion-select-option value="1">Abu Dhabi</ion-select-option>
-      <ion-select-option value="2">Dubai</ion-select-option>
-      <ion-select-option value="3">Sharjah</ion-select-option>
-      <ion-select-option value="4">Ajman</ion-select-option>
-      <ion-select-option value="5">Fujairah</ion-select-option>
-      <ion-select-option value="6">Al Ain</ion-select-option>
+
+      <ion-select-option value="1">Dubai</ion-select-option>
+      <ion-select-option value="2">Sharjah</ion-select-option>
+      <ion-select-option value="3">Ajman</ion-select-option>
+      <ion-select-option value="4">Abu Dhabi</ion-select-option>
+      <ion-select-option value="5">Al Ain</ion-select-option>
+      <ion-select-option value="6">Fujairah</ion-select-option>
       <ion-select-option value="7">Ras al-Khaimah</ion-select-option>
       <ion-select-option value="8">Umm al-Quwain</ion-select-option>
 
@@ -411,6 +420,12 @@
 
   </div>
 
+  <div>
+    <ion-label position="stacked">Mobile</ion-label>
+
+    <ion-input required type="text" placeholder="Enter your mobile" [(ngModel)]="newUser.mobileNumber" name="mobileNumber"></ion-input>
+  </div>
+
 </ng-template>
 
 
@@ -421,28 +436,16 @@
 
 
 
-
-
-
-
-
-
-<ng-template #supplier_fields>
+<ng-template #organization_sector>
 
   <ion-item>
-    <ion-label position="stacked">Speciality</ion-label>
+    <ion-label position="stacked">Sector</ion-label>
 
-    <ion-select placeholder="Please Select Your Specialities" multiple="true" ok-text="Select" interface="alert"
-      (ionChange)="onSelectSupplierCategory($event)" name="selectSupplierCategory">
+    <ion-select placeholder="Sector" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedSector" (ionChange)="onSelectSector(event)"
+      name="selectedSector">
 
-      <ion-select-option value="c_paint">Paint</ion-select-option>
-      <ion-select-option value="c_blocks">Blocks</ion-select-option>
-      <ion-select-option value="c_ceramics">Ceramics</ion-select-option>
-      <ion-select-option value="c_interlock">Interlock</ion-select-option>
-      <ion-select-option value="c_wood">Wood</ion-select-option>
-      <ion-select-option value="c_doors">Doors</ion-select-option>
-      <ion-select-option value="c_fabric">Fabric</ion-select-option>
-      <ion-select-option value="c_cement">Cement</ion-select-option>
+      <ion-select-option value="gov">Govermental</ion-select-option>
+      <ion-select-option value="private">Private</ion-select-option>
 
     </ion-select>
   </ion-item>
@@ -455,19 +458,47 @@
 
 
 
+<ng-template #supplier_fields>
+
+  <ion-item padding-bottom>
+    <ion-label position="stacked">Select Speciality*</ion-label>
+
+    <ion-select placeholder="Please Select Your Specialities" multiple="true" ok-text="Select" interface="alert"
+      (ionChange)="onSelectSupplierCategory($event)" name="selectSupplierCategory">
+
+      <ion-select-option value="category_paint">Paint</ion-select-option>
+      <ion-select-option value="category_blocks">Blocks</ion-select-option>
+      <ion-select-option value="category_ceramics">Ceramics</ion-select-option>
+      <ion-select-option value="category_interlock">Interlock</ion-select-option>
+      <ion-select-option value="category_wood">Wood</ion-select-option>
+      <ion-select-option value="category_doors">Doors</ion-select-option>
+      <ion-select-option value="category_fabric">Fabric</ion-select-option>
+      <ion-select-option value="category_cement">Cement</ion-select-option>
+
+    </ion-select>
+  </ion-item>
+
+
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 <ng-template #agree_to_terms>
-  <div>
-    <ion-button expand="block" mode="ios" (click)="toggleShowingTerms()" style="width:auto; padding-left: 10px; font-size: 0.9rem;">Show
-      Terms
-      & Conditions
-    </ion-button>
-  </div>
 
-  <ion-list style="background: transparent">
+
+  <ion-list style="background: transparent" padding-top>
     <ion-item>
       I agree with the terms and conditions. &nbsp;&nbsp;
       <ion-checkbox style="padding-left: 5px;" [(ngModel)]="termsCheckBoxValue" color="primary"></ion-checkbox>
@@ -479,6 +510,13 @@
       </ion-col>
     </ion-row>
   </ion-list>
+
+  <div>
+    <ion-button expand="block" mode="ios" (click)="toggleShowingTerms()" style="width:auto; padding-left: 10px; font-size: 0.9rem;">Show
+      Terms
+      & Conditions
+    </ion-button>
+  </div>
 
   <div *ngIf="showTerms">
     <textarea style="padding-top:5px; padding-bottom:5px; padding-right:0; padding-left:0; width:100%; height: 20rem; font-size: 0.7rem">

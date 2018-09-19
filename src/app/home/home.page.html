@@ -12,17 +12,25 @@
 
 <ion-content>
 
-  <div class="flex-container">
+  <ng-container *ngIf="(tender$ | async)?.length === 0;else hasEntries">
+    <h2 class="no_entries">
+      No entries
+    </h2>
+  </ng-container>
 
-    <ng-container *ngFor="let tender of tenders | async">
-      <div class="tender-element-container">
-        <app-tender-list-element [tender]=>
-        </app-tender-list-element>
-      </div>
+  <ng-template #hasEntries>
+    <div class="flex-container">
 
-    </ng-container>
+      <ng-container *ngFor="let tender of tenders$ | async; let i = index">
+        <div class="tender-element-container">
+          <app-tender-list-element [tender]="tender">
+          </app-tender-list-element>
+        </div>
 
-  </div>
+      </ng-container>
+
+    </div>
+  </ng-template>
 
   <!-- <ion-button style="display:block; text-align:center" href="/select-language" routerDirection="forward"> Go to
     language </ion-button>
@@ -31,6 +39,8 @@
   <ion-button style="display:block; text-align:center" href="/register" routerDirection="forward"> Go to Registration
   </ion-button> -->
 
+  <ion-button style="display:block; text-align:center" href="/create-tender" routerDirection="forward"> Create Tender
+  </ion-button>
 
   <!-- <p *ngIf="isLoggedIn">Logged In</p>
   <p *ngIf="!isLoggedIn">Not Logged In</p> -->

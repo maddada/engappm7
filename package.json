@@ -1,5 +1,5 @@
 {
-  "name": "engappm7",
+  "name": "Memar UAE",
   "version": "0.0.1",
   "author": "Mohamad Yahia",
   "homepage": "http://maddada.com/",
@@ -25,9 +25,9 @@
     "@ionic-native/splash-screen": "^5.0.0-beta.17",
     "@ionic-native/sqlite": "^5.0.0-beta.17",
     "@ionic-native/status-bar": "^5.0.0-beta.17",
-    "@ionic/angular": "^4.0.0-beta.7",
+    "@ionic/angular": "^4.0.0-beta.11",
     "@ionic/pro": "2.0.3",
-    "@ionic/storage": "^2.1.3",
+    "@ionic/storage": "2.2.0",
     "animate.css": "^3.7.0",
     "cordova-android": "7.0.0",
     "cordova-ios": "4.5.5",

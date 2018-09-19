@@ -21,9 +21,8 @@ import { ShowToastService } from './show-toast.service';
 })
 export class AuthService {
 
-
-
   user$: Observable<User | null>;
+  userID: string;
 
   public isUserLoggedIn$: BehaviorSubject<boolean>;
 
@@ -41,11 +40,13 @@ export class AuthService {
         if (user) {
           console.log('auth service: logged in!');
           this.isUserLoggedIn$.next(true);
+          this.userID = user.uid;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
 
         } else {
           console.log('auth service: not logged in!');
           this.isUserLoggedIn$.next(false);
+          this.userID = null;
           return of(null);
         }
       }),

@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
 
-import { AuthService } from '../core/auth.service';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -26,7 +24,6 @@ export class RegisterPage implements OnInit {
     private nav: NavController,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
-    private auth: AuthService,
     private storage: AngularFireStorage,
     private db: FirestoreService,
     private toast: ShowToastService,
@@ -37,8 +34,7 @@ export class RegisterPage implements OnInit {
 
 
 
-
-  public newUser: User = { type: -1 };
+  public newUser: User = { accountType: -1 };
   protected uploadPercent: Observable<number>;
   protected downloadURL: Observable<string>;
 
@@ -48,8 +44,7 @@ export class RegisterPage implements OnInit {
 
   private newUserDoc: AngularFirestoreDocument<User>;
 
-  private selectedSupplierCategories: string[] = [];
-
+  private selectedSupplierCategories: string[];
 
   // We're binding to a select to get these
   // We're recieving them as string
@@ -60,6 +55,10 @@ export class RegisterPage implements OnInit {
 
   protected selectedType: string;
 
+  protected selectedSector: string;
+
+  showTerms: boolean;
+  termsCheckBoxValue: boolean;
 
 
   // used to access input and clear it
@@ -67,27 +66,9 @@ export class RegisterPage implements OnInit {
   @ViewChild('uploadButton')
   private myUploadButton: ElementRef;
 
-
-  showTerms: boolean;
-
-  termsCheckBoxValue: boolean;
-
-
-
-
-
   ngOnInit() {
+
   }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -101,26 +82,19 @@ export class RegisterPage implements OnInit {
     }
   }
 
+  protected onTestClicked(): void {
 
+    if (this.validateInputs()) {
+      console.log("TEST REGISTRATION SUCCESSFUL!");
+    }
+    else {
+    }
+    // console.log("this.termsCheckBoxValue", this.termsCheckBoxValue)
 
+    // console.log("this.newUser.govSector", this.newUser.govSector)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // console.log("this.uploadData", this.uploadData);
+  }
 
 
 
@@ -131,76 +105,76 @@ export class RegisterPage implements OnInit {
   //
   private validateInputs(): boolean {
 
+    if (this.termsCheckBoxValue === false ||
+      this.termsCheckBoxValue == null ||
+      isNaN(this.newUser.city) ||
+      this.newUser.email == null ||
+      this.newUser.email.length === 0 ||
+      this.newUser.password == null ||
+      this.newUser.password.length === 0 ||
+      this.newUser.personName == null ||
+      this.newUser.personName.length === 0 ||
+      this.newUser.mobileNumber == null ||
+      this.newUser.mobileNumber.length === 0
+    ) {
+      console.log("stopped here");
+      this.toast.showToast(`A Required Field is Empty!`);
+      return false;
+    }
 
-    switch (this.newUser.type) {
+
+
+
+    switch (this.newUser.accountType) {
 
       case 1: {
-        if (
-          isNaN(this.newUser.city) ||
-          this.newUser.personName.length === 0 ||
-          this.newUser.email.length === 0 ||
-          this.newUser.password.length === 0) {
-
-          this.toast.showToast(`A Required Field is Empty!`);
-          return false;
-
-        }
 
         return true;
-        break;
       }
 
       case 2:
+        if (this.newUser.govSector == null) {
+          this.toast.showToast(`A Required Field is Empty!`);
+          console.log("stopped here");
+          return false;
+        }
+      // tslint:disable-next-line
       case 3: {
         if (
           isNaN(this.newUser.city) ||
-          !this.newUser.email ||
-          this.newUser.email.length === 0 ||
-          !this.newUser.password ||
-          this.newUser.password.length === 0 ||
-          !this.newUser.companyName ||
+          this.newUser.companyName == null ||
           this.newUser.companyName.length === 0 ||
-          !this.newUser.phoneNumber ||
+          this.newUser.phoneNumber == null ||
           this.newUser.phoneNumber.length === 0 ||
-          !this.newUser.personName ||
-          this.newUser.personName.length === 0 ||
-          !this.newUser.mobileNumber ||
-          this.newUser.mobileNumber.length === 0 ||
-          !this.newUser.class ||
+          this.newUser.class == null ||
           this.newUser.class.length === 0 ||
-          !this.uploadData) {
-
+          this.uploadData == null) {
+          console.log("stopped here");
           this.toast.showToast(`A Required Field is Empty!`);
           return false;
-
+        } else {
+          return true;
         }
-        return true;
-        break;
       }
 
       case 4: {
         if (
           isNaN(this.newUser.city) ||
-          !this.newUser.email ||
-          this.newUser.email.length === 0 ||
-          !this.newUser.password || this.newUser.password.length === 0 ||
-          !this.newUser.companyName ||
+          this.newUser.companyName == null ||
           this.newUser.companyName.length === 0 ||
-          !this.newUser.phoneNumber ||
+          this.newUser.phoneNumber == null ||
           this.newUser.phoneNumber.length === 0 ||
-          !this.newUser.personName ||
-          this.newUser.personName.length === 0 ||
-          !this.newUser.mobileNumber ||
-          this.newUser.mobileNumber.length === 0 ||
-          this.selectedSupplierCategories.length === 0 ||
-          !this.uploadData) {
+          this.newUser.supplierCategory.length === 0 ||
+          this.uploadData == null) {
+          console.log("stopped here");
           this.toast.showToast(`A Required Field is Empty!`);
           return false;
 
+        } else {
+          return true;
         }
-        return true;
-        break;
       }
+
       default: {
         this.toast.showToast(`Select an Account Type!`);
         return false;
@@ -208,13 +182,6 @@ export class RegisterPage implements OnInit {
     }
 
   }
-
-
-
-
-
-
-
 
 
 
@@ -236,7 +203,7 @@ export class RegisterPage implements OnInit {
 
         this.newUserDoc = this.afs.doc(`users/${this.newUser.uid}`);
 
-        if (this.newUser.type !== 1) {
+        if (this.newUser.accountType !== 1) {
           this.startUpload();
         } else {
           this.afterUserRegistered();
@@ -248,11 +215,6 @@ export class RegisterPage implements OnInit {
       })
       .catch(error => this.handleError(error));
   }
-
-
-
-
-
 
 
 
@@ -305,23 +267,6 @@ export class RegisterPage implements OnInit {
     console.log(this.uploadData);
 
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -388,30 +333,9 @@ export class RegisterPage implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   toggleShowingTerms() {
     this.showTerms = !this.showTerms;
   }
-
 
 
 
@@ -427,11 +351,6 @@ export class RegisterPage implements OnInit {
     }
     console.log(this.termsCheckBoxValue);
   }
-
-
-
-
-
 
 
 
@@ -458,32 +377,9 @@ export class RegisterPage implements OnInit {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   protected onSelectType($event): any {
-    this.newUser.type = Number(this.selectedType);
+    this.newUser.accountType = Number(this.selectedType);
   }
-
-
-
 
 
 
@@ -492,9 +388,14 @@ export class RegisterPage implements OnInit {
   }
 
 
-
-
-
+  protected onSelectSector($event): any {
+    if (this.selectedSector === "gov") {
+      this.newUser.govSector = true;
+    }
+    else if (this.selectedSector === "private") {
+      this.newUser.govSector = false;
+    }
+  }
 
 
 
@@ -502,6 +403,7 @@ export class RegisterPage implements OnInit {
 
     if ($event.detail.value.length > 0) {
       this.selectedSupplierCategories = $event.detail.value;
+      this.newUser.supplierCategory = this.selectedSupplierCategories;
     }
 
   }

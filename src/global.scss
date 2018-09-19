@@ -14,26 +14,25 @@
 
 // @import "theme/main-theme.scss";
 @font-face {
-    font-family: 'a-jannat-lt';
-    src: url('/src/assets/fonts/a-jannat-lt.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
+  font-family: "a-jannat-lt";
+  src: url("/src/assets/fonts/a-jannat-lt.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
 }
 
 ion-content {
-    background: url("assets/images/background/electro1.jpg") no-repeat top center fixed;
-    background-size: cover;
+  background: url("assets/images/background/electro1.jpg") no-repeat top center
+    fixed;
+  background-size: cover;
 }
 
-
-
 .m7toast {
-    --ion-safe-area-bottom: 50px;
-    div {
-        padding: 0 auto !important;
-        width: auto;
-        text-align: center !important;
-    }
+  --ion-safe-area-bottom: 50px;
+  div {
+    padding: 0 auto !important;
+    width: auto;
+    text-align: center !important;
+  }
 }
 
 *,
@@ -49,29 +48,29 @@ button,
 input,
 select,
 textarea {
-    font-family: 'a-jannat-lt';
-    @include no-select;
-    --ion-font-family: 'a-jannat-lt';
+  font-family: "a-jannat-lt";
+  @include no-select;
+  --ion-font-family: "a-jannat-lt";
 }
 
 .bold {
-    font-weight: bold !important;
+  font-weight: bold !important;
 }
 
 .center {
-    text-align: center !important;
+  text-align: center !important;
 }
-
 
 .native-input {
-    position: relative;
-    top: 6.5px;
-    left: -5px;
-    border: 0;
-    outline: 0;
-    padding: 5px;
+  position: relative;
+  top: 6.5px;
+  left: -5px;
+  border: 0;
+  outline: 0;
+  padding: 5px;
 }
 
+// shadow
 ion-app {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2) !important;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2) !important;
 }

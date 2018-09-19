@@ -3,41 +3,90 @@
 
 export interface User {
 
-    createdAt?: any; // from angularfirebase's
-    updatedAt?: any; // from angularfirebase's
+    createdAt?: any;            // from angularfirebase's
+    updatedAt?: any;            // from angularfirebase's
 
-    email?: any; // for auth
-    password?: string; // for auth
+    email?: any;                // for auth, and contact
+    password?: string;          // for auth
 
-    companyName?: string; // for profile
-    uid?: string; // auto generated
+    companyName?: string;       // for profile
+    uid?: string;               // auto generated
 
-    phoneNumber?: string;     // مكتب الشركة
+    phoneNumber?: string;       // مكتب الشركة
     personName?: string;
 
-    mobileNumber?: string;
-    // رقم موبايل الشخص الي سجل
+    mobileNumber?: string;      // رقم موبايل الشخص الي سجل
 
-    profilePicURL?: string;
-    //this is only for logo or profile pic!
+    profilePicURL?: string;     //this is only for logo or profile pic!
 
-    licenceURL?: string;
-    //this is for the company licence copy
+    licenceURL?: string;        //this is for the company licence copy
+
+    accountType?: number;       //1- indv 2- consul 3- contractor 4- supplier
 
     city?: number;
+    // 1-dubai 2-shj 3-ajman 4-abudhabi 5-AlAin 6- fujaira 7-rak 8- ummQ
 
     govSector?: boolean; // true = govermental, false = private
-
-    projectCategory?: number; // construction, maintenece, etc
 
     class?: string; //الفئة
 
     //TODO: Check with Eng Abdullah Which Supplier Categories to add.
     supplierCategory?: any; // نوع المورد
 
+    numberOfTendersCreated?: number;
+    // META, increment in create tender!
+
+    address?: string; // in edit profile
+
+    website?: string; // in edit profile
 }
 
 
+// Tenders Collection:
+// tenders/tenderId/<TENDER_DOC_DETAILS_HERE>
+export interface Tender {
+    createdAt?: any;
+    updatedAt?: any; // publish date
+
+    tenderId?: string;
+
+    tenderCategory?: string; // construction, maintenece, etc
+
+    tenderTitle?: string;
+    tenderSummary?: string;
+
+    deadline?: any;
+    createdBy?: string; // uid
+    creatorEmail?: string; // Get Company Email from CreatedBy
+    nameOfCompany?: string;
+    nameOfPerson?: string;
+    numberOfContactPerson?: string;
+
+    numberOfProposals?: number;
+    // META: Incremenet when new proposal added!
+
+    participationFee?: number;
+    // رسوم الإشتراك في المناقصة
+
+    bidBondPercent?: number;
+    // الكفالة المصرفية
+
+    sector?: number; // 1- goverment, 2- private
+
+    city?: number;
+
+
+    participants?: string[];
+
+    numOfAttachments?: number;
+    attachmentURLs?: string[];
+
+    // documents explaining the project!
+    // for each document show download button
+    // (attachment 1 , attachment 2, etc.)
+
+
+}
 
 // Comments Collection:
 // usercomments/commentby_commenton/<user comment doc>
@@ -60,7 +109,7 @@ export interface ProfileComment {
 }
 
 
-// LATER:LATER, THESE COMMENTS ARE FOR TENDERS/PROPOSALS (Not required in alpha)
+// LATER: THESE COMMENTS ARE FOR TENDERS/PROPOSALS (Not required in alpha)
 // TenderComments Collection:
 // tenderComments/generated_id/<tender comment doc>
 export interface TenderComment {
@@ -74,51 +123,6 @@ export interface TenderComment {
 
     commentOn?: string;             // uid of comment reciever
     commentStr?: string;
-}
-
-
-
-// Tenders Collection:
-// tenders/tenderId/<TENDER_DOC_DETAILS_HERE>
-export interface Tender {
-    createdAt?: any;
-    updatedAt?: any; // publish date
-
-    deadline?: any;
-
-
-    createdBy?: string; // uid
-
-    creatorEmail?: string;
-    // Get Company Email from CreatedBy
-
-    nameOfCompany?: string;
-    nameOfPerson?: string;
-    numberOfContactPerson?: string;
-
-    numberOfProposals?: number;
-
-    participationFee?: number;
-    // رسوم الإشتراك في المناقصة
-
-    bidBondPercent?: number;
-    // الكفالة المصرفية
-
-    sector?: number; // 1- goverment, 2- private
-
-    city?: number;
-
-    category?: string;
-
-    participants?: string[];
-
-    attachmentURLs?: string[];
-
-    // documents explaining the project!
-    // for each document show download button
-    // (attachment 1 , attachment 2, etc.)
-
-
 }
 
 
