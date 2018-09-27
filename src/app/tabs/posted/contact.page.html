@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <!-- <ion-back-button></ion-back-button> -->
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Posted
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- TODO: MAKE POSTED USE FIREBASE -->
+  <!-- <ng-container *ngIf="(tender$ | async)?.length === 0;else hasEntries">
+    <h2 class="no_entries">
+      No entries
+    </h2>
+  </ng-container> -->
+
+  <!-- <ng-template #hasEntries> -->
+  <div class="flex-container">
+
+    <!-- <ng-container *ngFor="let tender of tenders$ | async; let i = index"> -->
+    <ng-container *ngFor="let tender of tenders; let i = index">
+
+      <div class="tender-element-container">
+        <app-tender-list-element [tender]="tender">
+        </app-tender-list-element>
+      </div>
+
+    </ng-container>
+
+  </div>
+  <!-- </ng-template> -->
+
+  <!-- <ion-button style="display:block; text-align:center" href="/select-language" routerDirection="forward"> Go to
+      language </ion-button>
+    <ion-button style="display:block; text-align:center" href="/login" routerDirection="forward"> Go to login
+    </ion-button>
+    <ion-button style="display:block; text-align:center" href="/register" routerDirection="forward"> Go to Registration
+    </ion-button> -->
+
+
+  <!-- <p *ngIf="isLoggedIn">Logged In</p>
+    <p *ngIf="!isLoggedIn">Not Logged In</p> -->
+</ion-content>
+
+
+
+
+<ion-footer>
+
+  <ion-toolbar color="light">
+
+    <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
+      padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <ion-button expand="block" mode="ios" href="/create-tender" routerDirection="forward">
+          <ion-icon name="add-circle" mode="ios"></ion-icon>&nbsp;Create Tender
+        </ion-button>
+
+        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+            &nbsp;TEST
+          </ion-button> -->
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

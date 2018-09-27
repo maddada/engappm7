@@ -78,7 +78,7 @@ export class AuthService {
     return this.afAuth.auth
       .signInWithEmailAndPassword(email, password)
       .then(credential => {
-        this.toast.showToast('Welcome back!');
+        this.toast.showToast('Welcome back!', '', 2000);
         this.router.navigateByUrl('/');
       })
       .catch(error => this.handleError(error));

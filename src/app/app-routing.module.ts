@@ -4,7 +4,8 @@ import { AuthGuard } from './core/auth.guard';
 import { LoggedinGuard } from './core/loggedin.guard';
 
 
-
+//NOTE: AuthGuard = Not logged in! (ex: Can't logout)
+//NOTE: LoggedinGuard = Already logged in! (ex: Can't log in)
 const routes: Routes = [
   {
     path: '',
@@ -17,29 +18,38 @@ const routes: Routes = [
   },
   {
     path: 'settings',
-    loadChildren: './settings/settings.module#SettingsPageModule'
+    loadChildren: './pages/settings/settings.module#SettingsPageModule'
   },
   {
     path: 'select-language',
-    loadChildren: './select-lang/select-lang.module#SelectLangPageModule'
+    loadChildren: './pages/select-lang/select-lang.module#SelectLangPageModule'
   },
   {
     path: 'login',
-    loadChildren: './login/login.module#LoginPageModule', canActivate: [LoggedinGuard]
+    loadChildren: './pages/login/login.module#LoginPageModule',
+    // canActivate: [LoggedinGuard]
   },
   {
     path: 'register',
-    loadChildren: './register/register.module#RegisterPageModule', canActivate: [LoggedinGuard]
+    loadChildren: './pages/login/register/register.module#RegisterPageModule',
+    //  canActivate: [LoggedinGuard]
   },
   {
     path: 'forgot-password',
-    loadChildren: './login/forgot-password/forgot-password.module#ForgotPasswordPageModule'
+    loadChildren: './pages/login/forgot-password/forgot-password.module#ForgotPasswordPageModule'
   },
   {
     path: 'logout',
-    loadChildren: './logout/logout.module#LogoutPageModule', canActivate: [AuthGuard]
+    loadChildren: './pages/logout/logout.module#LogoutPageModule',
+    // canActivate: [AuthGuard]
+  }, //NOTE: CANT CREATE TENDER WHEN NOT LOGGED IN!!
+  {
+    path: 'create-tender', loadChildren: './tender/create-tender/create-tender.module#CreateTenderPageModule',
+    // canActivate: [AuthGuard]
   },
-  { path: 'create-tender', loadChildren: './tender/create-tender/create-tender.module#CreateTenderPageModule' },
+  { path: 'wizard', loadChildren: './pages/wizard/wizard.module#WizardPageModule' },
+  { path: 'view-tender/:id', loadChildren: './tender/view-tender/view-tender.module#ViewTenderPageModule' },
+  { path: 'create-proposal', loadChildren: './proposal/create-proposal/create-proposal.module#CreateProposalPageModule' },
 
 ];
 

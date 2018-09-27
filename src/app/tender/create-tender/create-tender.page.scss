@@ -168,6 +168,10 @@ ion-label {
   font-size: 0.95rem;
 }
 
+ion-item {
+  --inner-padding-end: 0px;
+}
+
 ion-textarea {
   --background: rgba(189, 189, 189, 0.13);
   --padding-top: 10px;

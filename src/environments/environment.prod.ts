@@ -3,11 +3,11 @@ export const environment = {
 
   // Initialize Firebase
   firebase: {
-    apiKey: 'AIzaSyAgIfua26TmunuMcTC7u1_1xGG8Gzhzn_Y',
-    authDomain: 'engappm7-prod.firebaseapp.com',
-    databaseURL: 'https://engappm7-prod.firebaseio.com',
-    projectId: 'engappm7-prod',
-    storageBucket: '',
-    messagingSenderId: '827744583286'
+    apiKey: 'AIzaSyCTJwHVfwt9ijgP2fHDhuDtYwG2mu907G0',
+    authDomain: 'engapp-1.firebaseapp.com',
+    databaseURL: 'https://engapp-1.firebaseio.com',
+    projectId: 'engapp-1',
+    storageBucket: 'engapp-1.appspot.com',
+    messagingSenderId: '883936710445'
   }
 };

@@ -1,0 +1,102 @@
+@import "../../../theme/mixins.scss";
+@import "../../../theme/variables.scss";
+
+.grid-container {
+  width: 90vw;
+  max-width: 350px;
+  border-radius: 20px;
+  margin-top: 20px;
+  // margin: 15px;
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.details-grid {
+  display: grid;
+}
+
+.main-description-grid {
+  display: grid;
+  grid-row: 2;
+  grid-template-columns: 0.25fr 0.6fr 1fr;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.company-name-row {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  align-self: end;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-right: 10px;
+
+  padding-left: 20px;
+  padding-right: 20px;
+
+  color: rgb(46, 46, 46);
+  > * {
+    align-self: end;
+  }
+}
+
+.details-row-container {
+  align-content: center;
+  padding-top: 10px;
+  padding-left: 5px;
+}
+
+.main-description-grid.arabic {
+  direction: rtl; // flips all the columns.
+}
+
+ion-icon {
+  align-self: center;
+  font-size: 0.9rem;
+  margin-top: 2px;
+  margin-right: 10px;
+}
+
+.detail-name-text {
+  font-size: 0.9rem;
+  align-self: end;
+  padding-right: 40px;
+}
+
+.detail-data {
+  font-size: 0.9rem;
+  font-weight: bold;
+  align-self: end;
+}
+
+.r3 {
+  text-align: center;
+  font-size: 1.1em;
+  height: 34px;
+  color: #00000062;
+}
+
+.r4 {
+  text-align: center;
+  width: 100%;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: rgb(255, 255, 255);
+
+  .c2 {
+    background-color: rgb(230, 176, 50);
+    border-radius: 0 0 20px 20px;
+  }
+  .c3 {
+    background-color: rgb(26, 131, 23);
+    border-radius: 0 0 20px 20px;
+  }
+  .c4 {
+    background-color: rgb(56, 125, 172);
+    border-radius: 0 0 20px 20px;
+  }
+}

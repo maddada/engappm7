@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
-import { HomePage } from '../home/home.page';
-import { AboutPage } from '../about/about.page';
-import { ContactPage } from '../contact/contact.page';
-import { ProfilePage } from '../profile/profile.page';
+import { HomePage } from './home/home.page';
+import { SearchPage } from './search/search.page';
+import { ContactPage } from './posted/contact.page';
+import { ProfilePage } from './profile/profile.page';
 
 const routes: Routes = [
   {
@@ -18,9 +18,9 @@ const routes: Routes = [
         component: HomePage
       },
       {
-        path: 'about',
-        outlet: 'about',
-        component: AboutPage
+        path: 'search',
+        outlet: 'search',
+        component: SearchPage
       },
       {
         path: 'contact',

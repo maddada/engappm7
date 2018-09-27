@@ -5,8 +5,10 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { AuthService } from '../core/auth.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { ShowToastService } from './show-toast.service';
+
+// NOTE: CHECKS IF NOT LOGGED IN!!!!
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,8 @@ import { ShowToastService } from './show-toast.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private auth: AuthService,
-    private toast: ShowToastService
+    private toast: ShowToastService,
+    private nav: NavController
   ) { }
 
   async canActivate(
@@ -25,17 +28,11 @@ export class AuthGuard implements CanActivate {
     const isLoggedIn = !!uid;
 
     if (!isLoggedIn) {
-      this.toast.showToast('Already logged in');
-
-      //   const alert = await this.alertController.create({
-      //     header: 'Blocked',
-      //     subHeader: 'Users only',
-      //     message: 'You have been blocked by the router guard...',
-      //     buttons: ['OK']
+      this.toast.showToast('Not Logged In');
+      this.nav.navigateRoot('/');
     }
 
     return isLoggedIn;
-    // await alert.present();
   }
 
 }

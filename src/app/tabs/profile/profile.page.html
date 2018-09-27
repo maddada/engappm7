@@ -1,0 +1,214 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Your Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+
+  <ion-grid no-padding>
+
+    <ng-container *ngIf="auth.user$ | async as user; else notLoggedIn">
+      <!-- NOTE: if logged in -->
+
+      <ion-row style="margin: 0 auto; max-width: 400px;" padding-horizontal>
+
+        <ion-col align-self-center>
+
+
+          <ion-col text-center>
+            <img box-shadow [src]="logo" style="margin: 0 auto;">
+          </ion-col>
+
+
+          <ion-card padding>
+            <ion-card-header text-center>
+              <!-- <ion-card-subtitle>UID: {{ user.uid }}</ion-card-subtitle> -->
+              <!-- <img [src]="user.photoURL || 'assets/icon/anon.svg'"> -->
+              <ion-card-title>{{ user.companyName || 'Company Name' }}</ion-card-title>
+            </ion-card-header>
+
+
+
+            <!-- NOTE: CITY -->
+            <ion-card-subtitle>
+              <ion-icon name="pin" mode="md"></ion-icon>&nbsp;
+              City:<br>
+              <span>
+                <ng-container [ngSwitch]="user.city">
+
+                  <ng-container *ngSwitchCase="1">
+                    Dubai
+                  </ng-container>
+
+                  <ng-container *ngSwitchCase="2">
+                    Sharjah
+                  </ng-container>
+
+                  <ng-container *ngSwitchCase="3">
+                    Ajman
+                  </ng-container>
+
+                  <ng-container *ngSwitchCase="4">
+                    Abu Dhabi
+                  </ng-container>
+
+                  <!-- <ng-container *ngSwitchCase="5">
+                    Al Ain
+                  </ng-container> -->
+
+                  <ng-container *ngSwitchCase="6">
+                    Al Fujairah
+                  </ng-container>
+
+                  <ng-container *ngSwitchCase="7">
+                    Ras Al Khaima
+                  </ng-container>
+
+                  <ng-container *ngSwitchCase="8">
+                    Umm Al Quwain
+                  </ng-container>
+
+                </ng-container>
+              </span>
+            </ion-card-subtitle>
+
+            <!-- NOTE: NUMBER -->
+            <ion-card-subtitle>
+              <ion-icon name="call" mode="md"></ion-icon>&nbsp;
+              Number: <br>
+              <span>{{ user.personNumber || '-' }}</span>
+            </ion-card-subtitle>
+
+            <!-- NOTE: EMAIL -->
+            <ion-card-subtitle>
+              <ion-icon name="at" mode="md"></ion-icon>&nbsp;Email:<br>
+              <span> {{ user.email || '-' }}</span>
+            </ion-card-subtitle>
+
+            <!-- NOTE: EMAIL -->
+            <ion-card-subtitle>
+              <ion-icon name="business"></ion-icon>&nbsp;Class:<br>
+              <span [ngSwitch]="user.class">
+                <ng-container *ngSwitchCase="0">
+                  Special Class
+                </ng-container>
+                <ng-container *ngSwitchCase="1">
+                  First Class
+                </ng-container>
+                <ng-container *ngSwitchCase="2">
+                  Second Class
+                </ng-container>
+                <ng-container *ngSwitchCase="3">
+                  Third Class
+                </ng-container>
+                <ng-container *ngSwitchCase="4">
+                  Fourth Class
+                </ng-container>
+                <ng-container *ngSwitchCase="5">
+                  Fifth Class
+                </ng-container>
+                <ng-container *ngSwitchCase="6">
+                  Sixth Class
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                </ng-container>
+              </span>
+            </ion-card-subtitle>
+
+            <!-- NOTE: Address -->
+            <ion-card-subtitle *ngIf="user.address">
+              <ion-icon name="at" mode="md"></ion-icon>&nbsp;Address:<br>
+              <span> {{ user.address || '-' }}</span>
+            </ion-card-subtitle>
+
+
+          </ion-card>
+
+
+          <!-- TODO: COMMENTS AND RATINGS HERE -->
+
+
+        </ion-col>
+
+
+
+
+
+
+
+
+
+
+        <!-- TODO: do different pages for each type!!!  -->
+        <!-- <ng-container [ngSwitch]="LATER">
+
+        <ng-container *ngSwitchCase="1">
+          <ng-container *ngTemplateOutlet="individual">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="2">
+          <ng-container *ngTemplateOutlet="consultant">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngTemplateOutlet="contractor">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngTemplateOutlet="supplier">
+          </ng-container>
+        </ng-container>
+
+      </ng-container> -->
+      </ion-row>
+
+    </ng-container>
+  </ion-grid>
+
+</ion-content>
+
+
+<ng-template #individual>
+</ng-template>
+
+<ng-template #consultant>
+</ng-template>
+
+<ng-template #contractor>
+</ng-template>
+
+<ng-template #supplier>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #notLoggedIn>
+  <!-- not logged in here -->
+  <ion-row justify-content-center>
+    <ion-col text-center align-items-center>
+      <h1>Login to view your profile!</h1>
+      <ion-button type="bar-button" mode="ios" text-uppercase href="/login" routerDirection="forward">
+        <ion-icon name="at" mode="md"></ion-icon>&nbsp;Log In
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ng-template>

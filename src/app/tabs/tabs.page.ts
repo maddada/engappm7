@@ -12,6 +12,6 @@ export class TabsPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.menuCtrl.enable(true);
+    this.menuCtrl.swipeEnable(true);
   }
 }

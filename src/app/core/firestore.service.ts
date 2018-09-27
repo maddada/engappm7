@@ -20,7 +20,7 @@ type DocPredicate<T> = string | AngularFirestoreDocument<T>;
   providedIn: 'root',
 })
 export class FirestoreService {
-  constructor(private afs: AngularFirestore) { }
+  constructor(public afs: AngularFirestore) { }
 
 
   /************************************************
@@ -65,7 +65,7 @@ export class FirestoreService {
         map((doc: Action<DocumentSnapshotDoesNotExist | DocumentSnapshotExists<T>>) => {
           return doc.payload.data() as T;
         }),
-    );
+      );
   }
 
   /*
@@ -79,7 +79,7 @@ export class FirestoreService {
         map((docs: DocumentChangeAction<T>[]) => {
           return docs.map((a: DocumentChangeAction<T>) => a.payload.doc.data()) as T[];
         }),
-    );
+      );
   }
 
   /*
@@ -98,7 +98,7 @@ export class FirestoreService {
             return { id, ...data };
           });
         }),
-    );
+      );
   }
 
   /// **************
@@ -198,7 +198,7 @@ export class FirestoreService {
           const tock = new Date().getTime() - tick;
           console.log(`Loaded Document in ${tock}ms`, d);
         }),
-    )
+      )
       .subscribe();
   }
 
@@ -212,7 +212,7 @@ export class FirestoreService {
           const tock = new Date().getTime() - tick;
           console.log(`Loaded Collection in ${tock}ms`, c);
         }),
-    )
+      )
       .subscribe();
   }
 

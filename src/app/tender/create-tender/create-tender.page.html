@@ -2,7 +2,7 @@
   <ion-toolbar color="light">
 
     <ion-buttons slot="start">
-      <ion-button routerLink="/" routerDirection="back">
+      <ion-button routerLink="/" routerDirection="root">
         <ion-icon name="arrow-round-back"></ion-icon>
         Back
       </ion-button>
@@ -12,12 +12,6 @@
 
   </ion-toolbar>
 </ion-header>
-
-
-
-
-
-
 
 
 
@@ -49,7 +43,7 @@
         <ion-item padding-top>
           <ion-label color="primary" position="floating" class="label">Tender Category*</ion-label>
 
-          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedType" interface="action-sheet">
+          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedTenderCategory" interface="action-sheet">
 
             <ion-select-option value="tender_construction">Construction</ion-select-option>
             <ion-select-option value="tender_steel">Steel Works</ion-select-option>
@@ -59,6 +53,7 @@
             <ion-select-option value="tender_insulation">Insulation</ion-select-option>
             <ion-select-option value="tender_fencing">Fencing/Walls</ion-select-option>
             <ion-select-option value="tender_general">General Works</ion-select-option>
+
 
           </ion-select>
         </ion-item>
@@ -77,9 +72,13 @@
 
         <!-- NOTE: Deadline -->
         <ion-item padding-top>
+
           <ion-label color="primary" position="floating" class="label">Select Deadline*</ion-label>
 
-          <ion-datetime display-format="DD/MM/YYYY" max="{{datePickerMaxYear}}" style="--background: white;"></ion-datetime>
+          <ion-datetime [(ngModel)]="selectedDeadline" display-format="DD/MM/YYYY" min="{{datePickerMinYear}}" max="{{datePickerMaxYear}}"
+            (ionChange)="onSelectDate($event)">
+
+          </ion-datetime>
 
         </ion-item>
 
@@ -89,11 +88,12 @@
 
           <ion-label color="primary" position="floating" class="label">Participation Fee*</ion-label>
 
-          <ion-input type="number" placeholder="" [(ngModel)]="newTender.participationFee"></ion-input>
+          <ion-input min="0" type="number" placeholder="" [(ngModel)]="newTender.participationFee"></ion-input>
 
         </ion-item>
 
-        <p class="description-text center">Can be set to 0</p>
+        <p class="description-text" padding-start>Can be set to 0</p>
+
 
         <!-- NOTE: Bid Bond Percentage -->
         <ion-item padding-top>
@@ -101,26 +101,23 @@
           <ion-label color="primary" position="floating" class="label">Bid Bond Percentage*</ion-label>
 
 
-          <ion-input type="number" placeholder="" [(ngModel)]="newTender.bidBondPercent"></ion-input>
+          <ion-input min="0" max="100" type="number" placeholder="" [(ngModel)]="newTender.bidBondPercent"></ion-input>
 
         </ion-item>
 
-        <p class="description-text center">Can be set to 0</p>
+        <p class="description-text" padding-start>Can be set to 0</p>
 
         <br>
 
-        <!-- <h4>
-          Please upload any related documents here:
-        </h4> -->
-
         <!-- NOTE: Select Number Of Attachments -->
-        <ion-item padding-bottom>
+        <ion-item class="no-border-label">
 
-          <ion-label style="color:rgb(3, 108, 150); font-size:1rem;" position="stacked" mode="md" text-wrap>
-            Select number of related attachments to upload:
+          <ion-label style="color:rgb(3, 108, 150); font-size:1rem;">
+            Upload up to 3 attachments:
           </ion-label>
 
-          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedNumOfAttachments" interface="action-sheet"
+          <!-- <ion-select ok-text="Select"
+             cancle-text="Cancle" [(ngModel)]="selectedNumOfAttachments" interface="action-sheet"
             (ionChange)="onSelectNumOfAttachments(event)">
 
             <ion-select-option value="0">none</ion-select-option>
@@ -128,44 +125,46 @@
             <ion-select-option value="2">2</ion-select-option>
             <ion-select-option value="3">3</ion-select-option>
 
-          </ion-select>
+          </ion-select> -->
+
         </ion-item>
+        <p class="description-text" padding-start>(optional)</p>
 
 
-
-        <!-- NOTE: ATTACHMENT 1 -->
+        <!-- NOTE: ATTACHMENT 0 -->
         <ion-item *ngIf="newTender.numOfAttachments >= 1" padding-bottom>
 
           <ion-label color="primary" position="stacked">
             Attachment #1
           </ion-label>
 
-          <input #uploadButton3 type="file" (change)="setUpload($event, 0)" name="upload1">
+          <input #uploadButton0 type="file" (change)="setUpload($event, 0)" name="upload1">
 
         </ion-item>
 
-        <!-- NOTE: ATTACHMENT 2 -->
+        <!-- NOTE: ATTACHMENT 1 -->
         <ion-item *ngIf="newTender.numOfAttachments >= 2" padding-bottom>
 
           <ion-label color="primary" position="stacked">
             Attachment #2
           </ion-label>
 
-          <input #uploadButton3 type="file" (change)="setUpload($event, 1)" name="upload2">
+          <input #uploadButton1 type="file" (change)="setUpload($event, 1)" name="upload2">
 
         </ion-item>
 
-        <!-- NOTE: ATTACHMENT 3 -->
+        <!-- NOTE: ATTACHMENT 2 -->
         <ion-item *ngIf="newTender.numOfAttachments >= 3" padding-bottom>
 
           <ion-label color="primary" position="stacked">
             Attachment #3
           </ion-label>
 
-          <input #uploadButton3 type="file" (change)="setUpload($event, 2)" name="upload3">
-          <!-- <input #uploadButton type="file" (change)="setUpload($event)" name="upload" /> -->
+          <input #uploadButton2 type="file" (change)="setUpload($event, 2)" name="upload3">
 
         </ion-item>
+
+
 
         <!-- NOTE: Spacer  -->
         <div padding>
@@ -192,12 +191,12 @@
 
         <!-- NOTE: Create Tender Button -->
         <ion-button expand="block" mode="ios" type="submit" (click)="onSubmit()">
-          <ion-icon name="at"></ion-icon>&nbsp;Create Tender
+          <ion-icon name="add-circle" mode="ios"></ion-icon>&nbsp;Create Tender
         </ion-button>
 
-        <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
           &nbsp;TEST
-        </ion-button>
+        </ion-button> -->
 
       </ion-col>
     </ion-row>

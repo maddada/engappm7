@@ -1,0 +1,22 @@
+* {
+  font-family: "a-jannat-lt";
+}
+
+ion-content {
+  background-image: "assets/images/background/39.jpg";
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.flex-container {
+  display: flex;
+  align-content: space-around;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.company-element-container {
+  justify-self: center;
+}

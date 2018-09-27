@@ -1,21 +1,20 @@
-// Users Collection:
+// NOTE: Users Collection:
 // users/uid/<user doc>
-
 export interface User {
 
     createdAt?: any;            // from angularfirebase's
     updatedAt?: any;            // from angularfirebase's
 
+    uid?: string;               // auto generated
+
     email?: any;                // for auth, and contact
     password?: string;          // for auth
 
     companyName?: string;       // for profile
-    uid?: string;               // auto generated
+    companyNumber?: string;       // مكتب الشركة
 
-    phoneNumber?: string;       // مكتب الشركة
     personName?: string;
-
-    mobileNumber?: string;      // رقم موبايل الشخص الي سجل
+    personNumber?: string;      // رقم موبايل الشخص الي سجل
 
     profilePicURL?: string;     //this is only for logo or profile pic!
 
@@ -24,14 +23,14 @@ export interface User {
     accountType?: number;       //1- indv 2- consul 3- contractor 4- supplier
 
     city?: number;
-    // 1-dubai 2-shj 3-ajman 4-abudhabi 5-AlAin 6- fujaira 7-rak 8- ummQ
+    // 1-dubai 2-shj 3-ajman 4-abudhabi 6- fujaira 7-rak 8- ummQ  -------  5- Al Ain was taken out!!!!
 
     govSector?: boolean; // true = govermental, false = private
 
-    class?: string; //الفئة
+    class?: number; //الفئة
 
     //TODO: Check with Eng Abdullah Which Supplier Categories to add.
-    supplierCategory?: any; // نوع المورد
+    tags?: string[]; // Company Type & Supplier Category!!!
 
     numberOfTendersCreated?: number;
     // META, increment in create tender!
@@ -39,14 +38,18 @@ export interface User {
     address?: string; // in edit profile
 
     website?: string; // in edit profile
+
+    TEST_RATING?: number;
+
+    subscribedUntilDate?: Date;
 }
 
 
-// Tenders Collection:
+// NOTE: Tenders Collection:
 // tenders/tenderId/<TENDER_DOC_DETAILS_HERE>
 export interface Tender {
     createdAt?: any;
-    updatedAt?: any; // publish date
+    updatedAt?: any;
 
     tenderId?: string;
 
@@ -56,37 +59,70 @@ export interface Tender {
     tenderSummary?: string;
 
     deadline?: any;
+
+    //NOTE:  GET THESE FROM USER
     createdBy?: string; // uid
     creatorEmail?: string; // Get Company Email from CreatedBy
-    nameOfCompany?: string;
-    nameOfPerson?: string;
-    numberOfContactPerson?: string;
-
-    numberOfProposals?: number;
-    // META: Incremenet when new proposal added!
-
-    participationFee?: number;
-    // رسوم الإشتراك في المناقصة
-
-    bidBondPercent?: number;
-    // الكفالة المصرفية
-
-    sector?: number; // 1- goverment, 2- private
-
+    companyName?: string;
+    personName?: string;
+    personNumber?: string;
+    govSector?: boolean; // 1- goverment, 2- private
     city?: number;
 
+    participationFee?: number; // رسوم الإشتراك في المناقصة
+    bidBondPercent?: number; // الكفالة المصرفية
 
     participants?: string[];
 
-    numOfAttachments?: number;
-    attachmentURLs?: string[];
-
     // documents explaining the project!
     // for each document show download button
-    // (attachment 1 , attachment 2, etc.)
+    attachmentURLs?: string[];
 
+    //NOTE META
+    // META: Incremenet when new proposal added!
+    numberOfProposals?: number;
+
+    TESTPUBLISHED?: string;
+    TESTDEADLINE?: string;
+    TESTSTATUS?: string;
 
 }
+
+
+
+// NOTE: Proposals Collection:
+// proposals/createdByUid_tenderid/<PROPOSAL_DOC_DETAILS_HERE>
+export interface Proposal {
+    createdAt?: any;
+    updatedAt?: any;
+
+    createdBy?: string; // uid
+    tenderid?: string; // id of tender
+
+    companyName?: string; // name of company
+    personName?: string; // name of person that submitted this
+    class?: number;
+
+    bidAmount?: number;
+    city?: number;
+
+    creatorEmail?: string; // Get Company Email from CreatedBy
+    personNumber?: string;
+    companyNumber?: string;
+
+    attachmentLicenceDoc?: string; // copy this from the company's doc.
+
+    attachmentURLs: string[];
+
+}
+// attachmentTechnicalDoc?: string;
+// link to technical document
+// مستند العرض الفني
+
+// attachmentCostDoc?: string;
+// link to technical document
+// مستند العرض المالي
+
 
 // Comments Collection:
 // usercomments/commentby_commenton/<user comment doc>
@@ -129,37 +165,4 @@ export interface TenderComment {
 
 
 
-
-
-
-
-// Proposals Collection:
-// proposals/createdByUid_tenderid/<PROPOSAL_DOC_DETAILS_HERE>
-export interface Proposal {
-    createdAt?: any;
-    updatedAt?: any;
-
-    createdBy?: string; // uid
-    tenderid?: string;
-
-    nameOfCompany?: string;
-    // name of company
-    nameOfPerson?: string;
-    // name of person that submitted this
-
-    bidAmount?: number;
-
-    attachementGeneralDoc?: string;
-
-    attachmentLicenceDoc?: string;
-    // copy this from the company's doc.
-
-    attachmentTechnicalDoc?: string;
-    // link to technical document
-    // مستند العرض الفني
-
-    attachmentCostDoc?: string;
-    // link to technical document
-    // مستند العرض المالي
-}
 

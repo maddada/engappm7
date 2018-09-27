@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-toolbar color="light" transparent>
+
+    <ion-buttons slot="start">
+      <ion-button routerLink="/" routerDirection="root">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>View Tender</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <app-tender-list-element [tender]="currentTender" [extended]="true">
+  </app-tender-list-element>
+
+  <app-company-list-element [company]="currentCompany">
+  </app-company-list-element>
+
+</ion-content>

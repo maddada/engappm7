@@ -1,14 +1,37 @@
-<ion-tabs color="light">
-  <ion-tab label="Home" icon="home" href="/tabs/(home:home)">
+<ion-tabs color="primary" tabbar-highlight translucent tabbarLayout="label-hide">
+  <ion-tab label="Tenders" icon="browsers" href="/tabs/(home:home)">
     <ion-router-outlet name="home"></ion-router-outlet>
   </ion-tab>
-  <ion-tab label="About" icon="information-circle" href="/tabs/(about:about)">
-    <ion-router-outlet name="about"></ion-router-outlet>
-  </ion-tab>
-  <ion-tab label="Contacts" icon="contacts" href="/tabs/(contact:contact)">
+
+  <ion-tab label="Posted" icon="bookmarks" badge="5" href="/tabs/(contact:contact)">
     <ion-router-outlet name="contact"></ion-router-outlet>
   </ion-tab>
+
+  <ion-tab label="Search" icon="search" href="/tabs/(search:search)">
+    <ion-router-outlet name="search"></ion-router-outlet>
+  </ion-tab>
+
   <ion-tab label="Profile" icon="person" href="/tabs/(profile:profile)">
     <ion-router-outlet name="profile"></ion-router-outlet>
   </ion-tab>
 </ion-tabs>
+
+
+<!--
+<ion-tabs color="light">
+    <ion-tab label="home" icon="list-box" href="/tabs/(home:home)">
+      <ion-router-outlet name="home"></ion-router-outlet>
+    </ion-tab>
+
+    <ion-tab label="Posted" icon="bookmarks" href="/tabs/(contact:contact)">
+      <ion-router-outlet name="contact"></ion-router-outlet>
+    </ion-tab>
+
+    <ion-tab label="Search" icon="search" href="/tabs/(search:search)">
+      <ion-router-outlet name="search"></ion-router-outlet>
+    </ion-tab>
+
+    <ion-tab label="Profile" icon="person" mode="material" href="/tabs/(profile:profile)">
+      <ion-router-outlet name="profile"></ion-router-outlet>
+    </ion-tab>
+  </ion-tabs> -->

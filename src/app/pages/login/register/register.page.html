@@ -1,0 +1,577 @@
+<ion-header>
+  <ion-toolbar color="light">
+
+    <ion-buttons slot="start">
+      <ion-button routerLink="/" routerDirection="root">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title transparent>
+      Register an Account
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+<!-- FIXME: WHOLE PAGE LOOKS A BUT OFF CENTER TO THE RIGHT EXCEPT THE FOOTER!  SIMPLE CSS FIX PROBABLY -->
+
+
+
+
+<ion-content>
+  <ion-grid no-padding>
+    <div id="m7-container">
+
+      <form #heroForm="ngForm">
+
+        <ion-row size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;" padding-horizontal>
+
+          <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <ion-item>
+              <ion-label position="stacked">Account Type</ion-label>
+
+              <ion-select placeholder="Please Select One" ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedType"
+                id="selectAccountType" interface="action-sheet" (ionChange)="onSelectType(event)" name="selectAccountType">
+
+                <ion-select-option value="1">Individual</ion-select-option>
+                <ion-select-option value="2">Organization / Consultant</ion-select-option>
+                <ion-select-option value="3">Contractor</ion-select-option>
+                <ion-select-option value="4">Supplier</ion-select-option>
+
+              </ion-select>
+            </ion-item>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <ng-container [ngSwitch]="selectedType">
+
+
+
+
+
+
+
+
+
+              <ng-container *ngSwitchCase="1">
+
+                <ng-container *ngTemplateOutlet="city_picker"></ng-container>
+
+                <ng-container *ngTemplateOutlet="individual_fields"></ng-container>
+
+                <ng-container *ngTemplateOutlet="agree_to_terms">
+                </ng-container>
+
+              </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              <ng-container *ngSwitchCase="2">
+
+                <ng-container *ngTemplateOutlet="city_picker">
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="company_registration_fields">
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="organization_sector">
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="agree_to_terms">
+                </ng-container>
+
+              </ng-container>
+
+
+
+
+
+
+
+
+
+
+              <ng-container *ngSwitchCase="3">
+
+                <ng-container *ngTemplateOutlet="city_picker">
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="company_registration_fields">
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="agree_to_terms">
+                </ng-container>
+              </ng-container>
+
+
+
+
+
+
+
+
+
+              <ng-container *ngSwitchCase="4">
+
+                <ng-container *ngTemplateOutlet="city_picker"></ng-container>
+
+                <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
+
+                <ng-container *ngTemplateOutlet="supplier_fields"></ng-container>
+
+                <ng-container *ngTemplateOutlet="agree_to_terms">
+                </ng-container>
+              </ng-container>
+
+
+
+
+
+
+            </ng-container>
+
+
+          </ion-col>
+
+        </ion-row>
+      </form>
+
+
+    </div>
+
+  </ion-grid>
+
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+<ion-footer>
+
+  <ion-toolbar color="light">
+
+    <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
+      padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <ion-button expand="block" mode="ios" type="submit" (click)="onSubmit()">
+          <ion-icon name="at" mode="md"></ion-icon>&nbsp;Register
+        </ion-button>
+
+        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+          &nbsp;TEST
+        </ion-button> -->
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+
+
+
+
+
+
+
+
+
+<!-- Templates: -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- template to use for both consultant and contractor -->
+<ng-template #company_registration_fields>
+
+  <!-- EMAIL -->
+  <div padding-top>
+    <ion-label position="stacked" class="label">Email</ion-label>
+
+    <ion-input required type="text" placeholder="Enter your email" [(ngModel)]="newUser.email" name="email"></ion-input>
+
+    <!-- <ion-label error-field no-margin *ngIf="!isEmailValid">Error: {{errorType}}</ion-label> -->
+  </div>
+
+  <!-- PASSWORD -->
+  <div>
+    <ion-label position="stacked">Password</ion-label>
+
+    <ion-input required type="password" placeholder="Enter your password" [(ngModel)]="newUser.password" name="password"></ion-input>
+
+    <ion-label error-field no-margin *ngIf="!isPasswordValid">{{errorPassword}}</ion-label>
+  </div>
+
+  <!-- Company Name -->
+  <div>
+    <ion-label position="stacked">Company Name</ion-label>
+
+    <ion-input required type="text" placeholder="Enter company name" [(ngModel)]="newUser.companyName" name="companyName"></ion-input>
+  </div>
+
+  <!-- Company Phone -->
+  <div>
+    <ion-label position="stacked">Company Phone Number</ion-label>
+
+    <ion-input required type="text" placeholder="Enter company number" [(ngModel)]="newUser.companyNumber" name="companyNumber"></ion-input>
+  </div>
+
+  <!-- Account Creator Name -->
+  <div>
+    <ion-label position="stacked">Account Creator Name<br>(First and Last)</ion-label>
+
+    <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.personName" name="personName"></ion-input>
+  </div>
+
+  <!-- Person Phone -->
+  <div>
+    <ion-label position="stacked">Account Creator Mobile</ion-label>
+
+    <ion-input required type="text" placeholder="Enter your mobile" [(ngModel)]="newUser.personNumber" name="personNumber"></ion-input>
+  </div>
+
+
+  <!-- Company Classification CONSULTANT -->
+  <div *ngIf="newUser.accountType == 2">
+
+    <ion-item>
+      <ion-label position="stacked">Company Classification</ion-label>
+
+      <ion-select placeholder="Please Select a Class" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedClass"
+        (ionChange)="onSelectClass(event)" name="selectClass">
+
+        <ion-select-option value="0">Special Class</ion-select-option>
+        <ion-select-option value="1">First Class</ion-select-option>
+        <ion-select-option value="2">Second Class</ion-select-option>
+        <ion-select-option value="3">Third Class</ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+  </div>
+
+  <!-- Company Classification CONTRACTOR -->
+  <div *ngIf="newUser.accountType == 3">
+
+    <ion-item>
+      <ion-label position="stacked">Company Classification</ion-label>
+
+      <ion-select placeholder="Please Select a Class" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedClass"
+        (ionChange)="onSelectClass(event)" name="selectClass">
+
+        <ion-select-option value="0">Special Class</ion-select-option>
+        <ion-select-option value="1">First Class</ion-select-option>
+        <ion-select-option value="2">Second Class</ion-select-option>
+        <ion-select-option value="3">Third Class</ion-select-option>
+        <ion-select-option value="4">Fourth Class</ion-select-option>
+        <ion-select-option value="5">Fifth Class</ion-select-option>
+        <ion-select-option value="6">Sixth Class</ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+  </div>
+
+  <!-- upload company license -->
+  <div>
+
+    <ion-label position="stacked">Company Licence Copy</ion-label>
+
+
+    <!-- <div class="upload-wrapper"> -->
+    <input #uploadButton type="file" (change)="setUpload($event)" name="upload" />
+
+    <div id="upload-percent">{{ uploadPercent | async }}
+      <ng-container *ngIf="uploadPercent | async">
+        %
+      </ng-container>
+    </div>
+
+    <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
+    <ng-container *ngIf="downloadURL | async">
+      <img id="upload-image" style="
+      display: block;
+      text-align: center ;
+      margin: 0 auto;
+      border: 0 3px 15px rgba(0, 0, 0, 0.2);
+      border-style: solid;
+      width: 80% !important;
+      height: auto;"
+        [src]="downloadURL | async">
+    </ng-container>
+    <!-- </div> -->
+
+  </div>
+
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #city_picker>
+
+  <ion-item>
+    <ion-label position="stacked">City</ion-label>
+
+    <ion-select placeholder="Please Select a City" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedCity"
+      (ionChange)="onSelectCity(event)" name="selectCity">
+
+      <ion-select-option value="1">Dubai</ion-select-option>
+      <ion-select-option value="2">Sharjah</ion-select-option>
+      <ion-select-option value="3">Ajman</ion-select-option>
+      <ion-select-option value="4">Abu Dhabi</ion-select-option>
+      <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
+      <ion-select-option value="6">Fujairah</ion-select-option>
+      <ion-select-option value="7">Ras al-Khaimah</ion-select-option>
+      <ion-select-option value="8">Umm al-Quwain</ion-select-option>
+
+    </ion-select>
+  </ion-item>
+
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #individual_fields>
+
+  <div padding-top>
+    <ion-label position="stacked" class="label">Name (First and Last)</ion-label>
+
+    <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.personName" class="form-control"
+      id="name" name="name" #name="ngModel"></ion-input>
+    <!-- <input type="text" placeholder="Enter your name" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
+  </div>
+
+  <div padding-top>
+    <ion-label position="stacked" class="label">Email</ion-label>
+
+    <ion-input required type="text" placeholder="Enter your email" [(ngModel)]="newUser.email" name="email"></ion-input>
+
+  </div>
+
+  <div>
+    <ion-label position="stacked">Password</ion-label>
+
+    <ion-input required type="password" placeholder="Enter your password" [(ngModel)]="newUser.password" name="password"></ion-input>
+
+  </div>
+
+  <div>
+    <ion-label position="stacked">Mobile</ion-label>
+
+    <ion-input required type="text" placeholder="Enter your mobile" [(ngModel)]="newUser.personNumber" name="personNumber"></ion-input>
+  </div>
+
+</ng-template>
+
+
+
+
+
+
+
+
+
+<ng-template #organization_sector>
+
+  <ion-item>
+    <ion-label position="stacked">Sector</ion-label>
+
+    <ion-select placeholder="Sector" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedSector" (ionChange)="onSelectSector(event)"
+      name="selectedSector">
+
+      <ion-select-option value="gov">Govermental</ion-select-option>
+      <ion-select-option value="private">Private</ion-select-option>
+
+    </ion-select>
+  </ion-item>
+
+</ng-template>
+
+
+
+
+
+
+
+<ng-template #supplier_fields>
+
+  <ion-item padding-bottom>
+    <ion-label position="stacked">Select Speciality*</ion-label>
+
+    <ion-select placeholder="Please Select Your Specialities" multiple="true" ok-text="Select" interface="alert"
+      (ionChange)="onSelectSupplierCategory($event)" name="selectSupplierCategory">
+
+      <ion-select-option value="category_paint">Paint</ion-select-option>
+      <ion-select-option value="category_blocks">Blocks</ion-select-option>
+      <ion-select-option value="category_ceramics">Ceramics</ion-select-option>
+      <ion-select-option value="category_interlock">Interlock</ion-select-option>
+      <ion-select-option value="category_wood">Wood</ion-select-option>
+      <ion-select-option value="category_doors">Doors</ion-select-option>
+      <ion-select-option value="category_fabric">Fabric</ion-select-option>
+      <ion-select-option value="category_cement">Cement</ion-select-option>
+
+    </ion-select>
+  </ion-item>
+
+
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #agree_to_terms>
+
+
+  <ion-list style="background: transparent" padding-top>
+    <ion-item>
+      <ion-label>
+        I agree with the terms and conditions. &nbsp;&nbsp;
+      </ion-label>
+      <ion-checkbox style="padding-left: 5px;" [(ngModel)]="termsCheckBoxValue" color="primary"></ion-checkbox>
+    </ion-item>
+    <ion-row justify-content-center>
+      <ion-col>
+
+
+      </ion-col>
+    </ion-row>
+  </ion-list>
+
+  <div>
+    <ion-button expand="block" mode="ios" (click)="toggleShowingTerms()" style="width:auto; padding-left: 10px; font-size: 0.9rem;">Show
+      Terms & Conditions
+    </ion-button>
+  </div>
+
+  <div *ngIf="showTerms">
+    <textarea style="padding-top:5px; padding-bottom:5px; padding-right:0; padding-left:0; width:100%; height: 20rem; font-size: 0.7rem">
+      SERVICES AGREEMENT
+
+      THIS SERVICES AGREEMENT (the “Agreement”) is made as of the Effective Date by and between Drifty Co. (d/b/a “Ionic”),
+       a Delaware corporation with its principal offices at 121 S. Pinckney St. Suite 300 Madison, WI 53703
+      (“Drifty”), and the party entering into this Agreement for the use of the Service (“Client”). By accessing,
+      copying, or otherwise using the Service (the date of which shall be known as the “Effective Date”),
+
+      Client acknowledges that it has read this Agreement, understands it, and agrees to be bound by its terms and conditions,
+       including Drifty’s Privacy Policy.
+
+      If Client does not agree to the terms and <conditio></conditio>ns of this Agreement, do not access or use the Service.
+      Drifty will not and does not license and make the Service available unless Client agrees to the terms of this Agreement.
+      In consideration of the mutual covenants and agreements set forth herein, and other good and valuable consideration,
+      receipt of which are hereby acknowledged, the parties agree as follows:
+
+      Scope of agreement. Drifty offers a service and tools that facilitate the development and design of
+      hybrid mobile apps using certain web technologies and certain ancillary applications, analytics, documentation,
+      and services to Client, all as more particularly described at ionicframework.com (the “Service”), and Drifty desires
+      to make such Service and its component parts available to Client on the terms and conditions described below.
+    </textarea>
+  </div>
+
+
+</ng-template>

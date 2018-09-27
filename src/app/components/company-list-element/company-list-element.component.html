@@ -1,0 +1,185 @@
+<div class="grid-container">
+  <div class="details-grid">
+    <!-- NOTE: ROW 1 TITLE -->
+    <div class="r1 company-name-row" text-nowrap>
+      {{company.companyName}}
+    </div>
+
+    <!-- NOTE: ROW 2 DETAILS GRID -->
+    <div class="details-row-container">
+      <div class="main-description-grid">
+
+        <ion-icon name='pin' mode="md"></ion-icon>
+        <div class="detail-name-text">City</div>
+        <div class="detail-data">
+          <ng-container [ngSwitch]="company.city">
+
+            <ng-container *ngSwitchCase="1">
+              Dubai
+            </ng-container>
+
+            <ng-container *ngSwitchCase="2">
+              Sharjah
+            </ng-container>
+
+            <ng-container *ngSwitchCase="3">
+              Ajman
+            </ng-container>
+
+            <ng-container *ngSwitchCase="4">
+              Abu Dhabi
+            </ng-container>
+
+            <!-- <ng-container *ngSwitchCase="5">
+              Al Ain
+            </ng-container> -->
+
+            <ng-container *ngSwitchCase="6">
+              Al Fujairah
+            </ng-container>
+
+            <ng-container *ngSwitchCase="7">
+              Ras Al Khaima
+            </ng-container>
+
+            <ng-container *ngSwitchCase="8">
+              Umm Al Quwain
+            </ng-container>
+
+          </ng-container>
+        </div>
+
+        <ion-icon name="call" mode="md"></ion-icon>
+        <div class="detail-name-text">
+          Phone
+        </div>
+        <div class="detail-data">
+          {{company.companyNumber}}
+        </div>
+
+
+        <ion-icon name="mail" mode="md"></ion-icon>
+        <div class="detail-name-text">
+          Email
+        </div>
+        <div class="detail-data">
+          {{company.email}}
+        </div>
+
+        <ion-icon name="pricetags"></ion-icon>
+        <div class="detail-name-text">
+          Class
+          <!-- TODO: 1- CHANGE THIS TO SWITCH (CONS+CONTR VS SUPPLIER) -->
+          <!-- <span [ngSwitch]="">
+          <p *ngSwitchCase="true">
+
+          </p>
+          <p *ngSwitchCase="false">
+
+          </p>
+          <p *ngSwitchDefault>
+
+          </p>
+          </span> -->
+        </div>
+        <div class="detail-data">
+          <!-- TODO: 2- SWITCH HERE TOO -->
+          <!-- <span [ngSwitch]="">
+          <p *ngSwitchCase="true">
+
+          </p>
+          <p *ngSwitchCase="false">
+
+          </p>
+          <p *ngSwitchDefault>
+
+          </p>
+          </span> -->
+
+          <span [ngSwitch]="company.class">
+            <ng-container *ngSwitchCase="0">
+              Special Class
+            </ng-container>
+            <ng-container *ngSwitchCase="1">
+              First Class
+            </ng-container>
+            <ng-container *ngSwitchCase="2">
+              Second Class
+            </ng-container>
+            <ng-container *ngSwitchCase="3">
+              Third Class
+            </ng-container>
+            <ng-container *ngSwitchCase="4">
+              Fourth Class
+            </ng-container>
+            <ng-container *ngSwitchCase="5">
+              Fifth Class
+            </ng-container>
+            <ng-container *ngSwitchCase="6">
+              Sixth Class
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+            </ng-container>
+          </span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NOTE: ROW 3 RATINGS -->
+    <div class="r3">
+      <span [ngSwitch]="company.TEST_RATING">
+        <ng-container *ngSwitchCase="1">
+          <ion-icon name="star"></ion-icon>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ng-container>
+        <ng-container *ngSwitchCase="3">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ng-container>
+        <ng-container *ngSwitchCase="4">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ng-container>
+        <ng-container *ngSwitchCase="5">
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+          <ion-icon name="star"></ion-icon>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+
+        </ng-container>
+      </span>
+    </div>
+
+    <!-- NOTE: ROW 4 COLORED COMPANY TYPE -->
+
+  </div>
+
+  <div class="r4">
+    <ng-container [ngSwitch]="company.accountType">
+      <div *ngSwitchCase="1">
+      </div>
+      <div class="c2" *ngSwitchCase="2">
+        Organization
+      </div>
+      <div class="c3" *ngSwitchCase="3">
+        Contractor
+      </div>
+      <div class="c4" *ngSwitchCase="4">
+        Supplier
+      </div>
+      <div *ngSwitchDefault>
+      </div>
+    </ng-container>
+  </div>
+
+</div>

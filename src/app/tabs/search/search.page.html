@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Search
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+
+
+
+<ion-content padding>
+
+  <div class="flex-container">
+
+    <!-- TODO: MAKE HOME USE FIREBASE -->
+    <!-- <ng-container *ngFor="let tender of tenders$ | async; let i = index"> -->
+    <ng-container *ngFor="let company of companies; let i = index">
+
+      <div class="company-element-container">
+        <app-company-list-element [company]="company">
+        </app-company-list-element>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+
+</ion-content>
+
+
+
+
+
+
+
+<ion-footer>
+
+  <ion-toolbar color="light">
+
+    <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
+      padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+
+        <ion-item no-margin>
+          <ion-label position="floating" style="height: 0px;" no-padding no-margin></ion-label>
+          <ion-input type="text" placeholder="Search" no-margin></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label position="floating" style="height: 0px;" no-padding no-margin></ion-label>
+
+          <ion-select placeholder="Select Category" ok-text="Select" interface="alert" (ionChange)="onSelectSupplierCategory($event)">
+
+            <ion-select-option value="company_consultant">Consultant</ion-select-option>
+            <ion-select-option value="company_contractor">Contractor</ion-select-option>
+            <ion-select-option value="company_supplier">Supplier</ion-select-option>
+            <ion-select-option value="category_paint">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Paint</ion-select-option>
+            <ion-select-option value="category_blocks">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Blocks</ion-select-option>
+            <ion-select-option value="category_ceramics">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Ceramics</ion-select-option>
+            <ion-select-option value="category_interlock">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Interlock</ion-select-option>
+            <ion-select-option value="category_wood">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Wood</ion-select-option>
+            <ion-select-option value="category_doors">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Doors</ion-select-option>
+            <ion-select-option value="category_fabric">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Fabric</ion-select-option>
+            <ion-select-option value="category_cement">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Cement</ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+        <ion-button expand="block" mode="ios" (Click)="onClickSearch()" style="margin-left: 15px;">
+          <!-- <ion-icon name="search" mode="ios"></ion-icon>&nbsp; -->
+          Search
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

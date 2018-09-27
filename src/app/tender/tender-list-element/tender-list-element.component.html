@@ -1,47 +1,163 @@
-<ng-container>
-  <div class="grid-container">
+<div class="grid-container" (click)="view_tender(tender.tenderId)">
 
+  <ng-container [ngSwitch]="tender.tenderCategory">
 
+    <ng-container *ngSwitchCase="'tender_construction'">
+      <div class="image-col-grid c1">
+        <img src="/assets/icon/construction.svg">
 
-    <div class="image-col-grid">
-      <img src="/assets/icon/cement.svg">
-      <div class="category-row">
-        Construction
-      </div>
-    </div>
-
-    <div class="details-col-grid">
-
-      <div class="row-1 tender-title-row">
-        Construction of School in Qusais
-      </div>
-
-      <div class="row-2 company-name-row">
-        Emirates Consulting
-      </div>
-      <div class="row-3 details-row-container">
-        <div class="main-description-grid" [class.arabic]="lang === 'ar'">
-
-          <ion-icon name='pin' mode="md"></ion-icon>
-          <div class="detail-name-text">City</div>
-          <div class="detail-data">Abu Dhabi</div>
-
-          <ion-icon name="checkmark-circle-outline" mode="md"></ion-icon>
-          <div class="detail-name-text">Status</div>
-          <div class="detail-data">Recent</div>
-
-          <ion-icon name='alarm' mode="md"></ion-icon>
-          <div class="detail-name-text">Published</div>
-          <div class="detail-data">15-09-2018</div>
-
-          <div></div>
-          <div class="detail-name-text">Deadline</div>
-          <div class="detail-data">20-10-2018</div>
-
+        <div class="category-row">
+          Construction
         </div>
       </div>
+    </ng-container>
 
+    <ng-container *ngSwitchCase="'tender_steel'">
+      <div class="image-col-grid c2">
+        <img src="/assets/icon/steel.svg">
+
+        <div class="category-row">
+          Steel
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'tender_maintenance'">
+      <div class="image-col-grid c3">
+        <img src="/assets/icon/maintenance.svg">
+
+        <div class="category-row">
+          Maintenance
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'tender_concrete'">
+      <div class="image-col-grid c4">
+        <img src="/assets/icon/concrete.svg">
+
+        <div class="category-row">
+          Concrete
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'tender_prefab'">
+      <div class="image-col-grid c5">
+        <img src="/assets/icon/prefab.svg">
+
+        <div class="category-row">
+          Prefab
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'tender_insulation'">
+      <div class="image-col-grid c6">
+        <img src="/assets/icon/insulation.svg">
+
+        <div class="category-row">
+          Insulation
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'tender_fencing'">
+      <div class="image-col-grid c7">
+        <img src="/assets/icon/walls.svg">
+
+        <div class="category-row">
+          Walls/Fencing
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'tender_general'">
+      <div class="image-col-grid c8">
+        <img src="/assets/icon/helmet.svg">
+
+        <div class="category-row">
+          General
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <div class="image-col-grid c1">
+        <img src="/assets/icon/construction.svg">
+
+        <div class="category-row">
+          Construction
+        </div>
+      </div>
+    </ng-container>
+
+  </ng-container>
+
+  <div class="details-col-grid">
+
+    <div class="row-1 tender-title-row">
+      {{tender.tenderTitle}}
     </div>
+
+    <div class="row-2 company-name-row">
+      {{tender.companyName}}
+    </div>
+
+    <div class="row-3 details-row-container">
+      <div class="main-description-grid" [class.arabic]="lang === 'ar'">
+
+        <ion-icon name='pin' mode="md"></ion-icon>
+        <div class="detail-name-text">City</div>
+        <div class="detail-data">
+          <ng-container [ngSwitch]="tender.city">
+
+            <ng-container *ngSwitchCase="1">
+              Dubai
+            </ng-container>
+
+            <ng-container *ngSwitchCase="2">
+              Sharjah
+            </ng-container>
+
+            <ng-container *ngSwitchCase="3">
+              Ajman
+            </ng-container>
+
+            <ng-container *ngSwitchCase="4">
+              Abu Dhabi
+            </ng-container>
+
+            <ng-container *ngSwitchCase="6">
+              Al Fujairah
+            </ng-container>
+
+            <ng-container *ngSwitchCase="7">
+              Ras Al Khaima
+            </ng-container>
+
+            <ng-container *ngSwitchCase="8">
+              Umm Al Quwain
+            </ng-container>
+
+          </ng-container>
+        </div>
+
+        <ion-icon name="checkmark-circle-outline" mode="md"></ion-icon>
+        <div class="detail-name-text">Status</div>
+        <div class="detail-data">{{tender.TESTSTATUS}}</div>
+
+        <ion-icon name="alarm" mode="md"></ion-icon>
+        <div class="detail-name-text">Published</div>
+        <div class="detail-data">{{tender.TESTPUBLISHED}}</div>
+
+        <div></div>
+        <div class="detail-name-text">Deadline</div>
+        <div class="detail-data">{{tender.TESTDEADLINE}}</div>
+
+      </div>
+    </div>
+
   </div>
 
-</ng-container>
+</div>

@@ -1,5 +1,5 @@
 {
-  "name": "Memar UAE",
+  "name": "memar",
   "version": "0.0.1",
   "author": "Mohamad Yahia",
   "homepage": "http://maddada.com/",
@@ -43,12 +43,12 @@
     "firebase": "^5.4.2",
     "install": "^0.12.1",
     "rxjs": "6.2.2",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.9"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.8.2",
+    "@angular-devkit/architect": "^0.8.3",
     "@angular-devkit/build-angular": "^0.8.2",
-    "@angular-devkit/core": "^0.8.2",
+    "@angular-devkit/core": "^0.8.3",
     "@angular-devkit/schematics": "^0.8.2",
     "@angular/cli": "^6.2.2",
     "@angular/compiler": "^6.1.7",
@@ -57,7 +57,7 @@
     "@ionic/lab": "1.0.7",
     "@ionic/ng-toolkit": "^1.0.7",
     "@ionic/schematics-angular": "^1.0.5",
-    "@ionic/v4-migration-tslint": "^1.5.0",
+    "@ionic/v4-migration-tslint": "^1.5.1",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.5.2",

@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 // import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { IonRouterOutlet, Platform } from '@ionic/angular';
+import { IonRouterOutlet, Platform, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { AuthService } from './core/auth.service';
@@ -32,21 +32,24 @@ export class AppComponent {
         //     icon: 'home'
         // },
         {
+            title: 'About',
+            url: '/wizard',
+            icon: 'information-circle-outline'
+        },
+        {
             title: 'Settings',
             url: '/settings',
             icon: 'settings'
-        }
+        },
     ];
-
-
 
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
-        // private router: Router,
         private storage: Storage,
         private auth: AuthService,
+        private nav: NavController,
     ) {
         this.initializeApp();
     }
@@ -55,28 +58,15 @@ export class AppComponent {
 
     initializeApp() {
 
+        this.checkFirstLaunch();
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
 
-            this.checkFirstLaunch();
             this.myUser = this.auth.isUserLoggedIn$.subscribe();
         });
 
     }
-
-
-
-    // async checkIfLoggedIn() {
-    //   const user = await this.auth.isLoggedIn();
-    //   if (user) {
-    //     this.loggedIn = true;
-    //   } else {
-    //     this.loggedIn = false;
-    //   }
-    // }
-
-
 
     // TODO: Make wizard show up if first launch!
     checkFirstLaunch(): any {
@@ -88,6 +78,7 @@ export class AppComponent {
             } else {
                 console.log('First launch.');
                 this.storage.set('first_time', 'done');
+                // this.nav.navigateForward('/wizard');
             }
         });
     }

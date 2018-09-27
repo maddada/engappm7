@@ -1,0 +1,83 @@
+ion-slides {
+  width: 100%;
+  background: url("../../../assets/images/background/electro2.jpg") no-repeat
+    top center fixed;
+  background-size: cover;
+}
+
+ion-slide {
+  height: 100vh !important;
+  flex-direction: column;
+  text-align: start;
+  justify-content: start;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+div.img {
+  margin-top: 50px;
+  height: 200px;
+  max-height: 30vh;
+  align-items: center;
+}
+
+.subtitle {
+  height: 300px;
+  max-height: 30vh;
+  display: flex;
+  align-items: center;
+
+  h3 {
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: block;
+  }
+}
+
+ion-button {
+  margin-top: 20px;
+  justify-self: end;
+}
+
+.step-one {
+  // background: url("../../../assets/images/background/39.jpg") no-repeat top
+  //   center fixed;
+  // background-size: cover;
+  color: #000000;
+
+  ion-img {
+    height: 70%;
+    max-width: 200px;
+    overflow: hidden;
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
+  }
+}
+
+.step-two {
+  // background: url("../../../assets/images/background/31.jpg") no-repeat top center fixed;
+  // background-size: cover;
+  color: #000000;
+
+  ion-img {
+    height: 70%;
+    max-width: 200px;
+    overflow: hidden;
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(10deg);
+  }
+}
+
+.step-three {
+  // background: url("../../../assets/images/background/electro1.jpg") no-repeat
+  //   top center fixed;
+  // background-size: cover;
+  color: #000000;
+
+  ion-img {
+    height: 70%;
+    max-width: 200px;
+    overflow: hidden;
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(100deg);
+  }
+}

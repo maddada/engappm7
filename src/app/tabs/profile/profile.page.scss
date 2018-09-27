@@ -1,0 +1,35 @@
+@import "../../../theme/mixins.scss";
+
+// Settings Logo
+img {
+  max-width: 250px;
+  max-height: auto;
+  margin-bottom: 24px;
+  display: block;
+  border-radius: 0px;
+  // box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2) !important;
+
+  @include for-phone-only {
+    max-width: 250px;
+  }
+
+  @include for-tablet-portrait {
+    width: 10rem;
+  }
+
+  @include for-tablet-landscape {
+    width: 14rem;
+  }
+}
+
+ion-card-subtitle {
+  margin-top: 15px;
+  font-size: 0.95em;
+  color: #007eaf;
+}
+
+ion-card-subtitle span {
+  color: #2e2e2e;
+  font-size: 1.1em;
+  padding-left: 30px;
+}

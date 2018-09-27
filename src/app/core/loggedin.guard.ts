@@ -6,6 +6,9 @@ import {
 } from '@angular/router';
 import { AuthService } from '../core/auth.service';
 import { ShowToastService } from './show-toast.service';
+import { NavController } from '@ionic/angular';
+
+// NOTE: CHECKS IF LOGGED IN ALREADY!!!!
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +16,8 @@ import { ShowToastService } from './show-toast.service';
 export class LoggedinGuard implements CanActivate {
   constructor(
     private auth: AuthService,
-    private toast: ShowToastService) { }
+    private toast: ShowToastService,
+    private nav: NavController) { }
 
   async canActivate(
     next: ActivatedRouteSnapshot,
@@ -24,13 +28,12 @@ export class LoggedinGuard implements CanActivate {
 
     let allow: boolean;
 
-    if (isLoggedIn) {
-
-      this.toast.showToast('Already logged in');
-      allow = false;
-
-    } else {
+    if (!isLoggedIn) {
       allow = true;
+    } else {
+      this.toast.showToast('Already logged in');
+      this.nav.navigateRoot('/');
+      allow = false;
     }
 
     return allow;

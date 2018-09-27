@@ -9,6 +9,10 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 
+import { TenderListElementModule } from './tender/tender-list-element/tender-list-element.module';
+import { CompanyListElementModule } from './components/company-list-element/company-list-element.module';
+// import { ProposalListElementModule } from './proposal/proposal-list-element/proposal-list-element.module';
+
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -49,6 +53,9 @@ import { environment } from '../environments/environment';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireFunctionsModule,
+    TenderListElementModule,
+    CompanyListElementModule,
+    // ProposalListElementModule
   ],
   providers: [
     StatusBar,
