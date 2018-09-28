@@ -61,7 +61,7 @@ export interface Tender {
     deadline?: any;
 
     //NOTE:  GET THESE FROM USER
-    createdBy?: string; // uid
+    uid?: string; // uid
     creatorEmail?: string; // Get Company Email from CreatedBy
     companyName?: string;
     personName?: string;
@@ -88,10 +88,51 @@ export interface Tender {
 
 }
 
+// Comments Collection:
+// usercomments/commentby_commenton/<user comment doc>
+export interface ProfileComment {
+    createdAt?: any;
+    updatedAt?: any;
+
+    createdBy?: string;             // uid of comment writer
+    creatorDisplayName?: string;    // name of comment writer
+    creatorEmail?: string;          // email of comment writer
+    creatorPhoneNumber?: string;    // phone of comment writer
+
+    commentOn?: string;             // uid of comment reciever
+    commentStr?: string;
+
+    rating?: number;
+
+    // commentType?: number; // 1 = profile, 2 = tender, 3 = proposal.
+    //This is for the future (only profile comments now!)
+}
+
+
+// LATER: THESE COMMENTS ARE FOR TENDERS/PROPOSALS (Not required in alpha)
+// TenderComments Collection:
+// tenderComments/generated_id/<tender comment doc>
+export interface TenderComment {
+    createdAt?: any;
+    updatedAt?: any;
+
+    uid?: string;             // uid of comment writer
+    creatorDisplayName?: string;    // name of comment writer
+    creatorEmail?: string;          // email of comment writer
+    creatorPhoneNumber?: string;    // phone of comment writer
+
+    commentOn?: string;             // uid of comment reciever
+    commentStr?: string;
+}
+
+
+
+
 
 
 // NOTE: Proposals Collection:
 // proposals/createdByUid_tenderid/<PROPOSAL_DOC_DETAILS_HERE>
+/*
 export interface Proposal {
     createdAt?: any;
     updatedAt?: any;
@@ -122,47 +163,4 @@ export interface Proposal {
 // attachmentCostDoc?: string;
 // link to technical document
 // مستند العرض المالي
-
-
-// Comments Collection:
-// usercomments/commentby_commenton/<user comment doc>
-export interface ProfileComment {
-    createdAt?: any;
-    updatedAt?: any;
-
-    createdBy?: string;             // uid of comment writer
-    creatorDisplayName?: string;    // name of comment writer
-    creatorEmail?: string;          // email of comment writer
-    creatorPhoneNumber?: string;    // phone of comment writer
-
-    commentOn?: string;             // uid of comment reciever
-    commentStr?: string;
-
-    rating?: number;
-
-    // commentType?: number; // 1 = profile, 2 = tender, 3 = proposal.
-    //This is for the future (only profile comments now!)
-}
-
-
-// LATER: THESE COMMENTS ARE FOR TENDERS/PROPOSALS (Not required in alpha)
-// TenderComments Collection:
-// tenderComments/generated_id/<tender comment doc>
-export interface TenderComment {
-    createdAt?: any;
-    updatedAt?: any;
-
-    createdBy?: string;             // uid of comment writer
-    creatorDisplayName?: string;    // name of comment writer
-    creatorEmail?: string;          // email of comment writer
-    creatorPhoneNumber?: string;    // phone of comment writer
-
-    commentOn?: string;             // uid of comment reciever
-    commentStr?: string;
-}
-
-
-
-
-
-
+*/

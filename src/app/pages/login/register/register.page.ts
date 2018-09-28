@@ -457,7 +457,6 @@ export class RegisterPage implements OnInit {
   }
 
 
-
   protected onSelectSupplierCategory($event): any {
 
     if ($event.detail.value.length > 0) {

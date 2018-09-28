@@ -133,7 +133,7 @@ export class CreateTenderPage implements OnInit {
 
       deadline: this.selectedDeadline,
 
-      createdBy: this.user.uid,
+      uid: this.user.uid,
       creatorEmail: this.user.email,
       companyName: this.user.companyName,
       personName: this.user.personName,
@@ -299,7 +299,7 @@ export class CreateTenderPage implements OnInit {
     let fileName = file.name;
 
     // name of file in cloud storage
-    const filePath = `users/${this.newTender.createdBy}/${this.newTender.tenderId}`;
+    const filePath = `users/${this.newTender.uid}/${this.newTender.tenderId}`;
     const fileRef = this.storage.ref(filePath);
 
     // start upload task

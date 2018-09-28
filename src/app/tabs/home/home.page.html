@@ -1,4 +1,5 @@
 <ion-header>
+
   <ion-toolbar color="light">
     <ion-buttons slot="start">
       <!-- <ion-back-button></ion-back-button> -->
@@ -8,6 +9,7 @@
       Home
     </ion-title>
   </ion-toolbar>
+
 </ion-header>
 
 <ion-content>
@@ -51,10 +53,11 @@
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
         <ion-item>
-
           <ion-label position="floating" style="height: 0px !important" no-padding no-margin></ion-label>
 
-          <ion-select ok-text="Select" interface="action-sheet" placeholder="Select City" (ionChange)="onSelectCity($event)">
+          <ion-select ok-text="Select" interface="action-sheet" [(ngModel)]="selectedCityString" (ionChange)="onSelectCity($event)">
+
+            <ion-select-option value="0">All Cities</ion-select-option>
             <ion-select-option value="1">Dubai</ion-select-option>
             <ion-select-option value="2">Sharjah</ion-select-option>
             <ion-select-option value="3">Ajman</ion-select-option>
@@ -63,8 +66,8 @@
             <ion-select-option value="6">Fujairah</ion-select-option>
             <ion-select-option value="7">Ras al-Khaimah</ion-select-option>
             <ion-select-option value="8">Umm al-Quwain</ion-select-option>
-          </ion-select>
 
+          </ion-select>
 
         </ion-item>
 

@@ -27,12 +27,12 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: './pages/login/login.module#LoginPageModule',
-    // canActivate: [LoggedinGuard]
+    canActivate: [LoggedinGuard]
   },
   {
     path: 'register',
     loadChildren: './pages/login/register/register.module#RegisterPageModule',
-    //  canActivate: [LoggedinGuard]
+    canActivate: [LoggedinGuard]
   },
   {
     path: 'forgot-password',
@@ -41,11 +41,11 @@ const routes: Routes = [
   {
     path: 'logout',
     loadChildren: './pages/logout/logout.module#LogoutPageModule',
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   }, //NOTE: CANT CREATE TENDER WHEN NOT LOGGED IN!!
   {
     path: 'create-tender', loadChildren: './tender/create-tender/create-tender.module#CreateTenderPageModule',
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   { path: 'wizard', loadChildren: './pages/wizard/wizard.module#WizardPageModule' },
   { path: 'view-tender/:id', loadChildren: './tender/view-tender/view-tender.module#ViewTenderPageModule' },

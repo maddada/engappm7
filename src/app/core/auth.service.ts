@@ -38,16 +38,19 @@ export class AuthService {
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
+
           console.log('auth service: logged in!');
           this.isUserLoggedIn$.next(true);
           this.userID = user.uid;
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
 
         } else {
+
           console.log('auth service: not logged in!');
           this.isUserLoggedIn$.next(false);
           this.userID = null;
           return of(null);
+
         }
       }),
     );

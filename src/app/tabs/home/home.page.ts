@@ -115,11 +115,12 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+
     this.auth.user$.pipe(share()).subscribe(user => {
       if (user != null) {
         this.selectedCityString = `${user.city}`;
       } else {
-        this.selectedCityString = null;
+        this.selectedCityString = "0";
       }
     });
   }

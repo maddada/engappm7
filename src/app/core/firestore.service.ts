@@ -27,7 +27,9 @@ export class FirestoreService {
   * M7 FORK OF ANGULARFIRE.COM FIRESTORE SERVICE *
   ************************************************/
 
-
+  // Note: Example of queryFn
+  // db.col$('items', ref => ref.where('size', '==', 'large'))
+  // https://github.com/angular/angularfire2/blob/master/docs/firestore/querying-collections.md
 
   /*******************
    * GET A REFERENCE *

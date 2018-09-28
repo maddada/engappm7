@@ -22,14 +22,16 @@
   <!-- <ng-template #hasEntries> -->
   <div class="flex-container">
 
-    <!-- <ng-container *ngFor="let tender of tenders$ | async; let i = index"> -->
-    <ng-container *ngFor="let tender of tenders; let i = index">
+    <ng-container *ngIf="auth.isUserLoggedIn$ | async">
+      <ng-container *ngFor="let tender of tenders$ | async; let i = index">
+        <!-- <ng-container *ngFor="let tender of tenders; let i = index"> -->
 
-      <div class="tender-element-container">
-        <app-tender-list-element [tender]="tender">
-        </app-tender-list-element>
-      </div>
+        <div class="tender-element-container">
+          <app-tender-list-element [tender]="tender">
+          </app-tender-list-element>
+        </div>
 
+      </ng-container>
     </ng-container>
 
   </div>
@@ -62,6 +64,11 @@
         <ion-button expand="block" mode="ios" href="/create-tender" routerDirection="forward">
           <ion-icon name="add-circle" mode="ios"></ion-icon>&nbsp;Create Tender
         </ion-button>
+
+        <!-- I'M USING THIS TO CREATE FAKE TENDERS IN FIREBASE FAST!! -->
+        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="createFakeTender()">
+          <ion-icon name="add-circle" mode="ios"></ion-icon>&nbsp;Create Fake Tender
+        </ion-button> -->
 
         <!-- <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
             &nbsp;TEST
