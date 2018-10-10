@@ -10,71 +10,71 @@ export class SearchPage implements OnInit {
 
   companies: User[] = [
     {
-      companyName: 'Tiger Consulting',
+      profileName: 'Tiger Consulting',
       city: 1,
       accountType: 2,
       companyNumber: '061251516',
-      email: 'info@tiger.ae',
+      email: 'info@test.ae',
       class: 1,
       TEST_RATING: 5,
       tags: ['company_consultant'],
     },
     {
-      companyName: 'Al Samer Contracting',
+      profileName: 'Al Samer Contracting',
       city: 4,
       accountType: 3,
       companyNumber: '061251516',
-      email: 'info@tiger.ae',
+      email: 'info@test.ae',
       class: 2,
       TEST_RATING: 3,
       tags: ['company_consultant'],
     },
     {
-      companyName: 'Sharqiya Building Supplies',
+      profileName: 'Sharqiya Building Supplies',
       city: 2,
       accountType: 4,
       companyNumber: '061251516',
-      email: 'info@tiger.ae',
+      email: 'info@test.ae',
       class: 3,
       TEST_RATING: 4,
       tags: ['company_consultant'],
     },
     {
-      companyName: 'Carting Consulting',
+      profileName: 'Carting Consulting',
       city: 1,
       accountType: 3,
       companyNumber: '061251516',
-      email: 'info@tiger.ae',
+      email: 'info@test.ae',
       class: 5,
       TEST_RATING: 4,
       tags: ['company_consultant'],
     },
     {
-      companyName: 'Wathba Consulting',
+      profileName: 'Wathba Consulting',
       city: 3,
       accountType: 4,
       companyNumber: '061251516',
-      email: 'info@tiger.ae',
+      email: 'info@test.ae',
       class: 2,
       TEST_RATING: 3,
       tags: ['company_consultant'],
     },
     {
-      companyName: 'AON Management Consulting',
+      profileName: 'AON Management Consulting',
       city: 8,
       accountType: 3,
       companyNumber: '061251516',
-      email: 'info@tiger.ae',
+      email: 'info@test.ae',
       class: 4,
       TEST_RATING: 2,
       tags: ['company_consultant'],
     },
     {
-      companyName: 'Al Samer Consulting',
+      profileName: 'Al Samer Consulting',
       city: 6,
       accountType: 2,
       companyNumber: '061251516',
-      email: 'info@tiger.ae',
+      email: 'info@test.ae',
       class: 3,
       TEST_RATING: 5,
       tags: ['company_consultant'],
@@ -85,7 +85,7 @@ export class SearchPage implements OnInit {
 
   }
 
-  protected onSelectSupplierCategory($event): any {
+  public onSelectSupplierCategory($event): any {
 
     // if ($event.detail.value.length > 0) {
     //   this.selectedSupplierCategories = $event.detail.value;
@@ -93,5 +93,7 @@ export class SearchPage implements OnInit {
     // }
 
   }
+
+  public onClickSearch(): any { }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-tabs',
@@ -8,7 +9,7 @@ import { MenuController } from '@ionic/angular';
 })
 export class TabsPage implements OnInit {
 
-  constructor(private menuCtrl: MenuController) {
+  constructor(private menuCtrl: MenuController, public auth: AuthService) {
   }
 
   ngOnInit() {

@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"typescript.tsdk": "node_modules\\typescript\\lib",
+		"todo-tree.flat": true,
+		"vsicons.presets.angular": true
+	}
+}

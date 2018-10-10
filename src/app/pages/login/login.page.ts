@@ -19,35 +19,35 @@ export class LoginPage implements OnInit {
   private isEmailValid: boolean = true;
   private isPasswordValid: boolean = true;
 
-  private background = '';
-  private forgotPassword = 'Forgot password?';
-  private subtitle: string = 'Welcome';
-  private labelEmail: string = 'EMAIL';
-  private labelPassword: string = 'PASSWORD';
-  private title: string = 'Login to your account';
-  private emailPlaceholder: string = 'Enter your email';
-  private passwordPlaceholder: string = 'Enter your password';
-  private register: string = 'Register';
-  private login: string = 'Login';
-  private skip: string = 'Skip';
-  private logo: string = 'assets/images/logo/logo.png';
-  private errorUser: string = 'Field can\'t be empty';
-  private errorPassword: string = 'Field can\'t be empty';
-  protected isLoggedIn: string;
-  private email: string;
-  private password: string;
+  public background = '';
+  public forgotPassword = 'Forgot password?';
+  public subtitle: string = 'Welcome';
+  public labelEmail: string = 'EMAIL';
+  public labelPassword: string = 'PASSWORD';
+  public title: string = 'Login to your account';
+  public emailPlaceholder: string = 'Enter your email';
+  public passwordPlaceholder: string = 'Enter your password';
+  public register: string = 'Register';
+  public login: string = 'Login';
+  public skip: string = 'Skip';
+  public logo: string = 'assets/images/logo/logo.png';
+  public errorUser: string = 'Field can\'t be empty';
+  public errorPassword: string = 'Field can\'t be empty';
+  public isLoggedIn: string;
+  public email: string;
+  public password: string;
 
   constructor(
     private menuCtrl: MenuController,
     private router: Router,
-    private auth: AuthService,
     private toast: ShowToastService,
+    public auth: AuthService,
   ) { }
 
   ngOnInit() {
   }
 
-  protected onLoginClick(): void {
+  public onLoginClick(): void {
     if (this.validate()) {
       this.auth.emailLogin(this.email, this.password).catch(
         error =>

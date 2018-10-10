@@ -16,6 +16,7 @@ import { NavController } from '@ionic/angular';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { AuthService } from '../../core/auth.service';
+import { ShowLoadingService } from '../../core/show-loading.service';
 
 @Component({
   selector: 'app-create-tender',
@@ -24,16 +25,17 @@ import { AuthService } from '../../core/auth.service';
 })
 export class CreateTenderPage implements OnInit {
 
-  public user: User;
   public newTender: Tender = {};
 
-  protected uploadPercent: Observable<number>;
-  protected downloadURL: Observable<string>;
+  // public uploadPercents$: Observable<any>[] = [];
+  public uploadPercent0: Observable<any>;
+  public uploadPercent1: Observable<any>;
+  public uploadPercent2: Observable<any>;
 
-  protected selectedDeadline: any;
-  protected selectedTenderCategory: string;
+  public downloadURLs$: Observable<string>[];
 
-  private newTenderDoc: AngularFirestoreDocument<Tender>;
+  public selectedDeadline: any;
+  public summaryTemp: any;
 
   private filesToUpload: any[] = []; //Accepted Files
 
@@ -41,24 +43,19 @@ export class CreateTenderPage implements OnInit {
   datePickerMinYear: number;
   datePickerMaxYear: number;
 
-  // For On Change Selected, converted to number newTender.numOfAttachments
-
   // Used to access input and clear it
   // (if file selected for upload is too big or disallowed type)
   // Use 1 2 3 in UI ONLY! Everywhere else use 0 1 2 to avoid confusion.
   @ViewChild('uploadButton0')
-  private myUploadButton0: ElementRef;
+  public myUploadButton0: ElementRef;
 
   @ViewChild('uploadButton1')
-  private myUploadButton1: ElementRef;
+  public myUploadButton1: ElementRef;
 
   @ViewChild('uploadButton2')
-  private myUploadButton2: ElementRef;
+  public myUploadButton2: ElementRef;
 
-
-
-
-
+  private myUploadButtons: ElementRef[];
 
   constructor(
     private nav: NavController,
@@ -69,6 +66,7 @@ export class CreateTenderPage implements OnInit {
     private auth: AuthService,
     private toast: ShowToastService,
     public element: ElementRef,
+    public loading: ShowLoadingService,
   ) {
 
   }
@@ -76,30 +74,50 @@ export class CreateTenderPage implements OnInit {
 
 
   ngOnInit() {
-    this.setMinMaxYear();
-
-    this.newTender.participationFee = 0;
-    this.newTender.bidBondPercent = 0;
-
-    this.newTender.attachmentURLs = [];
-
-  }
-
-
-
-  protected setMinMaxYear() {
+    console.log(this.auth.user.class);
+    // Settings Deadline Picker Min and Max Year:
     let temp = new Date();
-
     this.datePickerMaxYear = temp.getFullYear() + 1;
     this.datePickerMinYear = temp.getFullYear();
+
+    // Initializing newTender properties
+    this.newTender.participationFee = 0;
+    this.newTender.bidBondPercent = 0;
+    this.newTender.participants = [];
+
+    // Initializing attachments arrays
+    this.newTender.tenderTitle = '';
+    this.newTender.tenderContactEmail = '';
+    this.newTender.tenderContactWhatsapp = '';
+    this.newTender.tenderContactNumber = '';
+
+    this.filesToUpload = ['NOT-SET', 'NOT-SET', 'NOT-SET'];
+    this.newTender.attachmentURLs = [];
+    this.downloadURLs$ = [];
+
+    // Setting My Upload Buttons Array
+    this.myUploadButtons = [];
+    this.myUploadButtons.push(this.myUploadButton0);
+    this.myUploadButtons.push(this.myUploadButton1);
+    this.myUploadButtons.push(this.myUploadButton2);
   }
 
 
-  // NOTE:    1- onSubmit
-  protected onSubmit(): void {
+  // NOTE:
+  // NOTE:
+  // NOTE:
+  // NOTE:
+  // NOTE:
+  // NOTE:
+  // NOTE: Upload Related Functions!!!
+  // NOTE:
 
-    if (this.validateInputs()) {
-      this.createTender();
+  // NOTE:   START POINT!!! onSubmit -> Validates then Starts Uploading the 3 Files
+  public onCreateClicked(): void {
+
+    if (this.s1_validateAndFixInputs()) {
+      this.loading.presentLoadingWithOptions();
+      this.s2_startUploadFile(0);
     }
     else {
       return;
@@ -107,138 +125,219 @@ export class CreateTenderPage implements OnInit {
   }
 
 
-  // NOTE:    2- createTender
-  protected createTender() {
 
-    // FIXME: ADD FILE UPLOADING!!
-    // if (this.newTender.numOfAttachments !== 0) {
-    //   this.uploadFiles();
-    // }
+  // NOTE:    STEP 1- validateInputs
+  private s1_validateAndFixInputs(): boolean {
 
-    this.auth.user$.pipe(
-      take(1),
-      map(user =>
-        this.user = user
-      )).subscribe();
-
-    this.newTender = {
-      //createdAt?: any; FROM AUTH
-      //updatedAt?: any; FROM AUTH
-      tenderId: this.db.afs.createId(),
-
-      //tenderCategory :// SET ALREADY
-
-      //tenderTitle SET ALREADY
-      //tenderSummary: SET ALREADY
-
-      deadline: this.selectedDeadline,
-
-      uid: this.user.uid,
-      creatorEmail: this.user.email,
-      companyName: this.user.companyName,
-      personName: this.user.personName,
-      personNumber: this.user.personNumber,
-      govSector: this.user.govSector,
-      city: this.user.city,
-
-      //participationFee: // SET ALREADY
-      //bidBondPercent?: number; // SET ALREADY
-
-      participants: [],
-
-      // FIXME: ATTACHMENTS LATER:
-      // attachmentURLs?: string[],
-
-      //NOTE META
-      numberOfProposals: 0,
-    };
-
-    // NOTE: WORKING HERE!!!
-    this.db.setTS(`tenders/${this.newTender.tenderId}`, this.newTender);
-
-  }
-
-  // NOTE:    3- onTestClicked
-  protected onTestClicked(): void {
-
-    if (this.validateInputs()) {
-      console.log("TEST ADD TENDER SUCCESSFUL!");
-    }
-    else {
-    }
-    // console.log("this.termsCheckBoxValue", this.termsCheckBoxValue)
-
-    // console.log("this.newTender.govSector", this.newTender.govSector)
-
-    // console.log("this.uploadData", this.uploadData);
-  }
-
-
-
-
-  // NOTE:    4- validateInputs
-  // Validation Function (Before Registering)
-  // Will return true or false based on required fields
-  private validateInputs() {
-    // TODO: CHECK INPUTS FOR CREATE TENDER
-
-    // FIXME: VALIDATE INPUTS
+    /** NOTE: xd
+      participation fee and bid bond percent aren't needed!
+      isNaN(this.newTender.participationFee) ||
+      isNaN(this.newTender.bidBondPercent)
+    */
     if (
       this.newTender.tenderTitle == null ||
       this.newTender.tenderTitle.length === 0 ||
-      this.newTender.tenderSummary == null ||
-      this.newTender.tenderSummary.length === 0 ||
-      isNaN(this.newTender.bidBondPercent)
+      this.newTender.tenderContactWhatsapp == null ||
+      this.newTender.tenderContactWhatsapp.length === 0 ||
+      this.newTender.tenderContactEmail == null ||
+      this.newTender.tenderContactEmail.length === 0 ||
+      this.newTender.tenderCategory == null ||
+      this.newTender.deadline == null
+
+
     ) {
-      console.log("stopped here");
+      console.log(this.newTender.tenderCategory);
+      console.log(this.newTender.deadline);
       this.toast.showToast(`A Required Field is Empty!`);
       return false;
     }
+
+    // Fixing Inputs:
+    if (this.summaryTemp != null) {
+      this.newTender.tenderSummary =
+        this.summaryTemp.replace(/\n/g, '<br>');
+    }
+
     return true;
   }
 
 
 
 
+  // NOTE: STEP 2 - StartUploadFile Uploads files saved in filesToUpload[]
+  private s2_startUploadFile(number: number) {
+
+    if (this.filesToUpload[number] === 'NOT-SET' && number < 2) {
+      // NOTE: IF ATTACHMENT IS NOT SET, THEN UPLOAD THE NEXT ONE!
+      return this.s2_startUploadFile(number + 1);
+
+    } else if (this.filesToUpload[number] === 'NOT-SET' && number === 2) {
+      // NOTE: IF LAST ATTACHMENT IS NOT SET, GO TO CREATE TENDER!
+      return this.s3_createTender();
+    }
+
+    //NOTE: IF THIS ATTACHMENT IS SET, THEN START UPLOADING IT!
+
+    // get the file from event (cuz filesToUpload contains the events!)
+    let file = this.filesToUpload[number].target.files[0];
+
+    // name of file in cloud storage
+    const filePath = `users/${this.newTender.uid}/${this.newTender.tenderId}/${file.name}`;
+    const fileRef = this.storage.ref(filePath);
+
+    // start upload task
+    const task = this.storage.upload(filePath, file);
+
+    // observe percentage changes
+    switch (number) {
+      case 0:
+        this.uploadPercent0 = task.percentageChanges();
+        break;
+      case 1:
+        this.uploadPercent1 = task.percentageChanges();
+        break;
+      case 2:
+        this.uploadPercent2 = task.percentageChanges();
+        break;
+      default:
+        break;
+    }
+
+    // get notified when the download URL is available
+    // NOTE: 1- subscribing to upload task, to be notified when upload is done!
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        // NOTE: 2- when upload is done, set downloadURLs$ observable to fileRef.getDownloadURL observable
+        this.downloadURLs$[number] = fileRef.getDownloadURL();
+
+        // NOTE: 3- then subscribe to get the URL from downloadURLs$ observable [using take(1) to get only 1st value emitted],
+        this.downloadURLs$[number].pipe(
+          take(1),
+          // NOTE: 5- After the attachmentURLs is set:
+          finalize(() => {
+            // ON URL OBSERVABLE COMPLETE
+            // NOTE: A- If more files left to upload then upload them!
+            if (number < 2) {
+              this.s2_startUploadFile(number + 1);
+            }
+
+            // NOTE: B- If this was the last file, then call s3_createTender()!
+            else if (number === 2) {
+              this.s3_createTender();
+            }
+
+          })
+        ).subscribe((val) => {
+          // this gets called after every next() (emission)
+          // NOTE: 4- After the URL is recieved, set attachmentURLs[number] to the URL, THEN GO TO 5 IN FINALIZE!
+          this.newTender.attachmentURLs.push(val);
+          console.log(`this.newTender.attachmentURLs[number]:`, this.newTender.attachmentURLs);
+        });
+      })).subscribe();
+
+  }
+
+
+
+
+  // NOTE:    STEP 3 - createTender
+  public async s3_createTender() {
+
+    // NOTE: 1- gets user details, and sets all needed newTender Data:
+
+
+
+    this.newTender = {
+
+      /*
+      Other Properties
+      createdAt: Set from Service
+      updatedAt:  Set from Service
+
+      tenderCategory: Set from template
+      tenderTitle: Set from template
+      tenderSummary: Set from template
+      tenderContactWhatsapp?: string;
+      tenderContactEmail?: string;
+      tenderContactNumber?: string;
+      deadline: Set from template // this.selectedDeadline,
+      attachmentURLs: set in startUpload(),
+
+      participationFee: UNUSED Set from template
+      bidBondPercent: UNUSED Set from template
+     */
+      ...this.newTender,
+      tenderId: this.db.afs.createId(),
+
+      uid: this.auth.user.uid,
+      creatorEmail: this.auth.user.email,
+      profileName: this.auth.user.profileName,
+      personName: this.auth.user.personName,
+      personNumber: this.auth.user.personNumber,
+      govSector: this.auth.user.govSector,
+      city: this.auth.user.city,
+
+    };
+
+
+    // NOTE: 2- Uploads newTender with DownloadURLs added to it.
+    await this.db.setTS(`tenders/${this.newTender.tenderId}`, this.newTender);
+
+    this.loading.dismiss();
+
+    this.toast.showToast(`Tender Created!`);
+
+    await this.delay(1000);
+
+    // this.nav.navigateForward(`/view-tender/${this.newTender.tenderId}`);
+
+    console.log('After Tender Created Ran');
+  }
+
+
+
+  // NOTE:
+  // NOTE:
+  // NOTE:
+  // NOTE:
+  // NOTE:
+  // NOTE:
+  // NOTE: Template Related Functions!!!
+  // NOTE:
+
+
   // NOTE:      setUpload
   // NOTE: OUTPUT: ADDING ALLOWED SELECTED FILES TO fileToUpload[]
-  // SAVES DATA OF FILE THAT WAS ADDED FOR LATER. (protected since I use it in html)
-  protected setUpload(event, number) {
+  // SAVES DATA OF FILE THAT WAS ADDED FOR LATER. (public since I use it in html)
+  public setUpload(event, number) {
 
-    console.log("setupload", event, number);
+    // console.log("setupload", event, number);
     let newFile = event.target.files[0];
 
     // If no file was selected
     if (newFile == null) {
+      this.filesToUpload[number] = 'NOT-SET';
       return;
     }
 
     let newFileType: string = newFile.type;
 
-    // checking if file is compatible
-    // If file is over 10 mbs
+    // NOTE: If file is over 10 mbs, then clear the upload button.
+    if (newFile.size < 1) {
+      this.toast.showToast(`File Selected is Empty! Please Check File`);
+      this.filesToUpload[number] = 'NOT-SET';
+      this.myUploadButtons[number].nativeElement.value = '';
+    }
+
     if (newFile.size > 10485760) {
       this.toast.showToast(`File selected is too large! (Max is 10mb)`);
-
-      switch (number) {
-        case 0: {
-          this.myUploadButton0.nativeElement.value = '';
-          break;
-        }
-        case 1: {
-          this.myUploadButton1.nativeElement.value = '';
-          break;
-        }
-        case 2: {
-          this.myUploadButton2.nativeElement.value = '';
-          break;
-        }
-      }
+      this.filesToUpload[number] = 'NOT-SET';
+      this.myUploadButtons[number].nativeElement.value = '';
 
       return;
     } else if (
-      // Else if file is one of these formats, add it to the filesToUpload array
 
+      // NOTE: Else if: Checking if file format is supported:
       //all images (png gif jpg)
       newFileType.includes('image') ||
       //pdf
@@ -248,93 +347,25 @@ export class CreateTenderPage implements OnInit {
       //docx
       newFileType.includes('application/vnd.openxmlformats-officedocument')) {
 
+      // NOTE: IF SELECTED FILE IS VALID THEN ADD
       this.filesToUpload[number] = event;
       console.log("2:", event);
 
-    } else { // if it's not one of the formats then don't upload it
+    } else {
+      // NOTE: 3- If file format isn't valid, then clear the upload button.
 
       this.toast.showToast(`File format not Supported! (Only Images/PDF/Word)`);
 
-      switch (number) {
-        case 0: {
-          this.myUploadButton0.nativeElement.value = '';
-          break;
-        }
-        case 1: {
-          this.myUploadButton1.nativeElement.value = '';
-          break;
-        }
-        case 2: {
-          this.myUploadButton2.nativeElement.value = '';
-          break;
-        }
-        default: {
-          console.log("default");
-        }
-      }
+      this.filesToUpload[number] = 'NOT-SET';
+      this.myUploadButtons[number].nativeElement.value = '';
+
     }
 
-    console.log(`File ${number} Set:`);
-    console.log(this.filesToUpload[number]);
+    // console.log(`File ${number} Set:`);
+    // console.log(this.filesToUpload[number]);
     return;
   }
   //END: END OF SETUPLOAD!!!
-
-
-  // NOTE: Upload Files
-  uploadFiles() {
-    for (let i = 1; i <= this.filesToUpload.length; i++) {
-      this.startUploadFile(i);
-    }
-  }
-
-
-
-  // NOTE: Start Upload
-  // STARTS UPLOAD OF SAVED FILE.
-  private startUploadFile(number) {
-
-    // (cuz filesToUpload contains the events!)
-    let file = this.filesToUpload[number].target.files[0];
-    let fileName = file.name;
-
-    // name of file in cloud storage
-    const filePath = `users/${this.newTender.uid}/${this.newTender.tenderId}`;
-    const fileRef = this.storage.ref(filePath);
-
-    // start upload task
-    const task = this.storage.upload(filePath, file);
-
-    // observe percentage changes
-    this.uploadPercent = task.percentageChanges();
-
-
-    // get notified when the download URL is available
-    task.snapshotChanges().pipe(
-
-      finalize(() => { // when upload task done do this:
-        // set downloadURL observable
-        this.downloadURL = fileRef.getDownloadURL();
-
-        // then get the URL from this observable [take(1)],
-        // and call afterUserRegistered() after you get it!
-        this.downloadURL.pipe(
-          take(1),
-
-          finalize(() => {
-            this.afterUserRegistered();
-          })
-
-        ).subscribe((val) => {
-          this.newTender.attachmentURLs.push(val);
-
-          console.log(`this.newTender.licenceURL:`, this.newTender.attachmentURLs);
-        });
-      })
-
-    ).subscribe();
-  }
-
 
 
   toggleTermsCheckBoxValue() {
@@ -357,28 +388,18 @@ export class CreateTenderPage implements OnInit {
   }
 
 
+  public onSelectDate($event): any {
+    let day = this.selectedDeadline.day.value;
+    let month = this.selectedDeadline.month.value - 1;
+    let year = this.selectedDeadline.year.value;
 
-  private async afterUserRegistered() {
+    let tempDate = new Date(year, month, day, 23, 59, 59);
 
-    await this.db.setTS(this.newTenderDoc, this.newTender);
+    this.newTender.deadline = new Date(tempDate).getTime();
 
-    this.toast.showToast(`Registration Successful, Welcome!`);
-    console.log('AFTER USER REGISTERED RAN');
-
-    await this.delay(1500);
-
-    this.nav.navigateForward('/');
+    // console.log(this.selectedDeadline);
+    console.log(this.newTender.deadline);
   }
-
-  // protected onSelectNumOfAttachments($event): any {
-  //   this.newTender.numOfAttachments = Number(this.selectedNumOfAttachmentsString);
-  // }
-
-  protected onSelectDate($event): any {
-    console.log(this.selectedDeadline);
-    // this.newTender.deadline = Number(this.selectedNumOfAttachmentsString);
-  }
-
 
 
   // If error, console log and notify user
@@ -386,6 +407,20 @@ export class CreateTenderPage implements OnInit {
     console.error(error);
     this.toast.showToast(`${error}`);
   }
+
+
+  public onTestClicked(): void {
+
+    if (this.s1_validateAndFixInputs()) {
+      console.log("TENDER INPUTS ARE VALID!");
+    }
+    else {
+    }
+    // console.log("this.termsCheckBoxValue", this.termsCheckBoxValue)
+    // console.log("this.newTender.govSector", this.newTender.govSector)
+    // console.log("this.uploadData", this.uploadData);
+  }
+
 
 
 }

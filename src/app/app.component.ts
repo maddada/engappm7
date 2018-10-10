@@ -23,7 +23,7 @@ export class AppComponent {
 
     @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
 
-    myUser: any;
+    public username: string;
 
     public appPages = [
         // {
@@ -48,8 +48,8 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private storage: Storage,
-        private auth: AuthService,
         private nav: NavController,
+        public auth: AuthService,
     ) {
         this.initializeApp();
     }
@@ -62,8 +62,6 @@ export class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-
-            this.myUser = this.auth.isUserLoggedIn$.subscribe();
         });
 
     }

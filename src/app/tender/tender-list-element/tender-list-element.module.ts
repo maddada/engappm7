@@ -6,7 +6,7 @@ import { TenderListElementComponent } from './tender-list-element.component';
 @NgModule({
   imports: [
     IonicModule,
-    CommonModule
+    CommonModule,
   ],
   declarations: [
     TenderListElementComponent

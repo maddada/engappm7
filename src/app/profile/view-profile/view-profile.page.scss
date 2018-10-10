@@ -1,0 +1,21 @@
+@import "../../../theme/mixins.scss";
+@import "../../../theme/variables.scss";
+
+.flex-container {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+.comments-header {
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  margin-top: 10px;
+  width: 100%;
+}

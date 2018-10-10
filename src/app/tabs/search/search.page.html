@@ -44,8 +44,7 @@
 
   <ion-toolbar color="light">
 
-    <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
-      padding-horizontal>
+    <ion-row padding-horizontal>
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
@@ -72,12 +71,20 @@
             <ion-select-option value="category_doors">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Doors</ion-select-option>
             <ion-select-option value="category_fabric">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Fabric</ion-select-option>
             <ion-select-option value="category_cement">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Cement</ion-select-option>
+            <ion-select-option value="category_gypsum">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Gypsum Board</ion-select-option>
+            <ion-select-option value="category_decoration">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Decoration</ion-select-option>
+            <ion-select-option value="category_glass">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Glass</ion-select-option>
+            <ion-select-option value="category_aluminium">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Aluminium</ion-select-option>
+            <ion-select-option value="category_kitchens">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Kitchens</ion-select-option>
+            <ion-select-option value="category_ac">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Air Conditioning</ion-select-option>
+            <ion-select-option value="category_lighting">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Lighting</ion-select-option>
+            <ion-select-option value="category_concrete">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Concrete</ion-select-option>
 
           </ion-select>
         </ion-item>
 
-        <ion-button expand="block" mode="ios" (Click)="onClickSearch()" style="margin-left: 15px;">
-          <!-- <ion-icon name="search" mode="ios"></ion-icon>&nbsp; -->
+        <ion-button expand="block" mode="ios" (Click)="onClickSearch()">
+          <ion-icon name="search" mode="md"></ion-icon>&nbsp;
           Search
         </ion-button>
 

@@ -13,6 +13,7 @@ import { map, tap, take, switchMap, mergeMap, expand, takeWhile } from 'rxjs/ope
 
 import * as firebase from 'firebase/app';
 
+
 type CollectionPredicate<T> = string | AngularFirestoreCollection<T>;
 type DocPredicate<T> = string | AngularFirestoreDocument<T>;
 
@@ -23,9 +24,10 @@ export class FirestoreService {
   constructor(public afs: AngularFirestore) { }
 
 
-  /************************************************
-  * M7 FORK OF ANGULARFIRE.COM FIRESTORE SERVICE *
-  ************************************************/
+  /*********************************************************
+  *      M7 FORK OF ANGULARFIRE.COM FIRESTORE SERVICE      *
+  *    Last Edited: 2018-09-28: Added queryFn Example.     *
+  *********************************************************/
 
   // Note: Example of queryFn
   // db.col$('items', ref => ref.where('size', '==', 'large'))
@@ -40,7 +42,8 @@ export class FirestoreService {
   const ref: AngularFirestoreCollection<User> = this.db.collection("user");
   */
   private col<T>(ref: CollectionPredicate<T>, queryFn?): AngularFirestoreCollection<T> {
-    return typeof ref === 'string' ? this.afs.collection<T>(ref, queryFn) : ref;
+    return typeof ref === 'string' ?
+      this.afs.collection<T>(ref, queryFn) : ref;
   }
 
   /*
@@ -65,6 +68,7 @@ export class FirestoreService {
       .snapshotChanges()
       .pipe(
         map((doc: Action<DocumentSnapshotDoesNotExist | DocumentSnapshotExists<T>>) => {
+          console.log(doc.payload.data());
           return doc.payload.data() as T;
         }),
       );

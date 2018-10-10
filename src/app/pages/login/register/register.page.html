@@ -18,7 +18,7 @@
 
 
 
-<!-- FIXME: WHOLE PAGE LOOKS A BUT OFF CENTER TO THE RIGHT EXCEPT THE FOOTER!  SIMPLE CSS FIX PROBABLY -->
+<!-- FIXME: 6aaaaaaaaaf WHOLE PAGE LOOKS A BUT OFF CENTER TO THE RIGHT EXCEPT THE FOOTER!  SIMPLE CSS FIX PROBABLY -->
 
 
 
@@ -55,7 +55,7 @@
               <ion-label position="stacked">Account Type</ion-label>
 
               <ion-select placeholder="Please Select One" ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedType"
-                id="selectAccountType" interface="action-sheet" (ionChange)="onSelectType(event)" name="selectAccountType">
+                id="selectAccountType" interface="action-sheet" (ionChange)="onSelectType($event)" name="selectAccountType">
 
                 <ion-select-option value="1">Individual</ion-select-option>
                 <ion-select-option value="2">Organization / Consultant</ion-select-option>
@@ -277,7 +277,7 @@
   <div>
     <ion-label position="stacked">Company Name</ion-label>
 
-    <ion-input required type="text" placeholder="Enter company name" [(ngModel)]="newUser.companyName" name="companyName"></ion-input>
+    <ion-input required type="text" placeholder="Enter company name" [(ngModel)]="newUser.profileName" name="profileName"></ion-input>
   </div>
 
   <!-- Company Phone -->
@@ -351,11 +351,11 @@
     <!-- <div class="upload-wrapper"> -->
     <input #uploadButton type="file" (change)="setUpload($event)" name="upload" />
 
-    <div id="upload-percent">{{ uploadPercent | async }}
-      <ng-container *ngIf="uploadPercent | async">
+    <ng-container *ngIf="uploadPercent | async">
+      <div id="upload-percent">{{ uploadPercent | async }}
         %
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
 
     <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
     <ng-container *ngIf="downloadURL | async">

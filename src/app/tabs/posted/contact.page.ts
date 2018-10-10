@@ -1,71 +1,124 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
+import { Observable, of, Subject } from 'rxjs';
 import { Tender, User } from '../../../model';
 import { FirestoreService } from '../../core/firestore.service';
 import { AuthService } from '../../core/auth.service';
-import { LoadingController } from '@ionic/angular';
-import { map, delay } from 'rxjs/operators';
+import { ShowLoadingService } from '../../core/show-loading.service';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contact',
   templateUrl: 'contact.page.html',
   styleUrls: ['contact.page.scss']
 })
-export class ContactPage implements OnInit {
+export class ContactPage implements OnInit, OnDestroy {
 
-  isLoggedIn: boolean;
-  user: User | null;
-  tenders$: Observable<Tender[]>;
+  featuredTenders$: Observable<Tender[]>; // for not logged in & supplier
+  consultantTenders$: Observable<Tender[]>; // for consultant
+  contractorTenders$: Observable<Tender[]>; // for contractor
+
+  tenders$: Observable<Tender[]>; // for contractor
+  tenders: Tender[]; // for contractor
+
+  user: User;
+
+  unsubscribe$: Subject<any> = new Subject();
+  // featuredCompanies$: Observable<Tender[]>; // for indvidual
 
   constructor(
+    public auth: AuthService,
     private db: FirestoreService,
-    private auth: AuthService,
-    private loadingController: LoadingController) {
-
+    private loading: ShowLoadingService) {
   }
 
-  async ngOnInit() {
-    // await this.delay(1000);
+  ngOnInit() {
 
-    this.presentLoadingWithOptions();
+    this.loading.presentLoadingDismissAfter(500);
 
-    this.auth.user$.pipe(
-      map(u => {
-        if (this.auth.userID) {
-          this.tenders$ = this.db.col$('tenders', ref => ref.where('uid', '==', this.auth.userID));
-          this.loadingController.dismiss();
+    // NOTE: Subscribing in HTML!
+    // this.featuredTenders$ = this.db.col$('tenders', ref => ref.where('featured', '==', true));
+    // this.consultantTenders$ = this.db.col$('tenders', ref => ref.where('uid', '==', this.auth.userID));
+    // this.contractorTenders$ = this.db.col$('tenders', ref => ref.where('participants', 'array-contains', this.auth.userID));
+
+    // this.featuredTenders$ = this.db.col$('tenders');
+    // this.consultantTenders$ = this.db.col$('tenders');
+    // this.contractorTenders$ = this.db.col$('tenders');
+
+    this.auth.user$.subscribe(res =>
+      this.user = res
+    );
+
+    this.tenders$ = this.auth.user$.pipe(
+      switchMap(user => {
+        if (user != null) {
+          switch (user.accountType) {
+            case 1:
+              return this.db.col$('tenders');
+              break;
+            case 2:
+              return this.db.col$('tenders');
+              break;
+            case 3:
+              return this.db.col$('tenders');
+              break;
+            case 4:
+              return this.db.col$('tenders');
+              break;
+
+            default:
+              break;
+          }
         } else {
-          this.tenders$ = null;
-          this.loadingController.dismiss();
+          return of(null);
         }
-      }),
-      delay(1000),
-      map(d => this.loadingController.dismiss())
-    ).subscribe();
 
+      }));
+
+    this.tenders$.pipe(takeUntil(this.unsubscribe$)).subscribe(res =>
+      this.tenders = res
+    );
+
+    // this.loading.delay(700).then(() => this.loading.dismiss());
   }
 
 
-  async presentLoadingWithOptions() {
-    const loading = await this.loadingController.create({
-      // duration: 700,
-      translucent: true,
-      spinner: 'bubbles',
-      showBackdrop: true,
-      animated: true,
-      mode: 'md',
-      keyboardClose: true,
-      // message: '',
-      // cssClass: 'custom-class custom-loading'
-    });
-    return await loading.present();
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
-
-
-
-  async delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
 
 }
+
+/*
+      // NOTE: OLD HACKY WAY OF GETTING A REFERENCE TO TENDERS THE USER STARTED!
+        this.auth.user$.pipe(
+          map(u => {
+            if (this.auth.userID) {
+              this.tenders$ = this.db.col$('tenders', ref => ref.where('uid', '==', this.auth.userID));
+              this.loadingController.dismiss();
+            } else {
+              this.tenders$ = null;
+              this.loadingController.dismiss();
+            }
+          }),
+          delay(1000),
+          map(d => this.loadingController.dismiss())
+        ).subscribe();
+
+
+
+
+
+    // NOTE: Was using switchmap to get observable based on user.uid, but I went to having 2 subscriptions in the HTML..
+    // NOTE: .. 1 for the user and one for the tender. (tender's observable changes based on usertype)
+        this.tenders$ = this.auth.afAuth.authState.pipe(
+      switchMap(user => {
+            if (user) {
+              return this.db.col$('tenders', ref => ref.where('uid', '==', user.uid));
+              // this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+            } else {
+              return of(null);
+            }
+      }),
+    );
+*/

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './core/auth.guard';
-import { LoggedinGuard } from './core/loggedin.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { LoggedinGuard } from './guards/loggedin.guard';
 
 
 //NOTE: AuthGuard = Not logged in! (ex: Can't logout)
@@ -49,7 +49,8 @@ const routes: Routes = [
   },
   { path: 'wizard', loadChildren: './pages/wizard/wizard.module#WizardPageModule' },
   { path: 'view-tender/:id', loadChildren: './tender/view-tender/view-tender.module#ViewTenderPageModule' },
-  { path: 'create-proposal', loadChildren: './proposal/create-proposal/create-proposal.module#CreateProposalPageModule' },
+  { path: 'view-profile/:id', loadChildren: './profile/view-profile/view-profile.module#ViewProfilePageModule' },
+  { path: 'rate/:id', loadChildren: './profile/rate/rate.module#RatePageModule' },
 
 ];
 

@@ -15,7 +15,12 @@
 // @import "theme/main-theme.scss";
 @font-face {
   font-family: "a-jannat-lt";
-  src: url("/src/assets/fonts/a-jannat-lt.ttf") format("truetype");
+  //  Woff2: Super Modern Browsers
+  //  Woff: Pretty Modern Browsers
+  //  ttf: Safari, Android, iOS
+  src: url("./assets/fonts/a-jannat-lt.woff2") format("woff2"),
+    url("./assets/fonts/a-jannat-lt.woff") format("woff"),
+    url("./assets/fonts/a-jannat-lt.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
 }
@@ -27,8 +32,11 @@ ion-content {
 }
 
 .m7toast {
-  --ion-safe-area-bottom: 50px;
+  --ion-safe-area-bottom: 120px;
+  --background: #494949c0;
+  font-weight: bold !important;
   div {
+    color: white;
     padding: 0 auto !important;
     width: auto;
     text-align: center !important;

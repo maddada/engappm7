@@ -1,0 +1,32 @@
+{
+  "indexes": [
+    {
+      "collectionId": "tenders",
+      "state": "READY",
+      "fields": [
+        {
+          "fieldPath": "city",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "mode": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionId": "tenders",
+      "state": "READY",
+      "fields": [
+        {
+          "fieldPath": "city",
+          "mode": "ASCENDING"
+        },
+        {
+          "fieldPath": "createdAt",
+          "mode": "DESCENDING"
+        }
+      ]
+    }
+  ]
+}

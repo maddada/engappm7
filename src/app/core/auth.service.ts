@@ -15,6 +15,7 @@ import { switchMap, first, startWith, tap, filter, take, map, share } from 'rxjs
 
 import { User } from '../../model';
 import { ShowToastService } from './show-toast.service';
+import { FirestoreService } from './firestore.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +23,17 @@ import { ShowToastService } from './show-toast.service';
 export class AuthService {
 
   user$: Observable<User | null>;
+  user: User | null;
   userID: string;
 
   public isUserLoggedIn$: BehaviorSubject<boolean>;
 
   constructor(
-    private afAuth: AngularFireAuth,
+    public afAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
     private toast: ShowToastService,
+    private db: FirestoreService
   ) {
 
     this.isUserLoggedIn$ = new BehaviorSubject<boolean>(null).pipe(share()) as BehaviorSubject<boolean>;
@@ -42,30 +45,27 @@ export class AuthService {
           console.log('auth service: logged in!');
           this.isUserLoggedIn$.next(true);
           this.userID = user.uid;
-          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+          // this.user = user;
+
+          return this.db.doc$<User>(`users/${user.uid}`);
+          //Same as:
+          //return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
 
         } else {
 
           console.log('auth service: not logged in!');
           this.isUserLoggedIn$.next(false);
           this.userID = null;
+          this.user = null;
           return of(null);
 
         }
       }),
     );
 
-    this.user$.subscribe();
+    //subscribing here cuz can't add .subscribe above;
+    this.user$.subscribe(u => this.user = u);
 
-    // this.afAuth.user();
-
-    // firebase.auth().onAuthStateChanged((user) => {
-    //   if (user) {
-    //     this.isUserLoggedIn$.next(true);
-    //   } else {
-    //     this.isUserLoggedIn$.next(false);
-    //   }
-    // });
   }
 
   uid() {

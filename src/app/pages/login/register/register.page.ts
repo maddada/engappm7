@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { ShowToastService } from '../../../core/show-toast.service';
 import { NavController } from '@ionic/angular';
+import { ShowLoadingService } from '../../../core/show-loading.service';
 
 @Component({
   selector: 'app-register',
@@ -27,6 +28,7 @@ export class RegisterPage implements OnInit {
     private storage: AngularFireStorage,
     private db: FirestoreService,
     private toast: ShowToastService,
+    private loading: ShowLoadingService,
   ) {
 
   }
@@ -35,8 +37,8 @@ export class RegisterPage implements OnInit {
 
 
   public newUser: User = { accountType: -1 };
-  protected uploadPercent: Observable<number>;
-  protected downloadURL: Observable<string>;
+  public uploadPercent: Observable<any>;
+  public downloadURL: Observable<string>;
 
   private uploadData: any;
 
@@ -51,12 +53,12 @@ export class RegisterPage implements OnInit {
   // Later do this:
   // this.newUser.city = Number(this.selectedCity);
   // to convert from string to number
-  protected selectedCity: string;
-  protected selectedClass: string;
+  public selectedCity: string;
+  public selectedClass: string;
 
-  protected selectedType: string;
+  public selectedType: string;
 
-  protected selectedSector: string;
+  public selectedSector: string;
 
   showTerms: boolean;
   termsCheckBoxValue: boolean;
@@ -73,9 +75,10 @@ export class RegisterPage implements OnInit {
 
 
 
-  protected onSubmit(): void {
+  public onSubmit(): void {
 
     if (this.validateInputs()) {
+      this.loading.presentLoadingWithOptions();
       this.emailSignUp();
     }
     else {
@@ -83,7 +86,7 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  protected onTestClicked(): void {
+  public onTestClicked(): void {
 
     if (this.validateInputs()) {
       console.log("TEST REGISTRATION SUCCESSFUL!");
@@ -143,8 +146,8 @@ export class RegisterPage implements OnInit {
       case 3: {
         if (
           isNaN(this.newUser.city) ||
-          this.newUser.companyName == null ||
-          this.newUser.companyName.length === 0 ||
+          this.newUser.profileName == null ||
+          this.newUser.profileName.length === 0 ||
           this.newUser.companyNumber == null ||
           this.newUser.companyNumber.length === 0 ||
           isNaN(this.newUser.class) ||
@@ -160,8 +163,8 @@ export class RegisterPage implements OnInit {
       case 4: {
         if (
           isNaN(this.newUser.city) ||
-          this.newUser.companyName == null ||
-          this.newUser.companyName.length === 0 ||
+          this.newUser.profileName == null ||
+          this.newUser.profileName.length === 0 ||
           this.newUser.companyNumber == null ||
           this.newUser.companyNumber.length === 0 ||
           this.newUser.tags.length === 0 ||
@@ -243,34 +246,35 @@ export class RegisterPage implements OnInit {
     //NOTE: Set City Tags
     switch (this.newUser.city) {
       case 1:
-        this.newUser.tags.push('city_dxb');
+        this.newUser.tags.push('dxb');
         break;
 
       case 2:
-        this.newUser.tags.push('city_shj');
+        this.newUser.tags.push('shj');
         break;
 
       case 3:
-        this.newUser.tags.push('city_aj');
+        this.newUser.tags.push('ajman');
         break;
 
       case 4:
-        this.newUser.tags.push('city_ad');
+        this.newUser.tags.push('ad');
         break;
+
       case 5:
-        this.newUser.tags.push('city_ain');
+        this.newUser.tags.push('ain');
         break;
 
       case 6:
-        this.newUser.tags.push('city_fuj');
+        this.newUser.tags.push('fujaira');
         break;
 
       case 7:
-        this.newUser.tags.push('city_rak');
+        this.newUser.tags.push('rak');
         break;
 
       case 8:
-        this.newUser.tags.push('city_umq');
+        this.newUser.tags.push('umq');
         break;
 
       default:
@@ -280,9 +284,9 @@ export class RegisterPage implements OnInit {
 
 
 
-  // SAVES DATA OF FILE THAT WAS ADDED FOR LATER. (protected since I use it in html)
+  // SAVES DATA OF FILE THAT WAS ADDED FOR LATER. (public since I use it in html)
   // This is used in the template, dw about no reference found
-  protected setUpload(event) {
+  public setUpload(event) {
 
     this.selectedFile = event.target.files[0];
 
@@ -327,12 +331,6 @@ export class RegisterPage implements OnInit {
 
 
 
-
-
-
-
-
-
   // STARTS UPLOAD OF SAVED FILE.
   private startUpload() {
     function zerofill(i) {
@@ -364,7 +362,6 @@ export class RegisterPage implements OnInit {
 
     // get notified when the download URL is available
     task.snapshotChanges().pipe(
-
       finalize(() => { // when upload task done do this:
         // set downloadURL observable
         this.downloadURL = fileRef.getDownloadURL();
@@ -373,7 +370,6 @@ export class RegisterPage implements OnInit {
         // and call afterUserRegistered() after you get it!
         this.downloadURL.pipe(
           take(1),
-
           finalize(() => {
             this.afterUserRegistered();
           })
@@ -423,8 +419,12 @@ export class RegisterPage implements OnInit {
 
     await this.db.setTS(this.newUserDoc, this.newUser);
 
+    this.loading.dismiss();
+
     this.toast.showToast(`Registration Successful, Welcome!`);
     console.log('AFTER USER REGISTERED RAN');
+
+
 
     await this.delay(1500);
 
@@ -432,22 +432,22 @@ export class RegisterPage implements OnInit {
   }
 
 
-  protected onSelectType($event): any {
+  public onSelectType($event): any {
     this.newUser.accountType = Number(this.selectedType);
   }
 
 
 
-  protected onSelectCity($event): any {
+  public onSelectCity($event): any {
     this.newUser.city = Number(this.selectedCity);
   }
 
-  protected onSelectClass($event): any {
+  public onSelectClass($event): any {
     this.newUser.class = Number(this.selectedClass);
   }
 
 
-  protected onSelectSector($event): any {
+  public onSelectSector($event): any {
     if (this.selectedSector === "gov") {
       this.newUser.govSector = true;
     }
@@ -457,7 +457,7 @@ export class RegisterPage implements OnInit {
   }
 
 
-  protected onSelectSupplierCategory($event): any {
+  public onSelectSupplierCategory($event): any {
 
     if ($event.detail.value.length > 0) {
       this.selectedSupplierCategories = $event.detail.value;

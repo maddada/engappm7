@@ -1,18 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// import { RouterModule, RouteReuseStrategy, Routes } from '@angular/router';
 import { RouteReuseStrategy } from '@angular/router';
-
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
-
-import { TenderListElementModule } from './tender/tender-list-element/tender-list-element.module';
-import { CompanyListElementModule } from './components/company-list-element/company-list-element.module';
-// import { ProposalListElementModule } from './proposal/proposal-list-element/proposal-list-element.module';
-
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,16 +15,17 @@ import { CoreModule } from './core/core.module';
 
 // AngularFire2 Modules
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
-import { AuthService } from './core/auth.service';
-
-// import { FirestoreService } from './core/firestore.service';
-
 import { environment } from '../environments/environment';
+
+import { TenderListElementModule } from './tender/tender-list-element/tender-list-element.module';
+import { CompanyListElementModule } from './profile/company-list-element/company-list-element.module';
+import { ProfileElementModule } from './profile/profile-element/profile-element.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +33,7 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     IonicModule.forRoot({
-      mode: 'ios', // M7: This is really imp. makes top text center. and icons better looking
+      mode: 'ios', // Makes top text center. and icons better looking
       backButtonText: 'Back',
       modalEnter: 'modal-slide-in',
       modalLeave: 'modal-slide-out',
@@ -47,23 +41,28 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     CoreModule.forRoot(),
-    // AngularFireModule.initializeApp(environment.firebase, 'firestarter'),
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule.enablePersistence(),
+    // AngularFirestoreModule.enablePersistence(),
+    AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireFunctionsModule,
     TenderListElementModule,
     CompanyListElementModule,
-    // ProposalListElementModule
+    ProfileElementModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    AuthService,
-    // FirestoreService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private afs: AngularFirestore) {
+    afs.firestore.settings({
+      timestampsInSnapshots: true,
+    });
+    //afs.firestore.enablePersistence();
+  }
+}

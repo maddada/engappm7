@@ -14,20 +14,24 @@
       <ion-list>
 
         <ion-menu-toggle auto-hide="false">
+          <!-- NOTE: IF LOGGED IN THEN SHOW LOG OUT BUTTON-->
+          <ng-container *ngIf="auth?.isUserLoggedIn$ | async; else logIn">
+            <ion-item *ngIf="auth?.user" [routerLink]="['/view-profile', auth.user.uid]" routerDirection="forward">
+              <ion-icon slot="start" name="person"></ion-icon>
+              <ion-label>
+                {{auth.user.profileName}}
+              </ion-label>
+            </ion-item>
 
-          <ng-container *ngIf="auth.isUserLoggedIn$ | async; else logIn">
-            <ion-item routerDirection="forward" routerLink="/logout">
-
+            <ion-item *ngIf="auth?.user" routerDirection="forward" routerLink="/logout">
               <ion-icon slot="start" name="log-out"></ion-icon>
-
               <ion-label>
                 Log Out
               </ion-label>
-
             </ion-item>
           </ng-container>
 
-
+          <!-- NOTE: THEN SHOW THE REST OF THE ITEMS-->
           <ng-container *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
 
@@ -48,12 +52,14 @@
 
   </ion-menu>
 
+  <!-- NOTE: MAIN ROUTER OUTLET FOR THE APP-->
   <ion-router-outlet main></ion-router-outlet>
 
   <!-- </ion-split-pane> -->
 
 </ion-app>
 
+<!-- NOTE: IF NOT LOGGED IN THEN SHOW LOG IN & REGISTER BUTTONS-->
 <ng-template #logIn>
   <ion-item routerDirection="forward" routerLink="/login">
 

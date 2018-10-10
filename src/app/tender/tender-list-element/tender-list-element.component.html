@@ -1,6 +1,6 @@
-<div class="grid-container" (click)="view_tender(tender.tenderId)">
+<div class="grid-container" [class.clickable]="!extended" [class.extended]="extended" (click)="viewTender()">
 
-  <ng-container [ngSwitch]="tender.tenderCategory">
+  <ng-container [ngSwitch]="tender?.tenderCategory">
 
     <ng-container *ngSwitchCase="'tender_construction'">
       <div class="image-col-grid c1">
@@ -97,20 +97,20 @@
   <div class="details-col-grid">
 
     <div class="row-1 tender-title-row">
-      {{tender.tenderTitle}}
+      {{tender?.tenderTitle}}
     </div>
 
     <div class="row-2 company-name-row">
-      {{tender.companyName}}
+      {{tender?.profileName}}
     </div>
 
     <div class="row-3 details-row-container">
-      <div class="main-description-grid" [class.arabic]="lang === 'ar'">
-
+      <div class="main-description-grid">
+        <!-- [class.arabic]="lang === 'ar'" -->
         <ion-icon name='pin' mode="md"></ion-icon>
         <div class="detail-name-text">City</div>
         <div class="detail-data">
-          <ng-container [ngSwitch]="tender.city">
+          <ng-container [ngSwitch]="tender?.city">
 
             <ng-container *ngSwitchCase="1">
               Dubai
@@ -145,19 +145,72 @@
 
         <ion-icon name="checkmark-circle-outline" mode="md"></ion-icon>
         <div class="detail-name-text">Status</div>
-        <div class="detail-data">{{tender.TESTSTATUS}}</div>
+        <div class="detail-data">{{statusString}}</div>
 
         <ion-icon name="alarm" mode="md"></ion-icon>
         <div class="detail-name-text">Published</div>
-        <div class="detail-data">{{tender.TESTPUBLISHED}}</div>
+        <div class="detail-data">{{ publishedDate | date:'dd-MM-yyyy'}}</div>
 
         <div></div>
         <div class="detail-name-text">Deadline</div>
-        <div class="detail-data">{{tender.TESTDEADLINE}}</div>
+        <div class="detail-data">{{tender.deadline | date:'dd-MM-yyyy'}}</div>
 
       </div>
     </div>
 
   </div>
 
+</div>
+
+<div *ngIf="extended" class="extended-container">
+
+  <h5 class="title"> Details: </h5>
+
+  <div class="extended-inner-grid">
+    <ion-icon name="document" style="align-self: start"></ion-icon>
+    <div class="detail-name-text" style="align-self: start; margin-top:-2px;">Description</div>
+    <div class="detail-data" style="align-self: start;">
+      <div *ngIf="tender?.tenderSummary.length> 0; else NoSummary" [innerHTML]="tender?.tenderSummary">
+
+      </div>
+    </div>
+
+    <ng-template #NoSummary>
+      <div text-center>Not Available.</div>
+    </ng-template>
+
+    <!-- Spacing Row -->
+    <div style="height: 15px;"></div>
+    <div></div>
+    <div></div>
+
+    <ion-icon name='business' mode="md"></ion-icon>
+    <div class="detail-name-text">Sector</div>
+    <div class="detail-data sector-data">
+      <ng-container *ngIf="tender?.govSector === true; else PrivateSector">Govermental</ng-container>
+      <ng-template #PrivateSector>
+        Private
+      </ng-template>
+    </div>
+
+
+    <!-- Spacing Row -->
+    <div style="height: 15px;"></div>
+    <div></div>
+    <div></div>
+
+
+    <ion-icon name="attach" mode="md"></ion-icon>
+    <div class="detail-name-text">Attachments</div>
+    <div class="detail-data">
+      <ng-container *ngFor="let attachment of tender?.attachmentURLs; let i = index">
+        <ion-button class="attachment-button" [href]="attachment" size="small">
+          Attachment #{{i+1}}
+        </ion-button>
+
+      </ng-container>
+    </div>
+
+
+  </div>
 </div>

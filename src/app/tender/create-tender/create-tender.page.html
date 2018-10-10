@@ -33,9 +33,37 @@
           <ion-label color="primary" position="floating">
             Title*
           </ion-label>
-          <ion-input [(ngModel)]="newTender.title" type="text">
+          <ion-input text-center [(ngModel)]="newTender.tenderTitle" type="text">
           </ion-input>
         </ion-item>
+
+        <!-- NOTE: Tender Email -->
+        <ion-item>
+          <ion-label color="primary" position="floating">
+            Contact Email*
+          </ion-label>
+          <ion-input text-center [(ngModel)]="newTender.tenderContactEmail" type="text">
+          </ion-input>
+        </ion-item>
+
+        <!-- NOTE: Tender Whatsapp -->
+        <ion-item>
+          <ion-label color="primary" position="floating">
+            Contact Whatsapp*
+          </ion-label>
+          <ion-input text-center [(ngModel)]="newTender.tenderContactWhatsapp" type="text">
+          </ion-input>
+        </ion-item>
+
+        <!-- NOTE: Tender Phone/Mobile -->
+        <ion-item>
+          <ion-label color="primary" position="floating">
+            Contact Phone/Mobile (Optional)
+          </ion-label>
+          <ion-input text-center [(ngModel)]="newTender.tenderContactNumber" type="text">
+          </ion-input>
+        </ion-item>
+
 
 
 
@@ -43,7 +71,7 @@
         <ion-item padding-top>
           <ion-label color="primary" position="floating" class="label">Tender Category*</ion-label>
 
-          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedTenderCategory" interface="action-sheet">
+          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory" interface="action-sheet">
 
             <ion-select-option value="tender_construction">Construction</ion-select-option>
             <ion-select-option value="tender_steel">Steel Works</ion-select-option>
@@ -58,18 +86,6 @@
           </ion-select>
         </ion-item>
 
-
-        <!-- NOTE: Tender Summary -->
-        <ion-item padding-top>
-          <ion-label color="primary" position="floating">
-            Tender Summary
-          </ion-label>
-
-          <ion-textarea rows="6" dir="auto" [(ngModel)]="newTender.tenderSummary" type="text">
-          </ion-textarea>
-        </ion-item>
-
-
         <!-- NOTE: Deadline -->
         <ion-item padding-top>
 
@@ -83,8 +99,27 @@
         </ion-item>
 
 
-        <!-- NOTE: Participation Fee -->
+        <!-- NOTE: Tender Summary -->
         <ion-item padding-top>
+          <ion-label color="primary" position="stacked">
+            Tender Summary & Main Instructions (Optional)
+          </ion-label>
+
+          <!-- <ion-textarea placeholder="" rows="6" dir="auto" [(ngModel)]="summaryTemp">
+          </ion-textarea> -->
+
+          <textarea placeholder="Type here..." rows="6" dir="auto" [(ngModel)]="summaryTemp"></textarea>
+
+        </ion-item>
+
+
+        <!-- NOTE: Spacer  -->
+        <div padding>
+        </div>
+
+
+        <!-- NOTE: 6af Participation Fee -->
+        <!-- <ion-item padding-top>
 
           <ion-label color="primary" position="floating" class="label">Participation Fee*</ion-label>
 
@@ -93,9 +128,10 @@
         </ion-item>
 
         <p class="description-text" padding-start>Can be set to 0</p>
+        -->
 
-
-        <!-- NOTE: Bid Bond Percentage -->
+        <!-- NOTE: 6af Bid Bond Percentage  -->
+        <!--
         <ion-item padding-top>
 
           <ion-label color="primary" position="floating" class="label">Bid Bond Percentage*</ion-label>
@@ -108,15 +144,17 @@
         <p class="description-text" padding-start>Can be set to 0</p>
 
         <br>
+        -->
 
-        <!-- NOTE: Select Number Of Attachments -->
+        <!-- NOTE: Attachments Section -->
         <ion-item class="no-border-label">
 
           <ion-label style="color:rgb(3, 108, 150); font-size:1rem;">
-            Upload up to 3 attachments:
+            Upload up to 3 attachments: (optional)
           </ion-label>
 
-          <!-- <ion-select ok-text="Select"
+          <!-- 6af: Select number of attachments
+            <ion-select ok-text="Select"
              cancle-text="Cancle" [(ngModel)]="selectedNumOfAttachments" interface="action-sheet"
             (ionChange)="onSelectNumOfAttachments(event)">
 
@@ -128,48 +166,67 @@
           </ion-select> -->
 
         </ion-item>
-        <p class="description-text" padding-start>(optional)</p>
+        <p class="description-text" padding-start></p>
 
 
         <!-- NOTE: ATTACHMENT 0 -->
-        <ion-item *ngIf="newTender.numOfAttachments >= 1" padding-bottom>
+        <ion-item padding-bottom>
 
           <ion-label color="primary" position="stacked">
             Attachment #1
           </ion-label>
 
-          <input #uploadButton0 type="file" (change)="setUpload($event, 0)" name="upload1">
+          <input #uploadButton0 type="file" (change)="setUpload($event, 0)" name="upload0">
+
+          <ng-container *ngIf="uploadPercent0 | async as p">
+            <div class="upload-percent">Upload Percent: {{ p }}
+              %
+            </div>
+          </ng-container>
 
         </ion-item>
 
         <!-- NOTE: ATTACHMENT 1 -->
-        <ion-item *ngIf="newTender.numOfAttachments >= 2" padding-bottom>
+        <ion-item padding-bottom>
 
           <ion-label color="primary" position="stacked">
             Attachment #2
           </ion-label>
 
-          <input #uploadButton1 type="file" (change)="setUpload($event, 1)" name="upload2">
+          <input #uploadButton1 type="file" (change)="setUpload($event, 1)" name="upload1">
+
+          <ng-container *ngIf="uploadPercent1 | async as p ">
+            <div class="upload-percent">Upload Percent: {{ p }}
+              %
+            </div>
+          </ng-container>
 
         </ion-item>
 
         <!-- NOTE: ATTACHMENT 2 -->
-        <ion-item *ngIf="newTender.numOfAttachments >= 3" padding-bottom>
+        <ion-item padding-bottom>
 
           <ion-label color="primary" position="stacked">
             Attachment #3
           </ion-label>
 
-          <input #uploadButton2 type="file" (change)="setUpload($event, 2)" name="upload3">
+          <input #uploadButton2 type="file" (change)="setUpload($event, 2)" name="upload2">
+
+          <ng-container *ngIf="uploadPercent2 | async as p ">
+            <div class="upload-percent">Upload Percent: {{ p }}
+              %
+            </div>
+          </ng-container>
 
         </ion-item>
-
 
 
         <!-- NOTE: Spacer  -->
         <div padding>
         </div>
 
+
+        <!-- NOTE: END OF ION CONTENT -->
       </ion-col>
 
     </ion-row>
@@ -184,19 +241,24 @@
 
   <ion-toolbar color="light">
 
-    <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
-      padding-horizontal>
+    <ion-row padding-horizontal>
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
         <!-- NOTE: Create Tender Button -->
-        <ion-button expand="block" mode="ios" type="submit" (click)="onSubmit()">
-          <ion-icon name="add-circle" mode="ios"></ion-icon>&nbsp;Create Tender
+        <ion-button expand="block" mode="ios" (click)="onCreateClicked()">
+          <ion-icon name="add-circle" mode="ios" color="light"></ion-icon>&nbsp;Create Tender
         </ion-button>
 
 
-        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+        <!-- input checking test done - perfect
+          <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
           &nbsp;TEST
+        </ion-button> -->
+
+        <!-- navigation testing done - perfect
+          <ion-button expand="block" mode="ios" type="submit" href="/view-tender/P52wFEorA3ryZqwJXtw2" routerDirection="forward">
+          &nbsp;Test Navigate
         </ion-button> -->
 
       </ion-col>

@@ -1,0 +1,65 @@
+.comment-grid-container {
+  min-width: 327px;
+  background: white;
+  display: grid;
+  grid-template-areas:
+    "row1"
+    "row2"
+    "row3";
+
+  border-radius: 15px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --color: rgb(31, 31, 31);
+
+  .row1-comment-title-and-date {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    color: var(--background-color);
+    grid-area: row1;
+    height: 3rem;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    .comment-title {
+      justify-self: center;
+      align-self: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .comment-date {
+      justify-self: center;
+      align-self: flex-end;
+      font-weight: bold;
+      color: #6b6b6b;
+      font-size: 14px;
+    }
+  }
+
+  .row2-comment-text {
+    grid-area: row2;
+    height: 6rem;
+    max-height: 6rem;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-right: 10px;
+    white-space: wrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .row3-comment-rating {
+    color: var(--background-color);
+    grid-area: row3;
+    height: 2rem;
+    max-height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

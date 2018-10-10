@@ -1,0 +1,51 @@
+<div class="comment-grid-container">
+  <div class="row1-comment-title-and-date">
+
+    <div class="comment-title">
+      {{ comment?.creatorDisplayName }}
+    </div>
+
+    <div class="comment-date">
+      <ng-container *ngIf="comment.createdAt">
+        {{ publishedDate | date:'dd-MM-yyyy'}}
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="row2-comment-text">
+    {{comment?.commentStr}}
+  </div>
+
+  <div class="row3-comment-rating">
+    <span [ngSwitch]="comment?.rating">
+      <ng-container *ngSwitchCase="1">
+        <ion-icon name="star"></ion-icon>
+      </ng-container>
+      <ng-container *ngSwitchCase="2">
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+      </ng-container>
+      <ng-container *ngSwitchCase="3">
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+      </ng-container>
+      <ng-container *ngSwitchCase="4">
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+      </ng-container>
+      <ng-container *ngSwitchCase="5">
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+
+      </ng-container>
+    </span>
+  </div>
+</div>

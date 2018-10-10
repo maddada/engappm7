@@ -140,7 +140,7 @@
 // }
 
 input[type="file"] {
-  max-width: 100%;
+  // max-width: 100%;
   //   //   position: static;
   //   //   display: block;
   // transform: scale(0.8);
@@ -155,13 +155,13 @@ input[type="file"] {
 //   height: 0 !important;
 // }
 
-// #upload-percent {
-//   display: block;
-//   padding: 20px;
-//   font-size: 1.5rem;
-//   font-weight: bold;
-//   color: theme-colors("textColors", "primary");
-// }
+.upload-percent {
+  display: block;
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: theme-colors("textColors", "primary");
+}
 
 ion-label {
   font-weight: bold;
@@ -181,6 +181,12 @@ ion-textarea {
 
 .description-text {
   font-size: 0.8rem;
+}
+
+textarea {
+  width: calc(100% - 4px);
+  resize: none;
+  background: rgb(250, 250, 250);
 }
 
 // textarea {

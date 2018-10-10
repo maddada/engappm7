@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+    <ion-title *ngIf="onUser">Rate {{onUser.profileName || onUser.personName}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list padding>
+
+    <ion-item>
+      <ion-label position="stacked" size="large" color="primary">Rating*</ion-label>
+
+      <ion-select placeholder="Select..." ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedRating" interface="action-sheet"
+        (ionChange)="onSelectRating($event)">
+
+        <ion-select-option value="1">1 Star</ion-select-option>
+        <ion-select-option value="2">2 Stars</ion-select-option>
+        <ion-select-option value="3">3 Stars</ion-select-option>
+        <ion-select-option value="4">4 Stars</ion-select-option>
+        <ion-select-option value="5">5 Stars</ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+    <!-- NOTE: Tender Summary -->
+    <ion-item padding-top>
+      <ion-label color="primary" position="stacked">
+        Comment* (120 characters)
+      </ion-label>
+
+      <textarea placeholder="Type here..." rows="3" dir="auto" maxlength="120" [(ngModel)]="newComment.commentStr"></textarea>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
+
+
+<!-- NOTE: Footer -->
+<ion-footer>
+
+  <ion-toolbar color="light">
+
+    <ion-row padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <!-- NOTE: Create Tender Button -->
+        <ion-button expand="block" mode="ios" (click)="onSubmit()">
+          <ion-icon name="add-circle" mode="ios" color="light"></ion-icon>&nbsp;Submit Rating
+        </ion-button>
+
+        <!-- input checking test done - perfect
+            <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+            &nbsp;TEST
+          </ion-button> -->
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

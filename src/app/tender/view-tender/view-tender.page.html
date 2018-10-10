@@ -1,9 +1,8 @@
 <ion-header>
-
-  <ion-toolbar color="light" transparent>
+  <ion-toolbar color="light">
 
     <ion-buttons slot="start">
-      <ion-button routerLink="/" routerDirection="root">
+      <ion-button (click)="goBack()">
         <ion-icon name="arrow-round-back"></ion-icon>
         Back
       </ion-button>
@@ -15,11 +14,74 @@
 </ion-header>
 
 <ion-content padding>
+  <ng-container *ngIf="tender$ | async as tender; else NotFound">
+    <div class="flex-container">
 
-  <app-tender-list-element [tender]="currentTender" [extended]="true">
-  </app-tender-list-element>
+      <app-tender-list-element [tender]="tender" [extended]="true">
+      </app-tender-list-element>
 
-  <app-company-list-element [company]="currentCompany">
-  </app-company-list-element>
+      <ng-container *ngIf="company$ | async as company">
+        <app-company-list-element [company]="company" [extended]="true">
+        </app-company-list-element>
+      </ng-container>
 
+    </div>
+
+  </ng-container>
 </ion-content>
+
+
+<ion-footer *ngIf="(company$ | async)?.accountType === 2">
+  <ion-toolbar color="light">
+    <ion-row padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <!-- NOTE: Save Tender Button -->
+        <ion-button expand="block" mode="ios" type="submit" (click)="saveTender()">
+          <ion-icon name="add-circle" mode="ios" color="light"></ion-icon>&nbsp;Save Tender
+        </ion-button>
+
+
+        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+              &nbsp;TEST
+            </ion-button> -->
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+<ion-footer *ngIf="(company$ | async)?.accountType === 3">
+  <ion-toolbar color="light">
+    <ion-row padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <!-- NOTE: Join Tender Button -->
+        <ion-button expand="block" mode="ios" (click)="joinTender()">
+          <ion-icon name="add-circle" mode="ios" color="light"></ion-icon>&nbsp;Join Tender
+        </ion-button>
+
+
+        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+                  &nbsp;TEST
+                </ion-button> -->
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+
+<ng-template #NotFound>
+  <h2 padding text-center>{{notFoundString}}</h2>
+  <br>
+  <ion-row *ngIf="notFoundString !== ''">
+    <ion-col align-self-center size="3" size-sm="3" size-md="3" size-lg="3" size-xl="3" style="margin: 0 auto;">
+      <ion-button expand="block" mode="ios" (click)="goBack()">
+        Go Back
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ng-template>

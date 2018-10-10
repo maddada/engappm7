@@ -40,10 +40,10 @@
     "cordova-sqlite-storage": "^2.4.0",
     "core-js": "^2.5.3",
     "css-animator": "^2.3.1",
-    "firebase": "^5.4.2",
+    "firebase": "^5.5.2",
     "install": "^0.12.1",
     "rxjs": "6.2.2",
-    "zone.js": "^0.8.9"
+    "zone.js": "^0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/architect": "^0.8.3",
@@ -59,7 +59,7 @@
     "@ionic/schematics-angular": "^1.0.5",
     "@ionic/v4-migration-tslint": "^1.5.1",
     "@types/jasmine": "~2.8.6",
-    "@types/jasminewd2": "~2.0.3",
+    "@types/jasminewd2": "^2.0.4",
     "@types/node": "~10.5.2",
     "codelyzer": "~4.4.2",
     "jasmine-core": "~2.99.1",
@@ -69,6 +69,7 @@
     "karma-coverage-istanbul-reporter": "^2.0.3",
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "nl2br-pipe": "^1.1.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",

@@ -1,0 +1,244 @@
+<ng-container *ngIf="user; else NotFound">
+  <!-- NOTE: if logged in -->
+
+  <div class="profile-card">
+    <div class="profile-header">{{ user.profileName || user.personName }}</div>
+
+    <!-- NOTE: CITY -->
+    <div class="profile-subtitle">
+      <ion-icon name="pin" mode="md"></ion-icon>
+      <div class="detail-name">City:</div>
+      <span>
+        <ng-container [ngSwitch]="user.city">
+
+          <ng-container *ngSwitchCase="1">
+            Dubai
+          </ng-container>
+
+          <ng-container *ngSwitchCase="2">
+            Sharjah
+          </ng-container>
+
+          <ng-container *ngSwitchCase="3">
+            Ajman
+          </ng-container>
+
+          <ng-container *ngSwitchCase="4">
+            Abu Dhabi
+          </ng-container>
+
+          <ng-container *ngSwitchCase="6">
+            Al Fujairah
+          </ng-container>
+
+          <ng-container *ngSwitchCase="7">
+            Ras Al Khaima
+          </ng-container>
+
+          <ng-container *ngSwitchCase="8">
+            Umm Al Quwain
+          </ng-container>
+
+        </ng-container>
+      </span>
+    </div>
+
+    <!-- NOTE: NUMBER -->
+    <div class="profile-subtitle">
+      <ion-icon name="call" mode="md"></ion-icon>
+      <div class="detail-name">Number:</div>
+      <span>{{ user.companyNumber || user.personNumber }}</span>
+    </div>
+
+    <!-- NOTE: EMAIL -->
+    <div class="profile-subtitle">
+      <ion-icon name="at" mode="md"></ion-icon>
+      <div class="detail-name">Email:</div>
+      <span> {{ user.email || '-' }}</span>
+    </div>
+
+    <!-- NOTE: CLASS -->
+
+    <ng-container *ngIf="user.accountType === 2 || user.accountType === 3; else elseTemplate">
+      <div class="profile-subtitle">
+        <ion-icon name="business"></ion-icon>
+        <div class="detail-name">Class:</div>
+        <span [ngSwitch]="user.class">
+          <ng-container *ngSwitchCase="0">
+            Special Class
+          </ng-container>
+          <ng-container *ngSwitchCase="1">
+            First Class
+          </ng-container>
+          <ng-container *ngSwitchCase="2">
+            Second Class
+          </ng-container>
+          <ng-container *ngSwitchCase="3">
+            Third Class
+          </ng-container>
+          <ng-container *ngSwitchCase="4">
+            Fourth Class
+          </ng-container>
+          <ng-container *ngSwitchCase="5">
+            Fifth Class
+          </ng-container>
+          <ng-container *ngSwitchCase="6">
+            Sixth Class
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+          </ng-container>
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-template #elseTemplate>
+      <div *ngIf="user.accountType === 4">
+        <div class="supplier-subtitle">
+          <ion-icon name="business"></ion-icon>
+          <div class="detail-name">Specialities:</div>
+          <span style="display:flex; flex-direction: column;">
+            <ng-container *ngFor="let cat of user.supplierCategory; let i = index">
+              <div *ngIf="cat === 'category_paint'">
+                Paint</div>
+              <div *ngIf="cat === 'category_blocks'">
+                Blocks</div>
+              <div *ngIf="cat === 'category_ceramics'">
+                Ceramics</div>
+              <div *ngIf="cat === 'category_interlock'">
+                Interlock</div>
+              <div *ngIf="cat === 'category_wood'">
+                Wood</div>
+              <div *ngIf="cat === 'category_doors'">
+                Doors</div>
+              <div *ngIf="cat === 'category_fabric'">
+                Fabric</div>
+              <div *ngIf="cat === 'category_cement'">
+                Cement</div>
+              <div *ngIf="cat === 'category_gypsum'">
+                Gypsum Board</div>
+              <div *ngIf="cat === 'category_decoration'">
+                Decoration</div>
+              <div *ngIf="cat === 'category_glass'">
+                Glass</div>
+              <div *ngIf="cat === 'category_aluminium'">
+                Aluminium</div>
+              <div *ngIf="cat === 'category_kitchens'">
+                Kitchens</div>
+              <div *ngIf="cat === 'category_ac'">
+                Air Conditioning</div>
+              <div *ngIf="cat === 'category_lighting'">
+                Lighting</div>
+              <div *ngIf="cat === 'category_concrete'">
+                Concrete</div>
+            </ng-container>
+          </span>
+        </div>
+      </div>
+    </ng-template>
+
+    <div class="rating-row">
+      <ion-icon name="" mode="md"></ion-icon>
+      <div class="detail-name">Rating:</div>
+      <div class="r3">
+        <span [ngSwitch]="user.rating">
+          <ng-container *ngSwitchCase="1">
+            <ion-icon name="star"></ion-icon>
+          </ng-container>
+          <ng-container *ngSwitchCase="2">
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+          </ng-container>
+          <ng-container *ngSwitchCase="3">
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+          </ng-container>
+          <ng-container *ngSwitchCase="4">
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+          </ng-container>
+          <ng-container *ngSwitchCase="5">
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+
+          </ng-container>
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- NOTE: Address -->
+  <div class="profile-subtitle" *ngIf="user.address">
+    <ion-icon name="at" mode="md"></ion-icon>
+    <div class="detail-name">Address:</div>
+    <span> {{ user.address || '-' }}</span>
+  </div>
+
+
+
+
+
+  <!-- TODO: do different pages for each type!!!  -->
+  <!-- <ng-container [ngSwitch]="LATER">
+
+        <ng-container *ngSwitchCase="1">
+          <ng-container *ngTemplateOutlet="individual">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="2">
+          <ng-container *ngTemplateOutlet="consultant">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngTemplateOutlet="contractor">
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngTemplateOutlet="supplier">
+          </ng-container>
+        </ng-container>
+
+      </ng-container> -->
+
+</ng-container>
+
+
+<ng-template #individual>
+</ng-template>
+
+<ng-template #consultant>
+</ng-template>
+
+<ng-template #contractor>
+</ng-template>
+
+<ng-template #supplier>
+</ng-template>
+
+
+
+
+<ng-template #NotFound>
+  <!-- not logged in here -->
+  <ion-row justify-content-center>
+    <ion-col text-center align-items-center>
+      <h1>Login to view your profile!</h1>
+      <ion-button type="bar-button" mode="ios" text-uppercase href="/login" routerDirection="forward">
+        <ion-icon name="at" mode="md"></ion-icon>&nbsp;Log In
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+</ng-template>

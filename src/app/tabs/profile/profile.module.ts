@@ -7,6 +7,10 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProfilePage } from './profile.page';
 
+import { ProfileElementModule } from '../../profile/profile-element/profile-element.module';
+
+import { ProfileCommentModule } from '../../profile/profile-comment/profile-comment.module';
+
 const routes: Routes = [
   {
     path: '',
@@ -19,8 +23,10 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    ProfileElementModule,
+    ProfileCommentModule,
     RouterModule.forChild(routes)
   ],
   declarations: [ProfilePage]
 })
-export class ProfilePageModule {}
+export class ProfilePageModule { }

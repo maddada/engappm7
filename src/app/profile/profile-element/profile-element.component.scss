@@ -1,0 +1,122 @@
+@import "../../../theme/mixins.scss";
+
+.profile-card {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  min-width: 327px;
+  border-radius: 15px;
+  text-align: center;
+  @include for-tablet-portrait {
+    width: 100%;
+    padding: 40px;
+  }
+}
+
+.profile-header {
+  font-size: 1.2rem;
+
+  font-weight: bold;
+  @include for-tablet-portrait {
+    font-size: 1.2rem;
+  }
+}
+
+.profile-subtitle {
+  display: flex;
+  justify-content: start;
+
+  margin-top: 15px;
+  font-size: 0.95em;
+  color: #007eaf;
+
+  ion-icon {
+    align-self: center;
+    font-size: 1rem;
+  }
+
+  .detail-name {
+    font-weight: bold;
+    text-align: start;
+    font-size: 0.9rem;
+    width: 5.7rem;
+    padding-left: 10px;
+
+    @include for-tablet-portrait {
+      font-size: 1.1rem;
+      width: 7rem;
+    }
+  }
+
+  span {
+    font-weight: bold;
+    color: #2e2e2e;
+    font-size: 0.9rem;
+    padding-left: 30px;
+
+    @include for-tablet-portrait {
+      font-size: 1.1rem;
+    }
+
+    ion-icon {
+      font-size: 1.4rem;
+      align-items: end;
+    }
+  }
+}
+
+.supplier-subtitle {
+  display: flex;
+
+  margin-top: 15px;
+  font-size: 0.95em;
+  color: #007eaf;
+
+  ion-icon {
+    align-self: start;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+
+  .detail-name {
+    font-weight: bold;
+    text-align: start;
+    font-size: 0.9rem;
+    width: 5.7rem;
+    padding-left: 10px;
+
+    @include for-tablet-portrait {
+      font-size: 1.1rem;
+      width: 7rem;
+    }
+  }
+
+  span {
+    text-align: start;
+    font-weight: bold;
+    color: #2e2e2e;
+    font-size: 0.9rem;
+    padding-left: 30px;
+
+    @include for-tablet-portrait {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.rating-row {
+  .detail-name {
+    color: #007eaf;
+    font-weight: bold;
+    text-align: start;
+  }
+  span {
+    font-size: 1.5rem;
+    color: #519cb9;
+  }
+}
+
+.supplier-category {
+  color: #353535;
+}

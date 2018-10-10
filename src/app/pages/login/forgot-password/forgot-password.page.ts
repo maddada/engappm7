@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'firebase';
+import { AuthService } from '../../../core/auth.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordPage implements OnInit {
 
-  constructor() { }
+  public user: User;
+
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
   }

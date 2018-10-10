@@ -1,0 +1,76 @@
+<ion-header>
+
+  <ion-toolbar color="light" transparent>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>View Profile</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <!-- From URL /:id -->
+  <ng-container *ngIf="user$ | async as user; else NotFound">
+
+    <div class="flex-container">
+
+      <app-profile-element [user]="user">
+      </app-profile-element>
+
+      <!-- <ng-container *ngIf="(comments$ | async)?.length > 0 && showComments"> -->
+      <ng-container *ngIf="comments?.length > 0 && showComments">
+        <div class="comments-header">Comments:</div>
+
+        <div style="max-width: 325px" color="primary">
+          <!-- <ng-container *ngFor="let comment of comments$ | async; let i = index"> -->
+          <ng-container *ngFor="let comment of comments; let i = index">
+            <app-profile-comment [comment]="comment">
+            </app-profile-comment>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+
+  </ng-container>
+</ion-content>
+
+
+
+<ion-footer *ngIf="auth.user$ | async as user">
+  <ng-container *ngIf="user.uid !== id">
+    <ion-toolbar color="light">
+
+      <ion-row align-self-center padding-horizontal>
+
+        <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+          <ion-button expand="block" mode="ios" type="submit" [routerLink]="['/rate',id]" routerDirection="forward">
+            <ion-icon name="star" mode="md"></ion-icon>&nbsp;Rate Company
+          </ion-button>
+
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ng-container>
+</ion-footer>
+
+
+<ng-template #NotFound>
+
+  <h2 text-center>Company Not Found!</h2>
+  <br>
+  <ion-row>
+    <ion-col align-self-center size="3" size-sm="3" size-md="3" size-lg="3" size-xl="3" style="margin: 0 auto;">
+      <ion-button expand="block" mode="ios" (click)="goBack()">
+        Go Back
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+</ng-template>
