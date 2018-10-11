@@ -1,168 +1,78 @@
-<!--
-featuredTenders$: Observable<Tender[]>; // for not logged in & supplier
-consultantTenders$: Observable<Tender[]>; // for consultant
-contractorTenders$: Observable<Tender[]>; // for contractor
-featuredCompanies$: Observable<Tender[]>; // for indvidual
--->
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
 
-<ng-container *ngIf="user; else NotLoggedIn">
-
-  <ion-header>
-    <ion-toolbar color="light">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-
-        <ng-container [ngSwitch]="user.accountType">
-          <ng-container *ngSwitchCase="1">
-            Featured Tenders
-          </ng-container>
-          <ng-container *ngSwitchCase="2">
-            Posted Tenders
-          </ng-container>
-          <ng-container *ngSwitchCase="3">
-            Joined Tenders
-          </ng-container>
-          <ng-container *ngSwitchCase="4">
-            Featured Tenders
-          </ng-container>
-          <p *ngSwitchDefault>
-            Featured Tenders
-          </p>
+      <ng-container [ngSwitch]="user?.accountType">
+        <ng-container *ngSwitchCase="1">
+          Featured Tenders
         </ng-container>
-
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-
-    <div class="flex-container">
-
-      <!-- NOTE: Indvidual -->
-      <ng-container *ngIf="user.accountType === 1">
-        <ng-container *ngFor="let tender of tenders; let i = index">
-          <ng-container *ngIf="tenders?.length !== 0;else NoFeaturedEntries">
-
-            <div class="tender-element-container">
-              <app-tender-list-element [tender]="tender">
-              </app-tender-list-element>
-            </div>
-
-          </ng-container>
+        <ng-container *ngSwitchCase="2">
+          Posted Tenders
+        </ng-container>
+        <ng-container *ngSwitchCase="3">
+          Joined Tenders
+        </ng-container>
+        <ng-container *ngSwitchCase="4">
+          Featured Tenders
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          Featured Tenders
         </ng-container>
       </ng-container>
 
-      <!-- NOTE: Consultant -->
-      <ng-container *ngIf="user.accountType === 2">
-        <ng-container *ngFor="let tender of tenders; let i = index">
-          <ng-container *ngIf="tenders?.length !== 0;else ConsultantNoEntries">
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-            <div class="tender-element-container">
-              <app-tender-list-element [tender]="tender">
-              </app-tender-list-element>
-            </div>
+<ion-content>
 
-          </ng-container>
-        </ng-container>
+  <div class="flex-container">
+
+    <ng-container *ngFor="let tender of tenders; let i = index">
+      <ng-container *ngIf="tenders?.length !== 0;else NoFeaturedEntries">
+
+        <div class="tender-element-container">
+          <app-tender-list-element [tender]="tender">
+          </app-tender-list-element>
+        </div>
+
       </ng-container>
+    </ng-container>
 
-      <!-- NOTE: Contractor -->
-      <ng-container *ngIf="user.accountType === 3">
-        <ng-container *ngFor="let tender of tenders; let i = index">
-
-          <ng-container *ngIf="tenders?.length !== 0;else ContractorNoEntries">
-
-            <div class="tender-element-container">
-              <app-tender-list-element [tender]="tender">
-              </app-tender-list-element>
-            </div>
-
-          </ng-container>
-        </ng-container>
-      </ng-container>
-
-      <!-- NOTE: SUPPLIER -->
-      <ng-container *ngIf="user.accountType === 4">
-        <ng-container *ngFor="let tender of tenders; let i = index">
-          <ng-container *ngIf="tenders?.length !== 0;else NoFeaturedEntries">
-
-            <div class="tender-element-container">
-              <app-tender-list-element [tender]="tender">
-              </app-tender-list-element>
-            </div>
-
-          </ng-container>
-        </ng-container>
-      </ng-container>
+  </div>
+</ion-content>
 
 
-    </div>
-  </ion-content>
+<ion-footer *ngIf="user?.accountType === 2">
 
+  <ion-toolbar color="light">
 
-  <ion-footer>
+    <ion-row padding-horizontal>
 
-    <ion-toolbar color="light">
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-      <ion-row padding-horizontal>
+        <ion-button expand="block" mode="ios" href="/create-tender" routerDirection="forward">
+          <ion-icon name="add-circle" mode="ios"></ion-icon>&nbsp;Create Tender
+        </ion-button>
 
-        <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
-
-          <ion-button expand="block" mode="ios" href="/create-tender" routerDirection="forward">
-            <ion-icon name="add-circle" mode="ios"></ion-icon>&nbsp;Create Tender
-          </ion-button>
-
-          <!-- NOTE: I'M USING THIS TO CREATE FAKE TENDERS IN FIREBASE FAST!! -->
-          <!-- <ion-button expand="block" mode="ios" type="submit" (click)="createFakeTender()">
+        <!-- NOTE: I'M USING THIS TO CREATE FAKE TENDERS IN FIREBASE FAST!! -->
+        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="createFakeTender()">
           <ion-icon name="add-circle" mode="ios"></ion-icon>&nbsp;Create Fake Tender
           </ion-button> -->
 
-        </ion-col>
-      </ion-row>
-    </ion-toolbar>
-  </ion-footer>
-</ng-container>
-
-
-<ng-template #NotLoggedIn>
-  <ion-header>
-    <ion-toolbar color="light">
-      <ion-buttons slot="start">
-        <!-- <ion-back-button></ion-back-button> -->
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        Featured
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-content>
-
-    <div class="flex-container">
-
-      <ng-container *ngFor="let tender of featuredTenders$ | async; let i = index">
-        <ng-container *ngIf="(featuredTenders$)?.length !== 0;else NoFeaturedEntries">
-
-          <div class="tender-element-container">
-            <app-tender-list-element [tender]="tender">
-            </app-tender-list-element>
-          </div>
-
-        </ng-container>
-      </ng-container>
-    </div>
-  </ion-content>
-
-</ng-template>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
 
 <ng-template #NoFeaturedEntries>
   <ion-row justify-content-center>
     <ion-col text-center align-items-center>
-      <h1>You Haven't Created Any Tenders Yet!</h1>
-      <h2>Click the Button to Create One!</h2>
+      <h1>No Featured Entries to Show</h1>
+      <!-- <h2>Click the Button to Create One!</h2> -->
       <!-- <ion-button type="bar-button" mode="ios" text-uppercase href="/login" routerDirection="forward">
         <ion-icon name="at" mode="md"></ion-icon>&nbsp;Log In
       </ion-button> -->
@@ -193,3 +103,60 @@ featuredCompanies$: Observable<Tender[]>; // for indvidual
     </ion-col>
   </ion-row>
 </ng-template>
+
+<!--
+<ng-container [ngSwitch]="user?.accountType">
+
+    <ng-container *ngSwitchCase="1">
+      <ng-container *ngFor="let tender of tenders; let i = index">
+        <ng-container *ngIf="tenders?.length !== 0;else NoFeaturedEntries">
+
+          <div class="tender-element-container">
+            <app-tender-list-element [tender]="tender">
+            </app-tender-list-element>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="2">
+      <ng-container *ngFor="let tender of tenders; let i = index">
+        <ng-container *ngIf="tenders?.length !== 0;else ConsultantNoEntries">
+
+          <div class="tender-element-container">
+            <app-tender-list-element [tender]="tender">
+            </app-tender-list-element>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="3">
+      <ng-container *ngFor="let tender of tenders; let i = index">
+
+        <ng-container *ngIf="tenders?.length !== 0;else ContractorNoEntries">
+
+          <div class="tender-element-container">
+            <app-tender-list-element [tender]="tender">
+            </app-tender-list-element>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="4">
+      <ng-container *ngFor="let tender of tenders; let i = index">
+        <ng-container *ngIf="tenders?.length !== 0;else NoFeaturedEntries">
+
+          <div class="tender-element-container">
+            <app-tender-list-element [tender]="tender">
+            </app-tender-list-element>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container> -->

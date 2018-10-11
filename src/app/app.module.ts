@@ -63,6 +63,6 @@ export class AppModule {
     afs.firestore.settings({
       timestampsInSnapshots: true,
     });
-    //afs.firestore.enablePersistence();
+    afs.firestore.enablePersistence();
   }
 }

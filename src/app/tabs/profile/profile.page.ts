@@ -23,7 +23,7 @@ export class ProfilePage implements OnInit {
 
   constructor(public auth: AuthService, private loading: ShowLoadingService, private db: FirestoreService) { }
 
-  /* Another to get comments, but subscription inside sub is bad!
+  /* Another way to get comments, but subscription inside subcription is bad!
     this.auth.user$.subscribe(res => {
       if (res) {
         this.comments$ = this.db.col$<ProfileComment>(`comments`, ref => ref.where('commentOnId', '==', res.uid));
@@ -36,6 +36,7 @@ export class ProfilePage implements OnInit {
       }
     });
  */
+
   ngOnInit() {
 
     this.comments$ = this.auth.user$.pipe(

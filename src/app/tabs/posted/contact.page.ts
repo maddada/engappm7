@@ -13,9 +13,9 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 })
 export class ContactPage implements OnInit, OnDestroy {
 
-  featuredTenders$: Observable<Tender[]>; // for not logged in & supplier
-  consultantTenders$: Observable<Tender[]>; // for consultant
-  contractorTenders$: Observable<Tender[]>; // for contractor
+  // featuredTenders$: Observable<Tender[]>; // for not logged in & supplier
+  // consultantTenders$: Observable<Tender[]>; // for consultant
+  // contractorTenders$: Observable<Tender[]>; // for contractor
 
   tenders$: Observable<Tender[]>; // for contractor
   tenders: Tender[]; // for contractor
@@ -69,7 +69,7 @@ export class ContactPage implements OnInit, OnDestroy {
               break;
           }
         } else {
-          return of(null);
+          return this.db.col$('tenders');
         }
 
       }));
@@ -90,24 +90,6 @@ export class ContactPage implements OnInit, OnDestroy {
 }
 
 /*
-      // NOTE: OLD HACKY WAY OF GETTING A REFERENCE TO TENDERS THE USER STARTED!
-        this.auth.user$.pipe(
-          map(u => {
-            if (this.auth.userID) {
-              this.tenders$ = this.db.col$('tenders', ref => ref.where('uid', '==', this.auth.userID));
-              this.loadingController.dismiss();
-            } else {
-              this.tenders$ = null;
-              this.loadingController.dismiss();
-            }
-          }),
-          delay(1000),
-          map(d => this.loadingController.dismiss())
-        ).subscribe();
-
-
-
-
 
     // NOTE: Was using switchmap to get observable based on user.uid, but I went to having 2 subscriptions in the HTML..
     // NOTE: .. 1 for the user and one for the tender. (tender's observable changes based on usertype)

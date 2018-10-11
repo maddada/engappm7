@@ -42,7 +42,8 @@
     "css-animator": "^2.3.1",
     "firebase": "^5.5.2",
     "install": "^0.12.1",
-    "rxjs": "6.2.2",
+    "rxjs": "^6.3.3",
+    "rxjs-compat": "^6.3.3",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

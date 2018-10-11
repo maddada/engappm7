@@ -58,7 +58,9 @@ export class HomePage implements OnInit, OnDestroy {
       }),
       tap(res => this.tenders = res));
 
-    this.tenders$.pipe(takeUntil(this.unsubscribe$)).subscribe();
+    this.tenders$.pipe(
+      take(1)).subscribe();
+    // takeUntil(this.unsubscribe$
   }
 
   ngOnDestroy() {
@@ -75,17 +77,25 @@ export class HomePage implements OnInit, OnDestroy {
     this.selectedCityNumber = Number(this.selectedCityString);
 
     if (this.selectedCityNumber === 0) {
+      // NOTE: If all cities is selected.
       this.tenders$ = this.db.col$('tenders', ref => ref.orderBy('createdAt', 'desc'));
+      this.tenders$.pipe(take(1)).subscribe(res =>
+        this.tenders = res
+      );
     }
     else {
       // NOTE: If a specific city is selected:
-      this.tenders$ = this.db.col$('tenders', ref => ref.where('city', '==', this.selectedCityNumber).orderBy('createdAt', 'desc'));
+      let temp$: Observable<Tender[]>
+        = this.db.col$('tenders', ref => ref.where('city', '==', this.selectedCityNumber).orderBy('createdAt', 'desc'));
 
       // NOTE: If there are no tenders in that city:
-      this.tenders$.pipe(
+
+      this.tenders$ = temp$.pipe(
         take(1),
-        map(res => {
+        switchMap(res => {
           if (res.length === 0) {
+            let myLoading = this.loading.presentLoadingWithOptions();
+
             switch (this.selectedCityNumber) {
               case city.dxb:
                 this.toast.showToast('No ongoing tenders were found in Dubai');
@@ -108,18 +118,27 @@ export class HomePage implements OnInit, OnDestroy {
               case city.fujaira:
                 this.toast.showToast('No ongoing tenders tenders were found in  Fujairah');
                 break;
-
               default:
                 break;
             }
 
+            myLoading.then(() => this.loading.dismiss);
+
             this.loading.delay(200).then(xd => {
               this.selectedCityString = '0';
               this.selectedCityNumber = 0;
+              return this.db.col$('tenders', ref => ref.orderBy('createdAt', 'desc'));
             });
+          } else {
+            // NOTE: if there's tenders in selected city:
+            return this.db.col$('tenders', ref => ref.where('city', '==', this.selectedCityNumber).orderBy('createdAt', 'desc'));
           }
         })
-      ).subscribe();
+      );
+
+      this.tenders$.pipe(take(1)).subscribe(res =>
+        this.tenders = res
+      );
     }
   }
 
