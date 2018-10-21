@@ -5,6 +5,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SearchPage } from './search.page';
 import { CompanyListElementModule } from '../../profile/company-list-element/company-list-element.module';
+import { FilterModalPage } from './filter-modal/filter-modal.page';
+
 
 @NgModule({
   imports: [
@@ -14,6 +16,12 @@ import { CompanyListElementModule } from '../../profile/company-list-element/com
     CompanyListElementModule,
     RouterModule.forChild([{ path: '', component: SearchPage }])
   ],
-  declarations: [SearchPage]
+  declarations: [
+    SearchPage,
+    FilterModalPage
+  ],
+  entryComponents: [
+    FilterModalPage
+  ]
 })
 export class SearchPageModule { }

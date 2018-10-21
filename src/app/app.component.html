@@ -15,8 +15,8 @@
 
         <ion-menu-toggle auto-hide="false">
           <!-- NOTE: IF LOGGED IN THEN SHOW LOG OUT BUTTON-->
-          <ng-container *ngIf="auth?.isUserLoggedIn$ | async; else logIn">
-            <ion-item *ngIf="auth?.user" [routerLink]="['/view-profile', auth.user.uid]" routerDirection="forward">
+          <ng-container *ngIf="auth?.user$ | async as user; else logIn">
+            <ion-item *ngIf="user" [routerLink]="['/view-profile', auth.user.uid]" routerDirection="forward">
               <ion-icon slot="start" name="person"></ion-icon>
               <ion-label>
                 {{auth.user.profileName}}

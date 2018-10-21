@@ -6,7 +6,6 @@ import { IonRouterOutlet, Platform, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { AuthService } from './core/auth.service';
-// import { BehaviorSubject } from 'rxjs';
 
 // import * as firebase from 'firebase/app';
 
@@ -48,7 +47,6 @@ export class AppComponent {
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
         private storage: Storage,
-        private nav: NavController,
         public auth: AuthService,
     ) {
         this.initializeApp();
@@ -59,6 +57,7 @@ export class AppComponent {
     initializeApp() {
 
         this.checkFirstLaunch();
+
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();

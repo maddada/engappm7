@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
-
+import { MenuController, NavController, LoadingController } from '@ionic/angular';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../core/auth.service';
 import { ShowToastService } from '../../core/show-toast.service';
+import { ShowLoadingService } from '../../core/show-loading.service';
+import { M7LoadingOptions } from '../../../model';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +16,8 @@ export class LoginPage implements OnInit {
 
   @Input() data: any;
   @Input() events: any;
+
+  model: any = {};
 
 
   private isEmailValid: boolean = true;
@@ -38,18 +42,34 @@ export class LoginPage implements OnInit {
   public password: string;
 
   constructor(
-    private menuCtrl: MenuController,
-    private router: Router,
     private toast: ShowToastService,
     public auth: AuthService,
-  ) { }
+    public nav: NavController,
+    private loadingCtrl: LoadingController,
+  ) {
+  }
 
   ngOnInit() {
   }
 
-  public onLoginClick(): void {
+  // keyDownFunction(event) {
+  //   if (event.keyCode === 13) {
+  //     console.log('you just clicked enter');
+  //     this.onLoginClick();
+  //     // rest of your code
+  //   }
+  // }
+
+  public async onClickLogin() {
     if (this.validate()) {
-      this.auth.emailLogin(this.email, this.password).catch(
+
+      const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+      await showLoading.present();
+
+      this.auth.emailLogin(this.model.email, this.model.password).then(() => {
+        showLoading.dismiss();
+        this.nav.navigateBack('/');
+      }).catch(
         error =>
           this.toast.showToast('Please Check Inputs')
       );
@@ -60,11 +80,11 @@ export class LoginPage implements OnInit {
     this.isEmailValid = true;
     this.isPasswordValid = true;
 
-    if (!this.email || this.email.length === 0) {
+    if (!this.model.email || this.model.email.length === 0) {
       this.isEmailValid = false;
     }
 
-    if (!this.password || this.password.length === 0) {
+    if (!this.model.password || this.model.password.length === 0) {
       this.isPasswordValid = false;
     }
 

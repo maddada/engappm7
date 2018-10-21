@@ -6,12 +6,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { FirestoreService } from '../../../core/firestore.service';
 
-import { User } from '../../../../model';
+import { User, M7LoadingOptions } from '../../../../model';
 
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { ShowToastService } from '../../../core/show-toast.service';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { ShowLoadingService } from '../../../core/show-loading.service';
 
 @Component({
@@ -29,11 +29,10 @@ export class RegisterPage implements OnInit {
     private db: FirestoreService,
     private toast: ShowToastService,
     private loading: ShowLoadingService,
+    private loadingCtrl: LoadingController,
   ) {
 
   }
-
-
 
 
   public newUser: User = { accountType: -1 };
@@ -63,6 +62,7 @@ export class RegisterPage implements OnInit {
   showTerms: boolean;
   termsCheckBoxValue: boolean;
 
+  showLoading: any;
 
   // used to access input and clear it
   // (if file selected for upload is too big or disallowed type)
@@ -70,15 +70,14 @@ export class RegisterPage implements OnInit {
   private myUploadButton: ElementRef;
 
   ngOnInit() {
-
+    this.newUser.tags = [];
   }
 
 
 
-  public onSubmit(): void {
+  public async onSubmit() {
 
     if (this.validateInputs()) {
-      this.loading.presentLoadingWithOptions();
       this.emailSignUp();
     }
     else {
@@ -191,7 +190,10 @@ export class RegisterPage implements OnInit {
 
   //// NOTE: Email/Password Auth ////
 
-  private emailSignUp() {
+  private async emailSignUp() {
+
+    this.showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    await this.showLoading.present();
 
     this.setTags();
 
@@ -211,7 +213,9 @@ export class RegisterPage implements OnInit {
 
         return;
       })
-      .catch(error => this.handleError(error));
+      .catch(error => {
+        this.handleError(error);
+      });
   }
 
 
@@ -419,7 +423,8 @@ export class RegisterPage implements OnInit {
 
     await this.db.setTS(this.newUserDoc, this.newUser);
 
-    this.loading.dismiss();
+
+    this.showLoading.dismiss();
 
     this.toast.showToast(`Registration Successful, Welcome!`);
     console.log('AFTER USER REGISTERED RAN');
@@ -461,7 +466,7 @@ export class RegisterPage implements OnInit {
 
     if ($event.detail.value.length > 0) {
       this.selectedSupplierCategories = $event.detail.value;
-      this.newUser.tags = this.selectedSupplierCategories;
+      this.newUser.tags = [... this.selectedSupplierCategories];
     }
 
   }
@@ -481,6 +486,7 @@ export class RegisterPage implements OnInit {
 
   // If error, console log and notify user
   private handleError(error: Error) {
+    this.showLoading.dismiss();
     console.error(error);
     this.toast.showToast(`${error}`);
   }

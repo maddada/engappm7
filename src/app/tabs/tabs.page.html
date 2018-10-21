@@ -1,9 +1,11 @@
-<ion-tabs color="primary" tabbar-highlight tabbarLayout="label-hide">
+<!-- <ion-tabs color="dark" tabbar-highlight tabbarLayout="label-hide"> -->
+<ion-tabs color="secondary" tabbarLayout="label-hide" tabbarPlacement="bottom" tabbarHighlight="true">
+
   <ion-tab label="Tenders" icon="browsers" href="/tabs/(home:home)">
     <ion-router-outlet name="home"></ion-router-outlet>
   </ion-tab>
 
-  <ion-tab label="Posted" icon="bookmarks" badge="5" href="/tabs/(contact:contact)">
+  <ion-tab label="Featured" icon="bookmarks" badge="5" href="/tabs/(contact:contact)">
     <ion-router-outlet name="contact"></ion-router-outlet>
   </ion-tab>
 
@@ -14,6 +16,7 @@
   <ion-tab label="Profile" icon="person" href="/tabs/(profile:profile)">
     <ion-router-outlet name="profile"></ion-router-outlet>
   </ion-tab>
+
 </ion-tabs>
 
 <!-- OLD TABS

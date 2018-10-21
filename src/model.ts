@@ -83,8 +83,8 @@ export interface Tender {
     //NOTE:  GET THESE FROM USER
     uid?: string; // uid
     creatorEmail?: string; // Get Company Email from CreatedBy
-    profileName?: string;
-    personName?: string;
+    profileName?: string; // User or Company Name!!
+    personName?: string; // Company rep name
     personNumber?: string;
     companyNumber?: string;
     govSector?: boolean; // 1- goverment, 2- private
@@ -160,8 +160,20 @@ export interface TenderComment {
 }
 
 
+export interface SearchFilter {
+    searchString?: string;
+    city?: number;
+    tag?: string;
+}
 
-
+export class M7LoadingOptions {
+    translucent = false;
+    spinner = 'bubbles';
+    showBackdrop = true;
+    animated = true;
+    mode = 'md';
+    keyboardClose = true;
+}
 
 
 // NOTE: Proposals Collection:

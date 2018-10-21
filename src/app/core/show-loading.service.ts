@@ -12,13 +12,13 @@ export class ShowLoadingService {
 
   async presentLoadingWithOptions() {
     this.loading = await this.loadingController.create({
-      // duration: 200,
       translucent: false,
       spinner: 'bubbles',
       showBackdrop: true,
       animated: true,
       mode: 'md',
       keyboardClose: true,
+      // duration: 200,
       // message: '',
       // cssClass: 'custom-class custom-loading'
     });
@@ -43,7 +43,7 @@ export class ShowLoadingService {
   }
 
   dismiss() {
-    this.loadingController.dismiss();
+    this.loading.dismiss();
   }
 
   async delay(ms: number): Promise<any> {

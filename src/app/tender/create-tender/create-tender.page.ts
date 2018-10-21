@@ -6,12 +6,12 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { FirestoreService } from '../../core/firestore.service';
 
-import { Tender, User } from '../../../model';
+import { Tender, User, M7LoadingOptions } from '../../../model';
 
 import { Observable } from 'rxjs';
 import { finalize, take, map } from 'rxjs/operators';
 import { ShowToastService } from '../../core/show-toast.service';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
@@ -34,7 +34,7 @@ export class CreateTenderPage implements OnInit {
 
   public downloadURLs$: Observable<string>[];
 
-  public selectedDeadline: any;
+  public selectedDeadline: Date;
   public summaryTemp: any;
 
   private filesToUpload: any[] = []; //Accepted Files
@@ -57,6 +57,8 @@ export class CreateTenderPage implements OnInit {
 
   private myUploadButtons: ElementRef[];
 
+  showLoading: any;
+
   constructor(
     private nav: NavController,
     // private afAuth: AngularFireAuth,
@@ -67,6 +69,7 @@ export class CreateTenderPage implements OnInit {
     private toast: ShowToastService,
     public element: ElementRef,
     public loading: ShowLoadingService,
+    public loadingCtrl: LoadingController,
   ) {
 
   }
@@ -113,10 +116,13 @@ export class CreateTenderPage implements OnInit {
   // NOTE:
 
   // NOTE:   START POINT!!! onSubmit -> Validates then Starts Uploading the 3 Files
-  public onCreateClicked(): void {
+  public async onCreateClicked() {
 
     if (this.s1_validateAndFixInputs()) {
-      this.loading.presentLoadingWithOptions();
+
+      this.showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+      await this.showLoading.present();
+
       this.s2_startUploadFile(0);
     }
     else {
@@ -143,8 +149,6 @@ export class CreateTenderPage implements OnInit {
       this.newTender.tenderContactEmail.length === 0 ||
       this.newTender.tenderCategory == null ||
       this.newTender.deadline == null
-
-
     ) {
       console.log(this.newTender.tenderCategory);
       console.log(this.newTender.deadline);
@@ -283,7 +287,7 @@ export class CreateTenderPage implements OnInit {
     // NOTE: 2- Uploads newTender with DownloadURLs added to it.
     await this.db.setTS(`tenders/${this.newTender.tenderId}`, this.newTender);
 
-    this.loading.dismiss();
+    this.showLoading.dismiss();
 
     this.toast.showToast(`Tender Created!`);
 
@@ -389,9 +393,11 @@ export class CreateTenderPage implements OnInit {
 
 
   public onSelectDate($event): any {
-    let day = this.selectedDeadline.day.value;
-    let month = this.selectedDeadline.month.value - 1;
-    let year = this.selectedDeadline.year.value;
+
+    console.log(this.selectedDeadline);
+    let day = this.selectedDeadline.getDay();
+    let month = this.selectedDeadline.getMonth() - 1;
+    let year = this.selectedDeadline.getFullYear();
 
     let tempDate = new Date(year, month, day, 23, 59, 59);
 
@@ -404,6 +410,7 @@ export class CreateTenderPage implements OnInit {
 
   // If error, console log and notify user
   private handleError(error: Error) {
+    this.showLoading.dismiss();
     console.error(error);
     this.toast.showToast(`${error}`);
   }

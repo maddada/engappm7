@@ -16,34 +16,43 @@
 
 <ion-content padding>
   <!-- From URL /:id -->
-  <ng-container *ngIf="user$ | async as user; else NotFound">
+  <ng-container *ngIf="showProfile">
+    <ng-container *ngIf="company; else NotFound">
 
-    <div class="flex-container">
+      <div class="flex-container">
 
-      <app-profile-element [user]="user">
-      </app-profile-element>
+        <app-profile-element [user]="company">
+        </app-profile-element>
 
-      <!-- <ng-container *ngIf="(comments$ | async)?.length > 0 && showComments"> -->
-      <ng-container *ngIf="comments?.length > 0 && showComments">
-        <div class="comments-header">Comments:</div>
+        <!-- <ng-container *ngIf="(comments$ | async)?.length > 0 && showComments"> -->
+        <ng-container *ngIf="showComments">
+          <ng-container *ngIf="comments?.length > 0; else NoComments">
+            <div class="comments-header">Comments:</div>
 
-        <div style="max-width: 325px" color="primary">
-          <!-- <ng-container *ngFor="let comment of comments$ | async; let i = index"> -->
-          <ng-container *ngFor="let comment of comments; let i = index">
-            <app-profile-comment [comment]="comment">
-            </app-profile-comment>
+            <div style="max-width: 325px" color="primary">
+              <!-- <ng-container *ngFor="let comment of comments$ | async; let i = index"> -->
+              <ng-container *ngFor="let comment of comments; let i = index">
+                <app-profile-comment [comment]="comment">
+                </app-profile-comment>
+              </ng-container>
+            </div>
           </ng-container>
-        </div>
-      </ng-container>
-    </div>
+        </ng-container>
+        <ng-template #NoComments>
+          <div class="comments-header no-comments">
+            <br><br>
+            <ion-button color="dark" fill="outline" disabled>No Comments</ion-button>
+          </div>
+        </ng-template>
+      </div>
 
+    </ng-container>
   </ng-container>
 </ion-content>
 
 
-
-<ion-footer *ngIf="auth.user$ | async as user">
-  <ng-container *ngIf="user.uid !== id">
+<ion-footer *ngIf="company">
+  <ng-container *ngIf="company.iud !== id">
     <ion-toolbar color="light">
 
       <ion-row align-self-center padding-horizontal>

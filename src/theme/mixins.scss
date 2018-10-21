@@ -1,22 +1,43 @@
-
-@mixin for-phone-only { //xs
-    @media (max-width: 575px) { @content; }
+@mixin for-small-phone-only {
+  //xxs
+  @media (min-width: 1px) and(max-width: 365px) {
+    @content;
+  }
 }
 
-@mixin for-tablet-portrait { //sm
-   @media (min-width: 576px) { @content; }
+@mixin for-phone-only {
+  //xs
+  @media (min-width: 366px) and (max-width: 575px) {
+    @content;
+  }
 }
 
-@mixin for-tablet-landscape { //md
-    @media (min-width: 768px) { @content; }
+@mixin for-tablet-portrait {
+  //sm
+  @media (min-width: 576px) {
+    @content;
+  }
 }
 
-@mixin for-desktop-up { //lg
-    @media (min-width: 992px) { @content; }
+@mixin for-tablet-landscape {
+  //md
+  @media (min-width: 768px) {
+    @content;
+  }
 }
 
-@mixin for-big-desktop-up { //xl
-    @media (min-width: 1200px) { @content; }
+@mixin for-desktop-up {
+  //lg
+  @media (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin for-big-desktop-up {
+  //xl
+  @media (min-width: 1200px) {
+    @content;
+  }
 }
 /*
 example:
@@ -39,21 +60,21 @@ example:
 */
 
 @mixin no-select {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: default;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
 }
 
 @mixin allow-select {
-    -webkit-touch-callout: text;
-    -webkit-user-select: text;
-    -khtml-user-select: text;
-    -moz-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
-    cursor: default;
+  -webkit-touch-callout: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  cursor: default;
 }

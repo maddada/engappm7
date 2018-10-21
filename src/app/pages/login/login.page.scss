@@ -4,19 +4,30 @@
   font-family: "a-jannat-lt";
 }
 
-ion-content {
-  background-image: "assets/images/background/39.jpg";
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-}
-
 ion-input {
   text-align: center;
 
   &::placeholder {
     text-align: center;
   }
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  border: 2px solid #aaa;
+  border-radius: 15px;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
 }
 
 // Settings Logo

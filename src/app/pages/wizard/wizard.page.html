@@ -1,110 +1,139 @@
-<ion-slides pager="true">
+<ion-content>
+  <ion-button class="skip-button" fill="clear" color="primary" (click)="finish()">Skip</ion-button>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="true">
 
-  <!-- NOTE: STEP ONE -->
-  <ion-slide class="step-one">
-    <div class="img">
-      <ion-img src="./assets/icon/helmet.svg"></ion-img>
-    </div>
-    <h1>Welcome to Memar</h1>
-    <div class="subtitle">
-      <h3 text-center margin-horizontal padding-horizontal>
-        We strive to be the destination for<br>
-        Consultants, Contractors, and Suppliers in the UAE!<br>
-      </h3>
-    </div>
-    <ion-button size="large" fill="clear" color="dark" (click)="next()">Swipe Right!</ion-button>
+    <!-- _: First Slide -->
+    <ion-slide class="slide-first">
+      <div class="img">
+        <ion-img style="filter: initial;" src="./assets/icon/favicon.png"></ion-img>
+      </div>
+      <h1>Welcome to Memar</h1>
+      <div class="subtitle">
+        <h3>
+          We strive to be the destination for Consultants, Contractors, and Suppliers in the UAE!<br>
+          <br>
+          Our robust modern procurement system can be a great asset to your business!<br>
+        </h3>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">Swipe
+        Right!</ion-button>
 
-  </ion-slide>
+    </ion-slide>
 
-  <!-- NOTE: Why Memar -->
-  <ion-slide class="step-two">
-    <div class="img">
-      <ion-img src="./assets/icon/construction.svg"></ion-img>
-    </div>
-    <h1>Why Memar?</h1>
+    <!-- _: Why Memar -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="filter: invert(0.5) sepia(1) saturate(5) hue-rotate(155deg);" src="./assets/icon/helmet.svg"></ion-img>
+      </div>
+      <h1>Why Memar?</h1>
 
-    <div class="subtitle">
-      <h3 margin-horizontal padding-horizontal>
-        ◾ &nbsp;We allow you to bid on tenders from all over the UAE!<br>
-        ◾ &nbsp;Add your tenders and we'll get you the best prices!<br>
-        ◾ &nbsp;Recieve notifications for new tenders around you!<br>
-        ◾ &nbsp;Get all of the Tender's specs online!<br>
-        ◾ &nbsp;Search for suppliers of all specialities!<br>
-      </h3>
-    </div>
-    <ion-button size="large" fill="clear" color="dark" (click)="next()">Swipe Right!</ion-button>
-  </ion-slide>
+      <div class="subtitle">
+        <ul>
+          <li>We allow you to bid on tenders from all over the UAE!</li>
+          <li>Add your tenders and get the best prices!</li>
+          <li>Recieve notifications about new tenders!</li>
+          <li>Get all of the Tender's specs online!</li>
+          <li>Search for suppliers of all specialities!</li>
+        </ul>
+      </div>
 
-  <!-- NOTE: Benefits for Consultants -->
-  <ion-slide class="step-two">
-    <div class="img">
-      <ion-img src="./assets/icon/construction.svg"></ion-img>
-    </div>
-    <h1>Benefits for Consultants!</h1>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">Swipe
+        Right!</ion-button>
+    </ion-slide>
 
-    <div class="subtitle">
-      <h3 margin-horizontal padding-horizontal>
-        ◾ &nbsp;Get a massive amount of participants in your tenders easily!<br>
-        ◾ &nbsp;Add your tenders and we'll get you the best prices!<br>
-        ◾ &nbsp;Get rated and found by individuals that are looking for a consultant!<br>
-        ◾ &nbsp;Search for suppliers of all specialities!<br>
-      </h3>
-    </div>
-    <ion-button size="large" fill="clear" color="dark" (click)="next()">Swipe Right!</ion-button>
-  </ion-slide>
+    <!-- _: Consultants -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="padding: 5px; filter: invert(0.5) sepia(1) saturate(5) hue-rotate(60deg);" src="./assets/icon/construction.svg"></ion-img>
+      </div>
+      <h1>Benefits for Consultants!</h1>
 
-  <!-- NOTE: Benefits for Contractors -->
-  <ion-slide class="step-two">
-    <div class="img">
-      <ion-img src="./assets/icon/construction.svg"></ion-img>
-    </div>
-    <h1>Benefits for Contractors!</h1>
+      <div class="subtitle">
+        <ul>
+          <li>Advertise your tenders!</li>
+          <li>Get the best offers!</li>
+          <li>Increase your company's Discoverability!</li>
+          <li>Search for suppliers of all specialities!</li>
+        </ul>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">Swipe
+        Right!</ion-button>
+    </ion-slide>
 
-    <div class="subtitle">
-      <h3 margin-horizontal padding-horizontal>
-        ◾ &nbsp;We allow you to bid on tenders from all over the UAE!<br>
-        ◾ &nbsp;Recieve notifications for new tenders around you!<br>
-        ◾ &nbsp;Get all of the Tender's specs online!<br>
-        ◾ &nbsp;Individuals will be able to find you on our platform!<br>
-        ◾ &nbsp;Search for suppliers of all specialities!<br>
-      </h3>
-    </div>
-    <ion-button size="large" fill="clear" color="dark" (click)="next()">Swipe Right!</ion-button>
-  </ion-slide>
+    <!-- _: Contractors -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="padding: 10px; filter: invert(0.5) sepia(1) saturate(5) hue-rotate(330deg);" src="./assets/icon/walls.svg"></ion-img>
+      </div>
+      <h1>Benefits for Contractors!</h1>
 
-  <!-- NOTE: Benefits for Individuals -->
-  <ion-slide class="step-two">
-    <div class="img">
-      <ion-img src="./assets/icon/construction.svg"></ion-img>
-    </div>
-    <h1>Benefits for Individuals!</h1>
+      <div class="subtitle">
+        <ul>
+          <li>Bid on tenders from all over the UAE!</li>
+          <li>Recieve notifications for new tenders around you!</li>
+          <li>Get all of the Tender's specs online!</li>
+          <li>Increase your company's Discoverability!</li>
+          <li>Find suppliers of all specialities!</li>
+        </ul>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">Swipe
+        Right!</ion-button>
+    </ion-slide>
 
-    <div class="subtitle">
-      <h3 margin-horizontal padding-horizontal>
-        ◾ &nbsp;Find the best contractors & consultants according to community ratings!<br>
-        ◾ &nbsp;Search for suppliers of all specialities!<br>
-        ◾ &nbsp;Find out about all the important housing programs in UAE! (Coming soon)<br>
-      </h3>
-    </div>
-    <ion-button size="large" fill="clear" color="dark" (click)="next()">Swipe Right!</ion-button>
-  </ion-slide>
+    <!-- _: Suppliers -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="padding: 5px; filter: invert(0.5) sepia(1) saturate(5) hue-rotate(10deg);" src="./assets/icon/prefab.svg"></ion-img>
+      </div>
+      <h1>Benefits for Suppliers!</h1>
 
+      <div class="subtitle">
+        <ul>
+          <li>Get discoverd by potential clients!</li>
+          <li>Create an online profile!</li>
+          <li>Get comments and ratings!</li>
+          <li>Find businesses in the UAE!</li>
+        </ul>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">Swipe
+        Right!</ion-button>
+    </ion-slide>
 
-  <!-- NOTE: STEP THREE -->
-  <ion-slide class="step-three">
-    <div class="img">
-      <ion-img src="./assets/icon/maintenance.svg"></ion-img>
-    </div>
-    <h1>We're Happy to Help!</h1>
-    <div class="subtitle">
-      <h3 margin-horizontal padding-horizontal>
-        If you need to reach us: <br>
-        📞 Call as at 04-5362367<br>
-        📧 Email us at info@memar.ae<br>
-      </h3>
-    </div>
-    <ion-button size="large" fill="outline" color="dark" (click)="finish()">Let's Go!</ion-button>
+    <!-- _: Individuals -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="filter: none;" src="./assets/icon/arab1.svg"></ion-img>
+      </div>
+      <h1>Benefits for Individuals!</h1>
 
-  </ion-slide>
+      <div class="subtitle">
+        <ul>
+          <li>Find the best contractors & consultants according to community ratings!</li>
+          <li>Search for suppliers of all specialities!</li>
+          <li>Find out about all the important housing programs in UAE!<br>(Coming soon)</li>
+        </ul>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">Swipe
+        Right!</ion-button>
+    </ion-slide>
 
-</ion-slides>
+    <!-- _: Last Slide -->
+    <ion-slide class="slide-end">
+      <div class="img" style="margin-bottom: 30px;">
+        <ion-img style="padding:10px;" src="./assets/icon/maintenance.svg"></ion-img>
+      </div>
+      <h1>We're Happy to Help!</h1>
+      <div class="subtitle">
+        <h3 margin-horizontal padding-horizontal>
+          If you need to reach us: <br>
+          📞 Call as at 04-5362367<br>
+          📧 Email us at info@memar.ae<br>
+        </h3>
+      </div>
+      <ion-button class="finish-button" style="margin-bottom: 10px;" size="large" fill="outline" color="dark" (click)="finish()">Let's
+        Go!</ion-button>
+
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

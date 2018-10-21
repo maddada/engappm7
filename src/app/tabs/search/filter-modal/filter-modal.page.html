@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="light">
+
+    <ion-buttons slot="start">
+      <ion-button routerLink="/" routerDirection="root">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        Back
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title transparent>Filter</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row padding-horizontal>
+
+    <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+
+      <ion-item no-margin>
+        <ion-label position="floating" style="height: 0px;" no-padding no-margin></ion-label>
+        <ion-input type="text" placeholder="Search" [(ngModel)]="filterOptions.searchString" no-margin></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" style="height: 0px !important" no-padding no-margin></ion-label>
+
+        <ion-select ok-text="Select" [value]="0" interface="action-sheet" [(ngModel)]="selectedCityString" (ionChange)="onSelectCity($event)">
+
+          <ion-select-option value="0">All Cities</ion-select-option>
+          <ion-select-option value="1">Dubai</ion-select-option>
+          <ion-select-option value="2">Sharjah</ion-select-option>
+          <ion-select-option value="3">Ajman</ion-select-option>
+          <ion-select-option value="4">Abu Dhabi</ion-select-option>
+          <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
+          <ion-select-option value="6">Fujairah</ion-select-option>
+          <ion-select-option value="7">Ras al-Khaimah</ion-select-option>
+          <ion-select-option value="8">Umm al-Quwain</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" style="height: 0px;" no-padding no-margin></ion-label>
+
+        <ion-select placeholder="Select Category" ok-text="Select" interface="alert" [(ngModel)]="filterOptions.tag">
+
+          <ion-select-option value="company_consultant">Consultant</ion-select-option>
+          <ion-select-option value="company_contractor">Contractor</ion-select-option>
+          <ion-select-option value="company_supplier">Supplier</ion-select-option>
+          <ion-select-option value="category_paint">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Paint</ion-select-option>
+          <ion-select-option value="category_blocks">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Blocks</ion-select-option>
+          <ion-select-option value="category_ceramics">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Ceramics</ion-select-option>
+          <ion-select-option value="category_interlock">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Interlock</ion-select-option>
+          <ion-select-option value="category_wood">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Wood</ion-select-option>
+          <ion-select-option value="category_doors">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Doors</ion-select-option>
+          <ion-select-option value="category_fabric">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Fabric</ion-select-option>
+          <ion-select-option value="category_cement">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Cement</ion-select-option>
+          <ion-select-option value="category_gypsum">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Gypsum Board</ion-select-option>
+          <ion-select-option value="category_decoration">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Decoration</ion-select-option>
+          <ion-select-option value="category_glass">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Glass</ion-select-option>
+          <ion-select-option value="category_aluminium">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Aluminium</ion-select-option>
+          <ion-select-option value="category_kitchens">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Kitchens</ion-select-option>
+          <ion-select-option value="category_ac">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Air Conditioning</ion-select-option>
+          <ion-select-option value="category_lighting">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Lighting</ion-select-option>
+          <ion-select-option value="category_concrete">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; Concrete</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" mode="ios" (click)="onClickSearch()">
+        <ion-icon name="search" mode="md"></ion-icon>&nbsp;
+        Search
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+
+</ion-content>

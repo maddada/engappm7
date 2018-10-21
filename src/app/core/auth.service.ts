@@ -10,8 +10,8 @@ import {
   AngularFirestoreDocument
 } from '@angular/fire/firestore';
 
-import { Observable, of, BehaviorSubject } from 'rxjs';
-import { switchMap, first, startWith, tap, filter, take, map, share } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { switchMap, take, map, } from 'rxjs/operators';
 
 import { User } from '../../model';
 import { ShowToastService } from './show-toast.service';
@@ -26,7 +26,7 @@ export class AuthService {
   user: User | null;
   userID: string;
 
-  public isUserLoggedIn$: BehaviorSubject<boolean>;
+  // public isUserLoggedIn$: BehaviorSubject<boolean>;
 
   constructor(
     public afAuth: AngularFireAuth,
@@ -36,14 +36,12 @@ export class AuthService {
     private db: FirestoreService
   ) {
 
-    this.isUserLoggedIn$ = new BehaviorSubject<boolean>(null).pipe(share()) as BehaviorSubject<boolean>;
 
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
         if (user) {
 
           console.log('auth service: logged in!');
-          this.isUserLoggedIn$.next(true);
           this.userID = user.uid;
           // this.user = user;
 
@@ -54,7 +52,7 @@ export class AuthService {
         } else {
 
           console.log('auth service: not logged in!');
-          this.isUserLoggedIn$.next(false);
+          // this.isUserLoggedIn$.next(false);
           this.userID = null;
           this.user = null;
           return of(null);
@@ -64,7 +62,9 @@ export class AuthService {
     );
 
     //subscribing here cuz can't add .subscribe above;
-    this.user$.subscribe(u => this.user = u);
+    this.user$.subscribe(res =>
+      this.user = res
+    );
 
   }
 

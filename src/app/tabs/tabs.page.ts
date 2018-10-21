@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from '../core/auth.service';
 
@@ -9,10 +9,10 @@ import { AuthService } from '../core/auth.service';
 })
 export class TabsPage implements OnInit {
 
-  constructor(private menuCtrl: MenuController, public auth: AuthService) {
+  constructor(private menu: MenuController, public auth: AuthService) {
   }
 
   ngOnInit() {
-    this.menuCtrl.swipeEnable(true);
+
   }
 }

@@ -8,9 +8,9 @@ import {
   DocumentSnapshotDoesNotExist,
   DocumentSnapshotExists,
 } from '@angular/fire/firestore';
-import { Observable, from } from 'rxjs';
-import { map, tap, take, switchMap, mergeMap, expand, takeWhile } from 'rxjs/operators';
-
+import { Observable, } from 'rxjs';
+import { map, tap, take, } from 'rxjs/operators';
+// switchMap, mergeMap, expand, takeWhile
 import * as firebase from 'firebase/app';
 
 
@@ -73,6 +73,12 @@ export class FirestoreService {
         }),
       );
   }
+
+  // NOTE: Remember!!
+  // return this.db.doc$<User>(`users/${user.uid}`);
+  // Same as:
+  // return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+  // Both return the observable to subscribe to (either in template or in component)
 
   /*
   Ex usage:

@@ -16,7 +16,6 @@
 
   <div class="flex-container">
 
-    <!-- <ng-container *ngFor="let tender of tenders$ | async; let i = index"> -->
     <ng-container *ngFor="let tender of tenders; let i = index">
       <div class="tender-element-container">
         <app-tender-list-element [tender]="tender" [extended]="false">
@@ -25,7 +24,6 @@
     </ng-container>
 
   </div>
-  <!-- </ng-template> -->
 
 </ion-content>
 
@@ -42,46 +40,24 @@
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
         <!-- NOTE: LOGGED IN CITY SELECTOR, DEFAULTS TO USER'S CITY! -->
-        <ng-container *ngIf="auth.user$ | async as user; else NotLoggedIn">
-          <ion-item>
-            <ion-label position="floating" style="height: 0px !important" no-padding no-margin></ion-label>
+        <ion-item>
+          <ion-label position="floating" style="height: 0px !important" no-padding no-margin></ion-label>
 
-            <ion-select ok-text="Select" [value]="user.city" interface="action-sheet" [(ngModel)]="selectedCityString"
-              (ionChange)="onSelectCity($event)">
+          <ion-select ok-text="Select" [value]="0" interface="action-sheet" [(ngModel)]="selectedCityString"
+            (ionChange)="onSelectCity($event)">
 
-              <ion-select-option value="0">All Cities</ion-select-option>
-              <ion-select-option value="1">Dubai</ion-select-option>
-              <ion-select-option value="2">Sharjah</ion-select-option>
-              <ion-select-option value="3">Ajman</ion-select-option>
-              <ion-select-option value="4">Abu Dhabi</ion-select-option>
-              <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
-              <ion-select-option value="6">Fujairah</ion-select-option>
-              <ion-select-option value="7">Ras al-Khaimah</ion-select-option>
-              <ion-select-option value="8">Umm al-Quwain</ion-select-option>
+            <ion-select-option value="0">All Cities</ion-select-option>
+            <ion-select-option value="1">Dubai</ion-select-option>
+            <ion-select-option value="2">Sharjah</ion-select-option>
+            <ion-select-option value="3">Ajman</ion-select-option>
+            <ion-select-option value="4">Abu Dhabi</ion-select-option>
+            <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
+            <ion-select-option value="6">Fujairah</ion-select-option>
+            <ion-select-option value="7">Ras al-Khaimah</ion-select-option>
+            <ion-select-option value="8">Umm al-Quwain</ion-select-option>
 
-            </ion-select>
-          </ion-item>
-        </ng-container>
-
-        <ng-template #NotLoggedIn>
-          <ion-item>
-            <ion-label position="floating" style="height: 0px !important" no-padding no-margin></ion-label>
-            <!-- NOTE: NOT LOGGED IN CITY SELECTOR, DEFAULTS TO ALL CITIES (value=0)! -->
-            <ion-select ok-text="Select" value="0" interface="action-sheet" [(ngModel)]="selectedCityString"
-              (ionChange)="onSelectCity($event)">
-
-              <ion-select-option value="0">All Cities</ion-select-option>
-              <ion-select-option value="1">Dubai</ion-select-option>
-              <ion-select-option value="2">Sharjah</ion-select-option>
-              <ion-select-option value="3">Ajman</ion-select-option>
-              <ion-select-option value="4">Abu Dhabi</ion-select-option>
-              <ion-select-option value="6">Fujairah</ion-select-option>
-              <ion-select-option value="7">Ras al-Khaimah</ion-select-option>
-              <ion-select-option value="8">Umm al-Quwain</ion-select-option>
-
-            </ion-select>
-          </ion-item>
-        </ng-template>
+          </ion-select>
+        </ion-item>
 
       </ion-col>
     </ion-row>

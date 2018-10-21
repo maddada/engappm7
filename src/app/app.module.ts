@@ -32,17 +32,16 @@ import { ProfileElementModule } from './profile/profile-element/profile-element.
   entryComponents: [],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     IonicModule.forRoot({
       mode: 'ios', // Makes top text center. and icons better looking
       backButtonText: 'Back',
-      modalEnter: 'modal-slide-in',
-      modalLeave: 'modal-slide-out',
+      // modalEnter: 'modal-slide-in',
+      // modalLeave: 'modal-slide-out',
     }),
-    AppRoutingModule,
     IonicStorageModule.forRoot(),
     CoreModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
-    // AngularFirestoreModule.enablePersistence(),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
@@ -50,6 +49,7 @@ import { ProfileElementModule } from './profile/profile-element/profile-element.
     TenderListElementModule,
     CompanyListElementModule,
     ProfileElementModule,
+    // AngularFirestoreModule.enablePersistence(),
   ],
   providers: [
     StatusBar,

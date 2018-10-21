@@ -16,7 +16,7 @@
       </app-profile-element>
 
       <ng-container *ngIf="showComments">
-        <ng-container *ngIf="comments?.length > 0">
+        <ng-container *ngIf="comments?.length > 0;else NoComments">
           <div class="comments-header">
             Comments
           </div>
@@ -26,6 +26,12 @@
             </app-profile-comment>
           </ng-container>
         </ng-container>
+        <ng-template #NoComments>
+          <div class="comments-header no-comments">
+            <br><br>
+            <ion-button color="dark" fill="outline" disabled>No Comments</ion-button>
+          </div>
+        </ng-template>
       </ng-container>
     </div>
 

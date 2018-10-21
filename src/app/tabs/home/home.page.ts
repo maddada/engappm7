@@ -1,21 +1,31 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuController, NavController } from '@ionic/angular';
 import { AuthService } from '../../core/auth.service';
 import { Observable, Subject } from 'rxjs';
-import { User, Tender, city } from '../../../model';
+import { User, Tender, city, M7LoadingOptions } from '../../../model';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FirestoreService } from '../../core/firestore.service';
 import { ShowLoadingService } from '../../core/show-loading.service';
-import { map, take, switchMap, tap, takeUntil } from 'rxjs/operators';
+import { take, switchMap, tap, filter, } from 'rxjs/operators';
 import { ShowToastService } from '../../core/show-toast.service';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+
 })
-export class HomePage implements OnInit, OnDestroy {
+export class HomePage implements OnInit {
+
+  constructor(
+    public auth: AuthService,
+    private db: FirestoreService,
+    private loadingCtrl: LoadingController,
+    private toast: ShowToastService,
+  ) {
+
+  }
 
   tenders: Tender[];
   tenders$: Observable<Tender[]>;
@@ -24,64 +34,67 @@ export class HomePage implements OnInit, OnDestroy {
 
   user$: Observable<User | null>;
 
-  unsubscribe$: Subject<any> = new Subject();
-
   selectedCityString: string;
   selectedCityNumber: number;
 
-  constructor(
-    public auth: AuthService,
-    private db: FirestoreService,
-    private loading: ShowLoadingService,
-    private toast: ShowToastService,
-    private menuCtrl: MenuController,
-    private nav: NavController,
-  ) {
+  async ngOnInit() {
 
+    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    await showLoading.present();
+
+    this.selectedCityString = '0';
+    this.selectedCityNumber = 0;
+
+    this.tenders$ = this.db.col$('tenders', ref => ref.orderBy('createdAt', 'desc')).pipe(take(1));
+
+    this.tenders$.subscribe(res => {
+
+      const currentTime = new Date().getTime();
+      this.tenders = res.filter(element => {
+        // if current time is less than deadline keep it in ====> STILL NOT ENDED!
+        return (element.deadline > currentTime);
+      });
+
+      showLoading.dismiss();
+    });
   }
 
-  ngOnInit() {
-
-    this.loading.presentLoadingDismissAfter(700);
-
+  /* LATER: maybe make it show the company's city on log in
     this.tenders$ = this.auth.user$.pipe(
       switchMap(user => {
+
         if (user != null) {
           this.selectedCityString = '' + user.city;
+          this.selectedCityNumber = user.city;
 
-          return this.db.col$('tenders', ref => ref.where('city', '==', 3).orderBy('createdAt', 'desc'));
+          return this.db.col$('tenders', ref => ref.where('city', '==', user.city).orderBy('createdAt', 'desc'));
         } else {
-
           this.selectedCityString = "0";
-          return this.db.col$('tenders', ref => ref.where('city', '==', 3).orderBy('createdAt', 'desc'));
+          this.selectedCityNumber = 0;
+          return this.db.col$('tenders', ref => ref.orderBy('createdAt', 'desc'));
         }
-      }),
-      tap(res => this.tenders = res));
+      })
+    );
+  */
+  public async onSelectCity($event) {
 
-    this.tenders$.pipe(
-      take(1)).subscribe();
-    // takeUntil(this.unsubscribe$
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
-  }
-
-  //ionViewWillEnter() {} //DOESN'T WORKWELL, Only loads on first time!
-
-  public onSelectCity($event): any {
-
-    this.loading.presentLoadingDismissAfter(700);
+    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    await showLoading.present();
 
     this.selectedCityNumber = Number(this.selectedCityString);
 
     if (this.selectedCityNumber === 0) {
       // NOTE: If all cities is selected.
       this.tenders$ = this.db.col$('tenders', ref => ref.orderBy('createdAt', 'desc'));
-      this.tenders$.pipe(take(1)).subscribe(res =>
-        this.tenders = res
-      );
+      this.tenders$.pipe(take(1)).subscribe(res => {
+        const currentTime = new Date().getTime();
+        this.tenders = res.filter(element => {
+          // if current time is less than deadline keep it in ====> STILL NOT ENDED!
+          return (element.deadline > currentTime);
+        });
+
+        showLoading.dismiss();
+      });
     }
     else {
       // NOTE: If a specific city is selected:
@@ -93,8 +106,13 @@ export class HomePage implements OnInit, OnDestroy {
       this.tenders$ = temp$.pipe(
         take(1),
         switchMap(res => {
-          if (res.length === 0) {
-            let myLoading = this.loading.presentLoadingWithOptions();
+          const currentTime = new Date().getTime();
+          let res2 = res.filter(element => {
+            // if current time is less than deadline keep it in ====> STILL NOT ENDED!
+            return (element.deadline > currentTime);
+          });
+
+          if (res2.length === 0) {
 
             switch (this.selectedCityNumber) {
               case city.dxb:
@@ -122,13 +140,10 @@ export class HomePage implements OnInit, OnDestroy {
                 break;
             }
 
-            myLoading.then(() => this.loading.dismiss);
+            this.selectedCityString = '0';
+            this.selectedCityNumber = 0;
 
-            this.loading.delay(200).then(xd => {
-              this.selectedCityString = '0';
-              this.selectedCityNumber = 0;
-              return this.db.col$('tenders', ref => ref.orderBy('createdAt', 'desc'));
-            });
+            return this.db.col$('tenders', ref => ref.orderBy('createdAt', 'desc'));
           } else {
             // NOTE: if there's tenders in selected city:
             return this.db.col$('tenders', ref => ref.where('city', '==', this.selectedCityNumber).orderBy('createdAt', 'desc'));
@@ -136,10 +151,17 @@ export class HomePage implements OnInit, OnDestroy {
         })
       );
 
-      this.tenders$.pipe(take(1)).subscribe(res =>
-        this.tenders = res
-      );
+      this.tenders$.pipe(take(1)).subscribe(res => {
+        const currentTime = new Date().getTime();
+        this.tenders = res.filter(element => {
+          // if current time is less than deadline keep it in ====> STILL NOT ENDED!
+          return (element.deadline > currentTime);
+        });
+
+        showLoading.dismiss();
+      });
     }
+
   }
 
 }

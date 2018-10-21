@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ViewTenderPage } from './view-tender.page';
+import { JoinTenderModalPage } from '../join-tender-modal/join-tender-modal.page';
 
 import { CompanyListElementModule } from '../../profile/company-list-element/company-list-element.module';
 import { TenderListElementModule } from '../tender-list-element/tender-list-element.module';
@@ -25,6 +26,12 @@ const routes: Routes = [
     CompanyListElementModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ViewTenderPage]
+  declarations: [
+    JoinTenderModalPage,
+    ViewTenderPage
+  ],
+  entryComponents: [
+    JoinTenderModalPage
+  ]
 })
 export class ViewTenderPageModule { }

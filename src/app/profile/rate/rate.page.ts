@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProfileComment, User } from '../../../model';
+import { ProfileComment, User, M7LoadingOptions } from '../../../model';
 import { AuthService } from '../../core/auth.service';
 import { ShowToastService } from '../../core/show-toast.service';
 import { FirestoreService } from '../../core/firestore.service';
 import { take } from 'rxjs/operators';
 import { ShowLoadingService } from '../../core/show-loading.service';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-rate',
@@ -21,8 +21,10 @@ export class RatePage implements OnInit {
   newComment: ProfileComment;
   selectedRating: string;
 
-  constructor(private route: ActivatedRoute, public auth: AuthService, private toast: ShowToastService, private db: FirestoreService,
-    private loading: ShowLoadingService, private nav: NavController) { }
+  showLoading: any;
+
+  constructor(private route: ActivatedRoute, public auth: AuthService, private toast: ShowToastService,
+    private db: FirestoreService, private nav: NavController, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -44,7 +46,7 @@ export class RatePage implements OnInit {
     this.s1_validateAndStart();
   }
 
-  s1_validateAndStart() {
+  async s1_validateAndStart() {
     // Validate:
     if (
       this.newComment.commentStr == null ||
@@ -54,7 +56,10 @@ export class RatePage implements OnInit {
       this.toast.showToast(`A Required Field is Empty!`, '', 2000);
       return;
     } else {
-      this.loading.presentLoadingDismissAfter(1500);
+
+      this.showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+      await this.showLoading.present();
+
       this.s2_createComment();
     }
   }
@@ -81,9 +86,8 @@ export class RatePage implements OnInit {
       // rating: set by template,
     };
 
-    this.db.upsertTS(`comments/${this.newComment.createdById}_${this.newComment.commentOnId}`, this.newComment);
-
-    this.loading.delay(2500).then(() => {
+    this.db.upsertTS(`comments/${this.newComment.createdById}_${this.newComment.commentOnId}`, this.newComment).then(() => {
+      this.showLoading.dismiss();
       this.toast.showToast(`Rating Submitted for ${this.newComment.commentOnName}`);
       this.nav.goBack();
     });

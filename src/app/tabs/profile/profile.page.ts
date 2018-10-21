@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
 import { ShowLoadingService } from '../../core/show-loading.service';
-import { ProfileComment, User } from '../../../model';
+import { ProfileComment, User, M7LoadingOptions } from '../../../model';
 import { Observable, of } from 'rxjs';
 import { Profile } from 'selenium-webdriver/firefox';
 import { FirestoreService } from '../../core/firestore.service';
 import { take, switchMap } from 'rxjs/operators';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,7 @@ export class ProfilePage implements OnInit {
   public comments: ProfileComment[];
   public user: User;
 
-  constructor(public auth: AuthService, private loading: ShowLoadingService, private db: FirestoreService) { }
+  constructor(public auth: AuthService, private loadingCtrl: LoadingController, private db: FirestoreService) { }
 
   /* Another way to get comments, but subscription inside subcription is bad!
     this.auth.user$.subscribe(res => {
@@ -37,7 +38,11 @@ export class ProfilePage implements OnInit {
     });
  */
 
-  ngOnInit() {
+  async  ngOnInit() {
+
+
+    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    await showLoading.present();
 
     this.comments$ = this.auth.user$.pipe(
       switchMap(res => {
@@ -49,24 +54,16 @@ export class ProfilePage implements OnInit {
         }
       }));
 
-    this.comments$.subscribe(res => this.comments = res);
-
-
     this.auth.user$.subscribe(res => {
       this.user = res;
-    });
-
-
-    this.loading.delay(1000).then(() => {
       this.showNotLoggedIn = true;
+      showLoading.dismiss();
     });
 
-    this.loading.delay(1000).then(() => {
+    this.comments$.subscribe(res => {
+      this.comments = res;
       this.showComments = true;
     });
-
-
-
 
   }
 

@@ -9,7 +9,7 @@ export class ShowToastService {
   constructor(private toastController: ToastController) { }
 
 
-  async showToast(message: string, parameter?: string, duration: number = 3000) {
+  async showToast(message: string, parameter?: string, duration: number = 4000) {
 
     let toastOptions: any;
 

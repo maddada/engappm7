@@ -26,9 +26,9 @@
 }
 
 .grid-container {
-  &.extended {
-    @include breakpoint-scale;
-  }
+  // &.extended {
+  //   @include breakpoint-scale;
+  // }
 
   width: 90vw;
   max-width: 350px;
@@ -107,6 +107,24 @@ ion-icon {
   font-size: 0.9rem;
   font-weight: bold;
   align-self: end;
+}
+
+.detail-data-supplier {
+  font-size: 0.75rem;
+  font-weight: bold;
+  align-self: end;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.detail-data-supplier span::after {
+  content: ",";
+}
+
+.detail-data-supplier span:last-child::after {
+  content: ".";
 }
 
 .r3 {

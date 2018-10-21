@@ -13,41 +13,89 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content background-size>
   <ion-grid no-padding>
+
+    <ion-row margin-top align-self-end>
+
+      <ion-col text-center>
+        <img box-shadow [src]="logo" style="margin: 0 auto;">
+      </ion-col>
+
+    </ion-row>
 
     <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
       padding-horizontal>
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-        <ion-row margin-top align-self-end>
 
-          <ion-col text-center>
-            <img box-shadow [src]="logo" style="margin: 0 auto;">
-          </ion-col>
+        <form name="form" (ngSubmit)="f.form.valid && onClickLogin()" #f="ngForm" novalidate>
 
-        </ion-row>
+          <!-- ORIGINAL <div>
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+              required email />
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div> -->
 
-        <div margin-top>
+          <div>
+            <ion-label for="email">Email</ion-label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+              placeholder="{{emailPlaceholder}}" (keyup.enter)="onClickLogin()" autocomplete required email>
 
-          <ion-label position="stacked">{{labelEmail}}</ion-label>
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">Email is required</div>
+              <div *ngIf="email.errors.email">Email must be a valid email address</div>
+            </div>
+          </div>
 
-          <ion-input required type="text" placeholder="{{emailPlaceholder}}" [(ngModel)]="email"></ion-input>
+          <div>
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" (keyup.enter)="onClickLogin()" />
 
-          <!-- <ion-label error-field no-margin *ngIf="!isUsernameValid">{{errorUser}}</ion-label> -->
+            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+          </div>
 
-        </div>
+          <div style="display: none; visibility: hidden;">
+            <button class="btn btn-primary" type="submit">Register</button>
+          </div>
 
-        <div>
-          <ion-label position="stacked">{{labelPassword}}</ion-label>
-
-          <ion-input required type="password" placeholder="{{passwordPlaceholder}}" [(ngModel)]="password"></ion-input>
+        </form>
 
 
-          <!-- <ion-label error-field no-margin *ngIf="!isPasswordValid">{{errorPassword}}</ion-label> -->
-        </div>
+        <!-- Old ion-input crap, stopped using it because doesn't work with enter!
+          and generally doesn't play nice with angular template forms
+          User Styled input fields - much better!
+        <form [formGroup]="userForm" (submit)="onLoginClick()" (keydown)="keyDownFunction($event)" padding-right>
+          <div margin-top>
 
+            <ion-label position="stacked">{{labelEmail}}</ion-label>
+
+            <ion-input [formGroup]="userForm" formControlName="email" required type="text" placeholder="{{emailPlaceholder}}"
+              [(ngModel)]="email"></ion-input>
+
+
+          </div>
+
+          <div>
+            <ion-label position="stacked">{{labelPassword}}</ion-label>
+
+            <ion-input [formGroup]="userForm" formControlName="password" required type="password" placeholder="{{passwordPlaceholder}}"
+              [(ngModel)]="password"></ion-input>
+
+
+          </div>
+          <button [formGroup]="userForm" type="submit" style="display:none; visibility: hidden">submit</button>
+        </form> -->
       </ion-col>
 
     </ion-row>
@@ -72,7 +120,7 @@
         <ion-button text-capitalize expand="block" fill="clear" href="/forgot-password">{{forgotPassword}}</ion-button>
 
         <!---Login button-->
-        <ion-button expand="block" mode="ios" text-uppercase (click)="onLoginClick()">
+        <ion-button expand="block" mode="ios" text-uppercase (click)="onClickLogin()">
           <ion-icon name="person" mode="md"></ion-icon>&nbsp;{{login}}
         </ion-button>
         <!---google button-->

@@ -67,62 +67,79 @@
         </div>
 
         <ion-icon name="pricetags"></ion-icon>
-        <div class="detail-name-text">
-          Class
-          <!-- TODO: 1- CHANGE THIS TO SWITCH (CONS+CONTR VS SUPPLIER) -->
-          <!-- <span [ngSwitch]="">
-          <p *ngSwitchCase="true">
-
-          </p>
-          <p *ngSwitchCase="false">
-
-          </p>
-          <p *ngSwitchDefault>
-
-          </p>
-          </span> -->
-        </div>
-        <div class="detail-data">
-          <!-- TODO: 2- SWITCH HERE TOO -->
-          <!-- <span [ngSwitch]="">
-          <p *ngSwitchCase="true">
-
-          </p>
-          <p *ngSwitchCase="false">
-
-          </p>
-          <p *ngSwitchDefault>
-
-          </p>
-          </span> -->
-
-          <span [ngSwitch]="company?.class">
-            <ng-container *ngSwitchCase="0">
-              Special Class
+        <ng-container *ngIf="company?.accountType === 2 || company?.accountType === 3; else SupplierSpeciality">
+          <div class="detail-name-text">
+            Class
+          </div>
+          <div class="detail-data">
+            <span [ngSwitch]="company?.class">
+              <ng-container *ngSwitchCase="0">
+                Special Grade
+              </ng-container>
+              <ng-container *ngSwitchCase="1">
+                First Grade
+              </ng-container>
+              <ng-container *ngSwitchCase="2">
+                Second Grade
+              </ng-container>
+              <ng-container *ngSwitchCase="3">
+                Third Grade
+              </ng-container>
+              <ng-container *ngSwitchCase="4">
+                Fourth Grade
+              </ng-container>
+              <ng-container *ngSwitchCase="5">
+                Fifth Grade
+              </ng-container>
+              <ng-container *ngSwitchCase="6">
+                Sixth Grade
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+              </ng-container>
+            </span>
+          </div>
+        </ng-container>
+        <ng-template #SupplierSpeciality>
+          <div class="detail-name-text">
+            Categories
+          </div>
+          <div class="detail-data-supplier">
+            <ng-container *ngFor="let cat of company?.tags; let i = index">
+              <span *ngIf="cat === 'category_paint'">
+                Paint</span>
+              <span *ngIf="cat === 'category_blocks'">
+                Blocks</span>
+              <span *ngIf="cat === 'category_ceramics'">
+                Ceramics</span>
+              <span *ngIf="cat === 'category_interlock'">
+                Interlock</span>
+              <span *ngIf="cat === 'category_wood'">
+                Wood</span>
+              <span *ngIf="cat === 'category_doors'">
+                Doors</span>
+              <span *ngIf="cat === 'category_fabric'">
+                Fabric</span>
+              <span *ngIf="cat === 'category_cement'">
+                Cement</span>
+              <span *ngIf="cat === 'category_gypsum'">
+                Gypsum Board</span>
+              <span *ngIf="cat === 'category_decoration'">
+                Decoration</span>
+              <span *ngIf="cat === 'category_glass'">
+                Glass</span>
+              <span *ngIf="cat === 'category_aluminium'">
+                Aluminium</span>
+              <span *ngIf="cat === 'category_kitchens'">
+                Kitchens</span>
+              <span *ngIf="cat === 'category_ac'">
+                Air Conditioning</span>
+              <span *ngIf="cat === 'category_lighting'">
+                Lighting</span>
+              <span *ngIf="cat === 'category_concrete'">
+                Concrete</span>
             </ng-container>
-            <ng-container *ngSwitchCase="1">
-              First Class
-            </ng-container>
-            <ng-container *ngSwitchCase="2">
-              Second Class
-            </ng-container>
-            <ng-container *ngSwitchCase="3">
-              Third Class
-            </ng-container>
-            <ng-container *ngSwitchCase="4">
-              Fourth Class
-            </ng-container>
-            <ng-container *ngSwitchCase="5">
-              Fifth Class
-            </ng-container>
-            <ng-container *ngSwitchCase="6">
-              Sixth Class
-            </ng-container>
-            <ng-container *ngSwitchDefault>
-            </ng-container>
-          </span>
-        </div>
-
+          </div>
+        </ng-template>
       </div>
     </div>
 

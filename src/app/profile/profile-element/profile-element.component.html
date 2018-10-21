@@ -97,7 +97,7 @@
           <ion-icon name="business"></ion-icon>
           <div class="detail-name">Specialities:</div>
           <span style="display:flex; flex-direction: column;">
-            <ng-container *ngFor="let cat of user.supplierCategory; let i = index">
+            <ng-container *ngFor="let cat of user.tags; let i = index">
               <div *ngIf="cat === 'category_paint'">
                 Paint</div>
               <div *ngIf="cat === 'category_blocks'">

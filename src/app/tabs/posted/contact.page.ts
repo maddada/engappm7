@@ -1,10 +1,11 @@
 import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { Observable, of, Subject } from 'rxjs';
-import { Tender, User } from '../../../model';
+import { Tender, User, M7LoadingOptions } from '../../../model';
 import { FirestoreService } from '../../core/firestore.service';
 import { AuthService } from '../../core/auth.service';
 import { ShowLoadingService } from '../../core/show-loading.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-contact',
@@ -28,12 +29,13 @@ export class ContactPage implements OnInit, OnDestroy {
   constructor(
     public auth: AuthService,
     private db: FirestoreService,
-    private loading: ShowLoadingService) {
+    private loadingCtrl: LoadingController) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.loading.presentLoadingDismissAfter(500);
+    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    await showLoading.present();
 
     // NOTE: Subscribing in HTML!
     // this.featuredTenders$ = this.db.col$('tenders', ref => ref.where('featured', '==', true));
@@ -74,9 +76,10 @@ export class ContactPage implements OnInit, OnDestroy {
 
       }));
 
-    this.tenders$.pipe(takeUntil(this.unsubscribe$)).subscribe(res =>
-      this.tenders = res
-    );
+    this.tenders$.pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
+      this.tenders = res;
+      showLoading.dismiss();
+    });
 
     // this.loading.delay(700).then(() => this.loading.dismiss());
   }

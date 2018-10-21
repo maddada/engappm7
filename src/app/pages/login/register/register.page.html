@@ -16,13 +16,6 @@
 </ion-header>
 
 
-
-
-<!-- FIXME: 6aaaaaaaaaf WHOLE PAGE LOOKS A BUT OFF CENTER TO THE RIGHT EXCEPT THE FOOTER!  SIMPLE CSS FIX PROBABLY -->
-
-
-
-
 <ion-content>
   <ion-grid no-padding>
     <div id="m7-container">
@@ -89,10 +82,10 @@
 
 
 
-
+              <!-- _: Individual -->
               <ng-container *ngSwitchCase="1">
 
-                <ng-container *ngTemplateOutlet="city_picker"></ng-container>
+                <ng-container *ngTemplateOutlet="city_picker_normal"></ng-container>
 
                 <ng-container *ngTemplateOutlet="individual_fields"></ng-container>
 
@@ -120,16 +113,13 @@
 
 
 
-
+              <!-- _: Consultant -->
               <ng-container *ngSwitchCase="2">
 
-                <ng-container *ngTemplateOutlet="city_picker">
+                <ng-container *ngTemplateOutlet="city_picker_normal">
                 </ng-container>
 
                 <ng-container *ngTemplateOutlet="company_registration_fields">
-                </ng-container>
-
-                <ng-container *ngTemplateOutlet="organization_sector">
                 </ng-container>
 
                 <ng-container *ngTemplateOutlet="agree_to_terms">
@@ -145,7 +135,7 @@
 
 
 
-
+              <!-- _: Contractor -->
               <ng-container *ngSwitchCase="3">
 
                 <ng-container *ngTemplateOutlet="city_picker">
@@ -165,10 +155,10 @@
 
 
 
-
+              <!-- _:Supplier -->
               <ng-container *ngSwitchCase="4">
 
-                <ng-container *ngTemplateOutlet="city_picker"></ng-container>
+                <ng-container *ngTemplateOutlet="city_picker_supplier"></ng-container>
 
                 <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
 
@@ -311,10 +301,23 @@
       <ion-select placeholder="Please Select a Class" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedClass"
         (ionChange)="onSelectClass(event)" name="selectClass">
 
-        <ion-select-option value="0">Special Class</ion-select-option>
-        <ion-select-option value="1">First Class</ion-select-option>
-        <ion-select-option value="2">Second Class</ion-select-option>
-        <ion-select-option value="3">Third Class</ion-select-option>
+        <ion-select-option value="0">Special Grade</ion-select-option>
+        <ion-select-option value="1">First Grade</ion-select-option>
+        <ion-select-option value="2">Second Grade</ion-select-option>
+        <ion-select-option value="3">Third Grade</ion-select-option>
+
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="stacked">Sector</ion-label>
+
+      <ion-select placeholder="Sector" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedSector"
+        (ionChange)="onSelectSector(event)" name="selectedSector">
+
+        <ion-select-option value="gov">Govermental</ion-select-option>
+        <ion-select-option value="private">Private</ion-select-option>
 
       </ion-select>
     </ion-item>
@@ -330,13 +333,13 @@
       <ion-select placeholder="Please Select a Class" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedClass"
         (ionChange)="onSelectClass(event)" name="selectClass">
 
-        <ion-select-option value="0">Special Class</ion-select-option>
-        <ion-select-option value="1">First Class</ion-select-option>
-        <ion-select-option value="2">Second Class</ion-select-option>
-        <ion-select-option value="3">Third Class</ion-select-option>
-        <ion-select-option value="4">Fourth Class</ion-select-option>
-        <ion-select-option value="5">Fifth Class</ion-select-option>
-        <ion-select-option value="6">Sixth Class</ion-select-option>
+        <ion-select-option value="0">Special Grade</ion-select-option>
+        <ion-select-option value="1">First Grade</ion-select-option>
+        <ion-select-option value="2">Second Grade</ion-select-option>
+        <ion-select-option value="3">Third Grade</ion-select-option>
+        <ion-select-option value="4">Fourth Grade</ion-select-option>
+        <ion-select-option value="5">Fifth Grade</ion-select-option>
+        <ion-select-option value="6">Sixth Grade</ion-select-option>
 
       </ion-select>
     </ion-item>
@@ -344,30 +347,22 @@
   </div>
 
   <!-- upload company license -->
-  <div>
+  <div padding-top>
 
     <ion-label position="stacked">Company Licence Copy</ion-label>
 
     <!-- <div class="upload-wrapper"> -->
     <input #uploadButton type="file" (change)="setUpload($event)" name="upload" />
 
-    <ng-container *ngIf="uploadPercent | async">
-      <div id="upload-percent">{{ uploadPercent | async }}
+    <ng-container *ngIf="uploadPercent | async as p">
+      <div id="upload-percent">Upload Percent: {{ p }}
         %
       </div>
     </ng-container>
 
     <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
     <ng-container *ngIf="downloadURL | async">
-      <img id="upload-image" style="
-      display: block;
-      text-align: center ;
-      margin: 0 auto;
-      border: 0 3px 15px rgba(0, 0, 0, 0.2);
-      border-style: solid;
-      width: 80% !important;
-      height: auto;"
-        [src]="downloadURL | async">
+      <img id="upload-image" [src]="downloadURL | async">
     </ng-container>
     <!-- </div> -->
 
@@ -389,7 +384,7 @@
 
 
 
-<ng-template #city_picker>
+<ng-template #city_picker_supplier>
 
   <ion-item>
     <ion-label position="stacked">City</ion-label>
@@ -402,6 +397,28 @@
       <ion-select-option value="3">Ajman</ion-select-option>
       <ion-select-option value="4">Abu Dhabi</ion-select-option>
       <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
+      <ion-select-option value="6">Fujairah</ion-select-option>
+      <ion-select-option value="7">Ras al-Khaimah</ion-select-option>
+      <ion-select-option value="8">Umm al-Quwain</ion-select-option>
+
+    </ion-select>
+  </ion-item>
+
+</ng-template>
+
+
+<ng-template #city_picker_normal>
+
+  <ion-item>
+    <ion-label position="stacked">City of license</ion-label>
+
+    <ion-select placeholder="Please Select a City" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedCity"
+      (ionChange)="onSelectCity(event)" name="selectCity">
+
+      <ion-select-option value="1">Dubai</ion-select-option>
+      <ion-select-option value="2">Sharjah</ion-select-option>
+      <ion-select-option value="3">Ajman</ion-select-option>
+      <ion-select-option value="4">Abu Dhabi</ion-select-option>
       <ion-select-option value="6">Fujairah</ion-select-option>
       <ion-select-option value="7">Ras al-Khaimah</ion-select-option>
       <ion-select-option value="8">Umm al-Quwain</ion-select-option>
@@ -430,7 +447,7 @@
   <div padding-top>
     <ion-label position="stacked" class="label">Name (First and Last)</ion-label>
 
-    <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.personName" class="form-control"
+    <ion-input required type="text" placeholder="Enter your name" [(ngModel)]="newUser.profileName" class="form-control"
       id="name" name="name" #name="ngModel"></ion-input>
     <!-- <input type="text" placeholder="Enter your name" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
   </div>
@@ -465,35 +482,16 @@
 
 
 
-<ng-template #organization_sector>
-
-  <ion-item>
-    <ion-label position="stacked">Sector</ion-label>
-
-    <ion-select placeholder="Sector" ok-text="Select" interface="action-sheet" [(ngModel)]="selectedSector" (ionChange)="onSelectSector(event)"
-      name="selectedSector">
-
-      <ion-select-option value="gov">Govermental</ion-select-option>
-      <ion-select-option value="private">Private</ion-select-option>
-
-    </ion-select>
-  </ion-item>
-
-</ng-template>
-
-
-
-
 
 
 
 <ng-template #supplier_fields>
-
+  <br>
   <ion-item padding-bottom>
-    <ion-label position="stacked">Select Speciality*</ion-label>
+    <ion-label position="stacked">Select Specialities*</ion-label>
 
-    <ion-select placeholder="Please Select Your Specialities" multiple="true" ok-text="Select" interface="alert"
-      (ionChange)="onSelectSupplierCategory($event)" name="selectSupplierCategory">
+    <ion-select placeholder="Multiple Selection" multiple="true" ok-text="Select" interface="alert" (ionChange)="onSelectSupplierCategory($event)"
+      name="selectSupplierCategory">
 
       <ion-select-option value="category_paint">Paint</ion-select-option>
       <ion-select-option value="category_blocks">Blocks</ion-select-option>
@@ -534,13 +532,13 @@
 
 <ng-template #agree_to_terms>
 
-
+  <br>
   <ion-list style="background: transparent" padding-top>
     <ion-item>
-      <ion-label>
-        I agree with the terms and conditions. &nbsp;&nbsp;
+      <ion-label position="stacked" style="font-size: 1.05rem !important">
+        I agree with the terms & conditions
       </ion-label>
-      <ion-checkbox style="padding-left: 5px;" [(ngModel)]="termsCheckBoxValue" color="primary"></ion-checkbox>
+      <ion-checkbox style="padding-left: 5px; justify-content: flex-end;" [(ngModel)]="termsCheckBoxValue" color="primary"></ion-checkbox>
     </ion-item>
     <ion-row justify-content-center>
       <ion-col>

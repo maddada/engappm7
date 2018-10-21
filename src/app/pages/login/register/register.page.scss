@@ -171,3 +171,13 @@ input[type="file"] {
   font-weight: bold;
   color: theme-colors("textColors", "primary");
 }
+
+#upload-image {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  border: 0 3px 15px rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  width: 80% !important;
+  height: auto;
+}

@@ -25,11 +25,35 @@
   font-style: normal;
 }
 
+// .flex-container {
+//   // background: white url("./assets/images/background/electro1.jpg") no-repeat top    center fixed;
+//   // background-color
+//   // --background: url("./assets/images/background/electro1.jpg") no-repeat 100% 100% !important;
+//   background: none;
+//   background-image: url("./assets/images/background/electro1.jpg") !important;
+//   background-position: center !important;
+//   background-size: cover !important;
+//   background-repeat: no-repeat !important;
+//   background-origin: initial !important;
+//   background-clip: initial !important;
+//   background-attachment: fixed !important;
+// }
+
+// .inner-scroll,
 ion-content {
-  background: url("assets/images/background/electro1.jpg") no-repeat top center
-    fixed;
-  background-size: cover;
+  // --background: url("./assets/images/background/electro1.jpg") no-repeat 100%
+  //   100% !important;
+  --background: url("./assets/images/background/yak.jpg") right center/100% 100%
+    no-repeat fixed;
+  // background-size: 1% 1% !important;
+  // background-position: bottom right;
+  // background-attachment: fixed;
+  // background-size: ;
 }
+
+// ion-col {
+//   --background: #00000000;
+// }
 
 .m7toast {
   --ion-safe-area-bottom: 120px;

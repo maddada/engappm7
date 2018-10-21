@@ -1,83 +1,183 @@
+@import "../../../theme/mixins.scss";
+
+ion-content {
+  position: relative !important;
+}
+
 ion-slides {
   width: 100%;
-  background: url("../../../assets/images/background/electro2.jpg") no-repeat
-    top center fixed;
-  background-size: cover;
+  background: url("/src/assets/images/background/yak.jpg") right center/100%
+    100% no-repeat fixed;
 }
 
 ion-slide {
+  position: relative !important;
   height: 100vh !important;
-  flex-direction: column;
-  text-align: start;
-  justify-content: start;
+  display: grid;
+  justify-content: flex-start;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(minmax(50px, auto), 3);
+  align-items: flex-start;
+  align-content: flex-start;
+
+  & > * {
+    width: 100%;
+  }
 }
 
 h1 {
+  // for phone:
   font-weight: bold;
+
+  // for tablet and above:
+  @include for-small-phone-only {
+    font-size: 1.2em;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+  @include for-phone-only {
+    font-size: 1.4em;
+    margin-top: 40px;
+    margin-bottom: 15px;
+  }
+
+  @include for-tablet-portrait {
+    font-size: 1.6em;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 }
 
 div.img {
-  margin-top: 50px;
-  height: 200px;
-  max-height: 30vh;
-  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  @include for-small-phone-only {
+    padding-top: 20px;
+  }
+
+  @include for-phone-only {
+    padding-top: 30px;
+  }
+
+  @include for-tablet-portrait {
+    padding-top: 40px;
+  }
 }
 
+// General Image Settings for all slides:
+ion-img {
+  overflow: hidden;
+  height: 100px;
+  width: auto;
+  @include for-phone-only {
+    // width: 60vw;
+    // max-width: 120px;
+  }
+
+  @include for-small-phone-only {
+    // width: 60vw;
+    // max-width: 80px;
+  }
+
+  @include for-tablet-portrait {
+    // width: 60vw;
+    // max-width: 150px;
+  }
+}
+
+.slide-first {
+  color: #000000;
+}
+
+.benefits-slide {
+  color: #000000;
+}
+
+.slide-end {
+  color: #000000;
+}
+
+// List under each benifits page
 .subtitle {
-  height: 300px;
-  max-height: 30vh;
+  height: auto;
   display: flex;
-  align-items: center;
+  justify-content: center;
+
+  @include for-tablet-portrait {
+    width: 500px;
+  }
 
   h3 {
+    margin-top: 40px;
+    color: rgb(73, 73, 73);
     font-weight: bold;
-    font-size: 1.2rem;
-    display: block;
+
+    // for phones:
+    width: 70vw;
+    font-size: 1.15rem;
+
+    @include for-tablet-portrait {
+      margin-top: 100px;
+      width: 80vw;
+      max-width: 500px;
+      font-size: 1.7rem;
+    }
+  }
+
+  ul {
+    font-size: 1.6rem;
+    width: 80%;
+    @include for-small-phone-only {
+      font-size: 0.98rem;
+    }
+
+    @include for-phone-only {
+      font-size: 1.12rem;
+    }
+
+    @include for-tablet-portrait {
+      font-size: 1.3rem;
+    }
+  }
+
+  li {
+    text-align: start;
+    color: rgb(73, 73, 73);
+    font-weight: bold;
   }
 }
 
-ion-button {
-  margin-top: 20px;
-  justify-self: end;
-}
-
-.step-one {
-  // background: url("../../../assets/images/background/39.jpg") no-repeat top
-  //   center fixed;
-  // background-size: cover;
-  color: #000000;
-
+.slide-first {
   ion-img {
-    height: 70%;
-    max-width: 200px;
-    overflow: hidden;
-    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(175deg);
+    margin-bottom: 20px;
+    height: 140px !important;
+    width: auto;
   }
 }
 
-.step-two {
-  // background: url("../../../assets/images/background/31.jpg") no-repeat top center fixed;
-  // background-size: cover;
-  color: #000000;
-
-  ion-img {
-    height: 70%;
-    max-width: 200px;
-    overflow: hidden;
-    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(10deg);
-  }
+// Fixed bottom of page button:
+.finish-button {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 100px;
+  width: 100%;
 }
 
-.step-three {
-  // background: url("../../../assets/images/background/electro1.jpg") no-repeat
-  //   top center fixed;
-  // background-size: cover;
-  color: #000000;
+.swipe-button {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+}
 
-  ion-img {
-    height: 70%;
-    max-width: 200px;
-    overflow: hidden;
-    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(100deg);
-  }
+.skip-button {
+  z-index: 2;
+  position: absolute;
+  display: block;
+  bottom: 0px;
+  right: 10px;
+  font-size: 1rem;
 }
