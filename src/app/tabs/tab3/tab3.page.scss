@@ -1,0 +1,28 @@
+@import "../../../theme/mixins.scss";
+
+* {
+  font-family: "a-jannat-lt";
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: none;
+  margin-top: 10px;
+
+  & > * {
+    @include for-desktop-up {
+      zoom: 102%;
+    }
+  }
+}
+
+.company-element-container {
+  justify-self: center;
+}
+
+ion-footer {
+  min-height: 70px !important;
+}

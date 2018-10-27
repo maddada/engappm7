@@ -4,11 +4,19 @@
     <ion-buttons slot="start">
       <ion-button routerLink="/" routerDirection="root">
         <ion-icon name="arrow-round-back"></ion-icon>
-        Back
+        {{'common.back' | translate}}
       </ion-button>
     </ion-buttons>
 
-    <ion-title>Create Tender</ion-title>
+    <ion-title>
+
+      <ng-container class="dir-rtl" *ngIf="translate.currentLang==='ar'">
+        أنشئ مناقصة
+      </ng-container>
+      <ng-container *ngIf="translate.currentLang==='en'">
+        Create Tender
+      </ng-container>
+    </ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -18,11 +26,16 @@
 <ion-content>
   <ion-grid no-padding>
 
-    <ion-row size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" padding-horizontal>
+    <ion-row padding-horizontal>
 
       <ion-col style="margin: 0 auto; max-width:500px">
 
-        <h2 class="center">
+        <h2 class="center dir-rtl" *ngIf="translate.currentLang==='ar'" padding-bottom margin-bottom>
+          <strong>
+            دخل التفاصيل و خلي الباقي علينا!
+          </strong>
+        </h2>
+        <h2 class="center" *ngIf="translate.currentLang==='en'">
           <strong>
             Enter the details,<br>leave the rest to us!
           </strong>
@@ -30,7 +43,10 @@
 
         <!-- NOTE: Tender Title -->
         <ion-item>
-          <ion-label color="primary" position="floating">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl bs">
+            عنوان المناقصة*
+          </ion-label>
+          <ion-label color="primary" position="floating" *ngIf="translate.currentLang==='en'">
             Title*
           </ion-label>
           <ion-input text-center [(ngModel)]="newTender.tenderTitle" type="text">
@@ -39,7 +55,10 @@
 
         <!-- NOTE: Tender Email -->
         <ion-item>
-          <ion-label color="primary" position="floating">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl bs">
+            إيميل التواصل*
+          </ion-label>
+          <ion-label color="primary" position="floating" *ngIf="translate.currentLang==='en'">
             Contact Email*
           </ion-label>
           <ion-input text-center [(ngModel)]="newTender.tenderContactEmail" type="text">
@@ -48,7 +67,10 @@
 
         <!-- NOTE: Tender Whatsapp -->
         <ion-item>
-          <ion-label color="primary" position="floating">
+          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+            واتساب التواصل*
+          </ion-label>
+          <ion-label color="primary" position="floating" *ngIf="translate.currentLang==='en'">
             Contact Whatsapp*
           </ion-label>
           <ion-input text-center [(ngModel)]="newTender.tenderContactWhatsapp" type="text">
@@ -57,7 +79,10 @@
 
         <!-- NOTE: Tender Phone/Mobile -->
         <ion-item>
-          <ion-label color="primary" position="floating">
+          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+            رقم التواصل
+          </ion-label>
+          <ion-label color="primary" position="floating" *ngIf="translate.currentLang==='en'">
             Contact Phone/Mobile (Optional)
           </ion-label>
           <ion-input text-center [(ngModel)]="newTender.tenderContactNumber" type="text">
@@ -69,7 +94,11 @@
 
         <!-- NOTE: Tender Category -->
         <ion-item padding-top>
-          <ion-label color="primary" position="floating" class="label">Tender Category*</ion-label>
+          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+            تصنيف المناقصة*
+          </ion-label>
+          <ion-label color="primary" position="floating" class="label" *ngIf="translate.currentLang==='en'">Tender
+            Category*</ion-label>
 
           <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory" interface="action-sheet">
 
@@ -89,7 +118,11 @@
         <!-- NOTE: Deadline -->
         <ion-item padding-top>
 
-          <ion-label color="primary" position="floating" class="label">Select Deadline*</ion-label>
+          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+            تاريخ الإنتهاء*
+          </ion-label>
+          <ion-label color="primary" position="floating" class="label" *ngIf="translate.currentLang==='en'">Select
+            Deadline*</ion-label>
 
           <ion-datetime [(ngModel)]="selectedDeadline" display-format="DD/MM/YYYY" min="{{datePickerMinYear}}" max="{{datePickerMaxYear}}"
             (ionChange)="onSelectDate($event)">
@@ -101,14 +134,14 @@
 
         <!-- NOTE: Tender Summary -->
         <ion-item padding-top>
-          <ion-label color="primary" position="stacked">
+          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+            تفاصيل المناقصة (إختياري)*
+          </ion-label>
+          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='en'">
             Tender Summary & Main Instructions (Optional)
           </ion-label>
 
-          <!-- <ion-textarea placeholder="" rows="6" dir="auto" [(ngModel)]="summaryTemp">
-          </ion-textarea> -->
-
-          <textarea placeholder="Type here..." rows="6" dir="auto" [(ngModel)]="summaryTemp"></textarea>
+          <textarea placeholder="" rows="6" dir="auto" [(ngModel)]="summaryTemp"></textarea>
 
         </ion-item>
 
@@ -149,21 +182,24 @@
         <!-- NOTE: Attachments Section -->
         <ion-item class="no-border-label">
 
-          <ion-label style="color:rgb(3, 108, 150); font-size:1rem;">
+          <ion-label style="color:rgb(3, 108, 150); font-size:1.1rem;" *ngIf="translate.currentLang==='ar'" class="dir-rtl"
+            text-center>
+            يمكنك رفع 3 ملفات كحد أقصى (إختياري)
+          </ion-label>
+          <ion-label style="color:rgb(3, 108, 150); font-size:1.1rem;" *ngIf="translate.currentLang==='en'" text-center>
             Upload up to 3 attachments: (optional)
           </ion-label>
 
           <!-- 6af: Select number of attachments
-            <ion-select ok-text="Select"
-             cancle-text="Cancle" [(ngModel)]="selectedNumOfAttachments" interface="action-sheet"
-            (ionChange)="onSelectNumOfAttachments(event)">
+            <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="selectedNumOfAttachments" interface="action-sheet"
+                (ionChange)="onSelectNumOfAttachments(event)">
 
-            <ion-select-option value="0">none</ion-select-option>
-            <ion-select-option value="1">1</ion-select-option>
-            <ion-select-option value="2">2</ion-select-option>
-            <ion-select-option value="3">3</ion-select-option>
+                <ion-select-option value="0">none</ion-select-option>
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
 
-          </ion-select> -->
+                </ion-select> -->
 
         </ion-item>
         <p class="description-text" padding-start></p>
@@ -172,14 +208,21 @@
         <!-- NOTE: ATTACHMENT 0 -->
         <ion-item padding-bottom>
 
-          <ion-label color="primary" position="stacked">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl bs">
+            الملف الأول
+          </ion-label>
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='en'" class="bs">
             Attachment #1
           </ion-label>
 
           <input #uploadButton0 type="file" (change)="setUpload($event, 0)" name="upload0">
 
           <ng-container *ngIf="uploadPercent0 | async as p">
-            <div class="upload-percent">Upload Percent: {{ p }}
+            <div class="upload-percent">
+              <ng-container *ngIf="translate.currentLang==='ar'">رفع الملف</ng-container>
+              <ng-container *ngIf="translate.currentLang==='en'">Upload
+                Percent</ng-container>
+              {{ p }}
               %
             </div>
           </ng-container>
@@ -189,14 +232,21 @@
         <!-- NOTE: ATTACHMENT 1 -->
         <ion-item padding-bottom>
 
-          <ion-label color="primary" position="stacked">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl bs">
+            الملف الثاني
+          </ion-label>
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='en'" class="bs">
             Attachment #2
           </ion-label>
 
           <input #uploadButton1 type="file" (change)="setUpload($event, 1)" name="upload1">
 
           <ng-container *ngIf="uploadPercent1 | async as p ">
-            <div class="upload-percent">Upload Percent: {{ p }}
+            <div class="upload-percent">
+              <ng-container *ngIf="translate.currentLang==='ar'">رفع الملف</ng-container>
+              <ng-container *ngIf="translate.currentLang==='en'">Upload
+                Percent</ng-container>
+              {{ p }}
               %
             </div>
           </ng-container>
@@ -206,14 +256,21 @@
         <!-- NOTE: ATTACHMENT 2 -->
         <ion-item padding-bottom>
 
-          <ion-label color="primary" position="stacked">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl bs">
+            الملف الثالث
+          </ion-label>
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='en'" class="bs">
             Attachment #3
           </ion-label>
 
           <input #uploadButton2 type="file" (change)="setUpload($event, 2)" name="upload2">
 
           <ng-container *ngIf="uploadPercent2 | async as p ">
-            <div class="upload-percent">Upload Percent: {{ p }}
+            <div class="upload-percent">
+              <ng-container *ngIf="translate.currentLang==='ar'">رفع الملف</ng-container>
+              <ng-container *ngIf="translate.currentLang==='en'">Upload
+                Percent</ng-container>
+              {{ p }}
               %
             </div>
           </ng-container>
@@ -222,8 +279,7 @@
 
 
         <!-- NOTE: Spacer  -->
-        <div padding>
-        </div>
+        <div padding></div>
 
 
         <!-- NOTE: END OF ION CONTENT -->
@@ -247,9 +303,11 @@
 
         <!-- NOTE: Create Tender Button -->
         <ion-button expand="block" mode="ios" (click)="onCreateClicked()">
-          <ion-icon name="add-circle" mode="ios" color="light"></ion-icon>&nbsp;Create Tender
-        </ion-button>
+          <ng-container *ngIf="translate.currentLang==='ar'">أنشئ المناقصة</ng-container>
+          <ng-container *ngIf="translate.currentLang==='en'">Create
+            Tender</ng-container>
 
+        </ion-button>
 
         <!-- input checking test done - perfect
           <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">

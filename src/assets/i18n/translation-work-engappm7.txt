@@ -1,0 +1,32 @@
+
+
+#####Translated Pages:
+
+select-lang
+settings
+login
+forgot-password
+tabs
+tabs.tab1 (home)
+tabs.tab2 (contact)
+tabs.tab3 (search)
+tabs.tab3.filter-modal
+tabs.tab4 (profile)
+register
+select-indv-company
+select-acc-type
+logout
+rate
+company-list-element (was hard but used css classes to fix everything!)
+comment-list-element (no need to translate)
+tender-list-element
+view-tender
+create-tender (USE INLINE TRANSLATION FOR THIS FILE!! was much faster)
+view-profile
+join-tender-modal (easy)
+
+
+
+####### Not Translated:
+
+

@@ -1,0 +1,178 @@
+{
+	"Organization-Consultant": "Organization / Consultant",
+	"UAE": "United Arab Emirates",
+	"abu-dhabi": "Abu Dhabi",
+	"ajman": "Ajman",
+	"c": {
+		"Interlock": "Interlock",
+		"air-conditioning": "Air Conditioning",
+		"aluminium": "Aluminium",
+		"blocks": "Blocks",
+		"cement": "Cement",
+		"ceramics": "Ceramics",
+		"concrete": "Concrete",
+		"decoration": "Decoration",
+		"doors": "Doors",
+		"fabric": "Fabric",
+		"glass": "Glass",
+		"gypsum-board": "Gypsum Board",
+		"kitchens": "Kitchens",
+		"lighting": "Lighting",
+		"paint": "Paint",
+		"wood": "Wood"
+	},
+	"common": {
+		"about": "About",
+		"back": "Back",
+		"city": "City",
+		"comments": "Comments",
+		"confirm": "Confirm",
+		"create-account": "Create Account",
+		"create-tender": "Create Tender",
+		"email": "Email",
+		"email-short": "Email",
+		"featured": "Featured",
+		"filter": "Filter",
+		"first-and-last-paranthases": "(First & Last)",
+		"forgot-password": "Forgot Password",
+		"go-back": "Go Back",
+		"home": "Home",
+		"log-in": "Log In",
+		"log-out": "Log Out",
+		"login": "Login",
+		"logout": "Logout",
+		"menu": "Menu",
+		"mobile": "Mobile",
+		"name": "Name",
+		"no": "No",
+		"no-comments": "No Comments",
+		"password": "Password",
+		"profile": "Profile",
+		"register": "Register",
+		"search": "Search",
+		"settings": "Settings",
+		"upload-percent": "Upload Percent",
+		"yes": "Yes"
+	},
+	"company": "Company",
+	"consultant": "Consultant",
+	"contractor": "Contractor",
+	"dubai": "Dubai",
+	"filter": {
+		"search": "Company Name",
+		"select-category": "Select Category"
+	},
+	"fujairah": "Fujairah",
+	"individual": "Individual",
+	"logout": {
+		"are-you-sure-logout": "Are you sure you want to logout?"
+	},
+	"organization": "Organization",
+	"pages": {
+		"login": {
+			"email-required": "Email is required",
+			"forgot-password": {
+				"password-reset": "Password Reset"
+			},
+			"pass-6-chars": "Password must be at least 6 characters",
+			"pass-required": "Password is required",
+			"title": "Login"
+		},
+		"settings": {
+			"change-language": "Change language"
+		}
+	},
+	"profile": {
+		"account-creator-mobile": "Account Creator Mobile",
+		"account-creator-name": "Account Creator Name",
+		"address": "Address",
+		"categories": "Categories",
+		"company-classification": "Company Classification",
+		"company-classification-short": "Class",
+		"company-name": "Company Name",
+		"company-name-ar": "Company Name in Arabic",
+		"company-phone-number": "Company Phone Number",
+		"edit-cancle": "Cancle",
+		"edit-done": "Done",
+		"govermental": "Govermental",
+		"grade": {
+			"fifth-grade": "Fifth Grade",
+			"first-grade": "First Grade",
+			"fourth-grade": "Fourth Grade",
+			"second-grade": "Second Grade",
+			"sixth-grade": "Sixth Grade",
+			"special-grade": "Special Grade",
+			"third-grade": "Third Grade"
+		},
+		"not-found": "Profile not found.",
+		"phone": "Phone",
+		"private": "Private",
+		"sector": "Sector"
+	},
+	"ras-al-khaimah": "Ras Al-Khaimah",
+	"rate": {
+		"comment-120-chars": "Comment* (120 characters)",
+		"five-star": "5 Stars",
+		"four-star": "4 Stars",
+		"one-star": "1 Stars",
+		"rating": "Rating*",
+		"submit-rating": "Submit Rating",
+		"three-star": "3 Stars",
+		"two-star": "2 Stars"
+	},
+	"register": {
+		"Account-Type": "Account Type",
+		"agree-with-terms": "I agree with the terms & conditions:",
+		"city-of-licence": "City of Licence",
+		"company-licence-copy": "Company Licence Copy",
+		"multiple-selection": "Multiple Selection",
+		"pick-account-type": "Pick account type",
+		"register-an-account": "Register an Account",
+		"select-placeholder": "Select",
+		"select-specialities": "Select Specialities",
+		"show-terms": "Show Terms",
+		"what-type-of-company": "What type of company?"
+	},
+	"sharjah": "Sharjah",
+	"supplier": "Supplier",
+	"tab2": {
+		"browse-home-to-find-tenders": "Browse the Home Tab to Find Some!",
+		"click-button-to-create-one": "Click the Button to Create One!",
+		"featured-tenders": "Featured",
+		"no-created-tenders": "Your posted tenders will be shown here",
+		"no-featured-tenders": "No Featured Tenders to Show",
+		"no-tenders-joined": "You Haven't Joined Any Tenders Yet!",
+		"posted-tenders": "Posted",
+		"search-options": "Search Options"
+	},
+	"tab4": {
+		"edit-profile": "Edit",
+		"login-to-view-profile": "Login to view your profile!",
+		"your-profile": "Your Profile"
+	},
+	"tabs": {
+		"tab1": {
+			"home": "Home"
+		}
+	},
+	"tender": {
+		"Attachment": "File",
+		"Attachments": "Attachments",
+		"Concrete": "Concrete",
+		"Construction": "Construction",
+		"Deadline": "Deadline",
+		"Description": "Description",
+		"Details": "Details",
+		"Featured": "Featured",
+		"General": "General",
+		"Insulation": "Insulation",
+		"Maintenance": "Maintenance",
+		"Prefab": "Prefab",
+		"Published": "Published",
+		"Status": "Status",
+		"Steel": "Steel",
+		"Walls-Fencing": "Walls/Fencing",
+		"no-available": "Not Available"
+	},
+	"umm-al-quwain": "Umm Al-Quwain"
+}

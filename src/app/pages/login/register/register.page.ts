@@ -12,7 +12,9 @@ import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { ShowToastService } from '../../../core/show-toast.service';
 import { NavController, LoadingController } from '@ionic/angular';
-import { ShowLoadingService } from '../../../core/show-loading.service';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-register',
@@ -28,12 +30,12 @@ export class RegisterPage implements OnInit {
     private storage: AngularFireStorage,
     private db: FirestoreService,
     private toast: ShowToastService,
-    private loading: ShowLoadingService,
     private loadingCtrl: LoadingController,
+    private route: ActivatedRoute,
+    public translate: TranslateService,
   ) {
 
   }
-
 
   public newUser: User = { accountType: -1 };
   public uploadPercent: Observable<any>;
@@ -64,18 +66,34 @@ export class RegisterPage implements OnInit {
 
   showLoading: any;
 
+
   // used to access input and clear it
   // (if file selected for upload is too big or disallowed type)
   @ViewChild('uploadButton')
   private myUploadButton: ElementRef;
 
   ngOnInit() {
-    this.newUser.tags = [];
+
+
+
+    let type = Number(this.route.snapshot.paramMap.get('type'));
+
+    if (type != null && type > 0 && type <= 4) {
+      this.newUser.accountType = type;
+      this.selectedType = '' + type;
+    } else {
+      this.newUser.accountType = -1;
+      this.selectedType = null;
+    }
+
+    this.newUser.tags = []; // You have to initialize arrays before pushing to them!
   }
 
 
 
   public async onSubmit() {
+
+    this.toast.toastController.dismiss().catch(_ => { });
 
     if (this.validateInputs()) {
       this.emailSignUp();
@@ -88,14 +106,12 @@ export class RegisterPage implements OnInit {
   public onTestClicked(): void {
 
     if (this.validateInputs()) {
-      console.log("TEST REGISTRATION SUCCESSFUL!");
+      // console.log("TEST REGISTRATION SUCCESSFUL!");
     }
     else {
     }
     // console.log("this.termsCheckBoxValue", this.termsCheckBoxValue)
-
     // console.log("this.newUser.govSector", this.newUser.govSector)
-
     // console.log("this.uploadData", this.uploadData);
   }
 
@@ -120,7 +136,7 @@ export class RegisterPage implements OnInit {
       this.newUser.personNumber == null ||
       this.newUser.personNumber.length === 0
     ) {
-      console.log("stopped here");
+      // console.log("stopped here");
       this.toast.showToast(`A Required Field is Empty!`);
       return false;
     }
@@ -138,7 +154,7 @@ export class RegisterPage implements OnInit {
       case 2:
         if (this.newUser.govSector == null) {
           this.toast.showToast(`A Required Field is Empty!`);
-          console.log("stopped here");
+          // console.log("stopped here");
           return false;
         }
       // tslint:disable-next-line
@@ -151,7 +167,7 @@ export class RegisterPage implements OnInit {
           this.newUser.companyNumber.length === 0 ||
           isNaN(this.newUser.class) ||
           this.uploadData == null) {
-          console.log("stopped here");
+          // console.log("stopped here");
           this.toast.showToast(`A Required Field is Empty!`);
           return false;
         } else {
@@ -168,7 +184,7 @@ export class RegisterPage implements OnInit {
           this.newUser.companyNumber.length === 0 ||
           this.newUser.tags.length === 0 ||
           this.uploadData == null) {
-          console.log("stopped here");
+          // console.log("stopped here");
           this.toast.showToast(`A Required Field is Empty!`);
           return false;
 
@@ -329,7 +345,7 @@ export class RegisterPage implements OnInit {
       this.myUploadButton.nativeElement.value = ''; //clearing file input!
       return;
     }
-    console.log(this.uploadData);
+    // console.log(this.uploadData);
 
   }
 
@@ -350,7 +366,7 @@ export class RegisterPage implements OnInit {
     }
 
     const current_date = getDateString();
-    console.log(current_date);
+    // console.log(current_date);
 
     const file = this.uploadData.target.files[0];
     // name of file in cloud storage
@@ -373,7 +389,7 @@ export class RegisterPage implements OnInit {
         // then get the URL from this observable [take(1)],
         // and call afterUserRegistered() after you get it!
         this.downloadURL.pipe(
-          take(1),
+          take(1), // keep this take(1)
           finalize(() => {
             this.afterUserRegistered();
           })
@@ -381,7 +397,7 @@ export class RegisterPage implements OnInit {
         ).subscribe((val) => {
           this.newUser.licenceURL = val;
 
-          console.log(`this.newUser.licenceURL:`, this.newUser.licenceURL);
+          // console.log(`this.newUser.licenceURL:`, this.newUser.licenceURL);
         });
       })
 
@@ -406,7 +422,7 @@ export class RegisterPage implements OnInit {
     } else {
       this.termsCheckBoxValue = true;
     }
-    console.log(this.termsCheckBoxValue);
+    // console.log(this.termsCheckBoxValue);
   }
 
 
@@ -427,7 +443,7 @@ export class RegisterPage implements OnInit {
     this.showLoading.dismiss();
 
     this.toast.showToast(`Registration Successful, Welcome!`);
-    console.log('AFTER USER REGISTERED RAN');
+    // console.log('AFTER USER REGISTERED RAN');
 
 
 
@@ -477,7 +493,6 @@ export class RegisterPage implements OnInit {
   // ex: ["c_blocks", "c_ceramics", "c_interlock"]
   // Working
   // console.log(event.detail.value);
-  // console.log(this.selectedSupplierCategories);
   // Upload this to each supplier document as
   // _tags array and it'll be used for
   // searching using algolia later.

@@ -11,6 +11,7 @@ import { ProfileElementModule } from '../profile-element/profile-element.module'
 
 import { ProfileCommentModule } from '../profile-comment/profile-comment.module';
 import { TenderListElementModule } from '../../tender/tender-list-element/tender-list-element.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     ProfileElementModule,
     ProfileCommentModule,
     TenderListElementModule,

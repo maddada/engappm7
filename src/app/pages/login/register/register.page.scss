@@ -1,6 +1,6 @@
 * {
   font-family: "a-jannat-lt";
-  --inner-border-width: 0;
+  // --inner-border-width: 0;
 }
 
 .center {
@@ -12,6 +12,24 @@ ion-label {
   font-size: 1.2rem !important;
 }
 
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  border: 2px solid #aaa;
+  border-radius: 15px;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  border-color: dodgerBlue;
+  box-shadow: 0 0 8px 0 dodgerBlue;
+}
+
 ion-input {
   text-align: center;
 
@@ -21,7 +39,7 @@ ion-input {
 }
 
 ion-list {
-  --inner-border-width: 0 !important;
+  // --inner-border-width: 0 !important;
 }
 
 ion-checkbox {
@@ -35,7 +53,7 @@ ion-checkbox {
 
 ion-select {
   // text-align: ;
-  --ion-border-width: 0 !important;
+  // --ion-border-width: 0 !important;
 
   &::placeholder {
     text-align: center;
@@ -180,4 +198,8 @@ input[type="file"] {
   border-style: solid;
   width: 80% !important;
   height: auto;
+}
+
+ion-checkbox {
+  --background: #888888 !important;
 }

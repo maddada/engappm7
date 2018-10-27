@@ -5,11 +5,15 @@
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
         <ion-icon name="arrow-round-back"></ion-icon>
-        Back
+        {{'common.back' | translate}}
       </ion-button>
     </ion-buttons>
 
-    <ion-title>View Profile</ion-title>
+    <ion-title>
+      <ng-container *ngIf="translate.currentLang==='ar'">ملف الشركة</ng-container>
+      <ng-container *ngIf="translate.currentLang==='en'">View
+        Profile</ng-container>
+    </ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -21,15 +25,18 @@
 
       <div class="flex-container">
 
-        <app-profile-element [user]="company">
+        <app-profile-element [user]="company" [allowEdit]="false">
         </app-profile-element>
 
         <!-- <ng-container *ngIf="(comments$ | async)?.length > 0 && showComments"> -->
         <ng-container *ngIf="showComments">
           <ng-container *ngIf="comments?.length > 0; else NoComments">
-            <div class="comments-header">Comments:</div>
+            <div class="comments-header">
+              <ng-container *ngIf="translate.currentLang==='ar'" class="dir-rtl">التعليقات</ng-container>
+              <ng-container *ngIf="translate.currentLang==='en'">Comments</ng-container>
+            </div>
 
-            <div style="max-width: 325px" color="primary">
+            <div color="primary">
               <!-- <ng-container *ngFor="let comment of comments$ | async; let i = index"> -->
               <ng-container *ngFor="let comment of comments; let i = index">
                 <app-profile-comment [comment]="comment">
@@ -41,7 +48,11 @@
         <ng-template #NoComments>
           <div class="comments-header no-comments">
             <br><br>
-            <ion-button color="dark" fill="outline" disabled>No Comments</ion-button>
+            <ion-button color="dark" fill="outline" disabled>
+              <ng-container *ngIf="translate.currentLang==='ar'" class="dir-rtl">لا يوجد تعليقات</ng-container>
+              <ng-container *ngIf="translate.currentLang==='en'">No Comments</ng-container>
+
+            </ion-button>
           </div>
         </ng-template>
       </div>
@@ -52,7 +63,7 @@
 
 
 <ion-footer *ngIf="company">
-  <ng-container *ngIf="company.iud !== id">
+  <ng-container *ngIf="company.uid !== id">
     <ion-toolbar color="light">
 
       <ion-row align-self-center padding-horizontal>
@@ -60,7 +71,9 @@
         <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
           <ion-button expand="block" mode="ios" type="submit" [routerLink]="['/rate',id]" routerDirection="forward">
-            <ion-icon name="star" mode="md"></ion-icon>&nbsp;Rate Company
+            <ion-icon name="star" mode="md"></ion-icon>&nbsp;
+            <ng-container *ngIf="translate.currentLang==='ar'" class="dir-rtl">قيم الشركة</ng-container>
+            <ng-container *ngIf="translate.currentLang==='en'">Rate Company</ng-container>
           </ion-button>
 
         </ion-col>
@@ -72,12 +85,15 @@
 
 <ng-template #NotFound>
 
-  <h2 text-center>Company Not Found!</h2>
+  <h2 text-center *ngIf="translate.currentLang==='ar'" class="dir-rtl">لم يتم العثور على الشركة!</h2>
+  <h2 text-center *ngIf="translate.currentLang==='en'">Company Not Found!</h2>
   <br>
   <ion-row>
     <ion-col align-self-center size="3" size-sm="3" size-md="3" size-lg="3" size-xl="3" style="margin: 0 auto;">
       <ion-button expand="block" mode="ios" (click)="goBack()">
-        Go Back
+        <ng-container *ngIf="translate.currentLang==='ar'">العودة</ng-container>
+        <ng-container *ngIf="translate.currentLang==='en'">Go
+          Back</ng-container>
       </ion-button>
 
     </ion-col>

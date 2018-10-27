@@ -1,0 +1,138 @@
+<ion-content>
+  <ion-button class="skip-button" fill="clear" color="primary" (click)="finish()">الخروج</ion-button>
+  <ion-slides #slides (ionSlideWillChange)="onSlideChangeStart($event)" pager="true">
+
+    <!-- _: First Slide -->
+    <ion-slide class="slide-first">
+      <div class="img">
+        <ion-img style="filter: initial;" src="./assets/icon/favicon.png"></ion-img>
+      </div>
+      <h1>مرحباً بكم في معمار</h1>
+      <div class="subtitle">
+        <h3>
+          نسمو لأن نكون الواجهة الرئيسية للإستشاريين و المقاولين و الموردين في الإمارات!<br>
+        </h3>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">إنتقل
+        لليسار</ion-button>
+
+    </ion-slide>
+
+    <!-- _: Why Memar -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="filter: invert(0.5) sepia(1) saturate(5) hue-rotate(155deg);" src="./assets/icon/helmet.svg"></ion-img>
+      </div>
+      <h1>ميزات معمار!</h1>
+
+      <div class="subtitle">
+        <ul>
+          <li>أضف مناقصاتك و إحصل على أفضل الأسعار.</li>
+          <li>نتيح لك المشاركة في المناقصات بسهولة.</li>
+          <li>إحصل على جميع تفاصيل المناقصة على الموقع.</li>
+          <li>إحصل على إشعارات في حال نزول مناقصات جديدة.</li>
+          <li>إبحث عن موردين في جميع المجالات.</li>
+        </ul>
+      </div>
+
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">إنتقل
+        لليسار</ion-button>
+    </ion-slide>
+
+    <!-- _: Consultants -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="padding: 5px; filter: invert(0.5) sepia(1) saturate(5) hue-rotate(60deg);" src="./assets/icon/construction.svg"></ion-img>
+      </div>
+      <h1>معمار للإستشاريين</h1>
+
+      <div class="subtitle">
+        <ul>
+          <li>أعلن عن مناقصاتك.</li>
+          <li>إحصل على أفضل العروض بسهولة.</li>
+          <li>سهل على الأفراد و الشركات إيجاد شركتك و التواصل معها.</li>
+          <li>إبحث عن موردين في جميع المجالات.</li>
+        </ul>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">إنتقل
+        لليسار</ion-button>
+    </ion-slide>
+
+    <!-- _: Contractors -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="padding: 10px; filter: invert(0.5) sepia(1) saturate(5) hue-rotate(330deg);" src="./assets/icon/walls.svg"></ion-img>
+      </div>
+      <h1>معمار للمقاولين</h1>
+
+      <div class="subtitle">
+        <ul>
+          <li>إشترك في مناقصات من جميع أنحاء الدولة.</li>
+          <li>إحصل على إشعارات للمناقصات الجديدة.</li>
+          <li>إتطلع على جميع تفاصيل المناقصة على الموقع.</li>
+          <li>سهل على الأفراد و الشركات إيجاد شركتك و التواصل معها.</li>
+          <li>إبحث عن موردين في جميع المجالات.</li>
+        </ul>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">إنتقل
+        لليسار</ion-button>
+    </ion-slide>
+
+    <!-- _: Suppliers -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="padding: 5px; filter: invert(0.5) sepia(1) saturate(5) hue-rotate(10deg);" src="./assets/icon/prefab.svg"></ion-img>
+      </div>
+      <h1>معمار للموردين</h1>
+
+      <div class="subtitle">
+        <ul>
+          <li>سهل على العملاء العثور على شركتك.</li>
+          <li>كون ملف شخصي على الويب.</li>
+          <li>إحصل على تعليقات و تقييمات.</li>
+          <li>إبحث عن شركاء في الدولة.</li>
+        </ul>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">إنتقل
+        لليسار</ion-button>
+    </ion-slide>
+
+    <!-- _: Individuals -->
+    <ion-slide class="benefits-slide">
+      <div class="img">
+        <ion-img style="filter: none;" src="./assets/icon/arab1.svg"></ion-img>
+      </div>
+      <h1>معمار للأفراد</h1>
+
+      <div class="subtitle">
+        <ul>
+          <li>إبحث عن أفضل الإستشاريين و المقاولين بإستخدام التقييمات.</li>
+          <li>إبحث عن موردين في جميع المجالات.</li>
+          <li>إتطلع على أحدث أخبار برامج الإسكان في الدولة (قريباً).</li>
+        </ul>
+      </div>
+      <ion-button class="swipe-button" size="large" fill="clear" expand="full" color="dark" (click)="next()">إنتقل
+        لليسار</ion-button>
+    </ion-slide>
+
+    <!-- _: Last Slide -->
+    <ion-slide class="slide-end">
+      <div class="img" style="margin-bottom: 30px;">
+        <ion-img style="padding:10px;" src="./assets/icon/maintenance.svg"></ion-img>
+      </div>
+      <h1>يسعدنا إرضائكم!</h1>
+      <div class="subtitle">
+        <h3 margin-horizontal padding-horizontal>
+          إذا أردت التواصل معنا: <br>
+          <br>
+          04-5362367 📞<br>
+          memar.app@gmail.com 📧<br>
+        </h3>
+      </div>
+      <ion-button class="finish-button" style="margin-bottom: 10px;" size="large" fill="outline" color="dark" (click)="finish()">إبدأ
+        في إستخدام التطبيق</ion-button>
+
+    </ion-slide>
+
+  </ion-slides>
+</ion-content>

@@ -31,9 +31,9 @@ h1 {
 
   // for tablet and above:
   @include for-small-phone-only {
-    font-size: 1.2em;
-    margin-top: 15px;
-    margin-bottom: 10px;
+    font-size: 1em;
+    margin-top: 8px;
+    margin-bottom: 8px;
   }
   @include for-phone-only {
     font-size: 1.4em;
@@ -53,7 +53,7 @@ div.img {
   justify-content: center;
 
   @include for-small-phone-only {
-    padding-top: 20px;
+    padding-top: 10px;
   }
 
   @include for-phone-only {
@@ -70,14 +70,16 @@ ion-img {
   overflow: hidden;
   height: 100px;
   width: auto;
-  @include for-phone-only {
-    // width: 60vw;
-    // max-width: 120px;
-  }
-
   @include for-small-phone-only {
+    height: 70px;
     // width: 60vw;
     // max-width: 80px;
+  }
+
+  @include for-phone-only {
+    // height: 10px;
+    // width: 60vw;
+    // max-width: 120px;
   }
 
   @include for-tablet-portrait {
@@ -105,7 +107,10 @@ ion-img {
   justify-content: center;
 
   @include for-tablet-portrait {
-    width: 500px;
+    * {
+      width: 370px;
+      margin: 0 auto;
+    }
   }
 
   h3 {
@@ -114,7 +119,7 @@ ion-img {
     font-weight: bold;
 
     // for phones:
-    width: 70vw;
+    width: 90vw;
     font-size: 1.15rem;
 
     @include for-tablet-portrait {
@@ -145,6 +150,11 @@ ion-img {
     text-align: start;
     color: rgb(73, 73, 73);
     font-weight: bold;
+    padding-bottom: 1.2rem;
+
+    @include for-small-phone-only {
+      padding-bottom: 0.5rem;
+    }
   }
 }
 

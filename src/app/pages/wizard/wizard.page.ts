@@ -1,6 +1,7 @@
-import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Slides, NavController, MenuController, Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-wizard',
@@ -14,19 +15,18 @@ export class WizardPage implements OnInit {
 
     @ViewChild('slides') slides: Slides;
 
+    i;
+
     ngOnInit() {
         this.platform.ready().then(() => {
-            this.menu.swipeEnable(false);
+            // temp fix for ionic beta zone.js error:
+            this.menu.swipeEnable(false).catch(_ => { });
         });
     }
 
-    // ionViewWillEnter() {
-
-    // }
-
     ionViewDidLeave() {
-        // enable swiping the root left menu when leaving the tutorial page
-        this.menu.swipeEnable(true);
+        // enable swiping menu when leaving the tutorial page
+        this.menu.swipeEnable(true).catch(_ => { });
     }
 
     onSlideChangeStart(event) {
@@ -37,7 +37,14 @@ export class WizardPage implements OnInit {
 
     async finish() {
         await this.storage.set('tutorialComplete', true);
-        this.nav.navigateForward('/');
+        this.slides.slideTo(0).then(_ => {
+            this.nav.navigateForward('/');
+        });
+        // window.location.reload(true);
+    }
+
+    ionViewWillLeave() {
+        // window.location.reload(true);
     }
 
     next() {

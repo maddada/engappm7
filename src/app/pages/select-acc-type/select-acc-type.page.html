@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="light">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        {{'common.back' | translate}}
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title></ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div id="container">
+    <h1>{{'register.what-type-of-company' | translate}}</h1>
+
+    <ion-icon name="briefcase" mode="md" color="medium" size="large" padding-top></ion-icon>
+    <ion-button expand="block" href="/register/2" routerDirection="forward">
+      {{'consultant' | translate}}
+    </ion-button>
+
+    <ion-icon name="business" mode="md" color="medium" size="large" padding-top></ion-icon>
+    <ion-button expand="block" href="/register/3" routerDirection="forward">
+      {{'contractor' | translate}}
+    </ion-button>
+
+    <ion-icon name="people" mode="ios" color="medium" size="large" padding-top></ion-icon>
+    <ion-button expand="block" href="/register/2" routerDirection="forward">
+      {{'organization' | translate}}
+    </ion-button>
+
+    <ion-icon name="build" mode="md" color="medium" size="large" padding-top></ion-icon>
+    <ion-button expand="block" href="/register/4" routerDirection="forward">
+      {{'supplier' | translate}}
+    </ion-button>
+  </div>
+
+</ion-content>

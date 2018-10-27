@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../../model';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-company-list-element',
@@ -12,9 +13,12 @@ export class CompanyListElementComponent implements OnInit {
   @Input() company: User;
   @Input() extended: boolean;
 
-  constructor(private nav: NavController) { }
+
+
+  constructor(private nav: NavController, public translate: TranslateService) { }
 
   ngOnInit() {
+    // console.log(this.company.profileNameAr);
   }
 
   public viewProfile() {

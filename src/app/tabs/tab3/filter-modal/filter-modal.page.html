@@ -1,0 +1,93 @@
+<ion-header>
+  <ion-toolbar color="light">
+
+    <ion-buttons slot="start">
+      <ion-button (click)="onClickDismiss()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        {{'common.back' | translate}}
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title transparent>{{'common.filter' | translate}}</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-row padding-horizontal>
+
+    <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+      <ion-item no-margin>
+        <ion-label position="floating" style="height: 0px;" no-padding no-margin></ion-label>
+        <ion-input type="text" placeholder="{{'filter.search' | translate}}" [(ngModel)]="filterOptions.searchString"
+          no-margin text-center></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" style="height: 0px !important" no-padding no-margin></ion-label>
+
+        <ion-select ok-text="Select" [value]="0" interface="action-sheet" [(ngModel)]="selectedCityString" (ionChange)="onSelectCity($event)"
+          text-center>
+
+          <ion-select-option value="0">{{'UAE' | translate}}</ion-select-option>
+          <ion-select-option value="1">{{'dubai' | translate}}</ion-select-option>
+          <ion-select-option value="2">{{'sharjah' | translate}}</ion-select-option>
+          <ion-select-option value="3">{{'ajman' | translate}}</ion-select-option>
+          <ion-select-option value="4">{{'abu-dhabi' | translate}}</ion-select-option>
+          <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
+          <ion-select-option value="6">{{'fujairah' | translate}}</ion-select-option>
+          <ion-select-option value="7">{{'ras-al-khaimah' | translate}}</ion-select-option>
+          <ion-select-option value="8">{{'umm-al-quwain' | translate}}</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" style="height: 0px;" no-padding no-margin></ion-label>
+
+        <ion-select placeholder="{{'filter.select-category' | translate}}" ok-text="Select" interface="alert"
+          [(ngModel)]="filterOptions.tag" text-center>
+
+          <ion-select-option value="company_consultant">{{'consultant' | translate}}</ion-select-option>
+          <ion-select-option value="company_contractor">{{'contractor' | translate}}</ion-select-option>
+          <ion-select-option value="company_supplier">{{'supplier' | translate}}</ion-select-option>
+          <ion-select-option value="category_paint">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.paint' | translate}}</ion-select-option>
+          <ion-select-option value="category_blocks">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.blocks' | translate}}</ion-select-option>
+          <ion-select-option value="category_ceramics">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.ceramics' |
+            translate}}</ion-select-option>
+          <ion-select-option value="category_interlock">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.Interlock' |
+            translate}}</ion-select-option>
+          <ion-select-option value="category_wood">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.wood' | translate}}</ion-select-option>
+          <ion-select-option value="category_doors">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.doors' | translate}}</ion-select-option>
+          <ion-select-option value="category_fabric">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.fabric' | translate}}</ion-select-option>
+          <ion-select-option value="category_cement">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.cement' | translate}}</ion-select-option>
+          <ion-select-option value="category_gypsum">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.gypsum-board' |
+            translate}}</ion-select-option>
+          <ion-select-option value="category_decoration">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.decoration' |
+            translate}}</ion-select-option>
+          <ion-select-option value="category_glass">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.glass' | translate}}</ion-select-option>
+          <ion-select-option value="category_aluminium">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.aluminium' |
+            translate}}</ion-select-option>
+          <ion-select-option value="category_kitchens">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.kitchens' |
+            translate}}</ion-select-option>
+          <ion-select-option value="category_ac">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.air-conditioning' |
+            translate}}</ion-select-option>
+          <ion-select-option value="category_lighting">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.lighting' |
+            translate}}</ion-select-option>
+          <ion-select-option value="category_concrete">&nbsp;&nbsp;&nbsp;&nbsp;◾ &nbsp;&nbsp; {{'c.concrete' |
+            translate}}</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+      <ion-button expand="block" mode="ios" (click)="onClickSearch()">
+        <ion-icon name="search" mode="md"></ion-icon>&nbsp;
+        {{'common.search' | translate}}
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+
+</ion-content>

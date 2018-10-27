@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../core/firestore.service';
 import { Tender, User, M7LoadingOptions } from '../../../model';
-import { Observable, of } from 'rxjs';
-import { finalize, take, flatMap, switchMap, withLatestFrom } from 'rxjs/operators';
-import { NavController, LoadingController, ModalController } from '@ionic/angular';
-import { ShowLoadingService } from '../../core/show-loading.service';
+import { Observable, of, Subject } from 'rxjs';
+import { take, switchMap, takeUntil } from 'rxjs/operators';
+import { NavController, LoadingController, ModalController, AlertController } from '@ionic/angular';
 import { PreviousRouteService } from '../../core/previous-route.service';
 import { JoinTenderModalPage } from '../join-tender-modal/join-tender-modal.page';
 import { AuthService } from '../../core/auth.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ShowToastService } from '../../core/show-toast.service';
 
 @Component({
   selector: 'app-view-tender',
   templateUrl: './view-tender.page.html',
   styleUrls: ['./view-tender.page.scss'],
 })
-export class ViewTenderPage implements OnInit {
+export class ViewTenderPage implements OnInit, OnDestroy {
+
+  id: string;
 
   tender$: Observable<Tender>;
   company$: Observable<User>;
@@ -26,6 +29,8 @@ export class ViewTenderPage implements OnInit {
   user: User;
   showNotFound: boolean = false;
 
+  unsubscribe$: Subject<any> = new Subject();
+
   constructor(
     private route: ActivatedRoute,
     private db: FirestoreService,
@@ -34,25 +39,21 @@ export class ViewTenderPage implements OnInit {
     private prevRoute: PreviousRouteService,
     private modal: ModalController,
     private auth: AuthService,
+    public translate: TranslateService,
+    public toast: ShowToastService,
+    private alertCtrl: AlertController,
   ) { }
 
   async ngOnInit() {
 
-
     const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
     await showLoading.present();
 
+    this.id = this.route.snapshot.paramMap.get('id');
 
-    const id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
-
-    // this.db.inspectDoc(`tenders/${id}`);
-
-    this.tender$ = this.db.doc$<Tender>(`tenders/${id}`)
-      .pipe(take(1));
+    this.tender$ = this.db.doc$<Tender>(`tenders/${this.id}`);
 
     this.company$ = this.tender$.pipe(
-      take(1),
       switchMap(tender => {
         // subs to tender$ and gets values from it, uses data to create another obs
         if (tender) { // if tender exists
@@ -67,18 +68,20 @@ export class ViewTenderPage implements OnInit {
 
     this.auth.user$.subscribe(res => this.user = res);
 
-    this.tender$.pipe(take(1)).subscribe(res => {
+    this.tender$.pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       this.tender = res;
     });
 
-    this.company$.pipe(take(1)).subscribe(res => {
+    this.company$.pipe(takeUntil(this.unsubscribe$)).subscribe(res => {
       this.company = res;
       this.showNotFound = true;
       showLoading.dismiss();
     });
   }
 
-  //tested and working perfectly
+  // if coming from create-tender page, then go to root
+  // if coming from anywhere else then just go back
+  // tested and working perfectly
   goBack() {
     let prevRouterString = this.prevRoute.getPreviousUrl();
     // console.log(prevRouterString);
@@ -98,5 +101,54 @@ export class ViewTenderPage implements OnInit {
     return await modal.present();
   }
 
+  async deleteTender() {
+
+    let message;
+    let confirmText;
+    let cancelText;
+    let toastMessage;
+
+    if (this.translate.currentLang === 'ar') {
+      message = 'يرجى تأكيد مسح المناقصة';
+      confirmText = 'تأكيد';
+      cancelText = 'إلغاء';
+      toastMessage = 'تم مسح المناقصة';
+    } else {
+      message = 'Confirm Deletion';
+      confirmText = 'Confirm';
+      cancelText = 'Cancel';
+      toastMessage = 'Tender Deleted!';
+    }
+
+    const alert = await this.alertCtrl.create({
+      // header: 'Confirm!',
+      message: message,
+      buttons: [
+        {
+          text: cancelText,
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+          }
+        }, {
+          text: confirmText,
+          handler: () => {
+            this.db.delete(`tenders/${this.id}`).then(_ => {
+              this.toast.showToast(toastMessage);
+              this.nav.navigateBack('/');
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
 }

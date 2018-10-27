@@ -1,6 +1,6 @@
 .comment-grid-container {
   min-width: 327px;
-  background: white;
+  // background: white;
   display: grid;
   grid-template-areas:
     "row1"
@@ -8,12 +8,13 @@
     "row3";
 
   border-radius: 15px;
-  padding: 10px;
+  padding: 20px;
   margin-top: 10px;
   margin-bottom: 10px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   --color: rgb(31, 31, 31);
 
+  max-width: 60vw;
   .row1-comment-title-and-date {
     display: flex;
     flex-direction: column;
@@ -21,23 +22,25 @@
 
     color: var(--background-color);
     grid-area: row1;
-    height: 3rem;
+    height: 3.5rem;
     padding-left: 10px;
     padding-right: 10px;
 
     .comment-title {
       justify-self: center;
-      align-self: center;
+      align-self: flex-start;
       font-weight: bold;
+      // margin-left: 20px;
       font-size: 16px;
     }
 
     .comment-date {
-      justify-self: center;
-      align-self: flex-end;
+      justify-self: flex-start;
+      align-self: flex-start;
+      // margin-left: 20px;
       font-weight: bold;
-      color: #6b6b6b;
-      font-size: 14px;
+      color: #7c7c7c;
+      font-size: 13px;
     }
   }
 
@@ -46,8 +49,9 @@
     height: 6rem;
     max-height: 6rem;
     overflow: hidden;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
     white-space: wrap;
     text-overflow: ellipsis;
     overflow: hidden;

@@ -24,8 +24,8 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Promise<boolean> {
-    const uid = await this.auth.uid();
-    const isLoggedIn = !!uid;
+    const user = await this.auth.uid();
+    const isLoggedIn = !!user;
 
     if (!isLoggedIn) {
       this.toast.showToast('Not Logged In');

@@ -2,13 +2,13 @@
   <ion-toolbar color="light">
 
     <ion-buttons slot="start">
-      <ion-button routerLink="/" routerDirection="root">
+      <ion-button routerLink="/" routerDirection="backward">
         <ion-icon name="arrow-round-back"></ion-icon>
-        Back
+        {{ 'common.back' | translate }}
       </ion-button>
     </ion-buttons>
 
-    <ion-title transparent>login</ion-title>
+    <ion-title transparent>{{ 'pages.login.title' | translate }}</ion-title>
 
   </ion-toolbar>
 </ion-header>
@@ -19,21 +19,112 @@
 
     <ion-row margin-top align-self-end>
 
-      <ion-col text-center>
-        <img box-shadow [src]="logo" style="margin: 0 auto;">
+      <ion-col text-center padding-top padding-bottom margin-bottom>
+        <img box-shadow src="assets/images/logo/logo.png" style="margin: 0 auto;">
       </ion-col>
 
     </ion-row>
 
-    <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
-      padding-horizontal>
+    <ion-row padding-horizontal>
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
 
         <form name="form" (ngSubmit)="f.form.valid && onClickLogin()" #f="ngForm" novalidate>
 
-          <!-- ORIGINAL <div>
+
+          <div>
+            <ion-label for="email" [class.ar]="translate.currentLang==='ar'">
+              {{'common.email' | translate}}
+            </ion-label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+              placeholder="" (keyup.enter)="onClickLogin()" autocomplete required email>
+
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+              <div *ngIf="email.errors.required">
+                {{ 'pages.login.email-required' | translate }}
+              </div>
+              <div *ngIf="email.errors.email">
+                {{ 'pages.login.pass-required' | translate }}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <ion-label for="password" [class.ar]="translate.currentLang==='ar'"> {{'common.password' | translate}}</ion-label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" (keyup.enter)="onClickLogin()" />
+
+            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+              <div *ngIf="password.errors.required">
+                {{ 'pages.login.pass-required' | translate }}
+
+
+              </div>
+              <div *ngIf="password.errors.minlength">
+                {{ 'pages.login.pass-6-chars' | translate }}
+
+              </div>
+            </div>
+          </div>
+
+          <div style="display: none; visibility: hidden;">
+            <button class="btn btn-primary" type="submit">
+              {{ 'common.register' | translate }}
+            </button>
+          </div>
+
+        </form>
+
+
+      </ion-col>
+
+    </ion-row>
+
+
+
+
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+
+  <ion-toolbar color="light">
+
+
+    <ion-row padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <ion-button text-capitalize expand="block" fill="clear" href="/forgot-password">
+          {{ 'common.forgot-password' | translate }}</ion-button>
+
+        <!---Login button-->
+        <ion-button expand="block" mode="ios" text-uppercase (click)="onClickLogin()">
+          <ion-icon name="person" mode="md"></ion-icon>&nbsp;
+          {{ 'common.login' | translate }}
+        </ion-button>
+        <!---google button-->
+        <ion-button expand="block" mode="ios" text-uppercase href="/select-indv-company">
+          <ion-icon name="at" mode="md"></ion-icon>&nbsp;
+          {{ 'common.create-account' | translate }}
+        </ion-button>
+
+      </ion-col>
+      <!---End Share Section-->
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+
+
+
+
+
+
+
+<!-- ORIGINAL <div>
             <label for="email">Email</label>
             <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
               required email />
@@ -43,36 +134,7 @@
             </div>
           </div> -->
 
-          <div>
-            <ion-label for="email">Email</ion-label>
-            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
-              placeholder="{{emailPlaceholder}}" (keyup.enter)="onClickLogin()" autocomplete required email>
-
-            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
-              <div *ngIf="email.errors.required">Email is required</div>
-              <div *ngIf="email.errors.email">Email must be a valid email address</div>
-            </div>
-          </div>
-
-          <div>
-            <label for="password">Password</label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
-              [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" (keyup.enter)="onClickLogin()" />
-
-            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
-              <div *ngIf="password.errors.required">Password is required</div>
-              <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
-            </div>
-          </div>
-
-          <div style="display: none; visibility: hidden;">
-            <button class="btn btn-primary" type="submit">Register</button>
-          </div>
-
-        </form>
-
-
-        <!-- Old ion-input crap, stopped using it because doesn't work with enter!
+<!-- Old ion-input crap, stopped using it because doesn't work with enter!
           and generally doesn't play nice with angular template forms
           User Styled input fields - much better!
         <form [formGroup]="userForm" (submit)="onLoginClick()" (keydown)="keyDownFunction($event)" padding-right>
@@ -96,40 +158,3 @@
           </div>
           <button [formGroup]="userForm" type="submit" style="display:none; visibility: hidden">submit</button>
         </form> -->
-      </ion-col>
-
-    </ion-row>
-
-
-
-
-  </ion-grid>
-
-</ion-content>
-
-<ion-footer>
-
-  <ion-toolbar color="light">
-
-
-    <ion-row align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;"
-      padding-horizontal>
-
-      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
-
-        <ion-button text-capitalize expand="block" fill="clear" href="/forgot-password">{{forgotPassword}}</ion-button>
-
-        <!---Login button-->
-        <ion-button expand="block" mode="ios" text-uppercase (click)="onClickLogin()">
-          <ion-icon name="person" mode="md"></ion-icon>&nbsp;{{login}}
-        </ion-button>
-        <!---google button-->
-        <ion-button expand="block" mode="ios" text-uppercase href="/register">
-          <ion-icon name="at" mode="md"></ion-icon>&nbsp;Create an Account
-        </ion-button>
-
-      </ion-col>
-      <!---End Share Section-->
-    </ion-row>
-  </ion-toolbar>
-</ion-footer>

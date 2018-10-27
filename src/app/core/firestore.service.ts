@@ -68,7 +68,7 @@ export class FirestoreService {
       .snapshotChanges()
       .pipe(
         map((doc: Action<DocumentSnapshotDoesNotExist | DocumentSnapshotExists<T>>) => {
-          console.log(doc.payload.data());
+          // console.log(doc.payload.data());
           return doc.payload.data() as T;
         }),
       );

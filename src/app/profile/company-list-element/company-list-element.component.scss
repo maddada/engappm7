@@ -59,6 +59,13 @@
   margin-right: 20px;
 }
 
+.ar-description-grid {
+  direction: rtl;
+  grid-template-columns: 0.25fr 0.5fr 1fr;
+  margin-left: 20px;
+  margin-right: 35px;
+}
+
 .company-name-row {
   margin-top: 20px;
   text-align: center;
@@ -86,10 +93,6 @@
   padding-left: 5px;
 }
 
-.main-description-grid.arabic {
-  direction: rtl; // flips all the columns.
-}
-
 ion-icon {
   align-self: center;
   font-size: 0.9rem;
@@ -100,7 +103,7 @@ ion-icon {
 .detail-name-text {
   font-size: 0.9rem;
   align-self: end;
-  padding-right: 40px;
+  // padding-inline-end: 30px;
 }
 
 .detail-data {
@@ -120,18 +123,18 @@ ion-icon {
 }
 
 .detail-data-supplier span::after {
-  content: ",";
+  content: "•";
 }
 
 .detail-data-supplier span:last-child::after {
-  content: ".";
+  content: "";
 }
 
 .r3 {
   text-align: center;
   font-size: 1.1em;
   height: 34px;
-  color: #00000062;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .r4 {

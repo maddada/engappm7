@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Tender } from '../../../model';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-tender-list-element',
@@ -17,12 +19,19 @@ export class TenderListElementComponent implements OnInit {
 
   public publishedDate: Date;
 
-  constructor(private nav: NavController) {
+
+
+  constructor(private nav: NavController,
+    public translate: TranslateService) {
   }
 
   ngOnInit() {
+
+
+
     this.publishedDate = this.tender.createdAt.toDate();
     this.setStatus();
+
   }
 
   public viewTender() {
@@ -50,23 +59,39 @@ export class TenderListElementComponent implements OnInit {
     // 432000000
     // NOTE: if less than 5 days left
     if (diffToDeadline > 0 && diffToDeadline < 432000000) {
-      this.statusString = "Ending Soon";
+      if (this.translate.currentLang === 'ar') {
+        this.statusString = "شارف الإنتهاء";
+      } else if (this.translate.currentLang === 'en') {
+        this.statusString = "Ending Soon";
+      }
     }
 
     // NOTE: if more than 5 days left
     // NOTE: started less than 2 days ago.
     if (diffToDeadline > 432000000 && diffToPublished < 172800000) {
-      this.statusString = "New";
+      if (this.translate.currentLang === 'ar') {
+        this.statusString = "جديد";
+      } else if (this.translate.currentLang === 'en') {
+        this.statusString = "New";
+      }
     }
 
     // NOTE: if more than 5 days left
     if (diffToDeadline > 432000000) {
-      this.statusString = "Ongoing";
+      if (this.translate.currentLang === 'ar') {
+        this.statusString = "جاري";
+      } else if (this.translate.currentLang === 'en') {
+        this.statusString = "Ongoing";
+      }
     }
 
     // NOTE: if it's done!
     if (diffToDeadline < 0) {
-      this.statusString = "Ended";
+      if (this.translate.currentLang === 'ar') {
+        this.statusString = "إنتهى";
+      } else if (this.translate.currentLang === 'en') {
+        this.statusString = "Ended";
+      }
     }
   }
 }

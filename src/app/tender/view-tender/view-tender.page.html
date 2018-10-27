@@ -4,16 +4,28 @@
     <ion-buttons slot="start">
       <ion-button (click)="goBack()">
         <ion-icon name="arrow-round-back"></ion-icon>
-        Back
+        <ng-container *ngIf="translate.currentLang === 'ar'" class="dir-rtl">
+          العودة
+        </ng-container>
+        <ng-container *ngIf="translate.currentLang === 'en'">
+          Back
+        </ng-container>
       </ion-button>
     </ion-buttons>
 
-    <ion-title>View Tender</ion-title>
+    <ion-title>
+      <ng-container *ngIf="translate.currentLang === 'ar'" class="dir-rtl">
+        تصفح مناقصة
+      </ng-container>
+      <ng-container *ngIf="translate.currentLang === 'en'">
+        View Tender
+      </ng-container>
+    </ion-title>
 
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ng-container *ngIf="tender != null; else NotFound">
     <div class="flex-container">
 
@@ -29,12 +41,25 @@
 
   <ng-template #NotFound>
     <ng-container *ngIf="showNotFound">
-      <h2 padding text-center>Tender Not Found!</h2>
+      <h2 padding text-center>
+        <ng-container *ngIf="translate.currentLang === 'ar'" class="dir-rtl">
+          لم يتم العثور على المناقصة
+        </ng-container>
+        <ng-container *ngIf="translate.currentLang === 'en'">
+          Tender Not Found!
+        </ng-container>
+      </h2>
       <br>
       <ion-row>
         <ion-col align-self-center size="3" size-sm="3" size-md="3" size-lg="3" size-xl="3" style="margin: 0 auto;">
           <ion-button expand="block" mode="ios" (click)="goBack()">
-            Go Back
+            <ng-container *ngIf="translate.currentLang === 'ar'" class="dir-rtl">
+              العودة
+            </ng-container>
+            <ng-container *ngIf="translate.currentLang === 'en'">
+              Go Back
+            </ng-container>
+
           </ion-button>
         </ion-col>
       </ion-row>
@@ -58,7 +83,12 @@
 
             <!-- NOTE: Join Tender Button -->
             <ion-button expand="block" mode="ios" (click)="joinTender()">
-              <ion-icon name="add-circle" mode="ios" color="light"></ion-icon>&nbsp;Join Tender
+              <ng-container *ngIf="translate.currentLang === 'ar'" class="dir-rtl">
+                الإشتراك في المناقصة
+              </ng-container>
+              <ng-container *ngIf="translate.currentLang === 'en'">
+                Join Tender
+              </ng-container>
             </ion-button>
 
           </ion-col>
@@ -67,6 +97,35 @@
       </ion-toolbar>
 
     </ion-footer>
+  </ng-container>
+
+  <!-- consultant or admin -->
+  <ng-container *ngIf="user.accountType === 2 || user.accountType === 5">
+    <!-- created the tender or admin -->
+    <ion-footer *ngIf="user.uid === tender.uid || user.accountType === 5">
+
+      <ion-toolbar color="light">
+        <ion-row padding-horizontal>
+
+          <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+            <!-- NOTE: Join Tender Button -->
+            <ion-button expand="block" mode="ios" (click)="deleteTender()">
+              <ng-container *ngIf="translate.currentLang === 'ar'" class="dir-rtl">
+                مسح المناقصة
+              </ng-container>
+              <ng-container *ngIf="translate.currentLang === 'en'">
+                Delete Tender
+              </ng-container>
+            </ion-button>
+
+          </ion-col>
+
+        </ion-row>
+      </ion-toolbar>
+
+    </ion-footer>
+
   </ng-container>
 </ng-container>
 

@@ -6,10 +6,12 @@ import { ToastController } from '@ionic/angular';
 })
 export class ShowToastService {
 
-  constructor(private toastController: ToastController) { }
+  constructor(public toastController: ToastController) { }
 
 
   async showToast(message: string, parameter?: string, duration: number = 4000) {
+
+    await this.toastController.dismiss().catch(_ => { });
 
     let toastOptions: any;
 
@@ -36,4 +38,9 @@ export class ShowToastService {
 
     await toast.present();
   }
+
+  // async dismissToast() {
+  //   this.toastController.dismiss();
+  // }
+
 }

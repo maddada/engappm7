@@ -1,19 +1,20 @@
 <!-- <ion-tabs color="dark" tabbar-highlight tabbarLayout="label-hide"> -->
 <ion-tabs color="secondary" tabbarLayout="label-hide" tabbarPlacement="bottom" tabbarHighlight="true">
 
-  <ion-tab label="Tenders" icon="browsers" href="/tabs/(home:home)">
+  <ion-tab label="{{'common.home' | translate}}" icon="browsers" href="/tabs/(home:home)">
     <ion-router-outlet name="home"></ion-router-outlet>
   </ion-tab>
 
-  <ion-tab label="Featured" icon="bookmarks" badge="5" href="/tabs/(contact:contact)">
+  <!-- Add back badge=""! Make it equal to number of featured tenders or posted tenders -->
+  <ion-tab label="{{'common.featured' | translate}}" icon="bookmarks" href="/tabs/(contact:contact)">
     <ion-router-outlet name="contact"></ion-router-outlet>
   </ion-tab>
 
-  <ion-tab label="Search" icon="search" href="/tabs/(search:search)">
+  <ion-tab label="{{'common.search' | translate}}" icon="search" href="/tabs/(search:search)">
     <ion-router-outlet name="search"></ion-router-outlet>
   </ion-tab>
 
-  <ion-tab label="Profile" icon="person" href="/tabs/(profile:profile)">
+  <ion-tab label="{{'common.profile' | translate}}" icon="person" href="/tabs/(profile:profile)">
     <ion-router-outlet name="profile"></ion-router-outlet>
   </ion-tab>
 

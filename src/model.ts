@@ -13,6 +13,8 @@ export interface User {
     password?: string;          // for auth
 
     profileName?: string;       // for profile
+    profileNameAr?: string;       // for profile
+
     companyNumber?: string;       // مكتب الشركة
 
     personName?: string;
@@ -76,6 +78,7 @@ export interface Tender {
     tenderCategory?: string; // construction, maintenece, etc
 
     tenderTitle?: string;
+    tenderTitleAr?: string;
     tenderSummary?: string;
 
     deadline?: number;
@@ -84,6 +87,7 @@ export interface Tender {
     uid?: string; // uid
     creatorEmail?: string; // Get Company Email from CreatedBy
     profileName?: string; // User or Company Name!!
+    profileNameAr?: string;       // Company Name!!
     personName?: string; // Company rep name
     personNumber?: string;
     companyNumber?: string;

@@ -25,12 +25,12 @@ export class AuthService {
   user$: Observable<User | null>;
   user: User | null;
   userID: string;
+  userPromise: Promise<User>;
 
   // public isUserLoggedIn$: BehaviorSubject<boolean>;
 
   constructor(
     public afAuth: AngularFireAuth,
-    private afs: AngularFirestore,
     private router: Router,
     private toast: ShowToastService,
     private db: FirestoreService
@@ -41,9 +41,13 @@ export class AuthService {
       switchMap(user => {
         if (user) {
 
-          console.log('auth service: logged in!');
+          // console.log('auth service: logged in!');
           this.userID = user.uid;
           // this.user = user;
+
+          this.userPromise = new Promise((resolve) => {
+            resolve(this.user);
+          });
 
           return this.db.doc$<User>(`users/${user.uid}`);
           //Same as:
@@ -51,7 +55,7 @@ export class AuthService {
 
         } else {
 
-          console.log('auth service: not logged in!');
+          // console.log('auth service: not logged in!');
           // this.isUserLoggedIn$.next(false);
           this.userID = null;
           this.user = null;
@@ -68,13 +72,8 @@ export class AuthService {
 
   }
 
-  uid() {
-    return this.user$
-      .pipe(
-        take(1),
-        map(u => u && u.uid)
-      )
-      .toPromise();
+  uid(): Promise<User> {
+    return this.user$.pipe(take(1)).toPromise();
   }
 
   emailLogin(email: string, password: string) {
@@ -93,7 +92,9 @@ export class AuthService {
 
     return fbAuth
       .sendPasswordResetEmail(email)
-      .then(() => this.toast.showToast('Password update email sent'))
+      .then(() => {
+        this.toast.showToast('Password Reset Email Sent!');
+      })
       .catch(error => this.handleError(error));
   }
 

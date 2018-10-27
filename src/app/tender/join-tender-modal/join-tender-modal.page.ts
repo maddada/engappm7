@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Tender } from '../../../model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-join-tender-modal',
@@ -15,10 +16,12 @@ export class JoinTenderModalPage implements OnInit {
 
   constructor(
     private modal: ModalController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    public translate: TranslateService,
   ) { }
 
   ngOnInit() {
+
     this.tempTender = this.navParams.data.tender;
     this.fixWhatsappNumber();
   }
@@ -41,7 +44,7 @@ export class JoinTenderModalPage implements OnInit {
       else if (this.originalWhatsapp.startsWith('05')) { //050 052 054 055 056 etc.
         this.originalWhatsapp = this.originalWhatsapp.slice(1);
         this.originalWhatsapp = '971' + this.originalWhatsapp;
-        console.log(this.originalWhatsapp);
+        // console.log(this.originalWhatsapp);
       }
 
       if (this.originalWhatsapp.length === 12 && this.originalWhatsapp.startsWith('97')) {
@@ -54,6 +57,10 @@ export class JoinTenderModalPage implements OnInit {
 
   openWhatsapp() {
     window.open(`https://wa.me/${this.fixedWhatsapp}`, '_blank');
+  }
+
+  openPhone() {
+    window.open(`tel:${this.tempTender.tenderContactNumber}`, '_top');
   }
 
   sendEmail() {

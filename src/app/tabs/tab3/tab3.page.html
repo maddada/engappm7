@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{'common.search' | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <div class="flex-container">
+
+    <ng-container *ngFor="let company of companies; let i = index">
+
+      <div class="company-element-container">
+        <app-company-list-element [company]="company">
+        </app-company-list-element>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+
+</ion-content>
+
+
+
+
+
+
+
+<ion-footer>
+  <ion-toolbar color="light">
+    <ion-row padding-horizontal>
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <ion-button expand="block" mode="ios" (click)="onClickFilterSearch()">
+          <ion-icon name="search" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
+          <ion-icon name="search" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
+          {{'tab2.search-options' | translate}}
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

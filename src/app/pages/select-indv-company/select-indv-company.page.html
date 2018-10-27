@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+        {{'common.back' | translate}}
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title></ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <div id="container">
+
+    <h1 [class.dir-rtl]="translate.currentLang==='ar'">{{'register.pick-account-type' | translate}}</h1>
+
+    <ion-icon name="person" mode="md" color="medium" size="large" padding-top></ion-icon>
+    <ion-button expand="block" href="/register/1" routerDirection="forward">
+      {{'individual' | translate}}
+    </ion-button>
+    <br>
+    <ion-icon name="pin" mode="md" color="medium" size="large" padding-top></ion-icon>
+    <ion-button expand="block" href="/select-acc-type" routerDirection="forward">
+      {{'company' | translate}}
+    </ion-button>
+
+  </div>
+
+</ion-content>

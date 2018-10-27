@@ -1,0 +1,42 @@
+@import "../../../theme/mixins.scss";
+
+#container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-content: stretch;
+  align-items: center;
+  margin: 0;
+  margin-top: 2vh;
+  padding: 0;
+
+  h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    width: 100%;
+    color: --ion-color-dark;
+    padding-bottom: 50px;
+    font-weight: 400;
+
+    @include for-tablet-portrait {
+      font-size: 2rem;
+      width: 20rem;
+    }
+  }
+
+  h2 {
+    font-weight: bold;
+  }
+
+  ion-button {
+    font-size: 1.3rem;
+    width: 60vw;
+
+    @include for-tablet-portrait {
+      text-align: center;
+      font-size: 1.5rem;
+      width: 10rem;
+    }
+  }
+}

@@ -2,37 +2,85 @@
   <ion-toolbar>
 
     <ion-title>
-      Join Tender Details
+      <ng-container *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+        تفاصيل المشاركة
+      </ng-container>
+      <ng-container *ngIf="translate.currentLang==='en'">
+        Join Tender Details
+      </ng-container>
     </ion-title>
 
     <ion-buttons slot="end">
-      <ion-button (click)="dismiss()" strong>Done</ion-button>
+      <ion-button (click)="dismiss()" strong>
+        <ng-container *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+          العودة
+        </ng-container>
+        <ng-container *ngIf="translate.currentLang==='en'">
+          Done
+        </ng-container>
+
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-list padding-top style="background: transparent">
-    <ion-item mode="ios" strong>
-      <ion-label text-wrap style="font-weight: bold; font-size: 1.1rem; padding-left: 20px; padding-right: 20px;">
-        Contact the tender creator for any questions or to submit your tender proposal.</ion-label>
+  <ion-list padding-top style="background: transparent" [class.dir-rtl]="translate.currentLang==='ar'">
+    <ion-item mode="ios" strong [class.dir-rtl]="translate.currentLang==='ar'">
+      <ion-label text-wrap style="font-weight: bold; font-size: 1.1rem; padding-left: 20px; padding-right: 20px;"
+        text-center *ngIf="translate.currentLang==='ar'" class="dir-rtl" padding-bottom>
+        تواصل مع منظم المناقصة في حال وجود أي استفسارات او للإشتراك:
+      </ion-label>
+      <ion-label text-wrap style="font-weight: bold; font-size: 1.1rem; padding-left: 20px; padding-right: 20px;" *ngIf="translate.currentLang==='en'" padding-bottom>
+        Contact the tender creator for any questions or to submit your tender proposal:
+      </ion-label>
     </ion-item>
 
-    <ion-item *ngIf="tender.tenderContactWhatsapp && tender.tenderContactWhatsapp != ''">
-      <ion-label strong>Whatsapp:</ion-label>
-      <ion-button strong fill="clear" size="default" (click)="openWhatsapp()" title="Click to Message">{{tender.tenderContactWhatsapp}}</ion-button>
+    <ion-item *ngIf="tempTender.tenderContactWhatsapp && tempTender.tenderContactWhatsapp != ''" [class.dir-rtl]="translate.currentLang==='ar'">
+      <ion-label style="font-weight:bold">
+        <ng-container *ngIf="translate.currentLang==='ar'">
+          الواتساب
+        </ng-container>
+        <ng-container *ngIf="translate.currentLang==='en'">
+          Whatsapp
+        </ng-container>
+      </ion-label>
+
+      <ion-button strong fill="clear" size="default" (click)="openWhatsapp()" title="إضغط لتتواصل" *ngIf="translate.currentLang==='ar'">{{tender.tenderContactWhatsapp}}</ion-button>
+
+      <ion-button strong fill="clear" size="default" (click)="openWhatsapp()" title="Click to Message" *ngIf="translate.currentLang==='en'">{{tender.tenderContactWhatsapp}}</ion-button>
     </ion-item>
 
-    <ion-item *ngIf="tender.tenderContactEmail != null && tender.tenderContactEmail != ''">
-      <ion-label strong>Email</ion-label>
-      <ion-button strong fill="clear" size="default" (click)="sendEmail()" title="Click to Email">{{tender.tenderContactEmail}}</ion-button>
+    <ion-item *ngIf="tempTender.tenderContactEmail != null && tempTender.tenderContactEmail != ''" [class.dir-rtl]="translate.currentLang==='ar'">
+      <ion-label style="font-weight:bold">
+        <ng-container *ngIf="translate.currentLang==='ar'">
+          الإيميل
+        </ng-container>
+        <ng-container *ngIf="translate.currentLang==='en'">
+          Email
+        </ng-container>
+      </ion-label>
+
+      <ion-button strong fill="clear" size="default" (click)="sendEmail()" title="إضغط لترسل" *ngIf="translate.currentLang==='ar'">{{tempTender.tenderContactEmail}}</ion-button>
+
+      <ion-button strong fill="clear" size="default" (click)="sendEmail()" title="Click to Email" *ngIf="translate.currentLang==='en'">{{tempTender.tenderContactEmail}}</ion-button>
     </ion-item>
 
-    <ion-item *ngIf="tender.tenderContactNumber != null && tender.tenderContactNumber != ''">
-      <span slot="start" class="dot"></span>
-      <ion-label>Mobile Number</ion-label>
-      <ion-button position="start" title="Click to Call">{{tender.tenderContactNumber}}</ion-button>
+    <ion-item *ngIf="tempTender.tenderContactNumber != null && tempTender.tenderContactNumber != ''" [class.dir-rtl]="translate.currentLang==='ar'">
+      <!-- <span slot="start" class="dot"></span> -->
+      <ion-label style="font-weight:bold">
+        <ng-container *ngIf="translate.currentLang==='ar'">
+          رقم الموبايل
+        </ng-container>
+        <ng-container *ngIf="translate.currentLang==='en'">
+          Mobile Number
+        </ng-container>
+      </ion-label>
+
+      <ion-button strong fill="clear" size="default" title="إضغط لتتصل" (click)="openPhone()" *ngIf="translate.currentLang==='ar'">{{tempTender.tenderContactNumber}}</ion-button>
+
+      <ion-button strong fill="clear" size="default" title="Click to Call" (click)="openPhone()" *ngIf="translate.currentLang==='en'">{{tempTender.tenderContactNumber}}</ion-button>
     </ion-item>
 
   </ion-list>

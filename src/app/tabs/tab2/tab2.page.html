@@ -1,0 +1,170 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+
+      <ng-container [ngSwitch]="user?.accountType">
+        <ng-container *ngSwitchCase="1">
+          {{'tab2.featured-tenders' | translate}}
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+          {{'tab2.posted-tenders' | translate}}
+        </ng-container>
+        <ng-container *ngSwitchCase="3">
+          {{'tab2.featured-tenders' | translate}}
+        </ng-container>
+        <ng-container *ngSwitchCase="4">
+          {{'tab2.featured-tenders' | translate}}
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          {{'tab2.featured-tenders' | translate}}
+        </ng-container>
+      </ng-container>
+
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="flex-container">
+    <ng-container *ngIf="tenders?.length !== 0;else NoTendersToShow">
+      <ng-container *ngFor="let tender of tenders; let i = index">
+
+
+        <div class="tender-element-container">
+          <app-tender-list-element [tender]="tender">
+          </app-tender-list-element>
+        </div>
+
+      </ng-container>
+    </ng-container>
+
+    <ng-template #NoTendersToShow>
+      <ion-row style="height:70vh; justify-content: center; align-items: center;">
+        <ion-col text-center align-items-center>
+
+          <ng-container *ngIf="user?.accountType === 1 || user?.accountType === 3 || user?.accountType === 4 || user?.accountType === 5">
+            <h1>{{'tab2.no-featured-tenders' | translate}}</h1>
+          </ng-container>
+
+          <ng-container *ngIf="user?.accountType === 2">
+            <ion-button color="dark" fill="outline" disabled>
+              {{'tab2.no-created-tenders' | translate}}
+            </ion-button>
+            <!-- <h5>
+              {{'tab2.no-created-tenders' | translate}}
+            </h5>
+            <h5>
+              {{'tab2.click-button-to-create-one' | translate}}
+            </h5> -->
+          </ng-container>
+
+        </ion-col>
+      </ion-row>
+    </ng-template>
+
+
+  </div>
+</ion-content>
+
+
+<ion-footer *ngIf="user?.accountType === 2">
+
+  <ion-toolbar color="light">
+
+    <ion-row padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <ion-button expand="block" mode="ios" href="/create-tender" routerDirection="forward">
+          <ion-icon name="add-circle-outline" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
+          <ion-icon name="add-circle-outline" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
+          {{'common.create-tender' | translate}}
+        </ion-button>
+
+        <!-- NOTE: I'M USING THIS TO CREATE FAKE TENDERS IN FIREBASE FAST!! -->
+        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="createFakeTender()">
+          <ion-icon name="add-circle" mode="ios"></ion-icon>&nbsp;Create Fake Tender
+          </ion-button> -->
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+
+<ng-template #ContractorNoEntries>
+  <ion-row justify-content-center>
+    <ion-col text-center align-items-center>
+      <h1>
+        {{'tab2.no-tenders-joined' | translate}}
+      </h1>
+      <h2>
+        {{'tab2.browse-home-to-find-tenders' | translate}}
+      </h2>
+      <!-- <ion-button type="bar-button" mode="ios" text-uppercase href="/login" routerDirection="forward">
+        <ion-icon name="at" mode="md"></ion-icon>&nbsp;Log In
+      </ion-button> -->
+    </ion-col>
+  </ion-row>
+</ng-template>
+
+<!--
+<ng-container [ngSwitch]="user?.accountType">
+
+    <ng-container *ngSwitchCase="1">
+      <ng-container *ngFor="let tender of tenders; let i = index">
+        <ng-container *ngIf="tenders?.length !== 0;else NoFeaturedEntries">
+
+          <div class="tender-element-container">
+            <app-tender-list-element [tender]="tender">
+            </app-tender-list-element>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="2">
+      <ng-container *ngFor="let tender of tenders; let i = index">
+        <ng-container *ngIf="tenders?.length !== 0;else ConsultantNoEntries">
+
+          <div class="tender-element-container">
+            <app-tender-list-element [tender]="tender">
+            </app-tender-list-element>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="3">
+      <ng-container *ngFor="let tender of tenders; let i = index">
+
+        <ng-container *ngIf="tenders?.length !== 0;else ContractorNoEntries">
+
+          <div class="tender-element-container">
+            <app-tender-list-element [tender]="tender">
+            </app-tender-list-element>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="4">
+      <ng-container *ngFor="let tender of tenders; let i = index">
+        <ng-container *ngIf="tenders?.length !== 0;else NoFeaturedEntries">
+
+          <div class="tender-element-container">
+            <app-tender-list-element [tender]="tender">
+            </app-tender-list-element>
+          </div>
+
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container> -->

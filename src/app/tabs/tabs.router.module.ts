@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { TabsPage } from './tabs.page';
-import { HomePage } from './home/home.page';
-import { SearchPage } from './search/search.page';
-import { ContactPage } from './posted/contact.page';
-import { ProfilePage } from './profile/profile.page';
+import { Tab1Page } from './tab1/tab1.page';
+import { Tab2Page } from './tab2/tab2.page';
+import { Tab3Page } from './tab3/tab3.page';
+import { Tab4Page } from './tab4/tab4.page';
 
 const routes: Routes = [
   {
@@ -15,22 +15,22 @@ const routes: Routes = [
       {
         path: 'home',
         outlet: 'home',
-        component: HomePage
-      },
-      {
-        path: 'search',
-        outlet: 'search',
-        component: SearchPage
+        component: Tab1Page
       },
       {
         path: 'contact',
         outlet: 'contact',
-        component: ContactPage
+        component: Tab2Page
+      },
+      {
+        path: 'search',
+        outlet: 'search',
+        component: Tab3Page
       },
       {
         path: 'profile',
         outlet: 'profile',
-        component: ProfilePage
+        component: Tab4Page
       },
     ]
   },

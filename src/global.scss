@@ -51,20 +51,26 @@ ion-content {
   // background-size: ;
 }
 
-// ion-col {
-//   --background: #00000000;
-// }
-
 .m7toast {
   --ion-safe-area-bottom: 120px;
-  --background: #494949c0;
+  --background: rgba(73, 73, 73, 0.7);
+  // background: rgba(73, 73, 73, 0.5);
   font-weight: bold !important;
   div {
-    color: white;
+    color: rgb(245, 245, 245);
     padding: 0 auto !important;
     width: auto;
     text-align: center !important;
   }
+}
+
+.ar {
+  text-align: right !important;
+  direction: rtl !important;
+}
+
+.dir-rtl {
+  direction: rtl !important;
 }
 
 *,

@@ -17,6 +17,8 @@ import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { AuthService } from '../../core/auth.service';
 import { ShowLoadingService } from '../../core/show-loading.service';
+import { TranslateService } from '@ngx-translate/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-create-tender',
@@ -34,7 +36,7 @@ export class CreateTenderPage implements OnInit {
 
   public downloadURLs$: Observable<string>[];
 
-  public selectedDeadline: Date;
+  public selectedDeadline: string;
   public summaryTemp: any;
 
   private filesToUpload: any[] = []; //Accepted Files
@@ -42,6 +44,8 @@ export class CreateTenderPage implements OnInit {
   termsCheckBoxValue: boolean;
   datePickerMinYear: number;
   datePickerMaxYear: number;
+
+
 
   // Used to access input and clear it
   // (if file selected for upload is too big or disallowed type)
@@ -61,15 +65,14 @@ export class CreateTenderPage implements OnInit {
 
   constructor(
     private nav: NavController,
-    // private afAuth: AngularFireAuth,
-    // private afs: AngularFirestore,
-    private storage: AngularFireStorage,
+    private ngFireStorage: AngularFireStorage,
     private db: FirestoreService,
     private auth: AuthService,
     private toast: ShowToastService,
     public element: ElementRef,
-    public loading: ShowLoadingService,
     public loadingCtrl: LoadingController,
+    public translate: TranslateService,
+    public storage: Storage,
   ) {
 
   }
@@ -77,7 +80,8 @@ export class CreateTenderPage implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.auth.user.class);
+
+
     // Settings Deadline Picker Min and Max Year:
     let temp = new Date();
     this.datePickerMaxYear = temp.getFullYear() + 1;
@@ -150,16 +154,25 @@ export class CreateTenderPage implements OnInit {
       this.newTender.tenderCategory == null ||
       this.newTender.deadline == null
     ) {
-      console.log(this.newTender.tenderCategory);
-      console.log(this.newTender.deadline);
-      this.toast.showToast(`A Required Field is Empty!`);
+      // console.log(this.newTender.tenderCategory);
+      // console.log(this.newTender.deadline);
+      if (this.translate.currentLang === 'ar') {
+        this.toast.showToast(`يوجد خانة إلزامية لم يتم تعبأتها`);
+      } else if (this.translate.currentLang === 'en') {
+        this.toast.showToast(`A Required Field is Empty!`);
+      }
+
       return false;
     }
 
     // Fixing Inputs:
+
     if (this.summaryTemp != null) {
       this.newTender.tenderSummary =
         this.summaryTemp.replace(/\n/g, '<br>');
+    }
+    else if (this.summaryTemp == null) {
+      this.newTender.tenderSummary = '';
     }
 
     return true;
@@ -187,10 +200,10 @@ export class CreateTenderPage implements OnInit {
 
     // name of file in cloud storage
     const filePath = `users/${this.newTender.uid}/${this.newTender.tenderId}/${file.name}`;
-    const fileRef = this.storage.ref(filePath);
+    const fileRef = this.ngFireStorage.ref(filePath);
 
     // start upload task
-    const task = this.storage.upload(filePath, file);
+    const task = this.ngFireStorage.upload(filePath, file);
 
     // observe percentage changes
     switch (number) {
@@ -235,7 +248,7 @@ export class CreateTenderPage implements OnInit {
           // this gets called after every next() (emission)
           // NOTE: 4- After the URL is recieved, set attachmentURLs[number] to the URL, THEN GO TO 5 IN FINALIZE!
           this.newTender.attachmentURLs.push(val);
-          console.log(`this.newTender.attachmentURLs[number]:`, this.newTender.attachmentURLs);
+          // console.log(`this.newTender.attachmentURLs[number]:`, this.newTender.attachmentURLs);
         });
       })).subscribe();
 
@@ -276,6 +289,7 @@ export class CreateTenderPage implements OnInit {
       uid: this.auth.user.uid,
       creatorEmail: this.auth.user.email,
       profileName: this.auth.user.profileName,
+      profileNameAr: this.auth.user.profileNameAr,
       personName: this.auth.user.personName,
       personNumber: this.auth.user.personNumber,
       govSector: this.auth.user.govSector,
@@ -289,13 +303,17 @@ export class CreateTenderPage implements OnInit {
 
     this.showLoading.dismiss();
 
-    this.toast.showToast(`Tender Created!`);
+    if (this.translate.currentLang === 'ar') {
+      this.toast.showToast(`تم إنشاء المناقصة`);
+    } else if (this.translate.currentLang === 'en') {
+      this.toast.showToast(`Tender Created!`);
+    }
 
     await this.delay(1000);
 
-    // this.nav.navigateForward(`/view-tender/${this.newTender.tenderId}`);
+    this.nav.navigateForward(`/view-tender/${this.newTender.tenderId}`);
 
-    console.log('After Tender Created Ran');
+    // console.log('After Tender Created Ran');
   }
 
 
@@ -328,13 +346,23 @@ export class CreateTenderPage implements OnInit {
 
     // NOTE: If file is over 10 mbs, then clear the upload button.
     if (newFile.size < 1) {
-      this.toast.showToast(`File Selected is Empty! Please Check File`);
+
+      if (this.translate.currentLang === 'ar') {
+        this.toast.showToast(`الملف الذي إخترته فارغ، الرجاء التحقق`);
+      } else if (this.translate.currentLang === 'en') {
+        this.toast.showToast(`File Selected is Empty! Please Check File`);
+      }
+
       this.filesToUpload[number] = 'NOT-SET';
       this.myUploadButtons[number].nativeElement.value = '';
     }
 
     if (newFile.size > 10485760) {
-      this.toast.showToast(`File selected is too large! (Max is 10mb)`);
+      if (this.translate.currentLang === 'ar') {
+        this.toast.showToast(`حجم الملف أكبر من 10 ميجابايت`);
+      } else if (this.translate.currentLang === 'en') {
+        this.toast.showToast(`File selected is too large! (Max is 10mb)`);
+      }
       this.filesToUpload[number] = 'NOT-SET';
       this.myUploadButtons[number].nativeElement.value = '';
 
@@ -353,12 +381,16 @@ export class CreateTenderPage implements OnInit {
 
       // NOTE: IF SELECTED FILE IS VALID THEN ADD
       this.filesToUpload[number] = event;
-      console.log("2:", event);
+      // console.log("2:", event);
 
     } else {
       // NOTE: 3- If file format isn't valid, then clear the upload button.
 
-      this.toast.showToast(`File format not Supported! (Only Images/PDF/Word)`);
+      if (this.translate.currentLang === 'ar') {
+        this.toast.showToast(`صيغة الملف الذي إخترته ليست مدعومة`);
+      } else if (this.translate.currentLang === 'en') {
+        this.toast.showToast(`File format not Supported! (Only Images/PDF/Word)`);
+      }
 
       this.filesToUpload[number] = 'NOT-SET';
       this.myUploadButtons[number].nativeElement.value = '';
@@ -382,7 +414,7 @@ export class CreateTenderPage implements OnInit {
     } else {
       this.termsCheckBoxValue = true;
     }
-    console.log(this.termsCheckBoxValue);
+    // console.log(this.termsCheckBoxValue);
   }
 
 
@@ -394,17 +426,19 @@ export class CreateTenderPage implements OnInit {
 
   public onSelectDate($event): any {
 
-    console.log(this.selectedDeadline);
-    let day = this.selectedDeadline.getDay();
-    let month = this.selectedDeadline.getMonth() - 1;
-    let year = this.selectedDeadline.getFullYear();
+    // Reference: How to deal with ion-datetime in component!!
+    //** START **//
+    let tempDateArray = this.selectedDeadline.split('-');
 
-    let tempDate = new Date(year, month, day, 23, 59, 59);
+    let day = tempDateArray[2];
+    let month = tempDateArray[1];
+    let year = tempDateArray[0];
+
+    let tempDate = new Date(Number(year), Number(month), Number(day), 23, 59, 59);
 
     this.newTender.deadline = new Date(tempDate).getTime();
-
-    // console.log(this.selectedDeadline);
-    console.log(this.newTender.deadline);
+    //** END **//
+    // console.log(this.newTender.deadline);
   }
 
 
@@ -419,7 +453,7 @@ export class CreateTenderPage implements OnInit {
   public onTestClicked(): void {
 
     if (this.s1_validateAndFixInputs()) {
-      console.log("TENDER INPUTS ARE VALID!");
+      // console.log("TENDER INPUTS ARE VALID!");
     }
     else {
     }

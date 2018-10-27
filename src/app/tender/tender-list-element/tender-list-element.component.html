@@ -4,155 +4,196 @@
 
     <ng-container *ngSwitchCase="'tender_construction'">
       <div class="image-col-grid c1">
+        <div class="featured" *ngIf="tender?.featured === true">
+          {{'tender.Featured' | translate}}
+        </div>
         <img src="/assets/icon/construction.svg">
 
         <div class="category-row">
-          Construction
+          {{'tender.Construction' | translate}}
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'tender_steel'">
       <div class="image-col-grid c2">
+        <div class="featured" *ngIf="tender?.featured === true">
+          {{'tender.Featured' | translate}}
+        </div>
         <img src="/assets/icon/steel.svg">
 
         <div class="category-row">
-          Steel
+          {{'tender.Steel' | translate}}
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'tender_maintenance'">
       <div class="image-col-grid c3">
+        <div class="featured" *ngIf="tender?.featured === true">
+          {{'tender.Featured' | translate}}
+        </div>
         <img src="/assets/icon/maintenance.svg">
 
         <div class="category-row">
-          Maintenance
+          {{'tender.Maintenance' | translate}}
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'tender_concrete'">
       <div class="image-col-grid c4">
+        <div class="featured" *ngIf="tender?.featured === true">
+          {{'tender.Featured' | translate}}
+        </div>
         <img src="/assets/icon/concrete.svg">
 
         <div class="category-row">
-          Concrete
+          {{'tender.Concrete' | translate}}
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'tender_prefab'">
       <div class="image-col-grid c5">
+        <div class="featured" *ngIf="tender?.featured === true">
+          {{'tender.Featured' | translate}}
+        </div>
         <img src="/assets/icon/prefab.svg">
 
         <div class="category-row">
-          Prefab
+          {{'tender.Prefab' | translate}}
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'tender_insulation'">
       <div class="image-col-grid c6">
+        <div class="featured" *ngIf="tender?.featured === true">
+          {{'tender.Featured' | translate}}
+        </div>
         <img src="/assets/icon/insulation.svg">
 
         <div class="category-row">
-          Insulation
+          {{'tender.Insulation' | translate}}
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'tender_fencing'">
       <div class="image-col-grid c7">
+        <div class="featured" *ngIf="tender?.featured === true">
+          {{'tender.Featured' | translate}}
+        </div>
         <img src="/assets/icon/walls.svg">
 
         <div class="category-row">
-          Walls/Fencing
+          {{'tender.Walls-Fencing' | translate}}
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchCase="'tender_general'">
       <div class="image-col-grid c8">
+        <div class="featured" *ngIf="tender?.featured === true">
+          {{'tender.Featured' | translate}}
+        </div>
         <img src="/assets/icon/helmet.svg">
 
         <div class="category-row">
-          General
+          {{'tender.General' | translate}}
         </div>
       </div>
     </ng-container>
 
     <ng-container *ngSwitchDefault>
       <div class="image-col-grid c1">
+        <div class="featured" *ngIf="tender?.featured === true">
+          {{'tender.Featured' | translate}}
+        </div>
         <img src="/assets/icon/construction.svg">
 
         <div class="category-row">
-          Construction
+          {{'tender.Construction' | translate}}
         </div>
       </div>
     </ng-container>
 
   </ng-container>
 
-  <div class="details-col-grid">
+  <div class="details-col-grid" [class.ar-details-col-grid]="translate.currentLang==='ar'">
 
-    <div class="row-1 tender-title-row">
-      {{tender?.tenderTitle}}
+    <div class="row-1 tender-title-row" [class.dir-rtl]="translate.currentLang==='ar'">
+      <ng-container *ngIf="translate.currentLang==='ar'">{{tender.tenderTitleAr
+        || tender.tenderTitle}}</ng-container>
+      <ng-container *ngIf="translate.currentLang==='en'">{{tender.tenderTitle}}</ng-container>
     </div>
 
-    <div class="row-2 company-name-row">
-      {{tender?.profileName}}
+    <div class="row-2
+      company-name-row" [class.dir-rtl]="translate.currentLang==='ar'">
+      <ng-container *ngIf="translate.currentLang==='ar'">
+        {{tender.profileNameAr || tender.profileName}}
+      </ng-container>
+      <ng-container *ngIf="translate.currentLang==='en'">
+        {{tender.profileName}}
+      </ng-container>
     </div>
 
-    <div class="row-3 details-row-container">
+    <div class="row-3
+      details-row-container">
       <div class="main-description-grid">
-        <!-- [class.arabic]="lang === 'ar'" -->
         <ion-icon name='pin' mode="md"></ion-icon>
-        <div class="detail-name-text">City</div>
+        <div class="detail-name-text">{{'common.city' | translate}}</div>
         <div class="detail-data">
           <ng-container [ngSwitch]="tender?.city">
 
             <ng-container *ngSwitchCase="1">
-              Dubai
+              {{'dubai' | translate}}
             </ng-container>
 
             <ng-container *ngSwitchCase="2">
-              Sharjah
+              {{'sharjah' | translate}}
             </ng-container>
 
             <ng-container *ngSwitchCase="3">
-              Ajman
+              {{'ajman' | translate}}
             </ng-container>
 
             <ng-container *ngSwitchCase="4">
-              Abu Dhabi
+              {{'abu-dhabi' | translate}}
             </ng-container>
 
+            <!-- <ng-container *ngSwitchCase="5">
+                  Al Ain
+                </ng-container> -->
+
             <ng-container *ngSwitchCase="6">
-              Al Fujairah
+              {{'fujairah' | translate}}
             </ng-container>
 
             <ng-container *ngSwitchCase="7">
-              Ras Al Khaima
+              {{'ras-al-khaimah' | translate}}
             </ng-container>
 
             <ng-container *ngSwitchCase="8">
-              Umm Al Quwain
+              {{'umm-al-quwain' | translate}}
             </ng-container>
+
 
           </ng-container>
         </div>
 
         <ion-icon name="checkmark-circle-outline" mode="md"></ion-icon>
-        <div class="detail-name-text">Status</div>
-        <div class="detail-data">{{statusString}}</div>
+        <div class="detail-name-text">{{'tender.Status' | translate}}</div>
+        <div class="detail-data" [class.ended]="statusString === 'Ended' || statusString === 'إنتهى'"
+          [class.ending-soon]="statusString === 'Ending Soon' || statusString === 'شارف الإنتهاء'">{{statusString}}</div>
 
         <ion-icon name="alarm" mode="md"></ion-icon>
-        <div class="detail-name-text">Published</div>
+        <div class="detail-name-text">{{'tender.Published' | translate}}</div>
         <div class="detail-data">{{ publishedDate | date:'dd-MM-yyyy'}}</div>
 
         <div></div>
-        <div class="detail-name-text">Deadline</div>
+        <div class="detail-name-text">{{'tender.Deadline' | translate}}</div>
         <div class="detail-data">{{tender.deadline | date:'dd-MM-yyyy'}}</div>
 
       </div>
@@ -162,52 +203,56 @@
 
 </div>
 
-<div *ngIf="extended" class="extended-container">
+<div *ngIf="extended" class="extended-container" [class.dir-rtl]="translate.currentLang==='ar'">
 
-  <h5 class="title"> Details: </h5>
+  <h5 class="title">
+    {{'tender.Details' | translate}}:
+  </h5>
 
-  <div class="extended-inner-grid">
+  <div class="extended-inner-grid" [class.dir-rtl]="translate.currentLang==='ar'">
     <ion-icon name="document" style="align-self: start"></ion-icon>
-    <div class="detail-name-text" style="align-self: start; margin-top:-2px;">Description</div>
+    <div class="detail-name-text" style="align-self: start; margin-top:-2px;">
+      {{'tender.Description' | translate}}
+    </div>
     <div class="detail-data" style="align-self: start;">
-      <div *ngIf="tender?.tenderSummary.length> 0; else NoSummary" [innerHTML]="tender?.tenderSummary">
+      <div dir="auto" *ngIf="tender?.tenderSummary?.length > 0; else NoSummary" [innerHTML]="tender?.tenderSummary">
 
       </div>
     </div>
 
     <ng-template #NoSummary>
-      <div text-center>Not Available.</div>
+      <div text-center>{{'tender.no-available' | translate}}</div>
     </ng-template>
 
     <!-- Spacing Row -->
     <div style="height: 15px;"></div>
-    <div></div>
-    <div></div>
+    <div style="height: 15px;"></div>
+    <div style="height: 15px;"></div>
 
     <ion-icon name='business' mode="md"></ion-icon>
-    <div class="detail-name-text">Sector</div>
+    <div class="detail-name-text">{{'profile.sector' | translate}}</div>
     <div class="detail-data sector-data">
-      <ng-container *ngIf="tender?.govSector === true; else PrivateSector">Govermental</ng-container>
+      <ng-container *ngIf="tender?.govSector === true; else PrivateSector">
+        {{'profile.govermental' | translate}}
+      </ng-container>
       <ng-template #PrivateSector>
-        Private
+        {{'profile.private' | translate}}
       </ng-template>
     </div>
 
-
     <!-- Spacing Row -->
     <div style="height: 15px;"></div>
-    <div></div>
-    <div></div>
+    <div style="height: 15px;"></div>
+    <div style="height: 15px;"></div>
 
 
     <ion-icon name="attach" mode="md"></ion-icon>
-    <div class="detail-name-text">Attachments</div>
+    <div class="detail-name-text">{{'tender.Attachments' | translate}}</div>
     <div class="detail-data">
       <ng-container *ngFor="let attachment of tender?.attachmentURLs; let i = index">
         <ion-button class="attachment-button" [href]="attachment" size="small">
-          Attachment #{{i+1}}
+          {{'tender.Attachment' | translate}} #{{i+1}}
         </ion-button>
-
       </ng-container>
     </div>
 

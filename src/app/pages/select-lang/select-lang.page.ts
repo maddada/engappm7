@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-select-lang',
@@ -8,17 +10,44 @@ import { Router } from '@angular/router';
 })
 export class SelectLangPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private nav: NavController, public translate: TranslateService, private storage: Storage) { }
 
   ngOnInit() {
   }
 
-  // TODO: Make each one set different language and change app direction.
-  ArabicButtonClicked() {
-    this.router.navigate(['/home']);
+  ArButtonClicked() {
+    this.useLanguage('ar');
   }
 
-  EnglishButtonClicked() {
-    this.router.navigate(['/home']);
+  EnButtonClicked() {
+    this.useLanguage('en');
+  }
+
+  useLanguage(selectedLanguage: string) {
+    this.translate.use(selectedLanguage);
+    this.translate.setDefaultLang(selectedLanguage);
+    this.storage.set('language', selectedLanguage);
+
+    this.storage.get('first_time').then((val) => {
+      if (val !== null) {
+        // console.log(`Not first launch.`);
+        // go back to settings page after selecting language.
+        // window.location.reload(true);
+        this.nav.navigateRoot('/');
+      } else {
+        // console.log('First launch.');
+
+        this.storage.set('first_time', 'done');
+
+        // open wizard after selecting language!
+        if (this.translate.currentLang === 'ar') {
+          this.nav.navigateForward('/wizard-ar');
+        }
+        else if (this.translate.currentLang === 'en') {
+          this.nav.navigateForward('/wizard');
+        }
+      }
+    });
+
   }
 }

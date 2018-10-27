@@ -1,17 +1,15 @@
-<ion-header>
-
-  <ion-toolbar>
-    <ion-title>Pick a language 🌍</ion-title>
-  </ion-toolbar>
-
-</ion-header>
-
-<ion-content padding>
+<ion-content>
 
   <div id="container">
-    <!-- <ion-button expand="block" [routerLink]="/" routerDirection="forward">العربية </ion-button> -->
-    <ion-button expand="block" (click)="ArabicButtonClicked()">العربية</ion-button>
-    <ion-button expand="block" (click)="EnglishButtonClicked()">English</ion-button>
+    <img style="margin-top: 30px;margin-bottom: 20px;" src="../../../assets/icon/select-language.png">
+
+
+    <h2>Pick a language!</h2>
+    <!-- <h2>إختر لغة</h2> -->
+    <br><br>
+    <ion-button expand="block" (click)="EnButtonClicked()">English</ion-button>
+    <ion-button expand="block" (click)="ArButtonClicked()">العربية</ion-button>
+
   </div>
 
 </ion-content>

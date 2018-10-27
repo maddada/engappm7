@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-toolbar>
-    <ion-title>Logout</ion-title>
+    <ion-title>{{'common.logout' | translate}}</ion-title>
   </ion-toolbar>
 
 </ion-header>
@@ -10,13 +10,15 @@
 
   <div id="container">
 
-    <h1>Are you sure you want to logout?</h1>
+    <h1>
+      {{'logout.are-you-sure-logout' | translate}}
+    </h1>
 
     <ion-button expand="block" (click)="signOutClicked()">
-      Yes
+      {{'common.yes' | translate}}
     </ion-button>
     <ion-button expand="block" href="/" routerDirection="root">
-      Go Back
+      {{'common.no' | translate}}
     </ion-button>
   </div>
 

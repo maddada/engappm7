@@ -1,0 +1,197 @@
+@import "../../../theme/mixins.scss";
+
+ion-content {
+  position: relative !important;
+  & * {
+    direction: rtl;
+  }
+}
+
+ion-slides {
+  width: 100%;
+  background: url("/src/assets/images/background/yak.jpg") right center/100%
+    100% no-repeat fixed;
+}
+
+ion-slide {
+  position: relative !important;
+  height: 100vh !important;
+  display: grid;
+  justify-content: flex-start;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(minmax(50px, auto), 3);
+  align-items: flex-start;
+  align-content: flex-start;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+h1 {
+  // for phone:
+  font-weight: bold;
+
+  // for tablet and above:
+  @include for-small-phone-only {
+    font-size: 1em;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  @include for-phone-only {
+    font-size: 1.4em;
+    margin-top: 40px;
+    margin-bottom: 15px;
+  }
+
+  @include for-tablet-portrait {
+    font-size: 1.6em;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}
+
+div.img {
+  display: flex;
+  justify-content: center;
+
+  @include for-small-phone-only {
+    padding-top: 10px;
+  }
+
+  @include for-phone-only {
+    padding-top: 30px;
+  }
+
+  @include for-tablet-portrait {
+    padding-top: 40px;
+  }
+}
+
+// General Image Settings for all slides:
+ion-img {
+  overflow: hidden;
+  height: 100px;
+  width: auto;
+  @include for-small-phone-only {
+    height: 70px;
+    // width: 60vw;
+    // max-width: 80px;
+  }
+
+  @include for-phone-only {
+    // height: 10px;
+    // width: 60vw;
+    // max-width: 120px;
+  }
+
+  @include for-tablet-portrait {
+    // width: 60vw;
+    // max-width: 150px;
+  }
+}
+
+.slide-first {
+  color: #000000;
+}
+
+.benefits-slide {
+  color: #000000;
+}
+
+.slide-end {
+  color: #000000;
+}
+
+// List under each benifits page
+.subtitle {
+  height: auto;
+  display: flex;
+  justify-content: center;
+
+  @include for-tablet-portrait {
+    * {
+      width: 370px;
+      margin: 0 auto;
+    }
+  }
+
+  h3 {
+    margin-top: 40px;
+    color: rgb(73, 73, 73);
+    font-weight: bold;
+    line-height: 180%;
+
+    // for phones:
+    width: 80vw;
+    font-size: 1.15rem;
+
+    @include for-tablet-portrait {
+      margin-top: 100px;
+      width: 80vw;
+      max-width: 500px;
+      font-size: 1.7rem;
+    }
+  }
+
+  ul {
+    font-size: 1.6rem;
+    width: 80%;
+    @include for-small-phone-only {
+      font-size: 0.98rem;
+    }
+
+    @include for-phone-only {
+      font-size: 1.12rem;
+    }
+
+    @include for-tablet-portrait {
+      font-size: 1.3rem;
+    }
+  }
+
+  li {
+    text-align: start;
+    color: rgb(73, 73, 73);
+    font-weight: bold;
+    padding-bottom: 1.2rem;
+
+    @include for-small-phone-only {
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+.slide-first {
+  ion-img {
+    margin-bottom: 20px;
+    height: 140px !important;
+    width: auto;
+  }
+}
+
+// Fixed bottom of page button:
+.finish-button {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 100px;
+  width: 100%;
+}
+
+.swipe-button {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+}
+
+.skip-button {
+  z-index: 2;
+  position: absolute;
+  display: block;
+  bottom: 0px;
+  right: 10px;
+  font-size: 1rem;
+}

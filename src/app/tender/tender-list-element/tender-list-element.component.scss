@@ -20,6 +20,8 @@
   margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.05);
 
+  margin-bottom: 10px;
+
   grid-template-columns: 35% 65%;
   grid-template-rows: 1fr;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2) !important;
@@ -39,6 +41,14 @@
     box-shadow: inset -5px 0px 30px 0px rgba(0, 0, 0, 0.2);
     justify-items: center;
 
+    .featured {
+      grid-row: 1;
+      align-self: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: rgba(255, 255, 255, 0.733);
+    }
+
     img {
       display: block;
       grid-row: 3/4;
@@ -52,7 +62,7 @@
     div.category-row {
       grid-row: 4;
       align-self: center;
-      font-size: 0.76rem;
+      font-size: 0.8rem;
       font-weight: bold;
       color: rgba(255, 255, 255, 0.733);
     }
@@ -149,7 +159,7 @@
       .detail-name-text {
         font-size: 0.75rem;
         align-self: end;
-        padding-right: 25px;
+        padding-inline-end: 25px;
       }
 
       .detail-data {
@@ -157,6 +167,26 @@
         font-weight: bold;
         align-self: end;
       }
+    }
+  }
+
+  .ar-details-col-grid {
+    direction: rtl;
+
+    .tender-title-row {
+      text-align: center;
+      margin-right: 20px;
+      direction: ltr;
+    }
+
+    .company-name-row {
+      text-align: center;
+      direction: ltr;
+      margin-right: 20px;
+    }
+
+    .details-row-container {
+      margin-right: 40px;
     }
   }
 }
@@ -173,45 +203,12 @@
   width: 90vw;
   max-width: 350px;
 
-  /* @include for-desktop-up {
-    margin-right: 5px;
-    margin-left: 5px;
-  }
-
-  @include for-phone-only {
-    width: 90vw;
-    max-width: 350px;
-  }
-
-  @include for-tablet-portrait {
-    width: 90vw;
-    max-width: 400px;
-    font-size: 20px;
-  }
-
-  @include for-tablet-landscape {
-    width: 90vw;
-    max-width: 450px;
-    font-size: 20px;
-  }
-
-  @include for-desktop-up {
-    width: 90vw;
-    max-width: 500px;
-    font-size: 20px;
-  } */
-
   border-radius: 20px;
   margin: 15px;
   margin-top: 15px;
   background-color: rgba(255, 255, 255, 0.05);
 
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2) !important;
-
-  // @include for-desktop-up {
-  //   margin-right: 5px;
-  //   margin-left: 5px;
-  // }
 
   .title {
     font-size: 0.85rem;
@@ -233,6 +230,7 @@
     .summary {
       padding-top: 6px;
       padding-bottom: 6px;
+      font-weight: bold;
     }
 
     ion-icon {
@@ -251,10 +249,12 @@
     .detail-data {
       font-size: 0.85rem;
       align-self: top;
+      font-weight: bold;
     }
 
     .sector-data {
       text-align: center;
+      font-weight: bold;
     }
 
     .attachment-button {
@@ -262,4 +262,12 @@
       font-weight: bold;
     }
   }
+}
+
+.ended {
+  color: rgb(207, 0, 0);
+}
+
+.ending-soon {
+  color: rgb(212, 98, 21);
 }

@@ -5,7 +5,7 @@
     <ion-header>
 
       <ion-toolbar color="light">
-        <ion-title>Menu</ion-title>
+        <ion-title>{{'common.menu' | translate}}</ion-title>
       </ion-toolbar>
 
     </ion-header>
@@ -19,30 +19,76 @@
             <ion-item *ngIf="user" [routerLink]="['/view-profile', auth.user.uid]" routerDirection="forward">
               <ion-icon slot="start" name="person"></ion-icon>
               <ion-label>
-                {{auth.user.profileName}}
+                <ng-container *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+                  {{auth.user.profileNameAr || auth.user.profileName}}
+                </ng-container>
+                <ng-container *ngIf="translate.currentLang==='en'">
+                  {{auth.user.profileName}}
+                </ng-container>
               </ion-label>
             </ion-item>
 
             <ion-item *ngIf="auth?.user" routerDirection="forward" routerLink="/logout">
               <ion-icon slot="start" name="log-out"></ion-icon>
               <ion-label>
-                Log Out
+                {{'common.log-out' | translate}}
               </ion-label>
             </ion-item>
           </ng-container>
 
-          <!-- NOTE: THEN SHOW THE REST OF THE ITEMS-->
-          <ng-container *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+          <!-- NOTE: ELSE! IF NOT LOGGED IN THEN SHOW LOG IN & REGISTER BUTTONS-->
+          <ng-template #logIn>
+            <ion-item routerDirection="forward" routerLink="/login">
 
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <ion-icon slot="start" name="log-in"></ion-icon>
 
               <ion-label>
-                {{p.title}}
+                {{'common.log-in' | translate}}
               </ion-label>
 
             </ion-item>
-          </ng-container>
+
+            <ion-item routerDirection="forward" routerLink="/select-indv-company">
+
+              <ion-icon slot="start" name="at"></ion-icon>
+
+              <ion-label>
+                {{'common.register' | translate}}
+              </ion-label>
+
+            </ion-item>
+          </ng-template>
+
+          <ion-item [routerDirection]="'forward'" routerLink="/select-language">
+
+            <ion-icon slot="start" name="globe"></ion-icon>
+
+            <ion-label>
+              {{ 'pages.settings.change-language' | translate }}
+            </ion-label>
+
+          </ion-item>
+
+
+          <ion-item routerDirection="forward" routerLink="" (click)="aboutClicked()">
+
+            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+
+            <ion-label>
+              {{'common.about' | translate}}
+            </ion-label>
+
+          </ion-item>
+
+          <!-- <ion-item [routerDirection]="'root'" routerLink="/settings">
+
+            <ion-icon slot="start" name="settings"></ion-icon>
+
+            <ion-label>
+              {{'common.settings' | translate}}
+            </ion-label>
+
+          </ion-item> -->
 
 
         </ion-menu-toggle>
@@ -58,26 +104,3 @@
   <!-- </ion-split-pane> -->
 
 </ion-app>
-
-<!-- NOTE: IF NOT LOGGED IN THEN SHOW LOG IN & REGISTER BUTTONS-->
-<ng-template #logIn>
-  <ion-item routerDirection="forward" routerLink="/login">
-
-    <ion-icon slot="start" name="log-in"></ion-icon>
-
-    <ion-label>
-      Log In
-    </ion-label>
-
-  </ion-item>
-
-  <ion-item routerDirection="forward" routerLink="/register">
-
-    <ion-icon slot="start" name="at"></ion-icon>
-
-    <ion-label>
-      Register
-    </ion-label>
-
-  </ion-item>
-</ng-template>

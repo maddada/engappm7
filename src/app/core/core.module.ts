@@ -6,24 +6,29 @@ import { FirestoreService } from './firestore.service';
 
 import { AuthGuard } from '../guards/auth.guard';
 import { LoggedinGuard } from '../guards/loggedin.guard';
+import { ConsultantOnlyGuard } from '../guards/consultant-only.guard';
 
 import { ShowLoadingService } from './show-loading.service';
 import { ShowToastService } from './show-toast.service';
 
-import { SafeHtmlPipe } from '../pipes/safehtml.pipe';
-import { FileSizePipe } from '../pipes/filesize.pipe';
+import { TranslateModule } from '@ngx-translate/core';
+
+// import { SafeHtmlPipe } from '../pipes/safehtml.pipe';
+// import { FileSizePipe } from '../pipes/filesize.pipe';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    TranslateModule
   ],
   declarations: [
-    SafeHtmlPipe,
-    FileSizePipe,
+    // SafeHtmlPipe,
+    // FileSizePipe,
   ],
   exports: [
-    SafeHtmlPipe,
-    FileSizePipe,
+    TranslateModule,
+    // SafeHtmlPipe,
+    // FileSizePipe,
   ],
 })
 export class CoreModule {
@@ -36,6 +41,7 @@ export class CoreModule {
           FirestoreService,
           AuthGuard,
           LoggedinGuard,
+          ConsultantOnlyGuard,
           ShowToastService,
           ShowLoadingService,
         ]

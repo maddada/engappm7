@@ -1,0 +1,36 @@
+### Project Start
+ionic cordova resource
+
+### Terminal:
+ionic s
+ionic build --prod
+npm run extract
+ionic g
+npm install
+npm update
+ionic cordova run android
+ionic cordova build android
+npx tslint -c ionic-migration.json -p tsconfig.json
+ionic run android --aot
+
+ionic build --prod
+firebase deploy --only hosting
+
+
+
+### Translation:
+
+
+
+### Unsubscribing using takeUntil
+
+, OnDestroy
+
+unsubscribe$: Subject<any> = new Subject();
+
+takeUntil(this.unsubscribe$)
+
+ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+}

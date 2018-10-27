@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{'tab4.your-profile' | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content no-padding>
+  <ng-container *ngIf="user?.uid != null; else notLoggedIn">
+    <div class="flex-container">
+
+      <app-profile-element [user]="user" [allowEdit]="true" #profileElement>
+      </app-profile-element>
+
+      <ng-container *ngIf="showComments && profileElement.editMode === false">
+        <ng-container *ngIf="comments?.length > 0;else NoComments">
+          <div class="comments-header">
+            {{'common.comments' | translate}}
+          </div>
+
+          <ng-template #NoComments>
+            <div class="comments-header no-comments">
+              <br><br>
+              <ion-button color="dark" fill="outline" disabled>{{'common.no-comments' | translate}}</ion-button>
+            </div>
+          </ng-template>
+
+          <ng-container *ngFor="let comment of comments; let i = index">
+            <app-profile-comment [comment]="comment">
+            </app-profile-comment>
+          </ng-container>
+        </ng-container>
+
+      </ng-container>
+    </div>
+
+  </ng-container>
+</ion-content>
+
+<ion-footer *ngIf="user?.uid != null">
+
+  <ion-toolbar color="light">
+
+    <ion-row padding-horizontal>
+
+      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+
+        <ion-button expand="block" mode="ios" (click)="toggleEditOn()" *ngIf="editMode === false">
+          <ion-icon name="create" mode="ios" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
+          <ion-icon name="create" mode="ios" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
+          {{'tab4.edit-profile' | translate}}
+        </ion-button>
+
+        <ion-button expand="block" mode="ios" (click)="cancle()" *ngIf="editMode === true" strong>
+          {{'profile.edit-cancle' | translate}}
+        </ion-button>
+
+        <ion-button expand="block" mode="ios" (click)="saveUpdate()" *ngIf="editMode === true" strong>
+          {{'profile.edit-done' | translate}}
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
+
+<!-- not logged in here -->
+<ng-template #notLoggedIn>
+  <ion-row justify-content-center>
+    <ion-col text-center align-items-center>
+      <ng-container *ngIf="showNotLoggedIn">
+        <!-- {{'tab4.login-to-view-profile' | translate}} -->
+        <div class="not-logged-in-button-container">
+          <ion-button class="not-logged-in-button" size="large" type="bar-button" mode="ios" text-uppercase href="/login"
+            routerDirection="forward">
+            <ion-icon name="at" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
+            <ion-icon name="at" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
+            {{'common.log-in' | translate}}
+          </ion-button>
+        </div>
+      </ng-container>
+    </ion-col>
+  </ion-row>
+</ng-template>

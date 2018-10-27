@@ -4,16 +4,17 @@ import { ProfileComment, User, M7LoadingOptions } from '../../../model';
 import { AuthService } from '../../core/auth.service';
 import { ShowToastService } from '../../core/show-toast.service';
 import { FirestoreService } from '../../core/firestore.service';
-import { take } from 'rxjs/operators';
-import { ShowLoadingService } from '../../core/show-loading.service';
+import { takeUntil } from 'rxjs/operators';
 import { NavController, LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-rate',
   templateUrl: './rate.page.html',
   styleUrls: ['./rate.page.scss'],
 })
-export class RatePage implements OnInit {
+export class RatePage implements OnInit, OnDestroy {
 
   id: string;
   onUser: User;
@@ -23,16 +24,28 @@ export class RatePage implements OnInit {
 
   showLoading: any;
 
-  constructor(private route: ActivatedRoute, public auth: AuthService, private toast: ShowToastService,
-    private db: FirestoreService, private nav: NavController, private loadingCtrl: LoadingController) { }
+
+  unsubscribe$: Subject<any> = new Subject();
+
+  constructor(
+    private route: ActivatedRoute,
+    public auth: AuthService,
+    private toast: ShowToastService,
+    public translate: TranslateService,
+    private db: FirestoreService,
+    private nav: NavController,
+    private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
+
+
+
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.newComment = {};
     this.newComment.rating = -1;
 
-    this.db.doc$(`users/${this.id}`).pipe(take(1)).subscribe(res =>
+    this.db.doc$(`users/${this.id}`).pipe(takeUntil(this.unsubscribe$)).subscribe(res =>
       this.onUser = res
     );
   }
@@ -53,7 +66,12 @@ export class RatePage implements OnInit {
       this.newComment.commentStr.length === 0 ||
       this.newComment.rating === -1
     ) {
-      this.toast.showToast(`A Required Field is Empty!`, '', 2000);
+      if (this.translate.currentLang === 'ar') {
+        this.toast.showToast(`الرجاء تعبئة الخانات الإلزامية`);
+      } else if (this.translate.currentLang === 'en') {
+        this.toast.showToast(`A Required Field is Empty!`);
+      }
+
       return;
     } else {
 
@@ -88,13 +106,23 @@ export class RatePage implements OnInit {
 
     this.db.upsertTS(`comments/${this.newComment.createdById}_${this.newComment.commentOnId}`, this.newComment).then(() => {
       this.showLoading.dismiss();
-      this.toast.showToast(`Rating Submitted for ${this.newComment.commentOnName}`);
+      if (this.translate.currentLang === 'ar') {
+        this.toast.showToast(`تم تثبيت التقييم`);
+      } else if (this.translate.currentLang === 'en') {
+        this.toast.showToast(`Rating Submitted for ${this.newComment.commentOnName}`);
+      }
+
       this.nav.goBack();
     });
   }
 
   goBack() {
     this.nav.goBack();
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
 

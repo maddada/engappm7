@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/en.json ./src/assets/i18n/ar.json --clean --sort --format namespaced-json"
   },
   "private": true,
   "dependencies": {
@@ -20,7 +21,9 @@
     "@angular/http": "^6.1.10",
     "@angular/platform-browser": "^6.1.10",
     "@angular/platform-browser-dynamic": "^6.1.10",
+    "@angular/pwa": "^0.10.3",
     "@angular/router": "^6.1.10",
+    "@angular/service-worker": "^6.1.10",
     "@ionic-native/core": "^5.0.0-beta.17",
     "@ionic-native/splash-screen": "^5.0.0-beta.17",
     "@ionic-native/sqlite": "^5.0.0-beta.17",
@@ -28,6 +31,8 @@
     "@ionic/angular": "^4.0.0-beta.13",
     "@ionic/pro": "2.0.3",
     "@ionic/storage": "2.2.0",
+    "@ngx-translate/core": "^10.0.2",
+    "@ngx-translate/http-loader": "^3.0.1",
     "animate.css": "^3.7.0",
     "cordova-android": "7.0.0",
     "cordova-ios": "4.5.5",
@@ -55,6 +60,7 @@
     "@angular/compiler": "^6.1.10",
     "@angular/compiler-cli": "^6.1.10",
     "@angular/language-service": "^6.1.10",
+    "@biesbjerg/ngx-translate-extract": "^2.3.4",
     "@ionic/lab": "1.0.7",
     "@ionic/ng-toolkit": "^1.1.0",
     "@ionic/schematics-angular": "^1.0.7",

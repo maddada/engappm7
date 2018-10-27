@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { RegisterPage } from './register.page';
 import { ShowToastService } from '../../../core/show-toast.service';
+import { TranslateModule } from '@ngx-translate/core';
+
+
 
 const routes: Routes = [
   {
@@ -20,6 +23,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     RouterModule.forChild(routes)
   ],
   providers: [
