@@ -98,7 +98,8 @@ export class Tab3Page implements OnInit, OnDestroy {
         if (res.length > 0 && this.filterOptions.searchString != null && this.filterOptions.searchString !== '') {
           res = res.filter(element => {
             if (element.profileName != null) {
-              return element.profileName.includes(this.filterOptions.searchString);
+              return (element.profileName.includes(this.filterOptions.searchString)
+                || element.profileNameAr.includes(this.filterOptions.searchString));
             } else {
               return false;
             }

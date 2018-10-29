@@ -41,10 +41,13 @@ export class SelectLangPage implements OnInit {
 
         // open wizard after selecting language!
         if (this.translate.currentLang === 'ar') {
-          this.nav.navigateForward('/wizard-ar');
+          // this.nav.navigateForward('/wizard-ar');
+          this.nav.navigateForward('/');
         }
         else if (this.translate.currentLang === 'en') {
-          this.nav.navigateForward('/wizard');
+          // this.nav.navigateForward('/wizard');
+          this.nav.navigateForward('/');
+
         }
       }
     });
