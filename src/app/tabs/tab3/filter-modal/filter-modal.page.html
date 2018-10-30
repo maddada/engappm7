@@ -82,9 +82,13 @@
         </ion-select>
       </ion-item>
 
-      <ion-button expand="block" mode="ios" (click)="onClickSearch()">
+      <ion-button expand="block" mode="ios" (click)="onClickSearch()" strong>
         <ion-icon name="search" mode="md"></ion-icon>&nbsp;
         {{'common.search' | translate}}
+      </ion-button>
+      <ion-button expand="block" mode="ios" (click)="onClickClear()" strong>
+        <!-- <ion-icon name="" mode="md"></ion-icon>&nbsp; -->
+        {{'common.clear' | translate}}
       </ion-button>
 
     </ion-col>

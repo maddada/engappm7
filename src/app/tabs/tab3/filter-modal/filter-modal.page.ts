@@ -9,7 +9,6 @@ import { ModalController, NavParams } from '@ionic/angular';
 })
 export class FilterModalPage implements OnInit {
 
-  selectedCityNumber: number;
   selectedCityString: string;
 
   filterOptions: SearchFilter;
@@ -28,6 +27,13 @@ export class FilterModalPage implements OnInit {
 
   onClickSearch() {
     this.modal.dismiss(this.filterOptions);
+  }
+
+  onClickClear() {
+    this.filterOptions.searchString = '';
+    this.selectedCityString = '0';
+    this.filterOptions.city = 0;
+    this.filterOptions.tag = '';
   }
 
   onClickDismiss() {
