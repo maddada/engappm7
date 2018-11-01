@@ -207,7 +207,6 @@ export class RegisterPage implements OnInit {
   //// NOTE: Email/Password Auth ////
 
   private async emailSignUp() {
-
     this.showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
     await this.showLoading.present();
 

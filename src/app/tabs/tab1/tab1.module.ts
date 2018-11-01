@@ -21,7 +21,6 @@ import { TranslateModule } from '@ngx-translate/core';
         component: Tab1Page
       }
     ]),
-    // TenderListElementModule
   ],
   declarations: [Tab1Page],
 

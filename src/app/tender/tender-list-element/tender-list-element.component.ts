@@ -1,15 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Tender } from '../../../model';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { Storage } from '@ionic/storage';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-tender-list-element',
   templateUrl: './tender-list-element.component.html',
   styleUrls: ['./tender-list-element.component.scss']
 })
-export class TenderListElementComponent implements OnInit {
+export class TenderListElementComponent implements OnInit, OnDestroy {
 
   @Input() tender: Tender;
   @Input() extended: boolean;
@@ -19,19 +20,25 @@ export class TenderListElementComponent implements OnInit {
 
   public publishedDate: Date;
 
-
+  unsubscribe$: Subject<any> = new Subject();
 
   constructor(private nav: NavController,
     public translate: TranslateService) {
   }
 
   ngOnInit() {
-
-
-
     this.publishedDate = this.tender.createdAt.toDate();
+
     this.setStatus();
 
+    this.translate.onLangChange.pipe(takeUntil(this.unsubscribe$)).subscribe(_ => {
+      this.setStatus();
+    });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   public viewTender() {

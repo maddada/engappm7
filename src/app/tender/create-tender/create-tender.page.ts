@@ -16,7 +16,6 @@ import { NavController, LoadingController } from '@ionic/angular';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { AuthService } from '../../core/auth.service';
-import { ShowLoadingService } from '../../core/show-loading.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Storage } from '@ionic/storage';
 

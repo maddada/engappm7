@@ -170,13 +170,18 @@ export interface SearchFilter {
     tag?: string;
 }
 
+export enum Mode {
+    md = "md",
+    ios = "ios",
+}
+
 export class M7LoadingOptions {
     translucent = false;
     spinner = 'bubbles';
     showBackdrop = true;
     animated = true;
-    mode = 'md';
     keyboardClose = true;
+    mode = Mode.md;
 }
 
 

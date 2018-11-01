@@ -17,15 +17,15 @@
 
   <ion-row padding-horizontal>
 
-    <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+    <ion-col align-self-center size="10" size-sm="10" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-      <ion-item no-margin>
+      <ion-item no-margin padding-bottom>
         <ion-label position="floating" style="height: 0px;" no-padding no-margin></ion-label>
         <ion-input type="text" placeholder="{{'filter.search' | translate}}" [(ngModel)]="filterOptions.searchString"
           no-margin text-center></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item padding-bottom>
         <ion-label position="floating" style="height: 0px !important" no-padding no-margin></ion-label>
 
         <ion-select ok-text="Select" [value]="0" interface="action-sheet" [(ngModel)]="selectedCityString" (ionChange)="onSelectCity($event)"
@@ -44,7 +44,7 @@
         </ion-select>
       </ion-item>
 
-      <ion-item>
+      <ion-item padding-bottom>
         <ion-label position="floating" style="height: 0px;" no-padding no-margin></ion-label>
 
         <ion-select placeholder="{{'filter.select-category' | translate}}" ok-text="Select" interface="alert"

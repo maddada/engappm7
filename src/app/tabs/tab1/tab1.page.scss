@@ -29,5 +29,10 @@
 }
 
 ion-footer {
-  min-height: 70px !important;
+  max-height: 70px !important;
+
+  * {
+    font-weight: bold !important;
+    color: rgb(71, 71, 71);
+  }
 }

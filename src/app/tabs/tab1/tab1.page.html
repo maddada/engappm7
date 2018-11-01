@@ -41,7 +41,7 @@
         <!-- NOTE: LOGGED IN CITY SELECTOR, DEFAULTS TO USER'S CITY! -->
 
         <ion-item *ngIf="translate.currentLang==='ar' ; else EnCitySelector">
-          <ion-label position="floating" style="height: 0px !important" no-padding no-margin></ion-label>
+          <ion-label position="floating" style="height: 0px !important; display:none;" no-padding no-margin></ion-label>
 
           <ion-select ok-text="Select" interface="action-sheet" [(ngModel)]="selectedCityString" (ionChange)="onSelectCity()"
             text-center>
@@ -62,7 +62,7 @@
 
         <ng-template #EnCitySelector>
           <ion-item>
-            <ion-label position="floating" style="height: 0px !important" no-padding no-margin></ion-label>
+            <ion-label position="floating" style="height: 0px !important; display:none;" no-padding no-margin></ion-label>
 
             <ion-select ok-text="Select" interface="action-sheet" [(ngModel)]="selectedCityString" (ionChange)="onSelectCity()"
               text-center>

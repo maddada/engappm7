@@ -13,30 +13,30 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'home',
-        outlet: 'home',
+        path: 'tab1',
+        outlet: 'tab1',
         component: Tab1Page
       },
       {
-        path: 'contact',
-        outlet: 'contact',
+        path: 'tab2',
+        outlet: 'tab2',
         component: Tab2Page
       },
       {
-        path: 'search',
-        outlet: 'search',
+        path: 'tab3',
+        outlet: 'tab3',
         component: Tab3Page
       },
       {
-        path: 'profile',
-        outlet: 'profile',
+        path: 'tab4',
+        outlet: 'tab4',
         component: Tab4Page
       },
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/(home:home)',
+    redirectTo: '/tabs/(tab1:tab1)',
     pathMatch: 'full'
   }
 ];

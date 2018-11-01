@@ -33,14 +33,14 @@
         <form name="form" (ngSubmit)="f.form.valid && onClickLogin()" #f="ngForm" novalidate>
 
 
-          <div>
-            <ion-label for="email" [class.ar]="translate.currentLang==='ar'">
+          <div [class.ar]="translate.currentLang === 'ar'">
+            <ion-label for="email">
               {{'common.email' | translate}}
             </ion-label>
-            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
-              placeholder="" (keyup.enter)="onClickLogin()" autocomplete required email>
+            <input style="text-align: center" type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
+              placeholder="" (keyup.enter)="onClickLogin()" autocomplete required email >
 
-            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback" >
               <div *ngIf="email.errors.required">
                 {{ 'pages.login.email-required' | translate }}
               </div>
@@ -50,12 +50,12 @@
             </div>
           </div>
 
-          <div>
-            <ion-label for="password" [class.ar]="translate.currentLang==='ar'"> {{'common.password' | translate}}</ion-label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
+          <div [class.ar]="translate.currentLang === 'ar'">
+            <ion-label for="password"> {{'common.password' | translate}}</ion-label>
+            <input style="text-align: center" type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
               [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6" (keyup.enter)="onClickLogin()" />
 
-            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback" >
               <div *ngIf="password.errors.required">
                 {{ 'pages.login.pass-required' | translate }}
 

@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
 import { ShowToastService } from '../../core/show-toast.service';
-import { M7LoadingOptions } from '../../../model';
+
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingController, NavController } from '@ionic/angular';
+import { M7LoadingOptions } from '../../../model';
 
 @Component({
   selector: 'app-login',
