@@ -14,32 +14,36 @@ ionic cordova run android
 ionic cordova build android
 npx tslint -c ionic-migration.json -p tsconfig.json
 ionic run android --aot
-ionic build --prod
-ionic build --prod --aot --release
+
 
 ######## COMMANDS FOR TRANSLATION:
 npm run extract
 
 
+######## COMMANDS FOR ONLINE RELEASE:
+ionic build --prod --aot
+firebase deploy --only hosting
 
 
-######## COMMANDS FOR RELEASE:
 
-1- ionic cordova build --release android
-2- ionic build --prod --aot
-3- firebase deploy --only hosting
+
+
 
 
 ######## COMMANDS FOR ANDROID RELEASE:
-------Keystore:
-To create the keystore:
-keytool -genkey -v -keystore memar-release-key.keystore -alias memar -keyalg RSA -keysize 2048 -validity 10000
+ionic cordova build --release android
+
 
 To use the keystore:
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore memar-release-key.keystore memar-release-v1_0.apk memar
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore c:\memar-release-key.keystore C:\Dev\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk memar
 
 I uploaded the keystore to drive.google.com memar.app@gmail.com
 Pass is in my lastpass!
 
 ------To Zip Align:
 zipalign -v 4 c:/memar-v1_0-release-unsigned.apk c:/memar-v1_0-release-signed.apk
+
+
+------Keystore (Only once):
+To create the keystore:
+keytool -genkey -v -keystore memar-release-key.keystore -alias memar -keyalg RSA -keysize 2048 -validity 10000

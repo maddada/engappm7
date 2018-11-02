@@ -1,15 +1,5 @@
 @import "../../../theme/mixins.scss";
 
-// .edit-button {
-//   display: flex;
-//   justify-content: flex-end;
-//   position: absolute;
-//   bottom: 20px;
-//   right: 20px;
-//   font-weight: bold;
-//   z-index: 5;
-// }
-
 .edit-card {
   position: relative;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
@@ -65,10 +55,21 @@
   border-radius: 15px;
   text-align: center;
 
-  // @include for-tablet-portrait {
-  //   width: 100%;
-  //   padding: 40px;
-  // }
+  .details-container {
+    margin: 10px auto;
+
+    @include for-tablet-landscape {
+      // for tablet and above (half width)
+      min-width: 327px;
+      width: 40vw;
+    }
+
+    @include for-desktop-up {
+      // for tablet and above (half width)
+      min-width: 327px;
+      width: 100%;
+    }
+  }
 }
 
 .profile-header {

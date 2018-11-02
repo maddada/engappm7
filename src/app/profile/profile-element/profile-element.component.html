@@ -3,189 +3,196 @@
     <!-- NOTE: if logged in -->
 
     <div class="profile-card">
-      <div class="profile-header" *ngIf="translate.currentLang==='ar'">{{ user.profileNameAr || user.profileName }}</div>
-      <div class="profile-header" *ngIf="translate.currentLang==='en'">{{ user.profileName }}</div>
+      <div class="profile-header" *ngIf="translate.currentLang==='ar'">
+        {{ user.profileNameAr || user.profileName }}
+      </div>
+      <div class="profile-header" *ngIf="translate.currentLang==='en'">
+        {{ user.profileName }}
+      </div>
 
       <!-- NOTE: CITY -->
-      <div class="profile-subtitle" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
-        <ion-icon name="pin" mode="md">
-        </ion-icon>
-        <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">الإمارة</div>
-        <div class="detail-name" *ngIf="translate.currentLang==='en'">City:</div>
-        <span>
-          <ng-container [ngSwitch]="user.city">
+      <div class="details-container">
+        <div class="profile-subtitle" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
+          <ion-icon name="pin" mode="md">
+          </ion-icon>
+          <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">الإمارة</div>
+          <div class="detail-name" *ngIf="translate.currentLang==='en'">City:</div>
+          <span>
+            <ng-container [ngSwitch]="user.city">
 
-            <ng-container *ngSwitchCase="1">
-              {{'dubai' | translate}}
-            </ng-container>
+              <ng-container *ngSwitchCase="1">
+                {{'dubai' | translate}}
+              </ng-container>
 
-            <ng-container *ngSwitchCase="2">
-              {{'sharjah' | translate}}
-            </ng-container>
+              <ng-container *ngSwitchCase="2">
+                {{'sharjah' | translate}}
+              </ng-container>
 
-            <ng-container *ngSwitchCase="3">
-              {{'ajman' | translate}}
-            </ng-container>
+              <ng-container *ngSwitchCase="3">
+                {{'ajman' | translate}}
+              </ng-container>
 
-            <ng-container *ngSwitchCase="4">
-              {{'abu-dhabi' | translate}}
-            </ng-container>
+              <ng-container *ngSwitchCase="4">
+                {{'abu-dhabi' | translate}}
+              </ng-container>
 
-            <!-- <ng-container *ngSwitchCase="5">
+              <!-- <ng-container *ngSwitchCase="5">
                 Al Ain
               </ng-container> -->
 
-            <ng-container *ngSwitchCase="6">
-              {{'fujairah' | translate}}
-            </ng-container>
+              <ng-container *ngSwitchCase="6">
+                {{'fujairah' | translate}}
+              </ng-container>
 
-            <ng-container *ngSwitchCase="7">
-              {{'ras-al-khaimah' | translate}}
-            </ng-container>
+              <ng-container *ngSwitchCase="7">
+                {{'ras-al-khaimah' | translate}}
+              </ng-container>
 
-            <ng-container *ngSwitchCase="8">
-              {{'umm-al-quwain' | translate}}
-            </ng-container>
-
-
-          </ng-container>
-        </span>
-      </div>
-
-      <!-- NOTE: NUMBER -->
-      <div class="profile-subtitle" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
-        <ion-icon name="call" mode="md">
-        </ion-icon>
-        <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">الرقم</div>
-        <div class="detail-name" *ngIf="translate.currentLang==='en'">Number:</div>
-        <span>{{ user.companyNumber || user.personNumber }}</span>
-      </div>
-
-      <!-- NOTE: EMAIL -->
-      <div class="profile-subtitle" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
-        <ion-icon name="at" mode="md">
-        </ion-icon>
-        <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">
-          الإيميل
-        </div>
-        <div class="detail-name" *ngIf="translate.currentLang==='en'">
-          Email:
-        </div>
-
-        <span> {{ user.email || '-' }}</span>
-      </div>
-
-      <!-- NOTE: Address -->
-      <div class="profile-subtitle" *ngIf="user.address" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
-        <ion-icon name="pin" mode="md" style="align-self: flex-start; margin-top: 10px;"></ion-icon>
-        <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">العنوان</div>
-        <div class="detail-name" *ngIf="translate.currentLang==='en'">Address:</div>
-
-        <span *ngIf="translate.currentLang==='ar'" style="text-align:start; margin-inline-end: 10px;">
-          {{ user.addressAr || user.address }}</span>
-        <span *ngIf="translate.currentLang==='en'" style="text-align:start; margin-inline-end: 10px;">
-          {{ user.address || '-' }}
-        </span>
-      </div>
+              <ng-container *ngSwitchCase="8">
+                {{'umm-al-quwain' | translate}}
+              </ng-container>
 
 
-      <!-- NOTE: CLASS -->
-      <ng-container *ngIf="user.accountType===2 || user.accountType===3; else elseTemplate">
-        <div class="profile-subtitle" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
-          <ion-icon name="business">
-          </ion-icon>
-          <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">الدرجة</div>
-          <div class="detail-name" *ngIf="translate.currentLang==='en'">Class:</div>
-          <span [ngSwitch]=" user.class">
-            <ng-container *ngSwitchCase="0">
-              {{'profile.grade.special-grade' | translate}}
-            </ng-container>
-            <ng-container *ngSwitchCase="1">
-              {{'profile.grade.first-grade' | translate}}
-            </ng-container>
-            <ng-container *ngSwitchCase="2">
-              {{'profile.grade.second-grade' | translate}}
-            </ng-container>
-            <ng-container *ngSwitchCase="3">
-              {{'profile.grade.third-grade' | translate}}
-            </ng-container>
-            <ng-container *ngSwitchCase="4">
-              {{'profile.grade.fourth-grade' | translate}}
-            </ng-container>
-            <ng-container *ngSwitchCase="5">
-              {{'profile.grade.fifth-grade' | translate}}
-            </ng-container>
-            <ng-container *ngSwitchCase="6">
-              {{'profile.grade.sixth-grade' | translate}}
-            </ng-container>
-            <ng-container *ngSwitchDefault>
             </ng-container>
           </span>
         </div>
-      </ng-container>
 
-      <ng-template #elseTemplate>
-        <div *ngIf="user.accountType === 4">
-          <div class="supplier-subtitle" [class.ar-supplier-subtitle]="translate.currentLang==='ar'">
+
+        <!-- NOTE: NUMBER -->
+        <div class="profile-subtitle" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
+          <ion-icon name="call" mode="md">
+          </ion-icon>
+          <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">الرقم</div>
+          <div class="detail-name" *ngIf="translate.currentLang==='en'">Number:</div>
+          <span>{{ user.companyNumber || user.personNumber }}</span>
+        </div>
+
+        <!-- NOTE: EMAIL -->
+        <div class="profile-subtitle" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
+          <ion-icon name="at" mode="md">
+          </ion-icon>
+          <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">
+            الإيميل
+          </div>
+          <div class="detail-name" *ngIf="translate.currentLang==='en'">
+            Email:
+          </div>
+
+          <span> {{ user.email || '-' }}</span>
+        </div>
+
+        <!-- NOTE: Address -->
+        <div class="profile-subtitle" *ngIf="user.address" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
+          <ion-icon name="pin" mode="md" style="align-self: flex-start; margin-top: 10px;"></ion-icon>
+          <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">العنوان</div>
+          <div class="detail-name" *ngIf="translate.currentLang==='en'">Address:</div>
+
+          <span *ngIf="translate.currentLang==='ar'" style="text-align:start; margin-inline-end: 10px;">
+            {{ user.addressAr || user.address }}</span>
+          <span *ngIf="translate.currentLang==='en'" style="text-align:start; margin-inline-end: 10px;">
+            {{ user.address || '-' }}
+          </span>
+        </div>
+
+
+        <!-- NOTE: CLASS -->
+        <ng-container *ngIf="user.accountType===2 || user.accountType===3; else elseTemplate">
+          <div class="profile-subtitle" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
             <ion-icon name="business">
             </ion-icon>
-            <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">الإختصاصات</div>
-            <div class="detail-name" *ngIf="translate.currentLang==='en'">Specialities:</div>
-            <span style=" display:flex; flex-direction: column;">
-              <ng-container *ngFor="let cat of user.tags; let i = index">
-                <div *ngIf="cat === 'category_paint'">
-                  {{'c.paint' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_blocks'">
-                  {{'c.blocks' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_ceramics'">
-                  {{'c.ceramics' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_interlock'">
-                  {{'c.Interlock' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_wood'">
-                  {{'c.wood' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_doors'">
-                  {{'c.doors' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_fabric'">
-                  {{'c.fabric' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_cement'">
-                  {{'c.cement' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_gypsum'">
-                  {{'c.gypsum-board' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_decoration'">
-                  {{'c.decoration' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_glass'">
-                  {{'c.glass' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_aluminium'">
-                  {{'c.aluminium' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_kitchens'">
-                  {{'c.kitchens' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_ac'">
-                  {{'c.air-conditioning' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_lighting'">
-                  {{'c.lighting' | translate}}
-                </div>
-                <div *ngIf="cat === 'category_concrete'">
-                  {{'c.concrete' | translate}}
-                </div>
+            <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">الدرجة</div>
+            <div class="detail-name" *ngIf="translate.currentLang==='en'">Class:</div>
+            <span [ngSwitch]=" user.class">
+              <ng-container *ngSwitchCase="0">
+                {{'profile.grade.special-grade' | translate}}
+              </ng-container>
+              <ng-container *ngSwitchCase="1">
+                {{'profile.grade.first-grade' | translate}}
+              </ng-container>
+              <ng-container *ngSwitchCase="2">
+                {{'profile.grade.second-grade' | translate}}
+              </ng-container>
+              <ng-container *ngSwitchCase="3">
+                {{'profile.grade.third-grade' | translate}}
+              </ng-container>
+              <ng-container *ngSwitchCase="4">
+                {{'profile.grade.fourth-grade' | translate}}
+              </ng-container>
+              <ng-container *ngSwitchCase="5">
+                {{'profile.grade.fifth-grade' | translate}}
+              </ng-container>
+              <ng-container *ngSwitchCase="6">
+                {{'profile.grade.sixth-grade' | translate}}
+              </ng-container>
+              <ng-container *ngSwitchDefault>
               </ng-container>
             </span>
           </div>
-        </div>
-      </ng-template>
+        </ng-container>
+
+        <ng-template #elseTemplate>
+          <div *ngIf="user.accountType === 4">
+            <div class="supplier-subtitle" [class.ar-supplier-subtitle]="translate.currentLang==='ar'">
+              <ion-icon name="business">
+              </ion-icon>
+              <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">الإختصاصات</div>
+              <div class="detail-name" *ngIf="translate.currentLang==='en'">Specialities:</div>
+              <span style=" display:flex; flex-direction: column;">
+                <ng-container *ngFor="let cat of user.tags; let i = index">
+                  <div *ngIf="cat === 'category_paint'">
+                    {{'c.paint' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_blocks'">
+                    {{'c.blocks' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_ceramics'">
+                    {{'c.ceramics' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_interlock'">
+                    {{'c.Interlock' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_wood'">
+                    {{'c.wood' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_doors'">
+                    {{'c.doors' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_fabric'">
+                    {{'c.fabric' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_cement'">
+                    {{'c.cement' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_gypsum'">
+                    {{'c.gypsum-board' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_decoration'">
+                    {{'c.decoration' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_glass'">
+                    {{'c.glass' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_aluminium'">
+                    {{'c.aluminium' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_kitchens'">
+                    {{'c.kitchens' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_ac'">
+                    {{'c.air-conditioning' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_lighting'">
+                    {{'c.lighting' | translate}}
+                  </div>
+                  <div *ngIf="cat === 'category_concrete'">
+                    {{'c.concrete' | translate}}
+                  </div>
+                </ng-container>
+              </span>
+            </div>
+          </div>
+        </ng-template>
+      </div>
 
       <div class="rating-row">
         <ion-icon name="" mode="md"></ion-icon>
