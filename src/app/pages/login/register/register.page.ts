@@ -61,7 +61,6 @@ export class RegisterPage implements OnInit {
 
   public selectedSector: string;
 
-  showTerms: boolean;
   termsCheckBoxValue: boolean;
 
   showLoading: any;
@@ -404,12 +403,9 @@ export class RegisterPage implements OnInit {
   }
 
 
-
-  toggleShowingTerms() {
-    this.showTerms = !this.showTerms;
+  showTerms() {
+    window.open(`https://www.iubenda.com/privacy-policy/89111822/legal`, '_blank');
   }
-
-
 
   toggleTermsCheckBoxValue() {
     // console.log(this.termsCheckBoxValue);

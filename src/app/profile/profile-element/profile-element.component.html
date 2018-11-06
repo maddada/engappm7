@@ -87,9 +87,9 @@
           <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">العنوان</div>
           <div class="detail-name" *ngIf="translate.currentLang==='en'">Address:</div>
 
-          <span *ngIf="translate.currentLang==='ar'" style="text-align:start; margin-inline-end: 10px;">
+          <span *ngIf="translate.currentLang==='ar'" style="text-align:start;">
             {{ user.addressAr || user.address }}</span>
-          <span *ngIf="translate.currentLang==='en'" style="text-align:start; margin-inline-end: 10px;">
+          <span *ngIf="translate.currentLang==='en'" style="text-align:start;">
             {{ user.address || '-' }}
           </span>
         </div>

@@ -18,9 +18,9 @@
   //  Woff2: Super Modern Browsers
   //  Woff: Pretty Modern Browsers
   //  ttf: Safari, Android, iOS
-  src: url("./assets/fonts/a-jannat-lt.woff2") format("woff2"),
-    url("./assets/fonts/a-jannat-lt.woff") format("woff"),
-    url("./assets/fonts/a-jannat-lt.ttf") format("truetype");
+  src: url("/assets/fonts/a-jannat-lt.woff2") format("woff2"),
+    url("/assets/fonts/a-jannat-lt.woff") format("woff"),
+    url("/assets/fonts/a-jannat-lt.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
 }
@@ -39,7 +39,11 @@
 //   background-attachment: fixed !important;
 // }
 
-// .inner-scroll,
+ion-item {
+  --ion-background-color: transparent;
+  --padding-start: 0;
+}
+
 ion-content {
   // --background: url("./assets/images/background/electro1.jpg") no-repeat 100%
   //   100% !important;

@@ -15,7 +15,16 @@ that hosts the main router outlet, probably app.components */
 
 @Component({
     selector: 'app-root',
-    templateUrl: 'app.component.html'
+    templateUrl: 'app.component.html',
+    styles: [`
+    ion-content {
+        --background: white;
+    }
+
+    ion-item {
+        --padding-start: 10px;
+    }
+    `],
 })
 export class AppComponent {
 

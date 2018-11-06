@@ -27,8 +27,10 @@
           <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
             <!--_ Select Account Type  -->
-            <ion-item padding-top>
-              <ion-label position="stacked">{{'register.Account-Type' | translate}}</ion-label>
+            <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
+              <ion-label position="stacked">
+                {{'register.Account-Type' | translate}}
+              </ion-label>
 
               <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" cancle-text="Cancle"
                 [(ngModel)]="selectedType" id="selectAccountType" interface="action-sheet" (ionChange)="onSelectType($event)"
@@ -144,16 +146,17 @@
 <ng-template #company_registration_fields>
 
   <!-- EMAIL -->
-  <div padding-top>
-    <ion-label position="stacked" class="label">{{'common.email' | translate}}</ion-label>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <ion-label position="stacked" class="label">{{'common.email' |
+      translate}}</ion-label>
 
     <input required type="text" placeholder="" [(ngModel)]="newUser.email" name="email">
 
-    <!-- <ion-label error-field no-margin *ngIf="!isEmailValid">Error: {{errorType}}</ion-label> -->
+    <!-- <ion-label   error-field no-margin *ngIf="!isEmailValid">Error: {{errorType}}</ion-label> -->
   </div>
 
   <!-- PASSWORD -->
-  <div padding-top>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
     <ion-label position="stacked">{{'common.password' | translate}}</ion-label>
 
     <input required type="password" placeholder="" [(ngModel)]="newUser.password" name="password">
@@ -162,37 +165,46 @@
   </div>
 
   <!-- Company Name -->
-  <div padding-top>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
     <ion-label position="stacked">{{'profile.company-name' | translate}}</ion-label>
 
     <input required type="text" placeholder="" [(ngModel)]="newUser.profileName" name="profileName" dir="auto">
   </div>
 
   <!-- Company Name Arabic -->
-  <div padding-top>
-    <ion-label position="stacked" *ngIf="translate.currentLang==='ar'">اسم الشركة بالعربي</ion-label>
-    <ion-label position="stacked" *ngIf="translate.currentLang==='en'">Company Name in Arabic (Optional)</ion-label>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <ion-label position="stacked" *ngIf="translate.currentLang==='ar'">اسم
+      الشركة بالعربي</ion-label>
+    <ion-label position="stacked" *ngIf="translate.currentLang==='en'">Company
+      Name in Arabic (Optional)</ion-label>
     <input required type="text" placeholder="" [(ngModel)]="newUser.profileNameAr" name="profileNameAr" dir="auto">
   </div>
 
   <!-- Company Phone -->
-  <div padding-top>
-    <ion-label position="stacked">{{'profile.company-phone-number' | translate}}</ion-label>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <ion-label position="stacked">
+      {{'profile.company-phone-number' | translate}}
+    </ion-label>
 
     <input required type="text" placeholder="" [(ngModel)]="newUser.companyNumber" name="companyNumber">
   </div>
 
   <!-- Account Creator Name -->
-  <div padding-top>
-    <ion-label position="stacked">{{'profile.account-creator-name' | translate}}<br>{{'common.first-and-last-paranthases'
-      | translate}}</ion-label>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <ion-label position="stacked">
+      {{'profile.account-creator-name' | translate}}
+      <br>
+      {{'common.first-and-last-paranthases' | translate}}
+    </ion-label>
 
     <input required type="text" placeholder="" [(ngModel)]="newUser.personName" name="personName" dir="auto">
   </div>
 
   <!-- Person Phone -->
-  <div padding-top>
-    <ion-label position="stacked">{{'profile.account-creator-mobile' | translate}}</ion-label>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <ion-label position="stacked">
+      {{'profile.account-creator-mobile' | translate}}
+    </ion-label>
 
     <input required type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber">
   </div>
@@ -201,8 +213,10 @@
   <!-- Company Classification CONSULTANT -->
   <div *ngIf="newUser.accountType == 2">
 
-    <ion-item padding-top>
-      <ion-label position="stacked">{{'profile.company-classification' | translate}}</ion-label>
+    <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
+      <ion-label position="stacked">
+        {{'profile.company-classification' | translate}}
+      </ion-label>
 
       <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
         [(ngModel)]="selectedClass" (ionChange)="onSelectClass(event)" name="selectClass" text-center>
@@ -216,8 +230,10 @@
     </ion-item>
 
 
-    <ion-item padding-top>
-      <ion-label position="stacked">{{'profile.sector' | translate}}</ion-label>
+    <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
+      <ion-label position="stacked">
+        {{'profile.sector' | translate}}
+      </ion-label>
 
       <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
         [(ngModel)]="selectedSector" (ionChange)="onSelectSector(event)" name="selectedSector" text-center>
@@ -234,7 +250,9 @@
   <div *ngIf="newUser.accountType == 3" padding-top>
 
     <ion-item>
-      <ion-label position="stacked">{{'profile.company-classification' | translate}}</ion-label>
+      <ion-label position="stacked">
+        {{'profile.company-classification' | translate}}
+      </ion-label>
 
       <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
         [(ngModel)]="selectedClass" (ionChange)="onSelectClass(event)" name="selectClass" text-center>
@@ -253,9 +271,10 @@
   </div>
 
   <!-- upload company license -->
-  <div padding-top>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
 
-    <ion-label position="stacked">{{'register.company-licence-copy' | translate}}</ion-label>
+    <ion-label position="stacked">
+      {{'register.company-licence-copy' | translate}}</ion-label>
 
     <!-- <div class="upload-wrapper"> -->
     <input #uploadButton type="file" (change)="setUpload($event)" name="upload" />
@@ -292,7 +311,7 @@
 
 <ng-template #city_picker_indv_supplier>
 
-  <ion-item padding-top>
+  <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
     <ion-label position="stacked">{{'common.city' | translate}}</ion-label>
 
     <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
@@ -315,7 +334,7 @@
 
 <ng-template #city_picker_consultant_contractor>
 
-  <ion-item padding-top>
+  <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
     <ion-label position="stacked">{{'register.city-of-licence' | translate}}</ion-label>
 
     <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
@@ -351,8 +370,9 @@
 
 <ng-template #individual_fields>
 
-  <div padding-top>
-    <ion-label position="stacked" class="label" [class.dir-rtl]="translate.currentLang==='ar'">{{'common.name' |
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <ion-label position="stacked" class="label" [class.dir-rtl]="translate.currentLang==='ar'">{{'common.name'
+      |
       translate}}
     </ion-label>
 
@@ -361,22 +381,26 @@
     <!-- <input type="text" placeholder="Enter your name" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
   </div>
 
-  <div padding-top>
-    <ion-label position="stacked" class="label">{{'common.email' | translate}}</ion-label>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <ion-label position="stacked" class="label">
+      {{'common.email' | translate}}
+    </ion-label>
 
     <input required type="text" placeholder="" [(ngModel)]="newUser.email" name="email">
 
   </div>
 
-  <div padding-top>
-    <ion-label position="stacked">{{'common.password' | translate}}</ion-label>
-
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <ion-label position="stacked">
+      {{'common.password' | translate}}</ion-label>
     <input required type="password" placeholder="" [(ngModel)]="newUser.password" name="password">
 
   </div>
 
-  <div padding-top>
-    <ion-label position="stacked">{{'common.mobile' | translate}}</ion-label>
+  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <ion-label position="stacked">
+      {{'common.mobile' | translate}}
+    </ion-label>
 
     <input required type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber">
   </div>
@@ -395,8 +419,9 @@
 
 
 <ng-template #supplier_fields>
-  <ion-item padding-top padding-bottom>
-    <ion-label position="stacked">{{'register.select-specialities' | translate}}*</ion-label>
+  <ion-item [class.ar]="translate.currentLang==='ar'" padding-top padding-bottom>
+    <ion-label position="stacked">{{'register.select-specialities' |
+      translate}}*</ion-label>
 
     <ion-select placeholder="{{'register.multiple-selection' | translate}}" multiple="true" ok-text="Select" interface="alert"
       (ionChange)="onSelectSupplierCategory($event)" name="selectSupplierCategory" text-center>
@@ -471,7 +496,7 @@
 
   <br>
   <ion-list style="background: transparent" padding-top>
-    <ion-item>
+    <ion-item [class.ar]="translate.currentLang === 'ar'">
       <ion-label position="stacked" style="font-size: 1.05rem !important">
         {{'register.agree-with-terms' | translate}}
       </ion-label>
@@ -486,28 +511,9 @@
   </ion-list>
 
   <div>
-    <ion-button expand="block" mode="ios" (click)="toggleShowingTerms()" style="width:auto; padding-left: 10px; font-size: 0.9rem;">{{'register.show-terms'
-      | translate}}
+    <ion-button expand="block" mode="ios" (click)="showTerms()" style="width:auto; font-size: 0.9rem;">
+      {{'register.show-terms' | translate}}
     </ion-button>
   </div>
-
-  <div *ngIf="showTerms">
-    <textarea style="padding-top:5px; padding-bottom:5px; padding-right:0; padding-left:0; width:100%; height: 20rem; font-size: 0.7rem">
-      SERVICES AGREEMENT
-
-      THIS SERVICES AGREEMENT (the “Agreement”) is made as of the Effective Date by and between Memar,
-       a UAE corporation with its principal offices in Sharjah, and the party entering into this Agreement for the use of the Service (“Client”).
-       By accessing, copying, or otherwise using the Service (the date of which shall be known as the “Effective Date”),
-
-      Client acknowledges that it has read this Agreement, understands it, and agrees to be bound by its terms and conditions,
-       including Drifty’s Privacy Policy.
-
-      If Client does not agree to the terms and conditions of this Agreement, do not access or use the Service.
-      Drifty will not and does not license and make the Service available unless Client agrees to the terms of this Agreement.
-      In consideration of the mutual covenants and agreements set forth herein, and other good and valuable consideration,
-      receipt of which are hereby acknowledged.
-    </textarea>
-  </div>
-
 
 </ng-template>

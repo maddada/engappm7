@@ -32,16 +32,16 @@ h1 {
   // for phone:
   font-weight: bold;
 
-  // for tablet and above:
-  @include for-small-phone-only {
-    font-size: 1em;
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
   @include for-phone-only {
     font-size: 1.4em;
     margin-top: 40px;
     margin-bottom: 15px;
+  }
+
+  @media (max-height: 680px) {
+    font-size: 1em;
+    margin-top: 8px;
+    margin-bottom: 8px;
   }
 
   @include for-tablet-portrait {
@@ -106,8 +106,10 @@ ion-img {
 // List under each benifits page
 .subtitle {
   height: auto;
+  max-height: 70vh;
   display: flex;
   justify-content: center;
+  overflow: auto;
 
   @include for-tablet-portrait {
     * {
@@ -137,12 +139,13 @@ ion-img {
   ul {
     font-size: 1.6rem;
     width: 80%;
-    @include for-small-phone-only {
-      font-size: 0.98rem;
-    }
 
     @include for-phone-only {
       font-size: 1.12rem;
+    }
+
+    @media (max-height: 680px) {
+      font-size: 0.98rem;
     }
 
     @include for-tablet-portrait {
