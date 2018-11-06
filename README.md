@@ -2,10 +2,10 @@
 
 <b>Description</b>
 
-This app aims to help people around the construction field in UAE to procure the best deals, 
+This app aims to help people around the construction field in UAE to procure the best deals,<br /> 
 and also to discover business partners.
 
-<br>
+<br />
 
 <b>Features of Memar:</b>
 
