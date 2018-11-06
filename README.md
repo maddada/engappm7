@@ -2,7 +2,8 @@
 
 <b>Description</b>
 
-This app aims to help people around the construction field in UAE to procure the best deals, and also to discover business partners.
+This app aims to help people around the construction field in UAE to procure the best deals, 
+and also to discover business partners.
 
 <br>
 
