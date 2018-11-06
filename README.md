@@ -1,5 +1,4 @@
-# Memar UAE
-## Tender Procurement App
+# Memar UAE - Tender Procurement App
 
 <b>Description</b>
 
