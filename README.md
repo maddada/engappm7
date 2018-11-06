@@ -1,11 +1,11 @@
 # Memar UAE
 ## Tender Procurement App
 
-Why use this app!
+<b>Description</b>
 
 This app aims to help people around the construction field in UAE to procure the best deals, and also to discover business partners.
 
-Features of Memar:
+<b>Features of Memar:</b>
 
 • We allow you to bid on tenders from all over the UAE!
 
