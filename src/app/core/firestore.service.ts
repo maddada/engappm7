@@ -10,7 +10,6 @@ import {
 } from '@angular/fire/firestore';
 import { Observable, } from 'rxjs';
 import { map, tap, take, } from 'rxjs/operators';
-// switchMap, mergeMap, expand, takeWhile
 import * as firebase from 'firebase/app';
 
 
