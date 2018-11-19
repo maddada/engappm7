@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { Tender, User, M7LoadingOptions } from '../../../model';
+import { Tender, User } from '../../../model';
 import { FirestoreService } from '../../core/firestore.service';
 import { AuthService } from '../../core/auth.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -35,7 +35,14 @@ export class Tab2Page implements OnInit, OnDestroy {
 
   async ngOnInit() {
 
-    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    const showLoading = await this.loadingCtrl.create({
+      translucent: false,
+      spinner: "bubbles",
+      showBackdrop: true,
+      animated: true,
+      keyboardClose: true,
+      mode: "md",
+    });
     await showLoading.present();
 
     // NOTE: Subscribing in HTML!

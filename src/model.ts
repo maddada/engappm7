@@ -170,21 +170,6 @@ export interface SearchFilter {
     tag?: string;
 }
 
-export enum Mode {
-    md = "md",
-    ios = "ios",
-}
-
-export class M7LoadingOptions {
-    translucent = false;
-    spinner = 'bubbles';
-    showBackdrop = true;
-    animated = true;
-    keyboardClose = true;
-    mode = Mode.md;
-}
-
-
 // NOTE: Proposals Collection:
 // proposals/createdByUid_tenderid/<PROPOSAL_DOC_DETAILS_HERE>
 /*

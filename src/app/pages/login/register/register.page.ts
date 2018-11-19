@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { FirestoreService } from '../../../core/firestore.service';
 
-import { User, M7LoadingOptions } from '../../../../model';
+import { User } from '../../../../model';
 
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
@@ -206,7 +206,14 @@ export class RegisterPage implements OnInit {
   //// NOTE: Email/Password Auth ////
 
   private async emailSignUp() {
-    this.showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    this.showLoading = await this.loadingCtrl.create({
+      translucent: false,
+      spinner: "bubbles",
+      showBackdrop: true,
+      animated: true,
+      keyboardClose: true,
+      mode: "md",
+    });
     await this.showLoading.present();
 
     this.setTags();

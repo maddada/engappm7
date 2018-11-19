@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 
 import { FirestoreService } from '../../core/firestore.service';
 
-import { Tender, User, M7LoadingOptions } from '../../../model';
+import { Tender, User } from '../../../model';
 
 import { Observable } from 'rxjs';
 import { finalize, take, map } from 'rxjs/operators';
@@ -123,7 +123,14 @@ export class CreateTenderPage implements OnInit {
 
     if (this.s1_validateAndFixInputs()) {
 
-      this.showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+      this.showLoading = await this.loadingCtrl.create({
+        translucent: false,
+        spinner: "bubbles",
+        showBackdrop: true,
+        animated: true,
+        keyboardClose: true,
+        mode: "md",
+      });
       await this.showLoading.present();
 
       this.s2_startUploadFile(0);

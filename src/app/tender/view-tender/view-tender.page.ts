@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../core/firestore.service';
-import { Tender, User, M7LoadingOptions } from '../../../model';
+import { Tender, User } from '../../../model';
 import { Observable, of, Subject } from 'rxjs';
 import { take, switchMap, takeUntil } from 'rxjs/operators';
 import { NavController, LoadingController, ModalController, AlertController } from '@ionic/angular';
@@ -46,7 +46,14 @@ export class ViewTenderPage implements OnInit, OnDestroy {
 
   async ngOnInit() {
 
-    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    const showLoading = await this.loadingCtrl.create({
+      translucent: false,
+      spinner: "bubbles",
+      showBackdrop: true,
+      animated: true,
+      keyboardClose: true,
+      mode: "md",
+    });
     await showLoading.present();
 
     this.id = this.route.snapshot.paramMap.get('id');

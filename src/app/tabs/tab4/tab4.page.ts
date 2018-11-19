@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
-import { ProfileComment, User, M7LoadingOptions } from '../../../model';
+import { ProfileComment, User } from '../../../model';
 import { Observable, of } from 'rxjs';
 import { FirestoreService } from '../../core/firestore.service';
 import { switchMap } from 'rxjs/operators';
@@ -34,7 +34,14 @@ export class Tab4Page implements OnInit {
 
 
 
-    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    const showLoading = await this.loadingCtrl.create({
+      translucent: false,
+      spinner: "bubbles",
+      showBackdrop: true,
+      animated: true,
+      keyboardClose: true,
+      mode: "md",
+    });
     await showLoading.present();
 
     this.comments$ = this.auth.user$.pipe(

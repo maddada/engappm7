@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ProfileComment, User, M7LoadingOptions } from '../../../model';
+import { ProfileComment, User } from '../../../model';
 import { AuthService } from '../../core/auth.service';
 import { ShowToastService } from '../../core/show-toast.service';
 import { FirestoreService } from '../../core/firestore.service';
@@ -75,7 +75,14 @@ export class RatePage implements OnInit, OnDestroy {
       return;
     } else {
 
-      this.showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+      this.showLoading = await this.loadingCtrl.create({
+        translucent: false,
+        spinner: "bubbles",
+        showBackdrop: true,
+        animated: true,
+        keyboardClose: true,
+        mode: "md",
+      });
       await this.showLoading.present();
 
       this.s2_createComment();

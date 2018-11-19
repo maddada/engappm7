@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { User, SearchFilter, M7LoadingOptions } from '../../../model';
+import { User, SearchFilter } from '../../../model';
 import { FilterModalPage } from './filter-modal/filter-modal.page';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { Observable, Subject } from 'rxjs';
@@ -31,7 +31,14 @@ export class Tab3Page implements OnInit, OnDestroy {
 
   async ngOnInit() {
 
-    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    const showLoading = await this.loadingCtrl.create({
+      translucent: false,
+      spinner: "bubbles",
+      showBackdrop: true,
+      animated: true,
+      keyboardClose: true,
+      mode: "md",
+    });
     await showLoading.present();
 
     this.filterOptions = {
@@ -69,7 +76,14 @@ export class Tab3Page implements OnInit, OnDestroy {
 
   public async startSearch() {
 
-    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    const showLoading = await this.loadingCtrl.create({
+      translucent: false,
+      spinner: "bubbles",
+      showBackdrop: true,
+      animated: true,
+      keyboardClose: true,
+      mode: "md",
+    });
     await showLoading.present();
 
     // console.log(this.filterOptions);

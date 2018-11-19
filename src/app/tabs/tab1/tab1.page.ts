@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
 import { Observable, Subject, of, forkJoin } from 'rxjs';
-import { User, Tender, city, M7LoadingOptions } from '../../../model';
+import { User, Tender, city } from '../../../model';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
 import { FirestoreService } from '../../core/firestore.service';
 import { switchMap, tap, filter, takeUntil, concatMap, flatMap, mergeMap, map } from 'rxjs/operators';
@@ -76,7 +76,14 @@ export class Tab1Page implements OnInit, OnDestroy {
       return;
     }
 
-    this.showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    this.showLoading = await this.loadingCtrl.create({
+      translucent: false,
+      spinner: "bubbles",
+      showBackdrop: true,
+      animated: true,
+      keyboardClose: true,
+      mode: "md",
+    });
     await this.showLoading.present();
 
     this.selectedCityNumber = Number(this.selectedCityString);

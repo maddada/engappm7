@@ -3,7 +3,7 @@ import { NavController, LoadingController } from '@ionic/angular';
 import { ShowLoadingService } from '../../core/show-loading.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { User, ProfileComment, M7LoadingOptions } from '../../../model';
+import { User, ProfileComment } from '../../../model';
 import { FirestoreService } from '../../core/firestore.service';
 import { switchMap, take, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../../core/auth.service';
@@ -44,7 +44,14 @@ export class ViewProfilePage implements OnInit, OnDestroy {
 
 
 
-    const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+    const showLoading = await this.loadingCtrl.create({
+      translucent: false,
+      spinner: "bubbles",
+      showBackdrop: true,
+      animated: true,
+      keyboardClose: true,
+      mode: "md",
+    });
     await showLoading.present();
 
     this.id = this.route.snapshot.paramMap.get('id');

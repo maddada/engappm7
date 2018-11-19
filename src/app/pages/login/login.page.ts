@@ -4,7 +4,6 @@ import { ShowToastService } from '../../core/show-toast.service';
 
 import { TranslateService } from '@ngx-translate/core';
 import { LoadingController, NavController } from '@ionic/angular';
-import { M7LoadingOptions } from '../../../model';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +39,14 @@ export class LoginPage implements OnInit {
   public async onClickLogin() {
     if (this.validate()) {
 
-      const showLoading = await this.loadingCtrl.create(new M7LoadingOptions);
+      const showLoading = await this.loadingCtrl.create({
+        translucent: false,
+        spinner: "bubbles",
+        showBackdrop: true,
+        animated: true,
+        keyboardClose: true,
+        mode: "md",
+      });
       await showLoading.present();
 
       this.auth.emailLogin(this.model.email, this.model.password).then(() => {
