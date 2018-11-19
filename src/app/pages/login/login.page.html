@@ -34,14 +34,13 @@
 
 
           <div [class.ar]="translate.currentLang === 'ar'">
-            <label for="email">
+            <ion-label for="email">
               {{'common.email' | translate}}
-            </label>
-            <input style="text-align: center" type="text" class="form-control" name="email" [(ngModel)]="model.email"
-              #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="" (keyup.enter)="onClickLogin()"
-              autocomplete required email>
-
-            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+            </ion-label>
+            <ion-input style="text-align: center; direction:ltr;" type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" 
+            [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" placeholder="" (keyup.enter)="onClickLogin()" email></ion-input>
+ 
+            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback" >
               <div *ngIf="email.errors.required">
                 {{ 'pages.login.email-required' | translate }}
               </div>
@@ -53,11 +52,10 @@
 
           <div [class.ar]="translate.currentLang === 'ar'">
             <ion-label for="password"> {{'common.password' | translate}}</ion-label>
-            <input style="text-align: center" type="password" class="form-control" name="password" [(ngModel)]="model.password"
-              #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" required minlength="6"
-              (keyup.enter)="onClickLogin()" />
+            <ion-input style="text-align: center; direction:ltr;" type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && password.invalid }" minlength="6" (keyup.enter)="onClickLogin()"></ion-input>
 
-            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback" >
               <div *ngIf="password.errors.required">
                 {{ 'pages.login.pass-required' | translate }}
 
@@ -82,6 +80,9 @@
       </ion-col>
 
     </ion-row>
+
+
+
 
   </ion-grid>
 
@@ -115,45 +116,3 @@
     </ion-row>
   </ion-toolbar>
 </ion-footer>
-
-
-
-
-
-
-
-
-<!-- ORIGINAL <div>
-            <label for="email">Email</label>
-            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
-              required email />
-            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
-              <div *ngIf="email.errors.required">Email is required</div>
-              <div *ngIf="email.errors.email">Email must be a valid email address</div>
-            </div>
-          </div> -->
-
-<!-- Old ion-input crap, stopped using it because doesn't work with enter!
-          and generally doesn't play nice with angular template forms
-          User Styled input fields - much better!
-        <form [formGroup]="userForm" (submit)="onLoginClick()" (keydown)="keyDownFunction($event)" padding-right>
-          <div margin-top>
-
-            <ion-label position="stacked">{{labelEmail}}</ion-label>
-
-            <ion-input [formGroup]="userForm" formControlName="email" required type="text" placeholder="{{emailPlaceholder}}"
-              [(ngModel)]="email"></ion-input>
-
-
-          </div>
-
-          <div>
-            <ion-label position="stacked">{{labelPassword}}</ion-label>
-
-            <ion-input [formGroup]="userForm" formControlName="password" required type="password" placeholder="{{passwordPlaceholder}}"
-              [(ngModel)]="password"></ion-input>
-
-
-          </div>
-          <button [formGroup]="userForm" type="submit" style="display:none; visibility: hidden">submit</button>
-        </form> -->

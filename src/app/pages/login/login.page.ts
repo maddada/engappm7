@@ -50,8 +50,7 @@ export class LoginPage implements OnInit {
       await showLoading.present();
 
       this.auth.emailLogin(this.model.email, this.model.password).then(() => {
-        showLoading.dismiss();
-        this.nav.navigateForward('/');
+        showLoading.dismiss();        
       }).catch(
         error =>
           this.toast.showToast('Please Check Inputs and Network')

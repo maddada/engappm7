@@ -150,7 +150,7 @@
     <ion-label position="stacked" class="label">{{'common.email' |
       translate}}</ion-label>
 
-    <input required type="text" placeholder="" [(ngModel)]="newUser.email" name="email">
+    <ion-input type="text" placeholder="" [(ngModel)]="newUser.email" name="email"></ion-input>
 
     <!-- <ion-label   error-field no-margin *ngIf="!isEmailValid">Error: {{errorType}}</ion-label> -->
   </div>
@@ -159,7 +159,7 @@
   <div [class.ar]="translate.currentLang==='ar'" padding-top>
     <ion-label position="stacked">{{'common.password' | translate}}</ion-label>
 
-    <input required type="password" placeholder="" [(ngModel)]="newUser.password" name="password">
+    <ion-input required type="password" placeholder="" [(ngModel)]="newUser.password" name="password"></ion-input>
 
     <ion-label error-field no-margin *ngIf="!isPasswordValid">{{errorPassword}}</ion-label>
   </div>
@@ -168,7 +168,7 @@
   <div [class.ar]="translate.currentLang==='ar'" padding-top>
     <ion-label position="stacked">{{'profile.company-name' | translate}}</ion-label>
 
-    <input required type="text" placeholder="" [(ngModel)]="newUser.profileName" name="profileName" dir="auto">
+    <ion-input type="text" placeholder="" [(ngModel)]="newUser.profileName" name="profileName" dir="auto"></ion-input>
   </div>
 
   <!-- Company Name Arabic -->
@@ -177,7 +177,7 @@
       الشركة بالعربي</ion-label>
     <ion-label position="stacked" *ngIf="translate.currentLang==='en'">Company
       Name in Arabic (Optional)</ion-label>
-    <input required type="text" placeholder="" [(ngModel)]="newUser.profileNameAr" name="profileNameAr" dir="auto">
+    <ion-input type="text" placeholder="" [(ngModel)]="newUser.profileNameAr" name="profileNameAr" dir="auto"></ion-input>
   </div>
 
   <!-- Company Phone -->
@@ -186,7 +186,7 @@
       {{'profile.company-phone-number' | translate}}
     </ion-label>
 
-    <input required type="text" placeholder="" [(ngModel)]="newUser.companyNumber" name="companyNumber">
+    <ion-input type="text" placeholder="" [(ngModel)]="newUser.companyNumber" name="companyNumber"></ion-input>
   </div>
 
   <!-- Account Creator Name -->
@@ -197,7 +197,7 @@
       {{'common.first-and-last-paranthases' | translate}}
     </ion-label>
 
-    <input required type="text" placeholder="" [(ngModel)]="newUser.personName" name="personName" dir="auto">
+    <ion-input type="text" placeholder="" [(ngModel)]="newUser.personName" name="personName" dir="auto"></ion-input>
   </div>
 
   <!-- Person Phone -->
@@ -206,7 +206,7 @@
       {{'profile.account-creator-mobile' | translate}}
     </ion-label>
 
-    <input required type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber">
+    <ion-input type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber"></ion-input>
   </div>
 
 
@@ -277,7 +277,7 @@
       {{'register.company-licence-copy' | translate}}</ion-label>
 
     <!-- <div class="upload-wrapper"> -->
-    <input #uploadButton type="file" (change)="setUpload($event)" name="upload" />
+    <input #uploadButton type="file" (change)="setUpload($event)" name="upload">
 
     <ng-container *ngIf="uploadPercent | async as p">
       <div id="upload-percent">{{'common.upload-percent' | translate}} {{ p }}
@@ -376,9 +376,8 @@
       translate}}
     </ion-label>
 
-    <input required type="text" placeholder="" [(ngModel)]="newUser.profileName" class="form-control" id="name" name="name"
-      #name="ngModel" dir="auto">
-    <!-- <input type="text" placeholder="Enter your name" class="form-control" id="name" required [(ngModel)]="model.name" name="name" #name="ngModel"> -->
+    <ion-input type="text" placeholder="" [(ngModel)]="newUser.profileName" class="form-control" id="name" name="name"
+      #name="ngModel" dir="auto"></ion-input>
   </div>
 
   <div [class.ar]="translate.currentLang==='ar'" padding-top>
@@ -386,14 +385,14 @@
       {{'common.email' | translate}}
     </ion-label>
 
-    <input required type="text" placeholder="" [(ngModel)]="newUser.email" name="email">
+    <ion-input type="text" placeholder="" [(ngModel)]="newUser.email" name="email"></ion-input>
 
   </div>
 
   <div [class.ar]="translate.currentLang==='ar'" padding-top>
     <ion-label position="stacked">
       {{'common.password' | translate}}</ion-label>
-    <input required type="password" placeholder="" [(ngModel)]="newUser.password" name="password">
+    <ion-input type="password" placeholder="" [(ngModel)]="newUser.password" name="password"></ion-input>
 
   </div>
 
@@ -402,7 +401,7 @@
       {{'common.mobile' | translate}}
     </ion-label>
 
-    <input required type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber">
+    <ion-input type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber"></ion-input>
   </div>
 
 </ng-template>
