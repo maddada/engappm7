@@ -92,11 +92,14 @@ export class ViewTenderPage implements OnInit, OnDestroy {
   goBack() {
     let prevRouterString = this.prevRoute.getPreviousUrl();
     // console.log(prevRouterString);
-    if (prevRouterString.includes('/create-tender')) {
-      this.nav.navigateBack('/');
+    if (prevRouterString.includes('/create-tender') || this.tender.uid == this.user.uid) {
+      this.nav.navigateBack('/tabs/tab2');
+    }
+    else if (this.tender == null) { //incase tender was deleted.
+      this.nav.navigateBack('/tabs/tab2');
     }
     else {
-      this.nav.goBack();
+      this.nav.back();
     }
   }
 

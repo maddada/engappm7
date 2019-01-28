@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { IonRouterOutlet, Platform, NavController } from '@ionic/angular';
+import { IonRouterOutlet, Platform, NavController, IonToggle } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './core/auth.service';
-
+import { FcmService } from './core/fcm.service';
+import { ShowToastService } from './core/show-toast.service';
 // import * as firebase from 'firebase/app';
 
 /* get a reference to the used IonRouterOutlet
@@ -29,7 +30,8 @@ that hosts the main router outlet, probably app.components */
 export class AppComponent {
 
     @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
-
+    @ViewChild('notifToggle') notifToggle: IonToggle;
+    ignoreOnChange: boolean;
     public username: string;
 
     constructor(
@@ -39,7 +41,9 @@ export class AppComponent {
         private storage: Storage,
         public auth: AuthService,
         private nav: NavController,
-        public translate: TranslateService
+        public translate: TranslateService,
+        public fcm: FcmService,
+        private toast: ShowToastService,
     ) {
         this.initializeApp();
     }
@@ -47,13 +51,14 @@ export class AppComponent {
 
 
     initializeApp() {
-
         this.platform.ready().then(() => {
-
-            this.checkFirstLaunch();
+            // this.checkFirstLaunch();
             this.getSetLanguage();
+            this.getNotificationsSetting();
             this.statusBar.styleDefault();
             this.splashScreen.hide();
+            this.fcm.getPermission().subscribe();
+            this.fcm.listenToMessages().subscribe();
         });
 
     }
@@ -70,6 +75,51 @@ export class AppComponent {
             }
         });
     }
+
+    async getNotificationsSetting(): Promise<any> {
+        this.storage.get('notifications').then((val) => {
+            if (val !== null) {
+                // __ if notif setting set from before:
+                // __ initialize toggle to stored value.
+                console.log('here! 1');
+                this.ignoreOnChange = true;
+                this.notifToggle.checked = val;
+                this.fcm.enabled = val;
+                this.ignoreOnChange = false;
+            } else {
+                // __ if setting not set from before:
+                // __ set it as off
+                console.log('here! 2');
+                this.ignoreOnChange = true;
+                this.notifToggle.checked = false;
+                this.storage.set('notifications', false);
+                this.fcm.enabled = false;
+                this.ignoreOnChange = false;
+            }
+        });
+    }
+
+    onToggleChange($event) {
+        if (this.ignoreOnChange === true) {
+            this.ignoreOnChange = false;
+            return;
+        }
+
+        let isChecked = $event.detail.checked;
+        // console.log($event.detail.checked);
+        this.fcm.enabled = isChecked;
+        this.platform.ready().then(() => {
+            if (isChecked === true) {
+                this.toast.showToast(`Enabling Notifications..`);
+                this.fcm.sub('notifications');
+                this.storage.set('notifications', true);
+            } else {
+                this.toast.showToast(`Disabling Notifications..`);
+                this.fcm.unsub('notifications');
+                this.storage.set('notifications', false);
+            }
+        });
+    };
 
     getSetLanguage(): any {
         this.storage.get('language').then((val) => {

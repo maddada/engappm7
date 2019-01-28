@@ -70,6 +70,8 @@
           </ion-item>
 
 
+
+
           <ion-item routerDirection="forward" routerLink="" (click)="aboutClicked()">
 
             <ion-icon slot="start" name="information-circle-outline"></ion-icon>
@@ -80,6 +82,20 @@
 
           </ion-item>
 
+
+          <ion-item>
+
+            <ion-icon slot="start" name="notifications-outline" mode="md"></ion-icon>
+
+            <ion-label>
+              {{ 'pages.settings.recieve-notifications' | translate }}
+            </ion-label>
+
+            <ion-toggle (ionChange)="onToggleChange($event)" color="dark" #notifToggle></ion-toggle>
+
+          </ion-item>
+
+          <!-- __ Removed Settings -->
           <!-- <ion-item [routerDirection]="'root'" routerLink="/settings">
 
             <ion-icon slot="start" name="settings"></ion-icon>

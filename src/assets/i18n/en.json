@@ -80,7 +80,8 @@
 			"title": "Login"
 		},
 		"settings": {
-			"change-language": "Change language"
+			"change-language": "Change language",
+			"recieve-notifications": "Recieve Notifications"
 		}
 	},
 	"profile": {
@@ -173,7 +174,8 @@
 		"Status": "Status",
 		"Steel": "Steel",
 		"Walls-Fencing": "Walls/Fencing",
-		"no-available": "Not Available"
+		"no-available": "Not Available",
+		"Photo": "Photo"
 	},
 	"umm-al-quwain": "Umm Al-Quwain"
 }

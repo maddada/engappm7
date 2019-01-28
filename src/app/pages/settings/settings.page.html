@@ -13,6 +13,7 @@
 <ion-content>
 
   <ion-list>
+    <!-- __ Item Start -->
     <ion-item>
       <ion-label>
         <ion-button fill="clear" color="primary" expand="block" size="large" routerLink="/select-language"
@@ -20,11 +21,22 @@
           <ion-icon name="globe" slot="start"></ion-icon>
           {{ 'pages.settings.change-language' | translate }}
         </ion-button>
-
       </ion-label>
     </ion-item>
 
+    <!-- __ Item Start -->
+    <ion-item>
+      <ion-toggle color="primary"></ion-toggle>
+      <ion-label>
+        <ion-button fill="clear" color="primary" expand="block" size="large" routerLink="/select-language"
+          routerDirection="forward">
+          <ion-icon name="notifications" slot="start"></ion-icon>
+          {{ 'pages.settings.recieve-notifications' | translate }}
+        </ion-button>
+      </ion-label>
+    </ion-item>
 
+    <!-- __ Last Item (Go Back) -->
     <ion-item>
       <ion-label>
 

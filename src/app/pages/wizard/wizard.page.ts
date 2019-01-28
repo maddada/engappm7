@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Slides, NavController, MenuController, Platform } from '@ionic/angular';
+import { IonSlides, NavController, MenuController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -13,7 +13,7 @@ export class WizardPage implements OnInit {
 
     showSkip = true;
 
-    @ViewChild('slides') slides: Slides;
+    @ViewChild('slides') slides: IonSlides;
 
     i;
 

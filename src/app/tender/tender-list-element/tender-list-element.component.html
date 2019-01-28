@@ -245,17 +245,37 @@
     <div style="height: 15px;"></div>
     <div style="height: 15px;"></div>
 
+    <ng-container *ngIf="tender?.attachmentURLs.length > 0;">
+      <ion-icon name="attach" mode="md"></ion-icon>
+      <div class="detail-name-text">{{'tender.Attachments' | translate}}</div>
+      <div class="detail-data">
 
-    <ion-icon name="attach" mode="md"></ion-icon>
-    <div class="detail-name-text">{{'tender.Attachments' | translate}}</div>
-    <div class="detail-data">
-      <ng-container *ngFor="let attachment of tender?.attachmentURLs; let i = index">
-        <ion-button class="attachment-button" [href]="attachment" size="small">
-          {{'tender.Attachment' | translate}} #{{i+1}}
-        </ion-button>
-      </ng-container>
-    </div>
+        <ng-container *ngFor="let attachment of tender?.attachmentURLs; let i = index">
+          <ion-button class="attachment-button" [href]="attachment" size="small">
+            {{'tender.Attachment' | translate}} #{{i+1}}
+          </ion-button>
+        </ng-container>
+
+      </div>
+      <div style="height: 15px;"></div>
+      <div style="height: 15px;"></div>
+      <div style="height: 15px;"></div>
+    </ng-container>
+    <!-- Spacing Row -->
 
 
+    <!-- __ Photo to be shown in extended container -->
+    <ng-container *ngIf="tender?.photoURL && tender?.photoURL !== ''">
+      <ion-icon name="image" mode="md"></ion-icon>
+      <div class="detail-name-text">{{'tender.Photo' | translate}}</div>
+      <div class="detail-data"></div>
+    </ng-container>
   </div>
+
+  <ng-container *ngIf="tender?.photoURL && tender?.photoURL !== ''">
+    <div style="margin-right: auto; margin-left: auto; margin-top: 30px; width: 100%;">
+      <img [src]="tender?.photoURL">
+    </div>
+  </ng-container>
+
 </div>

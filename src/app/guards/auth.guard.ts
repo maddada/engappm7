@@ -5,7 +5,7 @@ import {
   RouterStateSnapshot
 } from '@angular/router';
 import { AuthService } from '../core/auth.service';
-import { AlertController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { ShowToastService } from '../core/show-toast.service';
 
 // NOTE: CHECKS IF NOT LOGGED IN!!!!

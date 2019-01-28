@@ -80,7 +80,8 @@
 			"title": "تسجيل الدخول"
 		},
 		"settings": {
-			"change-language": "إختر اللغة"
+			"change-language": "إختر اللغة",
+			"recieve-notifications": "تلقي الإشعارات"
 		}
 	},
 	"profile": {
@@ -173,7 +174,8 @@
 		"Status": "الحالة",
 		"Steel": "حدادة",
 		"Walls-Fencing": "جدران",
-		"no-available": "غير متوفر"
+		"no-available": "غير متوفر",
+		"Photo": "صورة"
 	},
 	"umm-al-quwain": "أم القيوين"
 }

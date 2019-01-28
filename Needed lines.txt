@@ -6,7 +6,6 @@ npm update
 
 
 
-
 ######## COMMANDS FOR DEVELOPMENT:
 ionic s
 ionic g
@@ -26,20 +25,30 @@ firebase deploy --only hosting
 
 
 
+TO UPDATE ANDROID APP USE THESE 3:
+1- ionic cordova build --release android
+
+2- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore c:\memar-release-key.keystore D:\Dev\Angular_and_Ionic\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk memar
+
+3- zipalign -v 4 D:\Dev\Angular_and_Ionic\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk c:\apk\memar-v1_2b-release-signed.apk
+
+4- Then upload the singed+zipaligned apk to google play console.
 
 
 
-
-######## COMMANDS FOR ANDROID RELEASE:
+######## ALL COMMANDS FOR ANDROID RELEASE:
 ionic cordova build --release android
 
-
 To use the keystore:
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore c:\memar-release-key.keystore C:\Dev\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk memar
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore c:\apk\memar-release-key.keystore C:\Dev\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk memar
+
+Use Admin CMD! Not Powershell!
 
 I uploaded the keystore to drive.google.com memar.app@gmail.com
-Pass is in my lastpass!
+Pass is in my lastpass! SncBmMemar123$$
 
+
+YOU HAVE TO ZIP ALIGN TO UPLOAD IT TO PLAYSTORE!
 ------To Zip Align:
 zipalign -v 4 c:/memar-v1_0-release-unsigned.apk c:/memar-v1_0-release-signed.apk
 

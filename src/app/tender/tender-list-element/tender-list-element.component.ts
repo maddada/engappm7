@@ -30,7 +30,6 @@ export class TenderListElementComponent implements OnInit, OnDestroy {
     this.publishedDate = this.tender.createdAt.toDate();
 
     this.setStatus();
-
     this.translate.onLangChange.pipe(takeUntil(this.unsubscribe$)).subscribe(_ => {
       this.setStatus();
     });

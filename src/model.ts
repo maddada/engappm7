@@ -115,6 +115,8 @@ export interface Tender {
     tenderContactEmail?: string;
     tenderContactNumber?: string;
 
+    photoURL?: string;
+
     TESTPUBLISHED?: string;
     TESTDEADLINE?: string;
     TESTSTATUS?: string;

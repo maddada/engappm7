@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { Slides, NavController, MenuController, Platform } from '@ionic/angular';
+import { NavController, MenuController, Platform, IonSlides } from '@ionic/angular';
 
 @Component({
   selector: 'app-wizard-ar',
@@ -13,7 +13,7 @@ export class WizardArPage implements OnInit {
 
   showSkip = true;
 
-  @ViewChild('slides') slides: Slides;
+  @ViewChild('slides') slides: IonSlides;
 
   ngOnInit() {
     this.platform.ready().then(() => {

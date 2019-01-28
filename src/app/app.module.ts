@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
+// __ Ionic Native
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
+import { Firebase } from '@ionic-native/firebase/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +21,7 @@ import { AngularFirestoreModule, AngularFirestore } from '@angular/fire/firestor
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireFunctionsModule } from '@angular/fire/functions';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
 
 import { environment } from '../environments/environment';
 
@@ -32,6 +35,9 @@ import { CompanyListElementModule } from './profile/company-list-element/company
 import { ProfileElementModule } from './profile/profile-element/profile-element.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+import { FcmService } from './core/fcm.service';
+
+import { File } from '@ionic-native/file/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -62,6 +68,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireFunctionsModule,
     TenderListElementModule,
     CompanyListElementModule,
+    AngularFireMessagingModule,
     ProfileElementModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     // AngularFirestoreModule.enablePersistence(),
@@ -70,15 +77,20 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    Firebase,
+    FcmService,
+    File,
   ],
   bootstrap: [AppComponent,
   ]
 })
 export class AppModule {
-  constructor(private afs: AngularFirestore) {
-    afs.firestore.settings({
-      timestampsInSnapshots: true,
-    });
+  constructor(
+    private afs: AngularFirestore
+  ) {
+    // afs.firestore.settings({
+    //   // timestampsInSnapshots: true,
+    // });
     // LATER: Enable Persistence *MAYBE! It was causing problems with desynced data!
     afs.firestore.enablePersistence();
   }
