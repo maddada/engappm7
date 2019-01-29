@@ -20,12 +20,12 @@
     <h1 [class.dir-rtl]="translate.currentLang==='ar'">{{'register.pick-account-type' | translate}}</h1>
 
     <ion-icon name="person" mode="md" color="medium" size="large" padding-top></ion-icon>
-    <ion-button expand="block" href="/register/1" routerDirection="forward">
+    <ion-button expand="block" routerDirection="forward" routerLink="/register/1">
       {{'individual' | translate}}
     </ion-button>
     <br>
     <ion-icon name="pin" mode="md" color="medium" size="large" padding-top></ion-icon>
-    <ion-button expand="block" href="/select-acc-type" routerDirection="forward">
+    <ion-button expand="block" routerDirection="forward" routerLink="/select-acc-type">
       {{'company' | translate}}
     </ion-button>
 

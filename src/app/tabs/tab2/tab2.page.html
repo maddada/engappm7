@@ -79,7 +79,7 @@
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-        <ion-button expand="block" mode="ios" href="/create-tender" routerDirection="forward">
+        <ion-button expand="block" mode="ios" routerDirection="forward" routerLink="/create-tender">
           <ion-icon name="add-circle-outline" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
           <ion-icon name="add" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
           {{'common.create-tender' | translate}}
@@ -105,9 +105,6 @@
       <h2>
         {{'tab2.browse-home-to-find-tenders' | translate}}
       </h2>
-      <!-- <ion-button type="bar-button" mode="ios" text-uppercase href="/login" routerDirection="forward">
-        <ion-icon name="at" mode="md"></ion-icon>&nbsp;Log In
-      </ion-button> -->
     </ion-col>
   </ion-row>
 </ng-template>

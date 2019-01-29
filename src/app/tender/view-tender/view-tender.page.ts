@@ -95,13 +95,17 @@ export class ViewTenderPage implements OnInit, OnDestroy {
   // if coming from anywhere else then just go back
   // tested and working perfectly
   goBack() {
-    if (this.platform.is('ios')) {
-      this.nav.back();
-    }
-
     try { //not sure if this is causing problems on iOS
       let prevRouterString = this.prevRoute.getPreviousUrl();
       if (prevRouterString.includes('/create-tender')) {
+        this.nav.navigateBack('/tabs/tab2');
+      }
+
+      if (this.savedTenderUid === this.user.uid) { //cuz tender will be undefined when it's deleted.
+        this.nav.navigateBack('/tabs/tab2');
+      }
+
+      if (this.tender == null) { //incase tender was deleted.
         this.nav.navigateBack('/tabs/tab2');
       }
     }
@@ -109,13 +113,6 @@ export class ViewTenderPage implements OnInit, OnDestroy {
       console.log(err);
     }
 
-    if (this.savedTenderUid === this.user.uid) { //cuz tender will be undefined when it's deleted.
-      this.nav.navigateBack('/tabs/tab2');
-    }
-
-    if (this.tender == null) { //incase tender was deleted.
-      this.nav.navigateBack('/tabs/tab2');
-    }
 
     this.nav.back();
   }

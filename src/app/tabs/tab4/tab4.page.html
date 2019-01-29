@@ -74,8 +74,8 @@
       <ng-container *ngIf="showNotLoggedIn">
         <!-- {{'tab4.login-to-view-profile' | translate}} -->
         <div class="not-logged-in-button-container">
-          <ion-button class="not-logged-in-button" size="large" type="bar-button" mode="ios" text-uppercase href="/login"
-            routerDirection="forward">
+          <ion-button class="not-logged-in-button" size="large" type="bar-button" mode="ios" text-uppercase
+            routerDirection="forward" routerLink="/login">
             <ion-icon name="at" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
             <ion-icon name="at" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
             {{'common.log-in' | translate}}
