@@ -31,6 +31,8 @@ export class ViewTenderPage implements OnInit, OnDestroy {
 
   unsubscribe$: Subject<any> = new Subject();
 
+  savedTenderUid: string;
+
   constructor(
     private route: ActivatedRoute,
     private db: FirestoreService,
@@ -65,6 +67,7 @@ export class ViewTenderPage implements OnInit, OnDestroy {
         // subs to tender$ and gets values from it, uses data to create another obs
         if (tender) { // if tender exists
           // then it returns the new observable
+          this.savedTenderUid = tender.uid;
           return this.db.doc$<User>(`users/${tender.uid}`);
         } else {
           // return null so nothing appears
@@ -90,17 +93,25 @@ export class ViewTenderPage implements OnInit, OnDestroy {
   // if coming from anywhere else then just go back
   // tested and working perfectly
   goBack() {
-    let prevRouterString = this.prevRoute.getPreviousUrl();
-    // console.log(prevRouterString);
-    if (prevRouterString.includes('/create-tender') || this.tender.uid == this.user.uid) {
+    try { //not sure if this is causing problems on iOS
+      let prevRouterString = this.prevRoute.getPreviousUrl();
+      if (prevRouterString.includes('/create-tender')) {
+        this.nav.navigateBack('/tabs/tab2');
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+
+    if (this.savedTenderUid === this.user.uid) { //cuz tender will be undefined when it's deleted.
       this.nav.navigateBack('/tabs/tab2');
     }
-    else if (this.tender == null) { //incase tender was deleted.
+
+    if (this.tender == null) { //incase tender was deleted.
       this.nav.navigateBack('/tabs/tab2');
     }
-    else {
-      this.nav.back();
-    }
+
+    this.nav.back();
   }
 
   async joinTender() {
