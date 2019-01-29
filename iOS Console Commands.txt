@@ -1,0 +1,3 @@
+Always add sudo before all commands!
+
+sudo ionic cordova prepare ios
