@@ -4,12 +4,13 @@ import { FirestoreService } from '../../core/firestore.service';
 import { Tender, User } from '../../../model';
 import { Observable, of, Subject } from 'rxjs';
 import { take, switchMap, takeUntil } from 'rxjs/operators';
-import { NavController, LoadingController, ModalController, AlertController } from '@ionic/angular';
+import { NavController, LoadingController, ModalController, AlertController, Platform } from '@ionic/angular';
 import { PreviousRouteService } from '../../core/previous-route.service';
 import { JoinTenderModalPage } from '../join-tender-modal/join-tender-modal.page';
 import { AuthService } from '../../core/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ShowToastService } from '../../core/show-toast.service';
+
 
 @Component({
   selector: 'app-view-tender',
@@ -44,6 +45,7 @@ export class ViewTenderPage implements OnInit, OnDestroy {
     public translate: TranslateService,
     public toast: ShowToastService,
     private alertCtrl: AlertController,
+    private platform: Platform
   ) { }
 
   async ngOnInit() {
@@ -93,6 +95,10 @@ export class ViewTenderPage implements OnInit, OnDestroy {
   // if coming from anywhere else then just go back
   // tested and working perfectly
   goBack() {
+    if (this.platform.is('ios')) {
+      this.nav.back();
+    }
+
     try { //not sure if this is causing problems on iOS
       let prevRouterString = this.prevRoute.getPreviousUrl();
       if (prevRouterString.includes('/create-tender')) {
