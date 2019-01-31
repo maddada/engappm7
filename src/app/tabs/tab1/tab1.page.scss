@@ -1,9 +1,5 @@
 @import "../../../theme/mixins.scss";
 
-* {
-  font-family: "a-jannat-lt";
-}
-
 .flex-container {
   display: flex;
 
@@ -32,7 +28,7 @@ ion-footer {
   max-height: 70px !important;
 
   * {
-    font-weight: bold !important;
+    font-weight: 500 !important; //iOS: Replace with 500, Android: Replace with bold.
     color: rgb(71, 71, 71);
   }
 }

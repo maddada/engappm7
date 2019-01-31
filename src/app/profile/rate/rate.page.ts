@@ -119,12 +119,12 @@ export class RatePage implements OnInit, OnDestroy {
         this.toast.showToast(`Rating Submitted for ${this.newComment.commentOnName}`);
       }
 
-      this.nav.back();
+      this.nav.goBack();
     });
   }
 
   goBack() {
-    this.nav.back();
+    this.nav.goBack();
   }
 
   ngOnDestroy() {

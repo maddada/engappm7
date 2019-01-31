@@ -1,3 +1,7 @@
+@mixin m7bold {
+  font-weight: 400;
+}
+
 @mixin for-small-phone-only {
   //xxs
   @media (min-width: 1px) and(max-width: 365px) {

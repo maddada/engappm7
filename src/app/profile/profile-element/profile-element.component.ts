@@ -47,7 +47,7 @@ export class ProfileElementComponent implements OnInit {
   }
 
   // public goBack() {
-  //   this.nav.back();
+  //   this.nav.goBack();
   // }
 
   public toggleEditOn() {

@@ -14,7 +14,6 @@ import { ShowToastService } from './show-toast.service';
 // __ Ionic Native
 import { TranslateModule } from '@ngx-translate/core';
 import { Camera } from '@ionic-native/camera/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 // import { SafeHtmlPipe } from '../pipes/safehtml.pipe';
 // import { FileSizePipe } from '../pipes/filesize.pipe';
@@ -47,7 +46,6 @@ export class CoreModule {
           ConsultantOnlyGuard,
           ShowToastService,
           ShowLoadingService,
-          WebView,
           Camera,
         ]
     };

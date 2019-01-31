@@ -34,6 +34,8 @@ export class ViewTenderPage implements OnInit, OnDestroy {
 
   savedTenderUid: string;
 
+  deleted: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private db: FirestoreService,
@@ -95,26 +97,28 @@ export class ViewTenderPage implements OnInit, OnDestroy {
   // if coming from anywhere else then just go back
   // tested and working perfectly
   goBack() {
-    try { //not sure if this is causing problems on iOS
-      let prevRouterString = this.prevRoute.getPreviousUrl();
-      if (prevRouterString.includes('/create-tender')) {
+    // try { //not sure if this is causing problems on iOS
+      // let prevRouterString = this.prevRoute.getPreviousUrl();
+      // if (prevRouterString.includes('/create-tender')) {
+      //   this.nav.navigateBack('/tabs/tab2');
+      // }
+
+      if (this.user.uid != null && this.savedTenderUid === this.user.uid) {
+        //cuz tender will be undefined when it's deleted.
         this.nav.navigateBack('/tabs/tab2');
       }
 
-      if (this.savedTenderUid === this.user.uid) { //cuz tender will be undefined when it's deleted.
+      else if (this.tender == null) { //incase tender was deleted.
         this.nav.navigateBack('/tabs/tab2');
+      } else {
+        this.nav.goBack();
       }
 
-      if (this.tender == null) { //incase tender was deleted.
-        this.nav.navigateBack('/tabs/tab2');
-      }
-    }
-    catch (err) {
-      console.log(err);
-    }
+    // }
+    // catch (err) {
+    //   console.log(err);
+    // }
 
-
-    this.nav.back();
   }
 
   async joinTender() {
@@ -157,9 +161,12 @@ export class ViewTenderPage implements OnInit, OnDestroy {
         }, {
           text: confirmText,
           handler: () => {
+            this.deleted = true;
             this.db.delete(`tenders/${this.id}`).then(_ => {
               this.toast.showToast(toastMessage);
-              this.nav.navigateBack('/');
+              this.goBack();
+            }).catch(_ => {
+              this.deleted = false;
             });
           }
         }

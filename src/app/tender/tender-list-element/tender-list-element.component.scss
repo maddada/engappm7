@@ -1,6 +1,8 @@
 @import "../../../theme/mixins.scss";
 @import "../../../theme/variables.scss";
 
+// REPLACE ALL FONT-WEIGHT 5 00 TO B OLD WHEN DOING A CHROME BUILD.
+// AND DO 5 00 FOR iOS BUILD
 .clickable {
   cursor: pointer !important;
 
@@ -45,7 +47,7 @@
       grid-row: 1;
       align-self: center;
       font-size: 0.75rem;
-      font-weight: bold;
+      @include m7bold;
       color: rgba(255, 255, 255, 0.733);
     }
 
@@ -63,7 +65,7 @@
       grid-row: 4;
       align-self: center;
       font-size: 0.8rem;
-      font-weight: bold;
+      @include m7bold;
       color: rgba(255, 255, 255, 0.733);
     }
   }
@@ -113,8 +115,8 @@
     padding-bottom: 20px;
 
     .tender-title-row {
-      font-size: 0.85rem;
-      font-weight: bold;
+      font-size: 0.95rem;
+      @include m7bold;
       align-self: end;
       color: rgb(46, 46, 46);
 
@@ -164,7 +166,7 @@
 
       .detail-data {
         font-size: 0.75rem;
-        font-weight: bold;
+        @include m7bold;
         align-self: end;
       }
     }
@@ -212,10 +214,10 @@
 
   .title {
     font-size: 0.85rem;
-    font-weight: bold;
+    @include m7bold;
     color: rgb(46, 46, 46);
     margin-top: 0;
-    font-weight: bold;
+    @include m7bold;
   }
 
   .extended-inner-grid {
@@ -230,7 +232,7 @@
     .summary {
       padding-top: 6px;
       padding-bottom: 6px;
-      font-weight: bold;
+      @include m7bold;
     }
 
     ion-icon {
@@ -243,23 +245,23 @@
       font-size: 0.85rem;
       align-self: center;
       padding-right: 10px;
-      font-weight: bold;
+      @include m7bold;
     }
 
     .detail-data {
       font-size: 0.85rem;
       align-self: top;
-      font-weight: bold;
+      @include m7bold;
     }
 
     .sector-data {
       text-align: center;
-      font-weight: bold;
+      @include m7bold;
     }
 
     .attachment-button {
       display: block;
-      font-weight: bold;
+      @include m7bold;
       height: 30px;
     }
   }

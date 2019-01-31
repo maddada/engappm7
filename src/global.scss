@@ -21,8 +21,16 @@
   src: url("/assets/fonts/a-jannat-lt.woff2") format("woff2"),
     url("/assets/fonts/a-jannat-lt.woff") format("woff"),
     url("/assets/fonts/a-jannat-lt.ttf") format("truetype");
-  font-weight: 300;
+  speak: none;
   font-style: normal;
+  font-weight: normal;
+  text-transform: none; // mac ff fix
+  -webkit-font-smoothing: antialiased; // safari mac nicer
+  -moz-osx-font-smoothing: grayscale; // fix fatty ff on mac
+}
+
+@mixin m7bold {
+  font-weight: 500 !important;
 }
 
 // .flex-container {
@@ -47,8 +55,7 @@ ion-item {
 ion-content {
   // --background: url("./assets/images/background/electro1.jpg") no-repeat 100%
   //   100% !important;
-  --background: url("./assets/images/background/yak.jpg") right center/100% 100%
-    no-repeat fixed;
+  --background: url("./assets/images/background/yak.jpg") right center/100% 100% no-repeat fixed;
   // background-size: 1% 1% !important;
   // background-position: bottom right;
   // background-attachment: fixed;
@@ -59,7 +66,7 @@ ion-content {
   --ion-safe-area-bottom: 120px;
   --background: rgba(73, 73, 73, 0.7);
   // background: rgba(73, 73, 73, 0.5);
-  font-weight: bold !important;
+  @include m7bold;
   color: rgb(245, 245, 245);
   text-align: center !important;
   div {
@@ -73,6 +80,8 @@ ion-content {
 .ar {
   text-align: right !important;
   direction: rtl !important;
+  --ion-font-family: "a-jannat-lt";
+  font-family: "a-jannat-lt";
 }
 
 .dir-rtl {
@@ -95,10 +104,13 @@ textarea {
   font-family: "a-jannat-lt";
   @include no-select;
   --ion-font-family: "a-jannat-lt";
+  text-transform: none !important; // mac ff fix
+  -webkit-font-smoothing: antialiased !important; // safari mac nicer
+  -moz-osx-font-smoothing: grayscale !important; // fix fatty ff on mac
 }
 
 .bold {
-  font-weight: bold !important;
+  @include m7bold;
 }
 
 .center {
@@ -121,4 +133,8 @@ ion-app {
 
 .no-border-label {
   --border-style: 0 !important;
+}
+
+ion-title {
+  @include m7bold;
 }

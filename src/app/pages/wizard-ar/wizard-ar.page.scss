@@ -30,7 +30,7 @@ ion-slide {
 
 h1 {
   // for phone:
-  font-weight: bold;
+  @include m7bold;
 
   @include for-phone-only {
     font-size: 1.4em;
@@ -121,7 +121,7 @@ ion-img {
   h3 {
     margin-top: 40px;
     color: rgb(73, 73, 73);
-    font-weight: bold;
+    @include m7bold;
     line-height: 180%;
 
     // for phones:
@@ -156,7 +156,7 @@ ion-img {
   li {
     text-align: start;
     color: rgb(73, 73, 73);
-    font-weight: bold;
+    @include m7bold;
     padding-bottom: 1.2rem;
 
     @include for-small-phone-only {

@@ -1,5 +1,7 @@
+@import "../../theme/mixins.scss";
+
 ion-tab-bar {
-  font-weight: bold;
+  @include m7bold;
   ion-label {
     font-size: 12px !important;
   }

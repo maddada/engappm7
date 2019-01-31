@@ -17,6 +17,6 @@ export class SelectIndvCompanyPage implements OnInit {
   }
 
   goBack() {
-    this.nav.back();
+    this.nav.goBack();
   }
 }

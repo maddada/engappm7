@@ -70,7 +70,7 @@
   margin-top: 20px;
   text-align: center;
   font-size: 0.9rem;
-  font-weight: bold;
+  @include m7bold;
   align-self: end;
 
   white-space: nowrap;
@@ -108,13 +108,13 @@ ion-icon {
 
 .detail-data {
   font-size: 0.9rem;
-  font-weight: bold;
+  @include m7bold;
   align-self: end;
 }
 
 .detail-data-supplier {
   font-size: 0.9rem;
-  font-weight: bold;
+  @include m7bold;
   align-self: end;
 
   white-space: nowrap;
@@ -140,7 +140,7 @@ ion-icon {
 .r4 {
   text-align: center;
   width: 100%;
-  font-weight: bold;
+  @include m7bold;
   font-size: 0.8rem;
   color: rgb(255, 255, 255);
 

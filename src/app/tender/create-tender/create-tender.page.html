@@ -167,7 +167,7 @@
         <ion-item class="no-border-label" style="align-items: center;">
           <!-- __ Take Picture Button -->
 
-          <label for="uploadCamera" class="custom-file-upload" style="font-weight:bold; text-align: center;">
+          <label for="uploadCamera" class="custom-file-upload bold" style="text-align: center;">
             <ion-icon name="camera" size="large"></ion-icon>
           </label>
           <input #uploadCamera type="button" (click)="takePicture()" id="uploadCamera" name="uploadCamera" style="margin:0 auto; width: 90%; display: none;">
@@ -194,7 +194,7 @@
           <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='en'" class="bs">
           </ion-label>
 
-          <label for="upload3" class="custom-file-upload" style="font-weight:bold; text-align: center;">
+          <label for="upload3" class="custom-file-upload bold" style="text-align: center;">
             <ion-icon name="image" size="large"></ion-icon>
           </label>
           <input #uploadButton3 type="file" (change)="setUpload($event, 3)" id="upload3" name="upload3" style="margin:0 auto; width: 90%;">
@@ -233,7 +233,7 @@
             Attachment #1
           </ion-label>
 
-          <label for="upload0" class="custom-file-upload" style="font-weight:bold; text-align: center;">
+          <label for="upload0" class="custom-file-upload bold" style="text-align: center;" >
             <ion-icon name="document" size="large"></ion-icon>
           </label>
           <input #uploadButton0 type="file" (change)="setUpload($event, 0)" id="upload0" name="upload0" style="margin:0 auto; width: 90%;">
@@ -259,7 +259,7 @@
             Attachment #2
           </ion-label>
 
-          <label for="upload1" class="custom-file-upload" style="font-weight:bold; text-align: center;">
+          <label for="upload1" class="custom-file-upload bold" style="text-align: center;">
             <ion-icon name="document" size="large"></ion-icon>
           </label>
           <input #uploadButton1 type="file" (change)="setUpload($event, 1)" id="upload1" name="upload1" style="margin:0 auto; width: 90%;">
@@ -286,7 +286,7 @@
             Attachment #3
           </ion-label>
 
-          <label for="upload2" class="custom-file-upload" style="font-weight:bold; text-align: center;">
+          <label for="upload2" class="custom-file-upload bold" style="text-align: center;" >
             <ion-icon name="document" size="large"></ion-icon>
           </label>
           <input #uploadButton2 type="file" (change)="setUpload($event, 2)" id="upload2" name="upload2" style="margin:0 auto; width: 90%;">
@@ -327,7 +327,7 @@
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
         <!-- NOTE: Create Tender Button -->
-        <ion-button expand="block" mode="ios" (click)="onCreateClicked()" style="font-weight: bold;">
+        <ion-button expand="block" mode="ios" (click)="onCreateClicked()" style="@include m7bold;">
           <ng-container *ngIf="translate.currentLang==='ar'">أنشئ المناقصة</ng-container>
           <ng-container *ngIf="translate.currentLang==='en'">Create
             Tender</ng-container>

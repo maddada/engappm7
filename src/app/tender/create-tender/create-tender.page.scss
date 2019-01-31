@@ -1,13 +1,15 @@
+@import "../../../theme/mixins.scss";
+
 .upload-percent {
   display: block;
   padding: 20px;
   font-size: 1.5rem;
-  font-weight: bold;
+  @include m7bold;
   color: theme-colors("textColors", "primary");
 }
 
 ion-label {
-  font-weight: bold;
+  @include m7bold;
   font-size: 0.95rem;
 }
 
@@ -46,7 +48,7 @@ h2 {
   margin: 0 auto;
   padding: 6px 12px;
   color: white;
-  font-weight: bold;
+  @include m7bold;
 }
 
 input[type="file"] {
@@ -61,7 +63,7 @@ input[type="file"] {
   background-color: #007EAF;
   width: 100px;
   color: white;
-  font-weight: bold;
+  @include m7bold;
 padding-top: 15px;
   * {
     cursor: pointer;

@@ -40,7 +40,7 @@
   </ng-container>
 
   <ng-template #NotFound>
-    <ng-container *ngIf="showNotFound">
+    <ng-container *ngIf="showNotFound && !deleted">
       <h2 padding text-center>
         <ng-container *ngIf="translate.currentLang === 'ar'" class="dir-rtl">
           لم يتم العثور على المناقصة
