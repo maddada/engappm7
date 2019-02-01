@@ -1,7 +1,7 @@
 @import "../../../theme/mixins.scss";
 
 .comment-grid-container {
-  min-width: 327px;
+  min-width: 300px;
   // background: white;
   display: grid;
   grid-template-areas:
@@ -16,7 +16,7 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
   --color: rgb(31, 31, 31);
 
-  max-width: 60vw;
+  max-width: 90vw;
   .row1-comment-title-and-date {
     display: flex;
     flex-direction: column;

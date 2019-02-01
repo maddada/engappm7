@@ -97,27 +97,19 @@ export class ViewTenderPage implements OnInit, OnDestroy {
   // if coming from anywhere else then just go back
   // tested and working perfectly
   goBack() {
-    // try { //not sure if this is causing problems on iOS
-      // let prevRouterString = this.prevRoute.getPreviousUrl();
-      // if (prevRouterString.includes('/create-tender')) {
-      //   this.nav.navigateBack('/tabs/tab2');
-      // }
 
+    try {
       if (this.user.uid != null && this.savedTenderUid === this.user.uid) {
-        //cuz tender will be undefined when it's deleted.
-        this.nav.navigateBack('/tabs/tab2');
+        this.nav.navigateBack('/tabs/tab2'); //cuz tender will be undefined when it's deleted.
       }
-
-      else if (this.tender == null) { //incase tender was deleted.
-        this.nav.navigateBack('/tabs/tab2');
+      else if (this.tender == null) {
+        this.nav.navigateBack('/tabs/tab2'); //incase tender was deleted.
       } else {
         this.nav.goBack();
       }
-
-    // }
-    // catch (err) {
-    //   console.log(err);
-    // }
+    } catch (e) {
+      this.nav.goBack();
+    }
 
   }
 
