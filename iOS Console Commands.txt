@@ -1,7 +1,22 @@
 Always add sudo before all commands!
 
+To build for iOS:
+Make changes to ionic code
+then do:
 sudo ionic cordova prepare ios
+sudo ionic cordova build ios --prod --release
 then open the xworkspace file in platform/ios/
+
+
+
+
+
+
+
+
+
+
+
 
 
 Misc. Stuff:
@@ -10,3 +25,4 @@ IN MAC:
 cmd is control
 ctrl is windows key
 alt is option
+

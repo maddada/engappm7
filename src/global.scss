@@ -29,10 +29,6 @@
   -moz-osx-font-smoothing: grayscale; // fix fatty ff on mac
 }
 
-@mixin m7bold {
-  font-weight: 500 !important;
-}
-
 // .flex-container {
 //   // background: white url("./assets/images/background/electro1.jpg") no-repeat top    center fixed;
 //   // background-color
@@ -70,7 +66,7 @@ ion-content {
   color: rgb(245, 245, 245);
   text-align: center !important;
   div {
-    color: rgb(245, 245, 245);
+    color: rgb(2, 2, 2);
     padding: 0 auto !important;
     width: auto;
     text-align: center !important;

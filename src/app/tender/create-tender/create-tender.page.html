@@ -67,7 +67,7 @@
 
         <!-- NOTE: Tender Whatsapp -->
         <ion-item>
-          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
             واتساب التواصل*
           </ion-label>
           <ion-label color="primary" position="floating" *ngIf="translate.currentLang==='en'">
@@ -79,7 +79,7 @@
 
         <!-- NOTE: Tender Phone/Mobile -->
         <ion-item>
-          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
             رقم التواصل
           </ion-label>
           <ion-label color="primary" position="floating" *ngIf="translate.currentLang==='en'">
@@ -94,10 +94,10 @@
 
         <!-- NOTE: Tender Category -->
         <ion-item padding-top>
-          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
             تصنيف المناقصة*
           </ion-label>
-          <ion-label color="primary" position="floating" class="label" *ngIf="translate.currentLang==='en'">Tender
+          <ion-label color="primary" position="stacked" class="label" *ngIf="translate.currentLang==='en'">Tender
             Category*</ion-label>
 
           <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory" interface="action-sheet">
@@ -118,10 +118,10 @@
         <!-- NOTE: Deadline -->
         <ion-item padding-top>
 
-          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
             تاريخ الإنتهاء*
           </ion-label>
-          <ion-label color="primary" position="floating" class="label" *ngIf="translate.currentLang==='en'">Select
+          <ion-label color="primary" position="stacked" class="label" *ngIf="translate.currentLang==='en'">Select
             Deadline*</ion-label>
 
           <ion-datetime [(ngModel)]="selectedDeadline" display-format="DD/MM/YYYY" min="{{datePickerMinYear}}" max="{{datePickerMaxYear}}"
@@ -134,10 +134,10 @@
 
         <!-- NOTE: Tender Summary -->
         <ion-item padding-top>
-          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl">
             تفاصيل المناقصة (إختياري)*
           </ion-label>
-          <ion-label color="primary bs" position="stacked" *ngIf="translate.currentLang==='en'">
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='en'">
             Tender Summary & Main Instructions<br>(Optional)
           </ion-label>
 

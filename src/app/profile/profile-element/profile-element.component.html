@@ -82,7 +82,7 @@
         </div>
 
         <!-- NOTE: Address -->
-        <div class="profile-subtitle" *ngIf="user.address" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
+        <div style="display: none" class="profile-subtitle" *ngIf="user.address" [class.ar-profile-subtitle]="translate.currentLang==='ar'">
           <ion-icon name="pin" mode="md" style="align-self: flex-start; margin-top: 10px;"></ion-icon>
           <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'">العنوان</div>
           <div class="detail-name" *ngIf="translate.currentLang==='en'">Address:</div>
