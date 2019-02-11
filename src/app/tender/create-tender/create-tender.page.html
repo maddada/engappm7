@@ -100,8 +100,8 @@
           <ion-label color="primary" position="stacked" class="label" *ngIf="translate.currentLang==='en'">Tender
             Category*</ion-label>
 
-          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory" interface="action-sheet">
-
+          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory" interface="action-sheet"
+            *ngIf="translate.currentLang==='en'">
             <ion-select-option value="tender_construction">Construction</ion-select-option>
             <ion-select-option value="tender_steel">Steel Works</ion-select-option>
             <ion-select-option value="tender_maintenance">Maintenance</ion-select-option>
@@ -110,8 +110,18 @@
             <ion-select-option value="tender_insulation">Insulation</ion-select-option>
             <ion-select-option value="tender_fencing">Fencing/Walls</ion-select-option>
             <ion-select-option value="tender_general">General Works</ion-select-option>
+          </ion-select>
 
-
+          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory" interface="action-sheet"
+            *ngIf="translate.currentLang==='ar'">
+            <ion-select-option value="tender_construction">بناء</ion-select-option>
+            <ion-select-option value="tender_steel">حدادة </ion-select-option>
+            <ion-select-option value="tender_maintenance">إصلاحات</ion-select-option>
+            <ion-select-option value="tender_concrete">كونكريت</ion-select-option>
+            <ion-select-option value="tender_prefab">مصنعيات</ion-select-option>
+            <ion-select-option value="tender_insulation">عزل</ion-select-option>
+            <ion-select-option value="tender_fencing">جدران</ion-select-option>
+            <ion-select-option value="tender_general">عام</ion-select-option>
           </ion-select>
         </ion-item>
 
@@ -233,7 +243,7 @@
             Attachment #1
           </ion-label>
 
-          <label for="upload0" class="custom-file-upload bold" style="text-align: center;" >
+          <label for="upload0" class="custom-file-upload bold" style="text-align: center;">
             <ion-icon name="document" size="large"></ion-icon>
           </label>
           <input #uploadButton0 type="file" (change)="setUpload($event, 0)" id="upload0" name="upload0" style="margin:0 auto; width: 90%;">
@@ -286,7 +296,7 @@
             Attachment #3
           </ion-label>
 
-          <label for="upload2" class="custom-file-upload bold" style="text-align: center;" >
+          <label for="upload2" class="custom-file-upload bold" style="text-align: center;">
             <ion-icon name="document" size="large"></ion-icon>
           </label>
           <input #uploadButton2 type="file" (change)="setUpload($event, 2)" id="upload2" name="upload2" style="margin:0 auto; width: 90%;">

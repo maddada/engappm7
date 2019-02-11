@@ -105,10 +105,10 @@ export class ViewTenderPage implements OnInit, OnDestroy {
       else if (this.tender == null) {
         this.nav.navigateBack('/tabs/tab2'); //incase tender was deleted.
       } else {
-        this.nav.goBack();
+        this.nav.back();
       }
     } catch (e) {
-      this.nav.goBack();
+      this.nav.back();
     }
 
   }
