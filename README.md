@@ -17,6 +17,4 @@ and also to discover business partners.
 
 • Search for suppliers of all specialities!
 
-Coming Soon:
-
 • Receive notifications about new tenders!
