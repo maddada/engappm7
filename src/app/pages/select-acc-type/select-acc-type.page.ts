@@ -14,6 +14,6 @@ export class SelectAccTypePage implements OnInit {
   }
 
   goBack() {
-    this.nav.goBack();
+    this.nav.back();
   }
 }
