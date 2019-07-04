@@ -1,102 +1,107 @@
 <ion-app style="max-width: 1140px; margin: 0 auto;">
-  <!-- <ion-split-pane> -->
-  <ion-menu side="start" id="mainMenu">
+    <!-- <ion-split-pane> -->
+    <ion-menu side="start" id="mainMenu">
 
-    <ion-header>
+        <ion-header>
 
-      <ion-toolbar color="light">
-        <ion-title>{{'common.menu' | translate}}</ion-title>
-      </ion-toolbar>
+            <ion-toolbar color="light">
+                <ion-title>{{'common.menu' | translate}}</ion-title>
+            </ion-toolbar>
 
-    </ion-header>
+        </ion-header>
 
-    <ion-content>
-      <ion-list>
+        <ion-content>
+            <ion-list>
 
-        <ion-menu-toggle auto-hide="false">
-          <!-- NOTE: IF LOGGED IN THEN SHOW LOG OUT BUTTON-->
-          <ng-container *ngIf="auth?.user$ | async as user; else logIn">
-            <ion-item *ngIf="user" [routerLink]="['/view-profile', auth.user.uid]" routerDirection="forward">
-              <ion-icon slot="start" name="person"></ion-icon>
-              <ion-label>
-                <ng-container *ngIf="translate.currentLang==='ar'" class="dir-rtl">
-                  {{auth.user.profileNameAr || auth.user.profileName}}
-                </ng-container>
-                <ng-container *ngIf="translate.currentLang==='en'">
-                  {{auth.user.profileName}}
-                </ng-container>
-              </ion-label>
-            </ion-item>
+                <ion-menu-toggle auto-hide="false">
+                    <!-- NOTE: IF LOGGED IN THEN SHOW LOG OUT BUTTON-->
+                    <ng-container *ngIf="auth?.user$ | async as user; else logIn">
+                        <ion-item *ngIf="user" [routerLink]="['/view-profile', auth.user.uid]"
+                            routerDirection="forward">
+                            <ion-icon slot="start" name="person"></ion-icon>
+                            <ion-label>
+                                <ng-container *ngIf="translate.currentLang==='ar'" class="dir-rtl">
+                                    {{auth.user.profileNameAr || auth.user.profileName}}
+                                </ng-container>
+                                <ng-container *ngIf="translate.currentLang==='en'">
+                                    {{auth.user.profileName}}
+                                </ng-container>
+                            </ion-label>
+                        </ion-item>
 
-            <ion-item *ngIf="auth?.user" routerDirection="forward" routerLink="/logout">
-              <ion-icon slot="start" name="log-out"></ion-icon>
-              <ion-label>
-                {{'common.log-out' | translate}}
-              </ion-label>
-            </ion-item>
-          </ng-container>
+                        <ion-item *ngIf="auth?.user" routerDirection="forward" routerLink="/logout">
+                            <ion-icon slot="start" name="log-out"></ion-icon>
+                            <ion-label>
+                                {{'common.log-out' | translate}}
+                            </ion-label>
+                        </ion-item>
+                    </ng-container>
 
-          <!-- NOTE: ELSE! IF NOT LOGGED IN THEN SHOW LOG IN & REGISTER BUTTONS-->
-          <ng-template #logIn>
-            <ion-item routerDirection="forward" routerLink="/login">
+                    <!-- NOTE: ELSE! IF NOT LOGGED IN THEN SHOW LOG IN & REGISTER BUTTONS-->
+                    <ng-template #logIn>
+                        <ion-item routerDirection="forward" routerLink="/login">
 
-              <ion-icon slot="start" name="log-in"></ion-icon>
+                            <ion-icon slot="start" name="log-in"></ion-icon>
 
-              <ion-label>
-                {{'common.log-in' | translate}}
-              </ion-label>
+                            <ion-label>
+                                {{'common.log-in' | translate}}
+                            </ion-label>
 
-            </ion-item>
+                        </ion-item>
 
-            <ion-item routerDirection="forward" routerLink="/select-indv-company">
+                        <ion-item routerDirection="forward" routerLink="/select-indv-company">
 
-              <ion-icon slot="start" name="at"></ion-icon>
+                            <ion-icon slot="start" name="at"></ion-icon>
 
-              <ion-label>
-                {{'common.register' | translate}}
-              </ion-label>
+                            <ion-label>
+                                {{'common.register' | translate}}
+                            </ion-label>
 
-            </ion-item>
-          </ng-template>
+                        </ion-item>
+                    </ng-template>
 
-          <ion-item [routerDirection]="'forward'" routerLink="/select-language">
+                    <ion-item [routerDirection]="'forward'" routerLink="/select-language">
 
-            <ion-icon slot="start" name="globe" mode="md"></ion-icon>
+                        <ion-icon slot="start" name="globe" mode="md"></ion-icon>
 
-            <ion-label>
-              {{ 'pages.settings.change-language' | translate }}
-            </ion-label>
+                        <ion-label>
+                            {{ 'pages.settings.change-language' | translate }}
+                        </ion-label>
 
-          </ion-item>
+                    </ion-item>
 
+                    <ion-item routerDirection="forward" routerLink="" (click)="aboutClicked()">
 
+                        <ion-icon slot="start" name="information-circle-outline"></ion-icon>
 
+                        <ion-label>
+                            {{'common.about' | translate}}
+                        </ion-label>
 
-          <ion-item routerDirection="forward" routerLink="" (click)="aboutClicked()">
+                    </ion-item>
 
-            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+                    <ion-item>
 
-            <ion-label>
-              {{'common.about' | translate}}
-            </ion-label>
+                        <ion-icon slot="start" name="notifications-outline" mode="md"></ion-icon>
 
-          </ion-item>
+                        <ion-label>
+                            {{ 'pages.settings.recieve-notifications' | translate }}
+                        </ion-label>
 
+                        <ion-toggle (ionChange)="onToggleChange($event)" color="dark" mode="md" #notifToggle>
+                        </ion-toggle>
 
-          <ion-item>
+                    </ion-item>
 
-            <ion-icon slot="start" name="notifications-outline" mode="md"></ion-icon>
+                    <ion-item (click)="privacyPolicyClicked()">
+                        <ion-icon slot="start" name="document" mode="ios"></ion-icon>
+                        <ion-label>
+                            {{ 'privacy_policy' | translate }}
+                        </ion-label>
+                    </ion-item>
 
-            <ion-label>
-              {{ 'pages.settings.recieve-notifications' | translate }}
-            </ion-label>
-
-            <ion-toggle (ionChange)="onToggleChange($event)" color="dark" #notifToggle></ion-toggle>
-
-          </ion-item>
-
-          <!-- __ Removed Settings -->
-          <!-- <ion-item [routerDirection]="'root'" routerLink="/settings">
+                    <!-- __ Removed Settings -->
+                    <!-- <ion-item [routerDirection]="'root'" routerLink="/settings">
 
             <ion-icon slot="start" name="settings"></ion-icon>
 
@@ -107,16 +112,16 @@
           </ion-item> -->
 
 
-        </ion-menu-toggle>
+                </ion-menu-toggle>
 
-      </ion-list>
-    </ion-content>
+            </ion-list>
+        </ion-content>
 
-  </ion-menu>
+    </ion-menu>
 
-  <!-- NOTE: MAIN ROUTER OUTLET FOR THE APP-->
-  <ion-router-outlet main></ion-router-outlet>
+    <!-- NOTE: MAIN ROUTER OUTLET FOR THE APP-->
+    <ion-router-outlet main></ion-router-outlet>
 
-  <!-- </ion-split-pane> -->
+    <!-- </ion-split-pane> -->
 
 </ion-app>

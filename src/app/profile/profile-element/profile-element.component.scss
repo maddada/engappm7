@@ -1,200 +1,208 @@
 @import "../../../theme/mixins.scss";
 
 .edit-card {
-  position: relative;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 20px;
-  min-width: 327px;
-  border-radius: 15px;
-  text-align: center;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    min-width: 327px;
+    border-radius: 15px;
+    text-align: center;
 
-  // margin-bottom: 200px;
-  width: 100%;
-  padding: 40px;
-  @include for-tablet-portrait {
+    // margin-bottom: 200px;
     width: 100%;
     padding: 40px;
-  }
+    @include for-tablet-portrait {
+        width: 100%;
+        padding: 40px;
+    }
 
-  ion-label {
-    @include m7bold;
-    font-size: 1.02rem;
-    text-align: center;
-  }
+    ion-label {
+        @include m7bold;
+        font-size: 1.02rem;
+        text-align: center;
+    }
 
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    border: 2px solid #aaa;
-    border-radius: 15px;
-    margin: 8px 0;
-    outline: none;
-    padding: 8px;
-    box-sizing: border-box;
-    transition: 0.3s;
-  }
+    input[type="text"],
+    input[type="password"] {
+        width: 100%;
+        border: 2px solid #aaa;
+        border-radius: 15px;
+        margin: 8px 0;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+        transition: 0.3s;
+    }
 
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    border-color: dodgerBlue;
-    box-shadow: 0 0 8px 0 dodgerBlue;
-  }
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+        border-color: dodgerBlue;
+        box-shadow: 0 0 8px 0 dodgerBlue;
+    }
 }
 
 .profile-card {
-  position: relative;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
-  min-width: 327px;
-  border-radius: 15px;
-  text-align: center;
+    position: relative;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    min-width: 327px;
+    border-radius: 15px;
+    text-align: center;
 
-  .details-container {
-    margin: 10px auto;
+    .details-container {
+        margin: 10px auto;
 
-    @include for-tablet-landscape {
-      // for tablet and above (half width)
-      min-width: 327px;
-      width: 40vw;
+        @include for-tablet-landscape {
+            // for tablet and above (half width)
+            min-width: 327px;
+            width: 40vw;
+        }
+
+        @include for-desktop-up {
+            // for tablet and above (half width)
+            min-width: 327px;
+            width: 100%;
+        }
     }
-
-    @include for-desktop-up {
-      // for tablet and above (half width)
-      min-width: 327px;
-      width: 100%;
-    }
-  }
 }
 
 .profile-header {
-  font-size: 1.2rem;
-
-  @include m7bold;
-  @include for-tablet-portrait {
     font-size: 1.2rem;
-  }
+
+    @include m7bold;
+    @include for-tablet-portrait {
+        font-size: 1.2rem;
+    }
 }
 
 .ar-profile-subtitle {
-  direction: rtl;
+    direction: rtl;
 
-  ion-icon {
-    margin-inline-start: 30px;
-    margin-inline-end: 10px;
-  }
+    ion-icon {
+        margin-inline-start: 30px;
+        margin-inline-end: 10px;
+    }
 }
 
 .profile-subtitle {
-  display: flex;
-  justify-content: flex-start;
+    display: flex;
+    justify-content: flex-start;
 
-  margin-top: 15px;
-  font-size: 0.95em;
-  color: #007eaf;
-
-  ion-icon {
-    align-self: center;
-    font-size: 1rem;
-  }
-
-  .detail-name {
-    @include m7bold;
-    text-align: start;
-    font-size: 0.9rem;
-    width: 5rem;
-    padding-left: 10px;
-
-    @include for-tablet-portrait {
-      font-size: 1.1rem;
-      width: 7rem;
-    }
-  }
-
-  span {
-    @include m7bold;
-    color: #2e2e2e;
-    font-size: 0.9rem;
-    max-width: 250px;
-    text-align: start;
-    // padding-left: 30px;
-
-    @include for-tablet-portrait {
-      font-size: 1.1rem;
-    }
+    margin-top: 15px;
+    font-size: 0.95em;
+    color: #007eaf;
 
     ion-icon {
-      font-size: 1.4rem;
-      align-items: end;
+        align-self: center;
+        font-size: 1rem;
     }
-  }
+
+    .detail-name {
+        @include m7bold;
+        text-align: start;
+        font-size: 0.9rem;
+        width: 5rem;
+        padding-left: 10px;
+
+        @include for-tablet-portrait {
+            font-size: 1.1rem;
+            width: 7rem;
+        }
+    }
+
+    .detail-email {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    span {
+        @include m7bold;
+        color: #2e2e2e;
+        font-size: 0.9rem;
+        max-width: 300px;
+        text-align: start;
+        // padding-left: 30px;
+
+        @include for-tablet-portrait {
+            font-size: 1.1rem;
+        }
+
+        ion-icon {
+            font-size: 1.4rem;
+            align-items: end;
+        }
+    }
 }
 
 .ar-supplier-subtitle {
-  direction: rtl;
+    direction: rtl;
 
-  ion-icon {
-    margin-inline-start: 30px;
-    margin-inline-end: 10px;
-  }
+    ion-icon {
+        margin-inline-start: 30px;
+        margin-inline-end: 10px;
+    }
 }
 
 .supplier-subtitle {
-  display: flex;
+    display: flex;
 
-  margin-top: 15px;
-  font-size: 0.95em;
-  color: #007eaf;
+    margin-top: 15px;
+    font-size: 0.95em;
+    color: #007eaf;
 
-  ion-icon {
-    align-self: start;
-    font-size: 1rem;
-    margin-top: 5px;
-  }
-
-  .detail-name {
-    @include m7bold;
-    text-align: start;
-    font-size: 0.9rem;
-    width: 5.7rem;
-    padding-left: 10px;
-
-    @include for-tablet-portrait {
-      font-size: 1.1rem;
-      width: 7rem;
+    ion-icon {
+        align-self: start;
+        font-size: 1rem;
+        margin-top: 5px;
     }
-  }
 
-  span {
-    text-align: start;
-    @include m7bold;
-    color: #2e2e2e;
-    font-size: 0.9rem;
-    padding-left: 30px;
+    .detail-name {
+        @include m7bold;
+        text-align: start;
+        font-size: 0.9rem;
+        width: 5.7rem;
+        padding-left: 10px;
 
-    @include for-tablet-portrait {
-      font-size: 1.1rem;
+        @include for-tablet-portrait {
+            font-size: 1.1rem;
+            width: 7rem;
+        }
     }
-  }
+
+    span {
+        text-align: start;
+        @include m7bold;
+        color: #2e2e2e;
+        font-size: 0.9rem;
+        padding-left: 30px;
+
+        @include for-tablet-portrait {
+            font-size: 1.1rem;
+        }
+    }
 }
 
 .rating-row {
-  .detail-name {
-    color: #007eaf;
-    @include m7bold;
-    text-align: start;
-  }
-  span {
-    font-size: 1.5rem;
-    color: #505050;
-  }
+    margin-top: 25px;
+
+    .detail-name {
+        color: #007eaf;
+        @include m7bold;
+        text-align: start;
+    }
+    span {
+        font-size: 1.5rem;
+        color: #505050;
+    }
 }
 
 .supplier-category {
-  color: #353535;
+    color: #353535;
 }

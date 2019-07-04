@@ -119,7 +119,7 @@ export class AppComponent {
                 this.storage.set('notifications', false);
             }
         });
-    };
+    }
 
     getSetLanguage(): any {
         this.storage.get('language').then((val) => {
@@ -145,6 +145,10 @@ export class AppComponent {
         if (this.translate.currentLang === 'en') {
             this.nav.navigateForward('/wizard');
         }
+    }
+
+    privacyPolicyClicked() {
+        window.open(`https://memar.ae/privacy/`, '_blank');
     }
 
 

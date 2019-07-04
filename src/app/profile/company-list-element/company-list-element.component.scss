@@ -112,6 +112,12 @@ ion-icon {
   align-self: end;
 }
 
+.detail-data-email {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .detail-data-supplier {
   font-size: 0.9rem;
   @include m7bold;

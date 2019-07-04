@@ -1,224 +1,225 @@
 <div class="grid-container clickable" (click)="viewProfile()" [class.extended]="extended">
-  <div class="details-grid">
-    <!-- NOTE: ROW 1 TITLE -->
-    <div class="r1 company-name-row" text-nowrap>
-      <ng-container *ngIf="translate.currentLang==='ar'">
-        {{company?.profileNameAr || company?.profileName}}
-      </ng-container>
-      <ng-container *ngIf="translate.currentLang==='en'">
-        {{company?.profileName}}
-      </ng-container>
-    </div>
-
-    <!-- NOTE: ROW 2 DETAILS GRID -->
-    <div class="details-row-container">
-      <div class="main-description-grid" [class.ar-description-grid]="translate.currentLang==='ar'">
-
-        <ion-icon name='pin' mode="md">
-        </ion-icon>
-        <div class="detail-name-text">{{'common.city' | translate}}</div>
-        <div class="detail-data">
-          <ng-container [ngSwitch]="company?.city">
-
-            <ng-container *ngSwitchCase="1">
-              {{'dubai' | translate}}
+    <div class="details-grid">
+        <!-- NOTE: ROW 1 TITLE -->
+        <div class="r1 company-name-row" text-nowrap>
+            <ng-container *ngIf="translate.currentLang==='ar'">
+                {{company?.profileNameAr || company?.profileName}}
             </ng-container>
-
-            <ng-container *ngSwitchCase="2">
-              {{'sharjah' | translate}}
+            <ng-container *ngIf="translate.currentLang==='en'">
+                {{company?.profileName}}
             </ng-container>
+        </div>
 
-            <ng-container *ngSwitchCase="3">
-              {{'ajman' | translate}}
-            </ng-container>
+        <!-- NOTE: ROW 2 DETAILS GRID -->
+        <div class="details-row-container">
+            <div class="main-description-grid" [class.ar-description-grid]="translate.currentLang==='ar'">
 
-            <ng-container *ngSwitchCase="4">
-              {{'abu-dhabi' | translate}}
-            </ng-container>
+                <ion-icon name='pin' mode="md">
+                </ion-icon>
+                <div class="detail-name-text">{{'common.city' | translate}}</div>
+                <div class="detail-data">
+                    <ng-container [ngSwitch]="company?.city">
 
-            <!-- <ng-container *ngSwitchCase="5">
+                        <ng-container *ngSwitchCase="1">
+                            {{'dubai' | translate}}
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="2">
+                            {{'sharjah' | translate}}
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="3">
+                            {{'ajman' | translate}}
+                        </ng-container>
+
+                        <ng-container *ngSwitchCase="4">
+                            {{'abu-dhabi' | translate}}
+                        </ng-container>
+
+                        <!-- <ng-container *ngSwitchCase="5">
               Al Ain
             </ng-container> -->
 
-            <ng-container *ngSwitchCase="6">
-              {{'fujairah' | translate}}
-            </ng-container>
+                        <ng-container *ngSwitchCase="6">
+                            {{'fujairah' | translate}}
+                        </ng-container>
 
-            <ng-container *ngSwitchCase="7">
-              {{'ras-al-khaimah' | translate}}
-            </ng-container>
+                        <ng-container *ngSwitchCase="7">
+                            {{'ras-al-khaimah' | translate}}
+                        </ng-container>
 
-            <ng-container *ngSwitchCase="8">
-              {{'umm-al-quwain' | translate}}
-            </ng-container>
+                        <ng-container *ngSwitchCase="8">
+                            {{'umm-al-quwain' | translate}}
+                        </ng-container>
 
-          </ng-container>
+                    </ng-container>
+                </div>
+
+                <ion-icon name="call" mode="md"></ion-icon>
+                <div class="detail-name-text">
+                    {{'profile.phone' | translate}}
+                </div>
+                <div class="detail-data">
+                    {{company?.companyNumber}}
+                </div>
+
+
+                <ion-icon name="mail" mode="md"></ion-icon>
+                <div class="detail-name-text">
+                    {{'common.email-short' | translate}}
+                </div>
+                <div class="detail-data detail-data-email">
+                    {{company?.email}}
+                </div>
+
+                <ion-icon name="pricetags"></ion-icon>
+                <ng-container *ngIf="company?.accountType === 2 || company?.accountType === 3; else SupplierSpeciality">
+                    <div class="detail-name-text">
+                        {{'profile.company-classification-short' | translate}}
+                    </div>
+                    <div class="detail-data">
+                        <span [ngSwitch]="company?.class">
+                            <ng-container *ngSwitchCase="0">
+                                {{'profile.grade.special-grade' | translate}}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="1">
+                                {{'profile.grade.first-grade' | translate}}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="2">
+                                {{'profile.grade.second-grade' | translate}}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="3">
+                                {{'profile.grade.third-grade' | translate}}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="4">
+                                {{'profile.grade.fourth-grade' | translate}}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="5">
+                                {{'profile.grade.fifth-grade' | translate}}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="6">
+                                {{'profile.grade.sixth-grade' | translate}}
+                            </ng-container>
+                            <ng-container *ngSwitchDefault>
+                            </ng-container>
+                        </span>
+                    </div>
+                </ng-container>
+                <ng-template #SupplierSpeciality>
+                    <div class="detail-name-text">
+                        {{'profile.categories' | translate}} &nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="detail-data-supplier">
+                        <ng-container *ngFor="let cat of company?.tags; let i = index">
+                            <span *ngIf="cat === 'category_paint'">
+                                {{'c.paint' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_blocks'">
+                                {{'c.blocks' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_ceramics'">
+                                {{'c.ceramics' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_interlock'">
+                                {{'c.Interlock' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_wood'">
+                                {{'c.wood' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_doors'">
+                                {{'c.doors' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_fabric'">
+                                {{'c.fabric' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_cement'">
+                                {{'c.cement' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_gypsum'">
+                                {{'c.gypsum-board' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_decoration'">
+                                {{'c.decoration' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_glass'">
+                                {{'c.glass' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_aluminium'">
+                                {{'c.aluminium' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_kitchens'">
+                                {{'c.kitchens' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_ac'">
+                                {{'c.air-conditioning' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_lighting'">
+                                {{'c.lighting' | translate}}
+                            </span>
+                            <span *ngIf="cat === 'category_concrete'">
+                                {{'c.concrete' | translate}}
+                            </span>
+                        </ng-container>
+                    </div>
+                </ng-template>
+            </div>
         </div>
 
-        <ion-icon name="call" mode="md"></ion-icon>
-        <div class="detail-name-text">
-          {{'profile.phone' | translate}}
-        </div>
-        <div class="detail-data">
-          {{company?.companyNumber}}
-        </div>
+        <!-- NOTE: ROW 3 RATINGS -->
+        <div class="r3">
 
+            <span [ngSwitch]="company?.TEST_RATING">
+                <ng-container *ngSwitchCase="1">
+                    <ion-icon name="star"></ion-icon>
+                </ng-container>
+                <ng-container *ngSwitchCase="2">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                </ng-container>
+                <ng-container *ngSwitchCase="3">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                </ng-container>
+                <ng-container *ngSwitchCase="4">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                </ng-container>
+                <ng-container *ngSwitchCase="5">
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                    <ion-icon name="star"></ion-icon>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
 
-        <ion-icon name="mail" mode="md"></ion-icon>
-        <div class="detail-name-text">
-          {{'common.email-short' | translate}}
-        </div>
-        <div class="detail-data">
-          {{company?.email}}
-        </div>
-
-        <ion-icon name="pricetags"></ion-icon>
-        <ng-container *ngIf="company?.accountType === 2 || company?.accountType === 3; else SupplierSpeciality">
-          <div class="detail-name-text">
-            {{'profile.company-classification-short' | translate}}
-          </div>
-          <div class="detail-data">
-            <span [ngSwitch]="company?.class">
-              <ng-container *ngSwitchCase="0">
-                {{'profile.grade.special-grade' | translate}}
-              </ng-container>
-              <ng-container *ngSwitchCase="1">
-                {{'profile.grade.first-grade' | translate}}
-              </ng-container>
-              <ng-container *ngSwitchCase="2">
-                {{'profile.grade.second-grade' | translate}}
-              </ng-container>
-              <ng-container *ngSwitchCase="3">
-                {{'profile.grade.third-grade' | translate}}
-              </ng-container>
-              <ng-container *ngSwitchCase="4">
-                {{'profile.grade.fourth-grade' | translate}}
-              </ng-container>
-              <ng-container *ngSwitchCase="5">
-                {{'profile.grade.fifth-grade' | translate}}
-              </ng-container>
-              <ng-container *ngSwitchCase="6">
-                {{'profile.grade.sixth-grade' | translate}}
-              </ng-container>
-              <ng-container *ngSwitchDefault>
-              </ng-container>
+                </ng-container>
             </span>
-          </div>
-        </ng-container>
-        <ng-template #SupplierSpeciality>
-          <div class="detail-name-text">
-            {{'profile.categories' | translate}}
-          </div>
-          <div class="detail-data-supplier">
-            <ng-container *ngFor="let cat of company?.tags; let i = index">
-              <span *ngIf="cat === 'category_paint'">
-                {{'c.paint' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_blocks'">
-                {{'c.blocks' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_ceramics'">
-                {{'c.ceramics' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_interlock'">
-                {{'c.Interlock' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_wood'">
-                {{'c.wood' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_doors'">
-                {{'c.doors' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_fabric'">
-                {{'c.fabric' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_cement'">
-                {{'c.cement' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_gypsum'">
-                {{'c.gypsum-board' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_decoration'">
-                {{'c.decoration' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_glass'">
-                {{'c.glass' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_aluminium'">
-                {{'c.aluminium' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_kitchens'">
-                {{'c.kitchens' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_ac'">
-                {{'c.air-conditioning' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_lighting'">
-                {{'c.lighting' | translate}}
-              </span>
-              <span *ngIf="cat === 'category_concrete'">
-                {{'c.concrete' | translate}}
-              </span>
-            </ng-container>
-          </div>
-        </ng-template>
-      </div>
+        </div>
+
+        <!-- NOTE: ROW 4 COLORED COMPANY TYPE -->
+
     </div>
 
-    <!-- NOTE: ROW 3 RATINGS -->
-    <div class="r3">
-      <span [ngSwitch]="company?.TEST_RATING">
-        <ng-container *ngSwitchCase="1">
-          <ion-icon name="star"></ion-icon>
+    <div class="r4">
+        <ng-container [ngSwitch]="company?.accountType">
+            <div *ngSwitchCase="1">
+            </div>
+            <div class="c2" *ngSwitchCase="2">
+                {{'consultant' | translate}}
+            </div>
+            <div class="c3" *ngSwitchCase="3">
+                {{'contractor' | translate}}
+            </div>
+            <div class="c4" *ngSwitchCase="4">
+                {{'supplier' | translate}}
+            </div>
+            <div *ngSwitchDefault>
+            </div>
         </ng-container>
-        <ng-container *ngSwitchCase="2">
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-        </ng-container>
-        <ng-container *ngSwitchCase="3">
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-        </ng-container>
-        <ng-container *ngSwitchCase="4">
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-        </ng-container>
-        <ng-container *ngSwitchCase="5">
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-          <ion-icon name="star"></ion-icon>
-        </ng-container>
-        <ng-container *ngSwitchDefault>
-
-        </ng-container>
-      </span>
     </div>
-
-    <!-- NOTE: ROW 4 COLORED COMPANY TYPE -->
-
-  </div>
-
-  <div class="r4">
-    <ng-container [ngSwitch]="company?.accountType">
-      <div *ngSwitchCase="1">
-      </div>
-      <div class="c2" *ngSwitchCase="2">
-        {{'consultant' | translate}}
-      </div>
-      <div class="c3" *ngSwitchCase="3">
-        {{'contractor' | translate}}
-      </div>
-      <div class="c4" *ngSwitchCase="4">
-        {{'supplier' | translate}}
-      </div>
-      <div *ngSwitchDefault>
-      </div>
-    </ng-container>
-  </div>
 
 </div>
