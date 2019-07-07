@@ -1,7 +1,8 @@
 {
   "name": "engappm7",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular",
   "id": "ebc0226b"

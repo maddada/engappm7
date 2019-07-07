@@ -14,7 +14,6 @@ import { ShowToastService } from '../../../core/show-toast.service';
 import { NavController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'app-register',

@@ -282,6 +282,18 @@ export class Tab3Page implements OnInit, OnDestroy {
         this.startSearch();
     }
 
+    protected goBackCat() {
+        // if a suppleir cat was selected go back to supplier selection
+        if (this.currentSelectedCategory === SelectedCategory.SUPPLIER && this.currentSelectedSupplierCategory !== '-') {
+            this.currentSelectedSupplierCategory = '-';
+        }
+        // else just clear filter options
+        else
+        {
+            this.clearFilterOptions();
+        }
+    }
+
     protected clearFilterOptions() {
         this.filterOptions = {
             searchString: '',

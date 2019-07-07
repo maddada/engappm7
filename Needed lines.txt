@@ -13,7 +13,7 @@ ionic cordova run android
 ionic cordova build android
 npx tslint -c ionic-migration.json -p tsconfig.json
 ionic run android --aot
-
+cordova clean (after adding a plugin to cordova)
 
 ######## COMMANDS FOR TRANSLATION:
 npm run extract
@@ -26,11 +26,16 @@ firebase deploy --only hosting
 
 
 TO UPDATE ANDROID APP USE THESE 3:
-1- ionic cordova build --release android
+1-
+ionic cordova build --release android
 
-2- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore c:\memar-release-key.keystore D:\Dev\Angular_and_Ionic\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk memar
+2-
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore c:\apk\memar-release-key.keystore D:\Dev\zOther\Angular_and_Ionic\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk memar
+(app-release-unsigned.apk will be signed)
+S B Memar 123 $x2
 
-3- zipalign -v 4 D:\Dev\Angular_and_Ionic\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk c:\apk\memar-v1_2b-release-signed.apk
+3-
+zipalign -v 4 D:\Dev\zOther\Angular_and_Ionic\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk c:\apk\memar-v1_3-release-signed.apk
 
 4- Then upload the singed+zipaligned apk to google play console.
 
@@ -56,3 +61,15 @@ zipalign -v 4 c:/memar-v1_0-release-unsigned.apk c:/memar-v1_0-release-signed.ap
 ------Keystore (Only once):
 To create the keystore:
 keytool -genkey -v -keystore memar-release-key.keystore -alias memar -keyalg RSA -keysize 2048 -validity 10000
+
+
+FIXED ISSUE:
+
+Failed to execute aapt ->
+Remove retarded cordova plugins, they cause a ton of issues.
+
+Missing ActivityResource.xml
+Just remove and add platform in cordova
+
+Remember:
+Use Cordova debugging inside vs code and run app on emulator to get the debug console output and see what the issue is.
