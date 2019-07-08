@@ -1,3 +1,12 @@
+How I fixed the stupid issue with inputs and ion-inputs:
+just removed the no-select include in css from inputs and ion-inputs
+
+Node version: v10.13.0
+
+Cordova version: 8.1.1
+
+Config.xml file: 
+
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.m7.memar" version="1.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Memar</name>
@@ -54,6 +63,19 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^3.0.0" />
     <engine name="browser" spec="5.0.4" />
     <engine name="android" spec="^8.0.0" />
 </widget>
+
+
+Plugins: 
+
+cordova-plugin-camera,cordova-plugin-device,cordova-plugin-file,cordova-plugin-firebase,cordova-plugin-inappbrowser,cordova-plugin-ionic-keyboard,cordova-plugin-ionic-webview,cordova-plugin-nativestorage,cordova-plugin-splashscreen,cordova-plugin-whitelist
+
+iOS platform:
+
+Xcode 10.1
+Build version 10B61
+
+

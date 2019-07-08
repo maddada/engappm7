@@ -10,7 +10,7 @@
 </ion-header>
 
 <style>
-    .noCategorySelected--container {
+    #noCategorySelected--container {
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
@@ -23,12 +23,12 @@
         -webkit-justify-content: center;
         -ms-flex-pack: center;
         justify-content: center;
-        -webkit-align-content: stretch;
-        -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-        align-items: flex-start;
+        -webkit-align-content: center;
+        -ms-flex-line-pack: center;
+        align-content: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
     }
 
     .categoryButton {
@@ -131,11 +131,11 @@
         </ng-container>
 
         <ng-template #noCategorySelected>
-            <div id="container noCategorySelected--container">
-                <h2 style='text-align: center;' [ngStyle]="getDirection()">{{'Select-Category' | translate}}</h2>
+            <div id="noCategorySelected--container">
+                <h2 style='text-align: center; width: 100%;' [ngStyle]="getDirection()">{{'Select-Category' | translate}}</h2>
                 <br>
                 <button expand="block" (click)="selectCategory(4)" class="categoryButton">
-                    <ion-icon name="play" mode="md" color="dark" size="large"></ion-icon>
+                    <ion-icon name="checkbox-outline" mode="md" color="dark" size="large"></ion-icon>
                     <div slot="end">&nbsp;&nbsp;{{'all' | translate}}&nbsp;&nbsp;</div>
                 </button>
                 <button expand="block" (click)="selectCategory(1)" class="categoryButton">
