@@ -522,7 +522,7 @@
     </ion-list>
 
     <div>
-        <ion-button expand="block" mode="ios" onclick="window.open(`/assets/privacy/`, '_blank');" style="width:auto; font-size: 0.9rem;">
+        <ion-button expand="block" mode="ios" (click)="openPrivacyPageModal()" style="width:auto; font-size: 0.9rem;">
             {{'register.show-terms' | translate}}
         </ion-button>
     </div>

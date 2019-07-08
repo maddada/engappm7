@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { IonRouterOutlet, Platform, NavController, IonToggle } from '@ionic/angular';
+import { IonRouterOutlet, Platform, NavController, IonToggle, ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './core/auth.service';
 import { FcmService } from './core/fcm.service';
 import { ShowToastService } from './core/show-toast.service';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { PrivacyPage } from './pages/privacy/privacy.page';
 // import * as firebase from 'firebase/app';
 
 /* get a reference to the used IonRouterOutlet
@@ -44,6 +46,8 @@ export class AppComponent {
         public translate: TranslateService,
         public fcm: FcmService,
         private toast: ShowToastService,
+        private iab: InAppBrowser,
+        private modal: ModalController,
     ) {
         this.initializeApp();
     }
@@ -146,9 +150,12 @@ export class AppComponent {
             this.nav.navigateForward('/wizard');
         }
     }
-
-    privacyPolicyClicked() {
-
+    
+    async openPrivacyPageModal() {
+        const modal = await this.modal.create({
+            component: PrivacyPage,            
+        });
+        await modal.present();
     }
 
 

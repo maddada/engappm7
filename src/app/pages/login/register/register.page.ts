@@ -11,9 +11,11 @@ import { User } from '../../../../model';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { ShowToastService } from '../../../core/show-toast.service';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { PrivacyPage } from '../../../pages/privacy/privacy.page';
 
 @Component({
     selector: 'app-register',
@@ -32,6 +34,8 @@ export class RegisterPage implements OnInit {
         private loadingCtrl: LoadingController,
         private route: ActivatedRoute,
         public translate: TranslateService,
+        public iab: InAppBrowser,
+        private modal: ModalController,
     ) {
 
     }
@@ -503,6 +507,12 @@ export class RegisterPage implements OnInit {
     }
 
 
+    async openPrivacyPageModal() {
+        const modal = await this.modal.create({
+            component: PrivacyPage,            
+        });
+        await modal.present();
+    }
 
 }
 // END OF FILE HERE

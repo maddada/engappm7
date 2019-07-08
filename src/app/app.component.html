@@ -93,7 +93,7 @@
 
                     </ion-item>
 
-                    <ion-item onclick="window.open(`/assets/privacy/`, '_blank');">
+                    <ion-item (click)="openPrivacyPageModal()">
                         <ion-icon slot="start" name="document" mode="ios"></ion-icon>
                         <ion-label>
                             {{ 'privacy_policy' | translate }}
