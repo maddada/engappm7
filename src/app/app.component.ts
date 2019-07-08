@@ -148,7 +148,7 @@ export class AppComponent {
     }
 
     privacyPolicyClicked() {
-        window.open(`https://memar.ae/privacy/`, '_blank');
+
     }
 
 

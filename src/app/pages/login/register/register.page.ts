@@ -408,11 +408,6 @@ export class RegisterPage implements OnInit {
         ).subscribe();
     }
 
-
-    showTerms() {
-        window.open(`https://memar.ae/privacy/`, '_blank');
-    }
-
     toggleTermsCheckBoxValue() {
         // console.log(this.termsCheckBoxValue);
         if (this.termsCheckBoxValue == null) {
