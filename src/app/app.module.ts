@@ -8,7 +8,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -84,7 +83,6 @@ import { PrivacyPage } from './pages/privacy/privacy.page';
     Firebase,
     FcmService,
     File,
-    InAppBrowser,
   ],
   bootstrap: [AppComponent]
 })

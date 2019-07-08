@@ -7,7 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './core/auth.service';
 import { FcmService } from './core/fcm.service';
 import { ShowToastService } from './core/show-toast.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { PrivacyPage } from './pages/privacy/privacy.page';
 // import * as firebase from 'firebase/app';
 
@@ -46,7 +45,6 @@ export class AppComponent {
         public translate: TranslateService,
         public fcm: FcmService,
         private toast: ShowToastService,
-        private iab: InAppBrowser,
         private modal: ModalController,
     ) {
         this.initializeApp();
@@ -150,10 +148,10 @@ export class AppComponent {
             this.nav.navigateForward('/wizard');
         }
     }
-    
+
     async openPrivacyPageModal() {
         const modal = await this.modal.create({
-            component: PrivacyPage,            
+            component: PrivacyPage,
         });
         await modal.present();
     }
