@@ -90,7 +90,7 @@ export class CreateTenderPage implements OnInit {
 
     showLoading: any;
 
-    protected hideCreateButton = false;
+    public hideCreateButton = false;
     // options: CameraOptions = {
     //   quality: 85,
     //   destinationType: this.camera.DestinationType.FILE_URI,
