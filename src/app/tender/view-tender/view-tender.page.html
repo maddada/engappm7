@@ -102,7 +102,7 @@
   <!-- consultant or admin -->
   <ng-container *ngIf="user.accountType === 2 || user.accountType === 5">
     <!-- created the tender or admin -->
-    <ion-footer *ngIf="user.uid === tender.uid || user.accountType === 5">
+    <ion-footer *ngIf="(tender != null && user.uid === tender.uid) || user.accountType === 5">
 
       <!-- <ion-toolbar color="light"> -->
         <ion-row padding-horizontal>
