@@ -36,3 +36,4 @@ package.json
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+.firebase/hosting.d3d3.cache

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="light">
 
-    <ion-buttons slot="start">
+    <ion-buttons slot="start" *ngIf="showBack === true">
       <ion-button (click)="onClickDismiss()">
         <ion-icon name="arrow-round-back"></ion-icon>
         Back
@@ -9,7 +9,7 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-title transparent>Privacy Policy</ion-title>
+    <ion-title transparent>Memar's Privacy Policy</ion-title>
 
   </ion-toolbar>
 </ion-header>
