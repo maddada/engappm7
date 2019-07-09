@@ -77,23 +77,23 @@
 
 
       <!-- <ion-toolbar color="light"> -->
-        <ion-row padding-horizontal>
+      <ion-row padding-horizontal>
 
-          <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+        <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-            <!-- NOTE: Join Tender Button -->
-            <ion-button expand="block" mode="ios" (click)="joinTender()">
-              <ng-container *ngIf="translate.currentLang === 'ar'" class="dir-rtl">
-                الإشتراك في المناقصة
-              </ng-container>
-              <ng-container *ngIf="translate.currentLang === 'en'">
-                Join Tender
-              </ng-container>
-            </ion-button>
+          <!-- NOTE: Join Tender Button -->
+          <ion-button expand="block" mode="ios" (click)="joinTender()">
+            <ng-container *ngIf="translate.currentLang === 'ar'" class="dir-rtl">
+              الإشتراك في المناقصة
+            </ng-container>
+            <ng-container *ngIf="translate.currentLang === 'en'">
+              Join Tender
+            </ng-container>
+          </ion-button>
 
-          </ion-col>
+        </ion-col>
 
-        </ion-row>
+      </ion-row>
       <!-- </ion-toolbar> -->
 
     </ion-footer>
@@ -104,7 +104,7 @@
     <!-- created the tender or admin -->
     <ion-footer *ngIf="(tender != null && user.uid === tender.uid) || user.accountType === 5">
 
-      <!-- <ion-toolbar color="light"> -->
+      <ion-toolbar color="light">
         <ion-row padding-horizontal>
 
           <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
@@ -122,7 +122,7 @@
           </ion-col>
 
         </ion-row>
-      <!-- </ion-toolbar> -->
+      </ion-toolbar>
 
     </ion-footer>
 
