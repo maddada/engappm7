@@ -73,14 +73,14 @@
 
 <ion-footer *ngIf="user?.accountType === 2">
 
-  <ion-toolbar color="light">
+  <!-- <ion-toolbar color="light"> -->
 
     <ion-row padding-horizontal>
 
       <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
         <ion-button expand="block" mode="ios" routerDirection="forward" routerLink="/create-tender">
-          <ion-icon name="add-circle-outline" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
+          <ion-icon name="add" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
           <ion-icon name="add" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
           {{'common.create-tender' | translate}}
         </ion-button>
@@ -92,7 +92,7 @@
 
       </ion-col>
     </ion-row>
-  </ion-toolbar>
+  <!-- </ion-toolbar> -->
 </ion-footer>
 
 

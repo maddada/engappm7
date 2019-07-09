@@ -50,13 +50,13 @@
         font-style: normal;
         text-shadow: 0px 1px 0px rgba(100%, 100%, 100%, 0.5);
 
-        margin-left: 30px !important;
-        margin-right: 30px !important;
+        margin-left: 20px !important;
+        margin-right: 20px !important;
         margin-top: 20px !important;
         margin-bottom: 20px !important;
 
-        width: 130px !important;
-        height: 130px !important;
+        width: 120px !important;
+        height: 120px !important;
     }
 
     .categoryButton>* {
@@ -132,7 +132,8 @@
 
         <ng-template #noCategorySelected>
             <div id="noCategorySelected--container">
-                <h2 style='text-align: center; width: 100%;' [ngStyle]="getDirection()">{{'Select-Category' | translate}}</h2>
+                <h2 style='text-align: center; width: 100%;' [ngStyle]="getDirection()">
+                    {{'Select-Category' | translate}}</h2>
                 <br>
                 <button expand="block" (click)="selectCategory(4)" class="categoryButton">
                     <ion-icon name="checkbox-outline" mode="md" color="dark" size="large"></ion-icon>
@@ -196,13 +197,13 @@
                 font-style: normal;
                 text-shadow: 0px 1px 0px rgba(100%, 100%, 100%, 0.5);
 
-                margin-left: 30px !important;
-                margin-right: 30px !important;
+                margin-left: 20px !important;
+                margin-right: 20px !important;
                 margin-top: 20px !important;
                 margin-bottom: 20px !important;
 
-                width: 130px !important;
-                height: 130px !important;
+                width: 120px !important;
+                height: 120px !important;
             }
 
             .supplierCategories--button>* {
@@ -375,18 +376,17 @@
 </ng-template>
 
 <ion-footer>
-    <ion-toolbar color="light">
-        <ion-row padding-horizontal>
-            <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5"
-                style="margin: 0 auto;">
+    <!-- <ion-toolbar color="light"> -->
+    <ion-row padding-horizontal>
+        <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-                <ion-button expand="block" mode="ios" (click)="onClickFilterSearch()">
-                    <ion-icon name="search" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
-                    <ion-icon name="search" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
-                    {{'tab2.search-options' | translate}}
-                </ion-button>
+            <ion-button expand="block" mode="ios" (click)="onClickFilterSearch()">
+                <ion-icon name="search" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
+                <ion-icon name="search" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
+                {{'tab2.search-options' | translate}}
+            </ion-button>
 
-            </ion-col>
-        </ion-row>
-    </ion-toolbar>
+        </ion-col>
+    </ion-row>
+    <!-- </ion-toolbar> -->
 </ion-footer>

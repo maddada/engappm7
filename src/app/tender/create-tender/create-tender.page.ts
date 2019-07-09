@@ -478,6 +478,7 @@ export class CreateTenderPage implements OnInit {
 
   // __ Take Picture with Camera:
   async takePicture() {
+    debugger
     // NOTE: clearing file selection button.
     this.myUploadButton3.nativeElement.value = "";
     this.filesToUpload[3] = 'NOT-SET';
@@ -559,12 +560,10 @@ export class CreateTenderPage implements OnInit {
 
 
   public onSelectDate($event): any {
-
     // Reference: How to deal with ion-datetime in component!!
     //** START **//
     let tempDateArray = this.selectedDeadline.split('-');
-
-    let day = tempDateArray[2];
+    let day = tempDateArray[2].substring(0, 2);;
     let month = tempDateArray[1];
     let year = tempDateArray[0];
 
