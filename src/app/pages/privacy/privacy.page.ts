@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,17 +9,21 @@ import { Router } from '@angular/router';
 })
 export class PrivacyPage implements OnInit {
 
-    protected showBack = true;
-
-    constructor(private modal: ModalController, protected router: Router) { }
+    constructor(
+        private modal: ModalController,
+        protected router: Router,
+        private nav: NavController
+    ) { }
 
     ngOnInit() {
-        if (this.router.url.includes("privacy")) {
-            this.showBack = false;
-        }
     }
 
     onClickDismiss() {
-        this.modal.dismiss();
+        if (this.router.url.includes("privacy")) {
+            this.nav.navigateBack('/');
+        }
+        else {
+            this.modal.dismiss();
+        }
     }
 }
