@@ -1,0 +1,16 @@
+Work on the app
+
+Change version number in config.xml (HAVE TO)
+
+ionic cordova build --release android
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore c:\apk\memar-release-key.keystore D:\Dev\zOther\Angular_and_Ionic\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk memar
+S B M 123 $x2
+
+zipalign -v 4 D:\Dev\zOther\Angular_and_Ionic\engappm7\platforms\android\app\build\outputs\apk\release\app-release-unsigned.apk c:\apk\memar-v1_3_8-release-signed.apk
+
+Go here:
+https://play.google.com/apps/
+
+and go to releases, then create new release.
+

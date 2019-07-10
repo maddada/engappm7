@@ -1,6 +1,6 @@
 @mixin m7bold {
-    font-weight: bold; /* for android and chrome */
     font-weight: 400; /* for iphone and safari */
+    font-weight: bold; /* for android and chrome */
 }
 
 @mixin for-small-phone-only {
