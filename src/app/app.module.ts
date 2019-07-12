@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -42,64 +43,65 @@ import { PrivacyPageModule } from './pages/privacy/privacy.module';
 import { PrivacyPage } from './pages/privacy/privacy.page';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [PrivacyPage],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    IonicModule.forRoot({
-      mode: 'ios', // Makes top text center. and icons better looking
-      backButtonText: 'Back',
-      // modalEnter: 'modal-slide-in',
-      // modalLeave: 'modal-slide-out',
-    }),
-    IonicStorageModule.forRoot(),
-    CoreModule.forRoot(),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
-    AngularFireAuthModule,
-    AngularFireStorageModule,
-    AngularFireFunctionsModule,
-    TenderListElementModule,
-    CompanyListElementModule,
-    AngularFireMessagingModule,
-    ProfileElementModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    PrivacyPageModule,
-    // AngularFirestoreModule.enablePersistence(),
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Firebase,
-    FcmService,
-    File,
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    entryComponents: [PrivacyPage],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        IonicModule.forRoot({
+            mode: 'ios', // Makes top text center. and icons better looking
+            backButtonText: 'Back',
+            // modalEnter: 'modal-slide-in',
+            // modalLeave: 'modal-slide-out',
+        }),
+        IonicStorageModule.forRoot(),
+        CoreModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFireAuthModule,
+        AngularFireStorageModule,
+        AngularFireFunctionsModule,
+        TenderListElementModule,
+        CompanyListElementModule,
+        AngularFireMessagingModule,
+        ProfileElementModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+        PrivacyPageModule,
+        // AngularFirestoreModule.enablePersistence(),
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        Firebase,
+        FcmService,
+        File,
+        FileTransfer
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(
-    private afs: AngularFirestore
-  ) {
-    // afs.firestore.settings({
-    //   // timestampsInSnapshots: true,
-    // });
-    // LATER: Enable Persistence *MAYBE! It was causing problems with desynced data!
-    afs.firestore.enablePersistence();
-  }
+    constructor(
+        private afs: AngularFirestore
+    ) {
+        // afs.firestore.settings({
+        //   // timestampsInSnapshots: true,
+        // });
+        // LATER: Enable Persistence *MAYBE! It was causing problems with desynced data!
+        afs.firestore.enablePersistence();
+    }
 
 }
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
