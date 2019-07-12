@@ -250,8 +250,11 @@
       <div class="detail-name-text">{{'tender.Attachments' | translate}}</div>
       <div class="detail-data">
 
-        <ng-container *ngFor="let attachment of tender?.attachmentURLs; let i = index">
-          <ion-button class="attachment-button" [href]="attachment" size="small">
+        <ng-container *ngFor="let attachmentUrl of tender?.attachmentURLs; let i = index">
+          <!-- <ion-button class="attachment-button" [href]="attachment" size="small">
+            {{'tender.Attachment' | translate}} #{{i+1}}
+          </ion-button> -->
+          <ion-button class="attachment-button" (click)="downloadAttachment(attachmentUrl)" size="small">
             {{'tender.Attachment' | translate}} #{{i+1}}
           </ion-button>
         </ng-container>

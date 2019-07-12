@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "883936710445",
+    "firebase_url": "https://engapp-1.firebaseio.com",
+    "project_id": "engapp-1",
+    "storage_bucket": "engapp-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883936710445:android:dc6dc8e2878a76f7",
+        "android_client_info": {
+          "package_name": "io.m7.memar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883936710445-r0jd17ehp68a13qh86vmngn1qaabes0s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNxHqpr1vtj9uaLKnJXKSXkY1NtG0FdCc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

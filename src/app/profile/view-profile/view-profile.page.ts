@@ -81,7 +81,7 @@ export class ViewProfilePage implements OnInit, OnDestroy {
   }
 
   goBack() {
-    this.nav.goBack();
+    this.nav.back();
   }
 }
 

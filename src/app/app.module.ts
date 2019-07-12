@@ -38,10 +38,12 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { FcmService } from './core/fcm.service';
 
 import { File } from '@ionic-native/file/ngx';
+import { PrivacyPageModule } from './pages/privacy/privacy.module';
+import { PrivacyPage } from './pages/privacy/privacy.page';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [PrivacyPage],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -71,6 +73,7 @@ import { File } from '@ionic-native/file/ngx';
     AngularFireMessagingModule,
     ProfileElementModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    PrivacyPageModule,
     // AngularFirestoreModule.enablePersistence(),
   ],
   providers: [
@@ -81,8 +84,7 @@ import { File } from '@ionic-native/file/ngx';
     FcmService,
     File,
   ],
-  bootstrap: [AppComponent,
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(

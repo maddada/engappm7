@@ -60,6 +60,7 @@ const routes: Routes = [
   { path: 'select-acc-type', loadChildren: './pages/select-acc-type/select-acc-type.module#SelectAccTypePageModule' },
   { path: 'select-indv-company', loadChildren: './pages/select-indv-company/select-indv-company.module#SelectIndvCompanyPageModule' },
   { path: 'wizard-ar', loadChildren: './pages/wizard-ar/wizard-ar.module#WizardArPageModule' },  { path: 'notifications', loadChildren: './pages/notifications/notifications.module#NotificationsPageModule' },
+  { path: 'privacy', loadChildren: './pages/privacy/privacy.module#PrivacyPageModule' },
 
 
 ];

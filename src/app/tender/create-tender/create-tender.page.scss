@@ -6,6 +6,8 @@
   font-size: 1.5rem;
   @include m7bold;
   color: theme-colors("textColors", "primary");
+  text-align: center;
+  align-self: center;
 }
 
 ion-label {

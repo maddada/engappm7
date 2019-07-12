@@ -1,52 +1,392 @@
 <ion-header>
-  <ion-toolbar color="light">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      {{'common.search' | translate}}
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="light">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            {{'common.search' | translate}}
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
+<style>
+    #noCategorySelected--container {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-align-content: center;
+        -ms-flex-line-pack: center;
+        align-content: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
 
+    .categoryButton {
+        backface-visibility: hidden;
+        position: relative;
+        cursor: pointer !important;
+        display: inline-block;
+        white-space: nowrap;
+        background: linear-gradient(180deg, #ffffff 0%, #e6e6e6 100%);
+        border-radius: 12px;
+        border: 0.5px solid #ffffff;
+        border-width: 0.5px 0.5px 0.5px 0.5px;
+        padding: 5px 5px 5px 5px;
+        box-shadow: inset 0px 1px 0px rgba(100%, 100%, 100%, 0.6), 0px 1px 2px rgba(0%, 0%, 0%, 0.5);
+        color: #207eb1;
+        /* font-size: 36px; */
+        /* font-family: Helvetica Neue; */
+        font-weight: 900;
+        font-style: normal;
+        text-shadow: 0px 1px 0px rgba(100%, 100%, 100%, 0.5);
+
+        margin-left: 20px !important;
+        margin-right: 20px !important;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+
+        width: 120px !important;
+        height: 120px !important;
+    }
+
+    .categoryButton>* {
+        cursor: pointer !important;
+    }
+
+    .categoryButton:hover,
+    .categoryButton:focus {
+        transform: translateY(-0.25em);
+    }
+
+    .categoryButton>img {
+        height: 50px !important;
+        width: 50px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .categoryButton>div {
+        padding-top: 5px !important;
+        font-size: 18px !important;
+        /* color: #207eb1; */
+        font-size: 19px;
+        /* font-family: transcript; */
+        font-weight: bold;
+        font-style: normal;
+        text-align: center;
+        margin: 0px 0px 0px 0px;
+        margin-top: 5px;
+        color: rgb(61, 61, 61);
+    }
+
+    .categoryButton>img {
+        font-size: 1em;
+        border-radius: 0px;
+        border: 0px solid transparent;
+        border-width: 0px 0px 0px 0px;
+        padding: 0px 0px 0px 0px;
+        margin: 0px 0px 0px 0px;
+        position: static
+    }
+
+    /* noCategorySelected--container  {
+        height: 60px;
+        width: 200px;
+        font-size: 20px;
+        margin-top: 25px;
+        color: white !important;
+    } */
+</style>
 
 <ion-content>
-
-  <div class="flex-container">
-
-    <ng-container *ngFor="let company of companies; let i = index">
-
-      <div class="company-element-container">
-        <app-company-list-element [company]="company">
-        </app-company-list-element>
-      </div>
-
-    </ng-container>
-
-  </div>
+    <div class="flex-container">
+        <div #scroll_top></div>
+        <ng-container *ngIf="currentSelectedCategory !== selectedCategoryEnum.NONE; else noCategorySelected">
 
 
+            <ng-container
+                *ngIf="((currentSelectedCategory !== selectedCategoryEnum.SUPPLIER) || (currentSelectedCategory === selectedCategoryEnum.SUPPLIER && currentSelectedSupplierCategory !== '-')); else supplierCategory">
+                <ng-container *ngIf="!loadingSearch">
+                    <ng-container *ngFor="let company of companies; let i = index">
+
+                        <div class="company-element-container">
+                            <app-company-list-element [company]="company">
+                            </app-company-list-element>
+                        </div>
+
+                    </ng-container>
+                    <ng-container *ngTemplateOutlet="goBack"></ng-container>
+
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+        <ng-template #noCategorySelected>
+            <div id="noCategorySelected--container">
+                <h2 style='text-align: center; width: 100%;' [ngStyle]="getDirection()">
+                    {{'Select-Category' | translate}}</h2>
+                <br>
+                <button expand="block" (click)="selectCategory(4)" class="categoryButton">
+                    <ion-icon name="checkbox-outline" mode="md" color="dark" size="large"></ion-icon>
+                    <div slot="end">&nbsp;&nbsp;{{'all' | translate}}&nbsp;&nbsp;</div>
+                </button>
+                <button expand="block" (click)="selectCategory(1)" class="categoryButton">
+                    <ion-icon name="briefcase" mode="md" color="dark" size="large"></ion-icon>
+                    <div slot="end">{{'consultant' | translate}} </div>
+                </button>
+                <button expand="block" (click)="selectCategory(2)" class="categoryButton">
+                    <ion-icon name="business" mode="md" color="dark" size="large"></ion-icon>
+                    <div slot="end">{{'contractor' | translate}}</div>
+                </button>
+                <button expand="block" (click)="selectCategory(3)" class="categoryButton">
+                    <ion-icon name="hammer" mode="md" color="dark" size="large"></ion-icon>
+                    <div slot="end">&nbsp;&nbsp;{{'supplier' | translate}}&nbsp;&nbsp;</div>
+                </button>
+
+            </div>
+        </ng-template>
+
+        <!-- Supplier Category Part Styles:  -->
+        <style>
+            #supplierCategories--container {
+                display: -ms-flexbox;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                flex-direction: row;
+                -webkit-flex-wrap: wrap;
+                -ms-flex-wrap: wrap;
+                flex-wrap: wrap;
+                -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-align-content: stretch;
+                -ms-flex-line-pack: stretch;
+                align-content: stretch;
+                -webkit-align-items: flex-start;
+                -ms-flex-align: start;
+                align-items: flex-start;
+            }
+
+            .supplierCategories--button {
+                backface-visibility: hidden;
+                position: relative;
+                cursor: pointer !important;
+                display: inline-block;
+                white-space: nowrap;
+                background: linear-gradient(180deg, #ffffff 0%, #e6e6e6 100%);
+                border-radius: 12px;
+                border: 0.5px solid #ffffff;
+                border-width: 0.5px 0.5px 0.5px 0.5px;
+                padding: 5px 5px 5px 5px;
+                box-shadow: inset 0px 1px 0px rgba(100%, 100%, 100%, 0.6), 0px 1px 2px rgba(0%, 0%, 0%, 0.5);
+                color: #207eb1;
+                /* font-size: 36px; */
+                /* font-family: Helvetica Neue; */
+                font-weight: 900;
+                font-style: normal;
+                text-shadow: 0px 1px 0px rgba(100%, 100%, 100%, 0.5);
+
+                margin-left: 20px !important;
+                margin-right: 20px !important;
+                margin-top: 20px !important;
+                margin-bottom: 20px !important;
+
+                width: 120px !important;
+                height: 120px !important;
+            }
+
+            .supplierCategories--button>* {
+                cursor: pointer !important;
+            }
+
+            .supplierCategories--button:hover,
+            .supplierCategories--button:focus {
+                transform: translateY(-0.25em);
+            }
+
+            .supplierCategories--button>img {
+                height: 50px !important;
+                width: 50px !important;
+                margin-bottom: 5px !important;
+            }
+
+            .supplierCategories--button>div {
+                padding-top: 5px !important;
+                font-size: 15px !important;
+                /* color: #207eb1; */
+                font-size: 19px;
+                /* font-family: transcript; */
+                font-weight: bold;
+                font-style: normal;
+                text-align: center;
+                margin: 0px 0px 0px 0px;
+                margin-top: 5px;
+                color: rgb(61, 61, 61);
+            }
+
+            .supplierCategories--button>img {
+                font-size: 1em;
+                border-radius: 0px;
+                border: 0px solid transparent;
+                border-width: 0px 0px 0px 0px;
+                padding: 0px 0px 0px 0px;
+                margin: 0px 0px 0px 0px;
+                position: static
+            }
+
+            .button>.ld {
+                font-size: initial
+            }
+        </style>
+
+        <ng-template #supplierCategory>
+            <div>
+                <h2 style="text-align: center;" [ngStyle]="getDirection()">
+                    {{'Select-Supplier-Category' | translate}}</h2>
+                <div id="supplierCategories--container">
+                    <br>
+
+                    <button (click)="setSelectedSupplierCategory('all')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/all.svg">
+                        <div>&nbsp;&nbsp;{{'all' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_interlock')"
+                        class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/interlock.svg">
+                        <div>&nbsp;&nbsp;{{'c.Interlock' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_ac')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/air_conditioning.svg">
+                        <div>&nbsp;&nbsp;{{'c.air-conditioning2' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_aluminium')"
+                        class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/aluminium.svg">
+                        <div>&nbsp;&nbsp;{{'c.aluminium' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_blocks')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/blocks.svg">
+                        <div>&nbsp;&nbsp;{{'c.blocks' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_cement')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/cement.svg">
+                        <div>&nbsp;&nbsp;{{'c.cement' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_ceramics')"
+                        class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/ceramics.svg">
+                        <div>&nbsp;&nbsp;{{'c.ceramics' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_concrete')"
+                        class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/concrete.svg">
+                        <div>&nbsp;&nbsp;{{'c.concrete' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_decoration')"
+                        class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/decoration.svg">
+                        <div>&nbsp;&nbsp;{{'c.decoration' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_doors')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/doors.svg">
+                        <div>&nbsp;&nbsp;{{'c.doors' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_fabric')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/fabric.svg">
+                        <div>&nbsp;&nbsp;{{'c.fabric' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_glass')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/glass.svg">
+                        <div>&nbsp;&nbsp;{{'c.glass' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_gypsum')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/gypsum_board.svg">
+                        <div>&nbsp;&nbsp;{{'c.gypsum-board2' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_kitchens')"
+                        class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/kitchens.svg">
+                        <div>&nbsp;&nbsp;{{'c.kitchens' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_lighting')"
+                        class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/lighting.svg">
+                        <div>&nbsp;&nbsp;{{'c.lighting' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_paint')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/paint.svg">
+                        <div>&nbsp;&nbsp;{{'c.paint' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                    <button (click)="setSelectedSupplierCategory('category_wood')" class="supplierCategories--button">
+                        <img src="../../../assets/icon/SupplierCategories/wood.svg">
+                        <div>&nbsp;&nbsp;{{'c.wood' | translate}}&nbsp;&nbsp;</div>
+                    </button>
+
+                </div>
+                <ng-container *ngTemplateOutlet="goBack"></ng-container>
+            </div>
+        </ng-template>
+
+    </div>
 </ion-content>
 
-
-
-
-
-
+<style>
+    .backButton {
+        width: 50px;
+        height: 50px;
+        font-size: 30px;
+        background-color: transparent;
+    }
+</style>
+<ng-template #goBack>
+    <div style="width: 99%; display: flex;justify-content: left; position: absolute; top: 10px; right: 0px;">
+        <button expand="block" fill="clear" (click)="goBackCat()" class="backButton">
+            <ion-icon name="arrow-round-back" mode="md" color="dark" size="large" slot="start">
+            </ion-icon>
+            <!-- <div slot="end" style="color: #007EAF">&nbsp;&nbsp;{{'common.back' | translate}}&nbsp;&nbsp;</div> -->
+        </button>
+    </div>
+</ng-template>
 
 <ion-footer>
-  <ion-toolbar color="light">
+    <!-- <ion-toolbar color="light"> -->
     <ion-row padding-horizontal>
-      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+        <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
 
-        <ion-button expand="block" mode="ios" (click)="onClickFilterSearch()">
-          <ion-icon name="search" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
-          <ion-icon name="search" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
-          {{'tab2.search-options' | translate}}
-        </ion-button>
+            <ion-button expand="block" mode="ios" (click)="onClickFilterSearch()">
+                <ion-icon name="search" mode="md" slot="end" *ngIf="translate.currentLang==='ar'"></ion-icon>
+                <ion-icon name="search" mode="md" slot="start" *ngIf="translate.currentLang==='en'"></ion-icon>
+                {{'tab2.search-options' | translate}}
+            </ion-button>
 
-      </ion-col>
+        </ion-col>
     </ion-row>
-  </ion-toolbar>
+    <!-- </ion-toolbar> -->
 </ion-footer>

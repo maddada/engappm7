@@ -47,6 +47,7 @@
 			"**/src/app/*/*.module.ts": false,
 			"**/src/app/*/*/*.module.ts": false,
 			"**/src/app/*/*/*/*.module.ts": false
-		},
+        },
+        "terminal.integrated.rendererType": "dom",
 	}
 }

@@ -1,14 +1,22 @@
-Always add sudo before all commands!
+
 
 To build for iOS:
+
 Make changes to ionic code
-then do:
+
+Change version in config.xml
+
 sudo ionic cordova prepare ios
-sudo ionic cordova build ios --prod --release
+
 then open the xworkspace file in platform/ios/
 
 
 
+
+NOTES:
+Always add sudo before all commands!
+
+not needed: sudo ionic cordova build ios --prod --release
 
 
 

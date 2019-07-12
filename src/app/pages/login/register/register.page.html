@@ -1,94 +1,97 @@
 <ion-header>
-  <ion-toolbar color="light">
+    <ion-toolbar color="light">
 
-    <ion-buttons slot="start">
-      <ion-button routerLink="/" routerDirection="root">
-        <ion-icon name="arrow-round-back"></ion-icon>
-        {{'common.back' | translate}}
-      </ion-button>
-    </ion-buttons>
+        <ion-buttons slot="start">
+            <ion-button routerLink="/" routerDirection="root">
+                <ion-icon name="arrow-round-back"></ion-icon>
+                {{'common.back' | translate}}
+            </ion-button>
+        </ion-buttons>
 
-    <ion-title transparent>
-      {{'register.register-an-account' | translate}}
-    </ion-title>
+        <ion-title transparent>
+            {{'register.register-an-account' | translate}}
+        </ion-title>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
-  <ion-grid no-padding>
-    <div id="m7-container">
+    <ion-grid no-padding>
+        <div id="m7-container">
 
-      <form #heroForm="ngForm">
+            <form #heroForm="ngForm">
 
-        <ion-row padding-horizontal>
+                <ion-row padding-horizontal>
 
-          <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+                    <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5"
+                        style="margin: 0 auto;">
 
-            <!--_ Select Account Type  -->
-            <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
-              <ion-label position="stacked">
-                {{'register.Account-Type' | translate}}
-              </ion-label>
+                        <!--_ Select Account Type  -->
+                        <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
+                            <ion-label position="stacked">
+                                {{'register.Account-Type' | translate}}
+                            </ion-label>
 
-              <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" cancle-text="Cancle"
-                [(ngModel)]="selectedType" id="selectAccountType" interface="action-sheet" (ionChange)="onSelectType($event)"
-                name="selectAccountType" text-center>
+                            <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select"
+                                cancle-text="Cancle" [(ngModel)]="selectedType" id="selectAccountType"
+                                interface="action-sheet" (ionChange)="onSelectType($event)" name="selectAccountType"
+                                text-center>
 
-                <ion-select-option value="1">{{'individual' | translate}}</ion-select-option>
-                <ion-select-option value="2">{{'Organization-Consultant' | translate}}</ion-select-option>
-                <ion-select-option value="3">{{'contractor' | translate}}</ion-select-option>
-                <ion-select-option value="4">{{'supplier' | translate}}</ion-select-option>
+                                <ion-select-option value="1">{{'individual' | translate}}</ion-select-option>
+                                <ion-select-option value="2">{{'Organization-Consultant' | translate}}
+                                </ion-select-option>
+                                <ion-select-option value="3">{{'contractor' | translate}}</ion-select-option>
+                                <ion-select-option value="4">{{'supplier' | translate}}</ion-select-option>
 
-              </ion-select>
-            </ion-item>
-
-
-            <!-- _ Fields to display: -->
-            <ng-container [ngSwitch]="selectedType">
-
-              <!-- _: Individual -->
-              <ng-container *ngSwitchCase="1">
-                <ng-container *ngTemplateOutlet="city_picker_indv_supplier"></ng-container>
-                <ng-container *ngTemplateOutlet="individual_fields"></ng-container>
-                <ng-container *ngTemplateOutlet="agree_to_terms"></ng-container>
-              </ng-container>
+                            </ion-select>
+                        </ion-item>
 
 
-              <!-- _: Consultant -->
-              <ng-container *ngSwitchCase="2">
-                <ng-container *ngTemplateOutlet="city_picker_consultant_contractor"></ng-container>
-                <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
-                <ng-container *ngTemplateOutlet="agree_to_terms"></ng-container>
-              </ng-container>
+                        <!-- _ Fields to display: -->
+                        <ng-container [ngSwitch]="selectedType">
+
+                            <!-- _: Individual -->
+                            <ng-container *ngSwitchCase="1">
+                                <ng-container *ngTemplateOutlet="city_picker_indv_supplier"></ng-container>
+                                <ng-container *ngTemplateOutlet="individual_fields"></ng-container>
+                                <ng-container *ngTemplateOutlet="agree_to_terms"></ng-container>
+                            </ng-container>
 
 
-              <!-- _: Contractor -->
-              <ng-container *ngSwitchCase="3">
-                <ng-container *ngTemplateOutlet="city_picker_consultant_contractor"></ng-container>
-                <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
-                <ng-container *ngTemplateOutlet="agree_to_terms"></ng-container>
-              </ng-container>
+                            <!-- _: Consultant -->
+                            <ng-container *ngSwitchCase="2">
+                                <ng-container *ngTemplateOutlet="city_picker_consultant_contractor"></ng-container>
+                                <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
+                                <ng-container *ngTemplateOutlet="agree_to_terms"></ng-container>
+                            </ng-container>
 
 
-              <!-- _:Supplier -->
-              <ng-container *ngSwitchCase="4">
-                <ng-container *ngTemplateOutlet="city_picker_indv_supplier"></ng-container>
-                <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
-                <ng-container *ngTemplateOutlet="supplier_fields"></ng-container>
-                <ng-container *ngTemplateOutlet="agree_to_terms"></ng-container>
-              </ng-container>
-
-            </ng-container>
-          </ion-col>
-        </ion-row>
-      </form>
+                            <!-- _: Contractor -->
+                            <ng-container *ngSwitchCase="3">
+                                <ng-container *ngTemplateOutlet="city_picker_consultant_contractor"></ng-container>
+                                <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
+                                <ng-container *ngTemplateOutlet="agree_to_terms"></ng-container>
+                            </ng-container>
 
 
-    </div>
+                            <!-- _:Supplier -->
+                            <ng-container *ngSwitchCase="4">
+                                <ng-container *ngTemplateOutlet="city_picker_indv_supplier"></ng-container>
+                                <ng-container *ngTemplateOutlet="company_registration_fields"></ng-container>
+                                <ng-container *ngTemplateOutlet="supplier_fields"></ng-container>
+                                <ng-container *ngTemplateOutlet="agree_to_terms"></ng-container>
+                            </ng-container>
 
-  </ion-grid>
+                        </ng-container>
+                    </ion-col>
+                </ion-row>
+            </form>
+
+
+        </div>
+
+    </ion-grid>
 
 </ion-content>
 
@@ -104,21 +107,22 @@
 
 <!-- _ Footer [Register Button] -->
 <ion-footer>
-  <ion-toolbar color="light">
-    <ion-row padding-horizontal>
-      <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5" style="margin: 0 auto;">
+    <!-- <ion-toolbar color="light"> -->
+        <ion-row padding-horizontal>
+            <ion-col align-self-center size="11" size-sm="11" size-md="5" size-lg="5" size-xl="5"
+                style="margin: 0 auto;">
 
-        <ion-button expand="block" mode="ios" type="submit" (click)="onSubmit()">
-          <ion-icon name="at" mode="md" slot="start"></ion-icon>&nbsp;{{'common.register' | translate}}
-        </ion-button>
+                <ion-button expand="block" mode="ios" type="submit" (click)="onSubmit()">
+                    <ion-icon name="at" mode="md" slot="start"></ion-icon>&nbsp;{{'common.register' | translate}}
+                </ion-button>
 
-        <!-- <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
+                <!-- <ion-button expand="block" mode="ios" type="submit" (click)="onTestClicked()">
           &nbsp;TEST
         </ion-button> -->
 
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
+            </ion-col>
+        </ion-row>
+    <!-- </ion-toolbar> -->
 </ion-footer>
 
 
@@ -145,153 +149,158 @@
 <!-- template to use for both consultant and contractor -->
 <ng-template #company_registration_fields>
 
-  <!-- EMAIL -->
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked" class="label">{{'common.email' |
+    <!-- EMAIL -->
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked" class="label">{{'common.email' |
       translate}}</ion-label>
 
-    <ion-input type="text" placeholder="" [(ngModel)]="newUser.email" name="email"></ion-input>
+        <ion-input type="text" placeholder="" [(ngModel)]="newUser.email" name="email"></ion-input>
 
-    <!-- <ion-label   error-field no-margin *ngIf="!isEmailValid">Error: {{errorType}}</ion-label> -->
-  </div>
+        <!-- <ion-label   error-field no-margin *ngIf="!isEmailValid">Error: {{errorType}}</ion-label> -->
+    </div>
 
-  <!-- PASSWORD -->
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked">{{'common.password' | translate}}</ion-label>
+    <!-- PASSWORD -->
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked">{{'common.password' | translate}}</ion-label>
 
-    <ion-input required type="password" placeholder="" [(ngModel)]="newUser.password" name="password"></ion-input>
+        <ion-input required type="password" placeholder="" [(ngModel)]="newUser.password" name="password"></ion-input>
 
-    <ion-label error-field no-margin *ngIf="!isPasswordValid">{{errorPassword}}</ion-label>
-  </div>
+        <ion-label error-field no-margin *ngIf="!isPasswordValid">{{errorPassword}}</ion-label>
+    </div>
 
-  <!-- Company Name -->
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked">{{'profile.company-name' | translate}}</ion-label>
+    <!-- Company Name -->
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked">{{'profile.company-name' | translate}}</ion-label>
 
-    <ion-input type="text" placeholder="" [(ngModel)]="newUser.profileName" name="profileName" dir="auto"></ion-input>
-  </div>
+        <ion-input type="text" placeholder="" [(ngModel)]="newUser.profileName" name="profileName" dir="auto">
+        </ion-input>
+    </div>
 
-  <!-- Company Name Arabic -->
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked" *ngIf="translate.currentLang==='ar'">اسم
-      الشركة بالعربي</ion-label>
-    <ion-label position="stacked" *ngIf="translate.currentLang==='en'">Company
-      Name in Arabic (Optional)</ion-label>
-    <ion-input type="text" placeholder="" [(ngModel)]="newUser.profileNameAr" name="profileNameAr" dir="auto"></ion-input>
-  </div>
+    <!-- Company Name Arabic -->
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked" *ngIf="translate.currentLang==='ar'">اسم
+            الشركة بالعربي</ion-label>
+        <ion-label position="stacked" *ngIf="translate.currentLang==='en'">Company
+            Name in Arabic (Optional)</ion-label>
+        <ion-input type="text" placeholder="" [(ngModel)]="newUser.profileNameAr" name="profileNameAr" dir="auto">
+        </ion-input>
+    </div>
 
-  <!-- Company Phone -->
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked">
-      {{'profile.company-phone-number' | translate}}
-    </ion-label>
+    <!-- Company Phone -->
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked">
+            {{'profile.company-phone-number' | translate}}
+        </ion-label>
 
-    <ion-input type="text" placeholder="" [(ngModel)]="newUser.companyNumber" name="companyNumber"></ion-input>
-  </div>
+        <ion-input type="text" placeholder="" [(ngModel)]="newUser.companyNumber" name="companyNumber"></ion-input>
+    </div>
 
-  <!-- Account Creator Name -->
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked">
-      {{'profile.account-creator-name' | translate}}
-      <br>
-      {{'common.first-and-last-paranthases' | translate}}
-    </ion-label>
+    <!-- Account Creator Name -->
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked">
+            {{'profile.account-creator-name' | translate}}
+            <br>
+            {{'common.first-and-last-paranthases' | translate}}
+        </ion-label>
 
-    <ion-input type="text" placeholder="" [(ngModel)]="newUser.personName" name="personName" dir="auto"></ion-input>
-  </div>
+        <ion-input type="text" placeholder="" [(ngModel)]="newUser.personName" name="personName" dir="auto"></ion-input>
+    </div>
 
-  <!-- Person Phone -->
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked">
-      {{'profile.account-creator-mobile' | translate}}
-    </ion-label>
+    <!-- Person Phone -->
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked">
+            {{'profile.account-creator-mobile' | translate}}
+        </ion-label>
 
-    <ion-input type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber"></ion-input>
-  </div>
-
-
-  <!-- Company Classification CONSULTANT -->
-  <div *ngIf="newUser.accountType == 2">
-
-    <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
-      <ion-label position="stacked">
-        {{'profile.company-classification' | translate}}
-      </ion-label>
-
-      <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
-        [(ngModel)]="selectedClass" (ionChange)="onSelectClass(event)" name="selectClass" text-center>
-
-        <ion-select-option value="0">{{'profile.grade.special-grade' | translate}}</ion-select-option>
-        <ion-select-option value="1">{{'profile.grade.first-grade' | translate}}</ion-select-option>
-        <ion-select-option value="2">{{'profile.grade.second-grade' | translate}}</ion-select-option>
-        <ion-select-option value="3">{{'profile.grade.third-grade' | translate}}</ion-select-option>
-
-      </ion-select>
-    </ion-item>
+        <ion-input type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber"></ion-input>
+    </div>
 
 
-    <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
-      <ion-label position="stacked">
-        {{'profile.sector' | translate}}
-      </ion-label>
+    <!-- Company Classification CONSULTANT -->
+    <div *ngIf="newUser.accountType == 2">
 
-      <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
-        [(ngModel)]="selectedSector" (ionChange)="onSelectSector(event)" name="selectedSector" text-center>
+        <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
+            <ion-label position="stacked">
+                {{'profile.company-classification' | translate}}
+            </ion-label>
 
-        <ion-select-option value="gov">{{'profile.govermental' | translate}}</ion-select-option>
-        <ion-select-option value="private">{{'profile.private' | translate}}</ion-select-option>
+            <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select"
+                interface="action-sheet" [(ngModel)]="selectedClass" (ionChange)="onSelectClass(event)"
+                name="selectClass" text-center>
 
-      </ion-select>
-    </ion-item>
+                <ion-select-option value="0">{{'profile.grade.special-grade' | translate}}</ion-select-option>
+                <ion-select-option value="1">{{'profile.grade.first-grade' | translate}}</ion-select-option>
+                <ion-select-option value="2">{{'profile.grade.second-grade' | translate}}</ion-select-option>
+                <ion-select-option value="3">{{'profile.grade.third-grade' | translate}}</ion-select-option>
 
-  </div>
+            </ion-select>
+        </ion-item>
 
-  <!-- Company Classification CONTRACTOR -->
-  <div *ngIf="newUser.accountType == 3" padding-top>
 
-    <ion-item>
-      <ion-label position="stacked">
-        {{'profile.company-classification' | translate}}
-      </ion-label>
+        <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
+            <ion-label position="stacked">
+                {{'profile.sector' | translate}}
+            </ion-label>
 
-      <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
-        [(ngModel)]="selectedClass" (ionChange)="onSelectClass(event)" name="selectClass" text-center>
+            <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select"
+                interface="action-sheet" [(ngModel)]="selectedSector" (ionChange)="onSelectSector(event)"
+                name="selectedSector" text-center>
 
-        <ion-select-option value="0">{{'profile.grade.special-grade' | translate}}</ion-select-option>
-        <ion-select-option value="1">{{'profile.grade.first-grade' | translate}}</ion-select-option>
-        <ion-select-option value="2">{{'profile.grade.second-grade' | translate}}</ion-select-option>
-        <ion-select-option value="3">{{'profile.grade.third-grade' | translate}}</ion-select-option>
-        <ion-select-option value="4">{{'profile.grade.fourth-grade' | translate}}</ion-select-option>
-        <ion-select-option value="5">{{'profile.grade.fifth-grade' | translate}}</ion-select-option>
-        <ion-select-option value="6">{{'profile.grade.sixth-grade' | translate}}</ion-select-option>
+                <ion-select-option value="gov">{{'profile.govermental' | translate}}</ion-select-option>
+                <ion-select-option value="private">{{'profile.private' | translate}}</ion-select-option>
 
-      </ion-select>
-    </ion-item>
+            </ion-select>
+        </ion-item>
 
-  </div>
+    </div>
 
-  <!-- upload company license -->
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
+    <!-- Company Classification CONTRACTOR -->
+    <div *ngIf="newUser.accountType == 3" padding-top>
 
-    <ion-label position="stacked">
-      {{'register.company-licence-copy' | translate}}</ion-label>
+        <ion-item>
+            <ion-label position="stacked">
+                {{'profile.company-classification' | translate}}
+            </ion-label>
 
-    <!-- <div class="upload-wrapper"> -->
-    <input #uploadButton type="file" (change)="setUpload($event)" name="upload">
+            <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select"
+                interface="action-sheet" [(ngModel)]="selectedClass" (ionChange)="onSelectClass(event)"
+                name="selectClass" text-center>
 
-    <ng-container *ngIf="uploadPercent | async as p">
-      <div id="upload-percent">{{'common.upload-percent' | translate}} {{ p }}
-        %
-      </div>
-    </ng-container>
+                <ion-select-option value="0">{{'profile.grade.special-grade' | translate}}</ion-select-option>
+                <ion-select-option value="1">{{'profile.grade.first-grade' | translate}}</ion-select-option>
+                <ion-select-option value="2">{{'profile.grade.second-grade' | translate}}</ion-select-option>
+                <ion-select-option value="3">{{'profile.grade.third-grade' | translate}}</ion-select-option>
+                <ion-select-option value="4">{{'profile.grade.fourth-grade' | translate}}</ion-select-option>
+                <ion-select-option value="5">{{'profile.grade.fifth-grade' | translate}}</ion-select-option>
+                <ion-select-option value="6">{{'profile.grade.sixth-grade' | translate}}</ion-select-option>
 
-    <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
-    <ng-container *ngIf="downloadURL | async">
-      <img id="upload-image" [src]="downloadURL | async">
-    </ng-container>
-    <!-- </div> -->
+            </ion-select>
+        </ion-item>
 
-  </div>
+    </div>
+
+    <!-- upload company license -->
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+
+        <ion-label position="stacked">
+            {{'register.company-licence-copy' | translate}}</ion-label>
+
+        <!-- <div class="upload-wrapper"> -->
+        <input #uploadButton type="file" (change)="setUpload($event)" name="upload">
+
+        <ng-container *ngIf="uploadPercent | async as p">
+            <div id="upload-percent">{{'common.upload-percent' | translate}} {{ p }}
+                %
+            </div>
+        </ng-container>
+
+        <!-- <a [href]="downloadURL | async">{{ downloadURL | async }}</a> -->
+        <ng-container *ngIf="downloadURL | async">
+            <img id="upload-image" [src]="downloadURL | async">
+        </ng-container>
+        <!-- </div> -->
+
+    </div>
 
 </ng-template>
 
@@ -311,46 +320,48 @@
 
 <ng-template #city_picker_indv_supplier>
 
-  <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked">{{'common.city' | translate}}</ion-label>
+    <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked">{{'common.city' | translate}}</ion-label>
 
-    <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
-      [(ngModel)]="selectedCity" (ionChange)="onSelectCity(event)" name="selectCity" text-center>
+        <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select"
+            interface="action-sheet" [(ngModel)]="selectedCity" (ionChange)="onSelectCity(event)" name="selectCity"
+            text-center>
 
-      <ion-select-option value="1">{{'dubai' | translate}}</ion-select-option>
-      <ion-select-option value="2">{{'sharjah' | translate}}</ion-select-option>
-      <ion-select-option value="3">{{'ajman' | translate}}</ion-select-option>
-      <ion-select-option value="4">{{'abu-dhabi' | translate}}</ion-select-option>
-      <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
-      <ion-select-option value="6">{{'fujairah' | translate}}</ion-select-option>
-      <ion-select-option value="7">{{'ras-al-khaimah' | translate}}</ion-select-option>
-      <ion-select-option value="8">{{'umm-al-quwain' | translate}}</ion-select-option>
+            <ion-select-option value="1">{{'dubai' | translate}}</ion-select-option>
+            <ion-select-option value="2">{{'sharjah' | translate}}</ion-select-option>
+            <ion-select-option value="3">{{'ajman' | translate}}</ion-select-option>
+            <ion-select-option value="4">{{'abu-dhabi' | translate}}</ion-select-option>
+            <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
+            <ion-select-option value="6">{{'fujairah' | translate}}</ion-select-option>
+            <ion-select-option value="7">{{'ras-al-khaimah' | translate}}</ion-select-option>
+            <ion-select-option value="8">{{'umm-al-quwain' | translate}}</ion-select-option>
 
-    </ion-select>
-  </ion-item>
+        </ion-select>
+    </ion-item>
 
 </ng-template>
 
 
 <ng-template #city_picker_consultant_contractor>
 
-  <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked">{{'register.city-of-licence' | translate}}</ion-label>
+    <ion-item [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked">{{'register.city-of-licence' | translate}}</ion-label>
 
-    <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select" interface="action-sheet"
-      [(ngModel)]="selectedCity" (ionChange)="onSelectCity(event)" name="selectCity" text-center>
+        <ion-select placeholder="{{'register.select-placeholder' | translate}}" ok-text="Select"
+            interface="action-sheet" [(ngModel)]="selectedCity" (ionChange)="onSelectCity(event)" name="selectCity"
+            text-center>
 
-      <ion-select-option value="1">{{'dubai' | translate}}</ion-select-option>
-      <ion-select-option value="2">{{'sharjah' | translate}}</ion-select-option>
-      <ion-select-option value="3">{{'ajman' | translate}}</ion-select-option>
-      <ion-select-option value="4">{{'abu-dhabi' | translate}}</ion-select-option>
-      <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
-      <ion-select-option value="6">{{'fujairah' | translate}}</ion-select-option>
-      <ion-select-option value="7">{{'ras-al-khaimah' | translate}}</ion-select-option>
-      <ion-select-option value="8">{{'umm-al-quwain' | translate}}</ion-select-option>
+            <ion-select-option value="1">{{'dubai' | translate}}</ion-select-option>
+            <ion-select-option value="2">{{'sharjah' | translate}}</ion-select-option>
+            <ion-select-option value="3">{{'ajman' | translate}}</ion-select-option>
+            <ion-select-option value="4">{{'abu-dhabi' | translate}}</ion-select-option>
+            <!-- <ion-select-option value="5">Al Ain</ion-select-option> -->
+            <ion-select-option value="6">{{'fujairah' | translate}}</ion-select-option>
+            <ion-select-option value="7">{{'ras-al-khaimah' | translate}}</ion-select-option>
+            <ion-select-option value="8">{{'umm-al-quwain' | translate}}</ion-select-option>
 
-    </ion-select>
-  </ion-item>
+        </ion-select>
+    </ion-item>
 
 </ng-template>
 
@@ -370,39 +381,39 @@
 
 <ng-template #individual_fields>
 
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked" class="label" [class.dir-rtl]="translate.currentLang==='ar'">{{'common.name'
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked" class="label" [class.dir-rtl]="translate.currentLang==='ar'">{{'common.name'
       |
       translate}}
-    </ion-label>
+        </ion-label>
 
-    <ion-input type="text" placeholder="" [(ngModel)]="newUser.profileName" class="form-control" id="name" name="name"
-      #name="ngModel" dir="auto"></ion-input>
-  </div>
+        <ion-input type="text" placeholder="" [(ngModel)]="newUser.profileName" class="form-control" id="name"
+            name="name" #name="ngModel" dir="auto"></ion-input>
+    </div>
 
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked" class="label">
-      {{'common.email' | translate}}
-    </ion-label>
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked" class="label">
+            {{'common.email' | translate}}
+        </ion-label>
 
-    <ion-input type="text" placeholder="" [(ngModel)]="newUser.email" name="email"></ion-input>
+        <ion-input type="text" placeholder="" [(ngModel)]="newUser.email" name="email"></ion-input>
 
-  </div>
+    </div>
 
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked">
-      {{'common.password' | translate}}</ion-label>
-    <ion-input type="password" placeholder="" [(ngModel)]="newUser.password" name="password"></ion-input>
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked">
+            {{'common.password' | translate}}</ion-label>
+        <ion-input type="password" placeholder="" [(ngModel)]="newUser.password" name="password"></ion-input>
 
-  </div>
+    </div>
 
-  <div [class.ar]="translate.currentLang==='ar'" padding-top>
-    <ion-label position="stacked">
-      {{'common.mobile' | translate}}
-    </ion-label>
+    <div [class.ar]="translate.currentLang==='ar'" padding-top>
+        <ion-label position="stacked">
+            {{'common.mobile' | translate}}
+        </ion-label>
 
-    <ion-input type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber"></ion-input>
-  </div>
+        <ion-input type="text" placeholder="" [(ngModel)]="newUser.personNumber" name="personNumber"></ion-input>
+    </div>
 
 </ng-template>
 
@@ -418,64 +429,64 @@
 
 
 <ng-template #supplier_fields>
-  <ion-item [class.ar]="translate.currentLang==='ar'" padding-top padding-bottom>
-    <ion-label position="stacked">{{'register.select-specialities' |
+    <ion-item [class.ar]="translate.currentLang==='ar'" padding-top padding-bottom>
+        <ion-label position="stacked">{{'register.select-specialities' |
       translate}}*</ion-label>
 
-    <ion-select placeholder="{{'register.multiple-selection' | translate}}" multiple="true" ok-text="Select" interface="alert"
-      (ionChange)="onSelectSupplierCategory($event)" name="selectSupplierCategory" text-center>
+        <ion-select placeholder="{{'register.multiple-selection' | translate}}" multiple="true" ok-text="Select"
+            interface="alert" (ionChange)="onSelectSupplierCategory($event)" name="selectSupplierCategory" text-center>
 
-      <ion-select-option value="category_paint">
-        {{'c.paint' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_blocks">
-        {{'c.blocks' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_ceramics">
-        {{'c.ceramics' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_interlock">
-        {{'c.Interlock' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_wood">
-        {{'c.wood' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_doors">
-        {{'c.doors' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_fabric">
-        {{'c.fabric' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_cement">
-        {{'c.cement' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_gypsum">
-        {{'c.gypsum-board' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_decoration">
-        {{'c.decoration' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_glass">
-        {{'c.glass' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_aluminium">
-        {{'c.aluminium' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_kitchens">
-        {{'c.kitchens' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_ac">
-        {{'c.air-conditioning' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_lighting">
-        {{'c.lighting' | translate}}
-      </ion-select-option>
-      <ion-select-option value="category_concrete">
-        {{'c.concrete' | translate}}
-      </ion-select-option>
+            <ion-select-option value="category_paint">
+                {{'c.paint' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_blocks">
+                {{'c.blocks' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_ceramics">
+                {{'c.ceramics' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_interlock">
+                {{'c.Interlock' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_wood">
+                {{'c.wood' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_doors">
+                {{'c.doors' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_fabric">
+                {{'c.fabric' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_cement">
+                {{'c.cement' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_gypsum">
+                {{'c.gypsum-board' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_decoration">
+                {{'c.decoration' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_glass">
+                {{'c.glass' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_aluminium">
+                {{'c.aluminium' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_kitchens">
+                {{'c.kitchens' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_ac">
+                {{'c.air-conditioning' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_lighting">
+                {{'c.lighting' | translate}}
+            </ion-select-option>
+            <ion-select-option value="category_concrete">
+                {{'c.concrete' | translate}}
+            </ion-select-option>
 
-    </ion-select>
-  </ion-item>
+        </ion-select>
+    </ion-item>
 
 
 </ng-template>
@@ -493,26 +504,27 @@
 
 <ng-template #agree_to_terms>
 
-  <br>
-  <ion-list style="background: transparent" padding-top>
-    <ion-item [class.ar]="translate.currentLang === 'ar'">
-      <ion-label position="stacked" style="font-size: 1.05rem !important">
-        {{'register.agree-with-terms' | translate}}
-      </ion-label>
-      <ion-checkbox style="padding-left: 5px; justify-content: flex-end;" [(ngModel)]="termsCheckBoxValue" color="primary"></ion-checkbox>
-    </ion-item>
-    <ion-row justify-content-center>
-      <ion-col>
+    <br>
+    <ion-list style="background: transparent" padding-top>
+        <ion-item [class.ar]="translate.currentLang === 'ar'">
+            <ion-label position="stacked" style="font-size: 1.05rem !important">
+                {{'register.agree-with-terms' | translate}}
+            </ion-label>
+            <ion-checkbox style="padding-left: 5px; justify-content: flex-end;" [(ngModel)]="termsCheckBoxValue"
+                color="primary"></ion-checkbox>
+        </ion-item>
+        <ion-row justify-content-center>
+            <ion-col>
 
 
-      </ion-col>
-    </ion-row>
-  </ion-list>
+            </ion-col>
+        </ion-row>
+    </ion-list>
 
-  <div>
-    <ion-button expand="block" mode="ios" (click)="showTerms()" style="width:auto; font-size: 0.9rem;">
-      {{'register.show-terms' | translate}}
-    </ion-button>
-  </div>
+    <div>
+        <ion-button expand="block" mode="ios" (click)="openPrivacyPageModal()" style="width:auto; font-size: 0.9rem;">
+            {{'register.show-terms' | translate}}
+        </ion-button>
+    </div>
 
 </ng-template>

@@ -78,7 +78,7 @@
             Email:
           </div>
 
-          <span> {{ user.email || '-' }}</span>
+          <span class="detail-email"> {{ user.email || '-' }}</span>
         </div>
 
         <!-- NOTE: Address -->
@@ -195,7 +195,7 @@
       </div>
 
       <div class="rating-row">
-        <ion-icon name="" mode="md"></ion-icon>
+        <!-- <ion-icon name="" mode="md"></ion-icon> -->
         <div class="detail-name dir-rtl" *ngIf="translate.currentLang==='ar'" text-center>التقييم</div>
         <div class="detail-name" *ngIf="translate.currentLang==='en'">Rating:</div>
         <div class="r3">

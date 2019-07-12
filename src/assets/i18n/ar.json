@@ -1,181 +1,189 @@
 {
-	"Organization-Consultant": "مؤسسة أو إستشاري",
-	"UAE": "الإمارات",
-	"abu-dhabi": "أبوظبي",
-	"ajman": "عجمان",
-	"c": {
-		"Interlock": "أرصفة",
-		"air-conditioning": "التكييف",
-		"aluminium": "المنيوم",
-		"blocks": "أحجار",
-		"cement": "إسمنت",
-		"ceramics": "سيراميك",
-		"concrete": "كونكريت",
-		"decoration": "ديكور",
-		"doors": "أبواب",
-		"fabric": "أقمشة",
-		"glass": "زجاج",
-		"gypsum-board": "جبس",
-		"kitchens": "مطابخ",
-		"lighting": "إضاءة",
-		"paint": "أصباغ",
-		"wood": "خشب"
-	},
-	"common": {
-		"about": "عن معمار",
-		"back": "العودة",
-		"city": "الإمارة",
-		"clear": "إلغي الخيارات",
-		"comments": "تعليقات",
-		"confirm": "تأكيد",
-		"create-account": "إنشاء حساب",
-		"create-tender": "انشاء مناقصة",
-		"email": "البريد الإلكتروني",
-		"email-short": "الإيميل",
-		"featured": "المتميزة",
-		"filter": "الخيارات",
-		"first-and-last-paranthases": "(الإسم الأول و الأخير)",
-		"forgot-password": "نسيت كلمة السر",
-		"go-back": "عد للصفحة السابقة",
-		"home": "الرئيسية",
-		"log-in": "تسجيل الدخول",
-		"log-out": "تسجيل الخروج",
-		"login": "تسجيل الدخول",
-		"logout": "تسجيل الخروج",
-		"menu": "القائمة",
-		"mobile": "رقم الموبايل",
-		"name": "الإسم",
-		"no": "لا",
-		"no-comments": "لا يوجد تعليقات",
-		"password": "كلمة السر",
-		"profile": "الحساب",
-		"register": "إنشاء حساب",
-		"search": "ابحث",
-		"settings": "الإعدادات",
-		"upload-percent": "رفع الملف",
-		"yes": "نعم"
-	},
-	"company": "شركة",
-	"consultant": "إستشاري",
-	"contractor": "مقاول",
-	"dubai": "دبي",
-	"filter": {
-		"search": "إسم الشركة",
-		"select-category": "إختر التصنيف"
-	},
-	"fujairah": "الفجيرة",
-	"individual": "فرد",
-	"logout": {
-		"are-you-sure-logout": "هل تريد تسجيل الخروج؟"
-	},
-	"organization": "مؤسسة",
-	"pages": {
-		"login": {
-			"email-required": "البريد الإلكتروني مطلوب",
-			"forgot-password": {
-				"password-reset": "إعادة كلمة السر"
-			},
-			"pass-6-chars": "يجب أن يكون طول كلمة السر 6 أحرف على الأقل",
-			"pass-required": "كلمة السر مطلوبة",
-			"title": "تسجيل الدخول"
-		},
-		"settings": {
-			"change-language": "إختر اللغة",
-			"recieve-notifications": "تلقي الإشعارات"
-		}
-	},
-	"profile": {
-		"account-creator-mobile": "رقم موبايل منشئ الحساب",
-		"account-creator-name": "إسم منشئ الحساب",
-		"address": "العنوان",
-		"categories": "الإختصاص",
-		"company-classification": "درجة الشركة",
-		"company-classification-short": "الدرجة",
-		"company-name": "إسم الشركة بالإنجليزية",
-		"company-name-ar": "اسم الشركة بالعربية",
-		"company-phone-number": "رقم هاتف الشركة",
-		"edit-cancle": "إلغاء ",
-		"edit-done": "حفظ التعديلات",
-		"govermental": "حكومي",
-		"grade": {
-			"fifth-grade": "الدرجة الخامسة",
-			"first-grade": "الدرجة الأولى",
-			"fourth-grade": "الدرجة الرابعة",
-			"second-grade": "الدرجة الثانية",
-			"sixth-grade": "الدرجة السادسة",
-			"special-grade": "الدرجة الخاصة",
-			"third-grade": "الدرجة الثالثة"
-		},
-		"not-found": "لم يتم العثور على الملف",
-		"phone": "الهاتف",
-		"private": "خاص",
-		"sector": "القطاع"
-	},
-	"ras-al-khaimah": "راس الخيمة",
-	"rate": {
-		"comment-120-chars": "التعليق* (الحد 120 حرفاً)",
-		"five-star": "خمس نجوم",
-		"four-star": "أربع نجوم",
-		"one-star": "نجمة واحدة",
-		"rating": "التقييم*",
-		"submit-rating": "أكد التقييم",
-		"three-star": "ثلاث نجوم",
-		"two-star": "نجمتان"
-	},
-	"register": {
-		"Account-Type": "نوع الحساب",
-		"agree-with-terms": "أوافق على الشروط و الأحكام:",
-		"city-of-licence": "إمارة الترخيص",
-		"company-licence-copy": "نسخة من ترخيص الشركة",
-		"multiple-selection": "أكثر من خيار",
-		"pick-account-type": "إختر نوع الحساب",
-		"register-an-account": "تسجيل حساب",
-		"select-placeholder": "إختر",
-		"select-specialities": "إختر الإختصاصات",
-		"show-terms": "إطلع على البنود و الأحكام",
-		"what-type-of-company": "ما هو نوع الشركة؟"
-	},
-	"sharjah": "الشارقة",
-	"supplier": "مورد",
-	"tab2": {
-		"browse-home-to-find-tenders": " ",
-		"click-button-to-create-one": "إضغط على الزر أسفل الصفحة لتبدأ",
-		"featured-tenders": "المناقصات المتميزة",
-		"no-created-tenders": "سيتم إظهار مناقصاتك هنا",
-		"no-featured-tenders": "لا يوجد مناقصات متميزة",
-		"no-tenders-joined": "لم تقم بالإشتراك بأي مناقصات بعد",
-		"posted-tenders": "مناقصاتك",
-		"search-options": "الخيارات"
-	},
-	"tab4": {
-		"edit-profile": "عدل",
-		"login-to-view-profile": " سجل الدخول للإتطلاع على حسابك",
-		"your-profile": "حسابك الشخصي"
-	},
-	"tabs": {
-		"tab1": {
-			"home": "الرئيسية"
-		}
-	},
-	"tender": {
-		"Attachment": "الملف",
-		"Attachments": "المرفقات",
-		"Concrete": "كونكريت",
-		"Construction": "بناء",
-		"Deadline": "الإنتهاء",
-		"Description": "الشرح",
-		"Details": "التفاصيل",
-		"Featured": "مميز",
-		"General": "عام",
-		"Insulation": "عزل",
-		"Maintenance": "إصلاحات",
-		"Prefab": "مصنعيات",
-		"Published": "الإصدار",
-		"Status": "الحالة",
-		"Steel": "حدادة",
-		"Walls-Fencing": "جدران",
-		"no-available": "غير متوفر",
-		"Photo": "صورة"
-	},
-	"umm-al-quwain": "أم القيوين"
+    "Organization-Consultant": "مؤسسة أو إستشاري",
+    "UAE": "الإمارات",
+    "abu-dhabi": "أبوظبي",
+    "ajman": "عجمان",
+    "c": {
+        "all": "الجميع",
+        "Interlock": "أرصفة",
+        "air-conditioning": "التكييف",
+        "air-conditioning2": "التكييف",
+        "aluminium": "المنيوم",
+        "blocks": "أحجار",
+        "cement": "إسمنت",
+        "ceramics": "سيراميك",
+        "concrete": "كونكريت",
+        "decoration": "ديكور",
+        "doors": "أبواب",
+        "fabric": "أقمشة",
+        "glass": "زجاج",
+        "gypsum-board": "جبس",
+        "gypsum-board2": "جبس",
+        "kitchens": "مطابخ",
+        "lighting": "إضاءة",
+        "paint": "أصباغ",
+        "wood": "خشب"
+    },
+    "common": {
+        "about": "عن معمار",
+        "back": "العودة",
+        "city": "الإمارة",
+        "clear": "إلغي الخيارات",
+        "comments": "تعليقات",
+        "confirm": "تأكيد",
+        "create-account": "إنشاء حساب",
+        "create-tender": "انشاء مناقصة",
+        "email": "البريد الإلكتروني",
+        "email-short": "الإيميل",
+        "featured": "المتميزة",
+        "filter": "الخيارات",
+        "first-and-last-paranthases": "(الإسم الأول و الأخير)",
+        "forgot-password": "نسيت كلمة السر",
+        "go-back": "عد للصفحة السابقة",
+        "home": "الرئيسية",
+        "log-in": "تسجيل الدخول",
+        "log-out": "تسجيل الخروج",
+        "login": "تسجيل الدخول",
+        "logout": "تسجيل الخروج",
+        "menu": "القائمة",
+        "mobile": "رقم الموبايل",
+        "name": "الإسم",
+        "no": "لا",
+        "no-comments": "لا يوجد تعليقات",
+        "password": "كلمة السر",
+        "profile": "الحساب",
+        "register": "إنشاء حساب",
+        "search": "ابحث",
+        "settings": "الإعدادات",
+        "upload-percent": "رفع الملف",
+        "yes": "نعم"
+    },
+    "company": "شركة",
+    "consultant": "إستشاري",
+    "contractor": "مقاول",
+    "dubai": "دبي",
+    "filter": {
+        "search": "إسم الشركة",
+        "select-category": "إختر التصنيف"
+    },
+    "fujairah": "الفجيرة",
+    "individual": "فرد",
+    "logout": {
+        "are-you-sure-logout": "هل تريد تسجيل الخروج؟"
+    },
+    "organization": "مؤسسة",
+    "pages": {
+        "login": {
+            "email-required": "البريد الإلكتروني مطلوب",
+            "forgot-password": {
+                "password-reset": "إعادة كلمة السر"
+            },
+            "pass-6-chars": "يجب أن يكون طول كلمة السر 6 أحرف على الأقل",
+            "pass-required": "كلمة السر مطلوبة",
+            "title": "تسجيل الدخول"
+        },
+        "settings": {
+            "change-language": "إختر اللغة",
+            "recieve-notifications": "تلقي الإشعارات"
+        }
+    },
+    "profile": {
+        "account-creator-mobile": "رقم موبايل منشئ الحساب",
+        "account-creator-name": "إسم منشئ الحساب",
+        "address": "العنوان",
+        "categories": "الإختصاص",
+        "company-classification": "درجة الشركة",
+        "company-classification-short": "الدرجة",
+        "company-name": "إسم الشركة بالإنجليزية",
+        "company-name-ar": "اسم الشركة بالعربية",
+        "company-phone-number": "رقم هاتف الشركة",
+        "edit-cancle": "إلغاء ",
+        "edit-done": "حفظ التعديلات",
+        "govermental": "حكومي",
+        "grade": {
+            "fifth-grade": "الدرجة الخامسة",
+            "first-grade": "الدرجة الأولى",
+            "fourth-grade": "الدرجة الرابعة",
+            "second-grade": "الدرجة الثانية",
+            "sixth-grade": "الدرجة السادسة",
+            "special-grade": "الدرجة الخاصة",
+            "third-grade": "الدرجة الثالثة"
+        },
+        "not-found": "لم يتم العثور على الملف",
+        "phone": "الهاتف",
+        "private": "خاص",
+        "sector": "القطاع"
+    },
+    "ras-al-khaimah": "راس الخيمة",
+    "rate": {
+        "comment-120-chars": "التعليق* (الحد 120 حرفاً)",
+        "five-star": "خمس نجوم",
+        "four-star": "أربع نجوم",
+        "one-star": "نجمة واحدة",
+        "rating": "التقييم*",
+        "submit-rating": "أكد التقييم",
+        "three-star": "ثلاث نجوم",
+        "two-star": "نجمتان"
+    },
+    "register": {
+        "Account-Type": "نوع الحساب",
+        "agree-with-terms": "أوافق على الشروط و الأحكام:",
+        "city-of-licence": "إمارة الترخيص",
+        "company-licence-copy": "نسخة من ترخيص الشركة",
+        "multiple-selection": "أكثر من خيار",
+        "pick-account-type": "إختر نوع الحساب",
+        "register-an-account": "تسجيل حساب",
+        "select-placeholder": "إختر",
+        "select-specialities": "إختر الإختصاصات",
+        "show-terms": "إطلع على البنود و الأحكام",
+        "what-type-of-company": "ما هو نوع الشركة؟"
+    },
+    "sharjah": "الشارقة",
+    "supplier": "مورد",
+    "tab2": {
+        "browse-home-to-find-tenders": " ",
+        "click-button-to-create-one": "إضغط على الزر أسفل الصفحة لتبدأ",
+        "featured-tenders": "المناقصات المتميزة",
+        "no-created-tenders": "سيتم إظهار مناقصاتك هنا",
+        "no-featured-tenders": "لا يوجد مناقصات متميزة",
+        "no-tenders-joined": "لم تقم بالإشتراك بأي مناقصات بعد",
+        "posted-tenders": "مناقصاتك",
+        "search-options": "الخيارات"
+    },
+    "tab4": {
+        "edit-profile": "عدل",
+        "login-to-view-profile": " سجل الدخول للإتطلاع على حسابك",
+        "your-profile": "حسابك الشخصي"
+    },
+    "tabs": {
+        "tab1": {
+            "home": "الرئيسية"
+        }
+    },
+    "tender": {
+        "Attachment": "الملف",
+        "Attachments": "المرفقات",
+        "Concrete": "كونكريت",
+        "Construction": "بناء",
+        "Deadline": "الإنتهاء",
+        "Description": "الشرح",
+        "Details": "التفاصيل",
+        "Featured": "مميز",
+        "General": "عام",
+        "Insulation": "عزل",
+        "Maintenance": "إصلاحات",
+        "Prefab": "مصنعيات",
+        "Published": "الإصدار",
+        "Status": "الحالة",
+        "Steel": "حدادة",
+        "Walls-Fencing": "جدران",
+        "no-available": "غير متوفر",
+        "Photo": "صورة"
+    },
+    "umm-al-quwain": "أم القيوين",
+    "Select-Category": "إختر تصنيف الشركة:",
+    "Select-Supplier-Category": "إختر تصنيف المورد:",
+    "all": "الجميع",
+    "dir": "rtl",
+    "privacy_policy": "سياسة الخصوصية"
 }

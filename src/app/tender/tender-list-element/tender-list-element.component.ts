@@ -4,6 +4,11 @@ import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { File } from '@ionic-native/file/ngx';
+import { HttpClient } from '@angular/common/http';
+import { toPromise } from 'rxjs/Operator/toPromise';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 @Component({
   selector: 'app-tender-list-element',
@@ -22,8 +27,13 @@ export class TenderListElementComponent implements OnInit, OnDestroy {
 
   unsubscribe$: Subject<any> = new Subject();
 
-  constructor(private nav: NavController,
-    public translate: TranslateService) {
+  constructor(
+    private nav: NavController,
+    public translate: TranslateService,
+    public file: File,
+    public http: HttpClient,
+    public storage: AngularFireStorage
+    ) {
   }
 
   ngOnInit() {
@@ -100,4 +110,28 @@ export class TenderListElementComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  randomNumber(): number {
+    return Math.floor(Math.random() * 100); // from 0 to 99
+  }
+
+  downloadAttachment(_attachmentUrl: string) {
+    console.log({_attachmentUrl})
+    // The code asumes you have the native File plugin injected and the instance is called "file"
+    var httpsReference = this.storage.storage.refFromURL(_attachmentUrl);
+    console.log({httpsReference})
+    debugger
+    httpsReference.getDownloadURL().then(res => {
+      this.http.get(res, { responseType: 'blob' })
+        .subscribe((fileBlob: Blob) => {
+          // imageBlob is the binary data of the the image
+          // From here you can manipulate it and store it where you want
+          // For example, to store it in your app dir
+          // The replace true is optional but is just in case you want to overwrite it
+          return this.file.writeFile(this.file.dataDirectory, "attachment_" + this.randomNumber(), fileBlob, { replace: true });
+        });
+    });
+
+  }
+
 }

@@ -100,8 +100,8 @@
           <ion-label color="primary" position="stacked" class="label" *ngIf="translate.currentLang==='en'">Tender
             Category*</ion-label>
 
-          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory" interface="action-sheet"
-            *ngIf="translate.currentLang==='en'">
+          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory"
+            interface="action-sheet" *ngIf="translate.currentLang==='en'" style="text-align: center;">
             <ion-select-option value="tender_construction">Construction</ion-select-option>
             <ion-select-option value="tender_steel">Steel Works</ion-select-option>
             <ion-select-option value="tender_maintenance">Maintenance</ion-select-option>
@@ -112,8 +112,8 @@
             <ion-select-option value="tender_general">General Works</ion-select-option>
           </ion-select>
 
-          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory" interface="action-sheet"
-            *ngIf="translate.currentLang==='ar'">
+          <ion-select ok-text="Select" cancle-text="Cancle" [(ngModel)]="newTender.tenderCategory"
+            interface="action-sheet" *ngIf="translate.currentLang==='ar'" style="text-align: center;">
             <ion-select-option value="tender_construction">بناء</ion-select-option>
             <ion-select-option value="tender_steel">حدادة </ion-select-option>
             <ion-select-option value="tender_maintenance">إصلاحات</ion-select-option>
@@ -134,8 +134,8 @@
           <ion-label color="primary" position="stacked" class="label" *ngIf="translate.currentLang==='en'">Select
             Deadline*</ion-label>
 
-          <ion-datetime [(ngModel)]="selectedDeadline" display-format="DD/MM/YYYY" min="{{datePickerMinYear}}" max="{{datePickerMaxYear}}"
-            (ionChange)="onSelectDate($event)">
+          <ion-datetime [(ngModel)]="selectedDeadline" display-format="DD/MM/YYYY" min="{{datePickerMinYear}}"
+            max="{{datePickerMaxYear}}" (ionChange)="onSelectDate($event)" style="text-align: center;">
 
           </ion-datetime>
 
@@ -157,14 +157,13 @@
 
 
         <!-- Spacer  -->
-        <div padding>
-        </div>
+        <div padding></div>
 
 
         <!-- NOTE: Attachments Section -->
         <ion-item class="no-border-label">
-          <ion-label style="color:rgb(3, 108, 150); font-size:1.1rem;" *ngIf="translate.currentLang==='ar'" class="dir-rtl"
-            text-center>
+          <ion-label style="color:rgb(3, 108, 150); font-size:1.1rem;" *ngIf="translate.currentLang==='ar'"
+            class="dir-rtl" text-center>
             قم بإدراج صورة في المناقصة (إختياري)
           </ion-label>
           <ion-label style="color:rgb(3, 108, 150); font-size:1.1rem;" *ngIf="translate.currentLang==='en'" text-center>
@@ -173,42 +172,40 @@
         </ion-item>
 
         <!-- __ Camera Part -->
-        <!-- <ng-container *ngIf="platform.is('cordova')"> -->
-        <ion-item class="no-border-label" style="align-items: center;">
-          <!-- __ Take Picture Button -->
+        <ng-container *ngIf="platform.is('cordova')">
+          <ion-item class="no-border-label" style="align-items: center;">
+            <!-- __ Take Picture Button -->
 
-          <label for="uploadCamera" class="custom-file-upload bold" style="text-align: center;">
-            <ion-icon name="camera" size="large"></ion-icon>
-          </label>
-          <input #uploadCamera type="button" (click)="takePicture()" id="uploadCamera" name="uploadCamera" style="margin:0 auto; width: 90%; display: none;">
+            <label for="uploadCamera" class="custom-file-upload bold" style="text-align: center; align-self: center;">
+              <ion-icon name="camera" size="large"></ion-icon>
+            </label>
+            <input #uploadCamera type="button" (click)="takePicture()" id="uploadCamera" name="uploadCamera"
+              style="margin:0 auto; width: 90%; display: none; text-align:center">
 
-          <ion-icon name="checkbox" color="success" *ngIf="imageBlob"></ion-icon>
+            <ion-icon name="checkbox" color="success" *ngIf="imageBlob" style="align-self: center;"></ion-icon>
 
-          <!-- __ Add Photo Button -->
-          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl bs"
-            text-center style="margin-top: 14px">
-            أو
-          </ion-label>
-          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='en'" class="bs" text-center
-            style="margin-top: 14px">
-            Or
-          </ion-label>
-        </ion-item>
-        <!-- </ng-container> -->
+            <!-- Or -->
+            <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl bs"
+              text-center style="margin-top: 14px">أو</ion-label>
+            <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='en'" class="bs" text-center
+              style="margin-top: 14px">Or</ion-label>
+          </ion-item>
+        </ng-container>
 
-        <!-- NOTE: ATTACHMENT 3 -->
+        <!-- __ Add Photo Button -->
         <ion-item padding-bottom class="no-border-label">
 
           <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='ar'" class="dir-rtl bs">
           </ion-label>
-          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='en'" class="bs">
-          </ion-label>
+          <ion-label color="primary" position="stacked" *ngIf="translate.currentLang==='en'" class="bs"></ion-label>
 
-          <label for="upload3" class="custom-file-upload bold" style="text-align: center;">
+          <label for="upload3" class="custom-file-upload bold" style="text-align: center; align-self: center;">
             <ion-icon name="image" size="large"></ion-icon>
           </label>
-          <input #uploadButton3 type="file" (change)="setUpload($event, 3)" id="upload3" name="upload3" style="margin:0 auto; width: 90%;">
-          <ion-icon name="checkbox" color="success" *ngIf="filesToUpload[3] != 'NOT-SET'"></ion-icon>
+          <input #uploadButton3 type="file" (change)="setUpload($event, 3)" id="upload3" name="upload3"
+            style="margin:0 auto; width: 90%;">
+          <ion-icon name="checkbox" color="success" *ngIf="filesToUpload[3] != 'NOT-SET'" style="align-self: center;">
+          </ion-icon>
 
           <ng-container *ngIf="uploadPercent3 | async as p">
             <div class="upload-percent">
@@ -223,8 +220,8 @@
         <!-- NOTE: Attachments Section -->
         <ion-item class="no-border-label">
 
-          <ion-label style="color:rgb(3, 108, 150); font-size:1.1rem;" *ngIf="translate.currentLang==='ar'" class="dir-rtl"
-            text-center>
+          <ion-label style="color:rgb(3, 108, 150); font-size:1.1rem;" *ngIf="translate.currentLang==='ar'"
+            class="dir-rtl" text-center>
             يمكنك رفع 3 ملفات كحد أقصى (إختياري)
           </ion-label>
           <ion-label style="color:rgb(3, 108, 150); font-size:1.1rem;" *ngIf="translate.currentLang==='en'" text-center>
@@ -243,11 +240,13 @@
             Attachment #1
           </ion-label>
 
-          <label for="upload0" class="custom-file-upload bold" style="text-align: center;">
+          <label for="upload0" class="custom-file-upload bold" style="text-align: center; align-self: center;">
             <ion-icon name="document" size="large"></ion-icon>
           </label>
-          <input #uploadButton0 type="file" (change)="setUpload($event, 0)" id="upload0" name="upload0" style="margin:0 auto; width: 90%;">
-          <ion-icon name="checkbox" color="primary" *ngIf="filesToUpload[0] != 'NOT-SET'"></ion-icon>
+          <input #uploadButton0 type="file" (change)="setUpload($event, 0)" id="upload0" name="upload0"
+            style="margin:0 auto; width: 90%;">
+          <ion-icon name="checkbox" color="success" *ngIf="filesToUpload[0] != 'NOT-SET'" style="align-self: center;">
+          </ion-icon>
 
           <ng-container *ngIf="uploadPercent0 | async as p">
             <div class="upload-percent">
@@ -269,11 +268,13 @@
             Attachment #2
           </ion-label>
 
-          <label for="upload1" class="custom-file-upload bold" style="text-align: center;">
+          <label for="upload1" class="custom-file-upload bold" style="text-align: center; align-self: center;">
             <ion-icon name="document" size="large"></ion-icon>
           </label>
-          <input #uploadButton1 type="file" (change)="setUpload($event, 1)" id="upload1" name="upload1" style="margin:0 auto; width: 90%;">
-          <ion-icon name="checkbox" color="primary" *ngIf="filesToUpload[1] != 'NOT-SET'"></ion-icon>
+          <input #uploadButton1 type="file" (change)="setUpload($event, 1)" id="upload1" name="upload1"
+            style="margin:0 auto; width: 90%;">
+          <ion-icon name="checkbox" color="success" *ngIf="filesToUpload[1] != 'NOT-SET'" style="align-self: center;">
+          </ion-icon>
 
 
           <ng-container *ngIf="uploadPercent1 | async as p ">
@@ -296,11 +297,13 @@
             Attachment #3
           </ion-label>
 
-          <label for="upload2" class="custom-file-upload bold" style="text-align: center;">
+          <label for="upload2" class="custom-file-upload bold" style="text-align: center; align-self: center;">
             <ion-icon name="document" size="large"></ion-icon>
           </label>
-          <input #uploadButton2 type="file" (change)="setUpload($event, 2)" id="upload2" name="upload2" style="margin:0 auto; width: 90%;">
-          <ion-icon name="checkbox" color="primary" *ngIf="filesToUpload[2] != 'NOT-SET'"></ion-icon>
+          <input #uploadButton2 type="file" (change)="setUpload($event, 2)" id="upload2" name="upload2"
+            style="margin:0 auto; width: 90%;">
+          <ion-icon name="checkbox" color="success" *ngIf="filesToUpload[2] != 'NOT-SET'" style="align-self: center;">
+          </ion-icon>
 
           <ng-container *ngIf="uploadPercent2 | async as p ">
             <div class="upload-percent">
@@ -328,7 +331,7 @@
 
 
 <!-- NOTE: Footer -->
-<ion-footer>
+<ion-footer *ngIf="hideCreateButton === false">
 
   <ion-toolbar color="light">
 

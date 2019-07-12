@@ -98,11 +98,21 @@ input,
 select,
 textarea {
   font-family: "a-jannat-lt";
-  @include no-select;
   --ion-font-family: "a-jannat-lt";
   text-transform: none !important; // mac ff fix
   -webkit-font-smoothing: antialiased !important; // safari mac nicer
   -moz-osx-font-smoothing: grayscale !important; // fix fatty ff on mac
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+body {
+  @include no-select;
 }
 
 .bold {

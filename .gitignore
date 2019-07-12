@@ -36,7 +36,12 @@ package.json
 .DS_Store
 Thumbs.db
 UserInterfaceState.xcuserstate
+<<<<<<< HEAD
 resources/ios/icon/icon-76@2x.png
+=======
+.firebase/hosting.d3d3.cache
+resources/ios/splash/Default-2436h.png
+>>>>>>> 10c23c17058259efa9b29120b376f704c8cc6294
 resources/ios/icon/icon.png
 resources/ios/icon/icon-1024.png
 resources/ios/icon/icon-20.png
@@ -59,6 +64,10 @@ resources/ios/icon/icon-60@3x.png
 resources/ios/icon/icon-72.png
 resources/ios/icon/icon-72@2x.png
 resources/ios/icon/icon-76.png
+<<<<<<< HEAD
+=======
+resources/ios/icon/icon-76@2x.png
+>>>>>>> 10c23c17058259efa9b29120b376f704c8cc6294
 resources/ios/icon/icon-83.5@2x.png
 resources/ios/icon/icon-86@2x.png
 resources/ios/icon/icon-98@2x.png
@@ -66,7 +75,10 @@ resources/ios/icon/icon-small.png
 resources/ios/icon/icon-small@2x.png
 resources/ios/icon/icon-small@3x.png
 resources/ios/icon/icon@2x.png
+<<<<<<< HEAD
 resources/ios/splash/Default-2436h.png
+=======
+>>>>>>> 10c23c17058259efa9b29120b376f704c8cc6294
 resources/ios/splash/Default-568h@2x~iphone.png
 resources/ios/splash/Default-667h.png
 resources/ios/splash/Default-736h.png
