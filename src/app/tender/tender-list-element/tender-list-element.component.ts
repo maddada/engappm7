@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 import { toPromise } from 'rxjs/Operator/toPromise';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 @Component({
     selector: 'app-tender-list-element',
@@ -34,7 +35,8 @@ export class TenderListElementComponent implements OnInit, OnDestroy {
         public file: File,
         public storage: AngularFireStorage,
         public platform: Platform,
-        public transfer: FileTransfer
+        public transfer: FileTransfer,
+        public fileOpener: FileOpener
     ) {
     }
 
@@ -120,49 +122,63 @@ export class TenderListElementComponent implements OnInit, OnDestroy {
     downloadAttachment(_attachmentUrl: string) {
         //TODO: MAKE THIS IOS
         if (this.platform.is('cordova')) {
+            // if (0 === 0) {
             // !! Assumes variable fileURL contains a valid URL to a path on the device,
             //    for example, cdvfile://localhost/persistent/path/to/downloads/
 
             const fileTransfer: FileTransferObject = this.transfer.create();
 
             let _fileName = '';
+            let _meta = '';
 
             if (_attachmentUrl.includes('.pdf')) {
                 _fileName = 'tender_attachment.pdf';
+                _meta = 'application/pdf';
             }
             else if (_attachmentUrl.includes('.docx')) {
                 _fileName = 'tender_attachment.docx';
+                _meta = 'application/vnd.openxmlformats-officedocument';
             }
             else if (_attachmentUrl.includes('.doc')) {
                 _fileName = 'tender_attachment.doc';
+                _meta = 'application/msword';
             }
             else if (_attachmentUrl.includes('.png')) {
                 _fileName = 'tender_attachment.png';
+                _meta = 'image/png';
             }
             else if (_attachmentUrl.includes('.jpg')) {
                 _fileName = 'tender_attachment.jpg';
+                _meta = 'image/jpeg';
             }
             else if (_attachmentUrl.includes('.gif')) {
                 _fileName = 'tender_attachment.gif';
+                _meta = 'image/gif';
             }
             else if (_attachmentUrl.includes('.ppt')) {
                 _fileName = 'tender_attachment.ppt';
+                _meta = 'application/vnd.ms-powerpoint';
             }
 
             debugger
-            fileTransfer.download(_attachmentUrl, cordova.file.externalRootDirectory + _fileName, false
+            fileTransfer.download(_attachmentUrl, this.file.dataDirectory + _fileName, false
                 // ,{
                 //     headers: {
                 //         "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
                 //     }
                 // }
-            ).then(function (entry) {
+            ).then(entry => {
                 console.log("download complete: " + entry.toURL());
+                console.log({ entry });
+
+                this.fileOpener.open(entry.toURL(), _meta)
+                    .then(() => console.log('File is opened'))
+                    .catch(e => console.log('Error opening file', e));
                 debugger
             }).catch(function (error) {
-                console.log("download error source " + error.source);
-                console.log("download error target " + error.target);
-                console.log("download error code" + error.code);
+                console.log("download error source: " + error.source);
+                console.log("download error target: " + error.target);
+                console.log("download error code: " + error.code);
                 debugger
             });
 

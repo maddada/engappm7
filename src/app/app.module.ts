@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { Firebase } from '@ionic-native/firebase/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -84,7 +85,8 @@ import { PrivacyPage } from './pages/privacy/privacy.page';
         Firebase,
         FcmService,
         File,
-        FileTransfer
+        FileTransfer,
+        FileOpener
     ],
     bootstrap: [AppComponent]
 })
