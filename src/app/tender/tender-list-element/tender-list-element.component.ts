@@ -121,7 +121,7 @@ export class TenderListElementComponent implements OnInit, OnDestroy {
 
     downloadAttachment(_attachmentUrl: string) {
         //TODO: MAKE THIS IOS
-        if (this.platform.is('cordova')) {
+        if (this.platform.is('ios')) {
             // if (0 === 0) {
             // !! Assumes variable fileURL contains a valid URL to a path on the device,
             //    for example, cdvfile://localhost/persistent/path/to/downloads/
@@ -171,7 +171,7 @@ export class TenderListElementComponent implements OnInit, OnDestroy {
                 console.log("download complete: " + entry.toURL());
                 console.log({ entry });
 
-                this.fileOpener.open(entry.toURL(), _meta)
+                this.fileOpener.showOpenWithDialog(entry.toURL(), _meta)
                     .then(() => console.log('File is opened'))
                     .catch(e => console.log('Error opening file', e));
                 debugger
